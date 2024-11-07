@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Ana sayfa"
+        android:id="@+id/homeFragment"
+        android:icon="@drawable/ic_home"/>
+
+    <item
+        android:title="Yakıt alımlarım"
+        android:id="@+id/fuelPurchaseFragment"
+        android:icon="@drawable/ic_fuel"/>
+
+    <item
+        android:title="Yolculuklarım"
+        android:id="@+id/journeyFragment"
+        android:icon="@drawable/ic_journey"/>
+</menu>

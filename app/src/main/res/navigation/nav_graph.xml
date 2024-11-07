@@ -9,5 +9,31 @@
         android:id="@+id/homeFragment"
         android:name="com.keremkulac.journeylog.presentation.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_journeyFragment"
+            app:destination="@id/journeyFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_fuelPurchaseFragment"
+            app:destination="@id/fuelPurchaseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/journeyFragment"
+        android:name="com.keremkulac.journeylog.presentation.ui.journey.JourneyFragment"
+        android:label="fragment_journey"
+        tools:layout="@layout/fragment_journey" >
+        <action
+            android:id="@+id/action_journeyFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.keremkulac.journeylog.presentation.ui.map.MapFragment"
+        android:label="fragment_map"
+        tools:layout="@layout/fragment_map" />
+    <fragment
+        android:id="@+id/fuelPurchaseFragment"
+        android:name="com.keremkulac.journeylog.presentation.ui.fuelPurchase.FuelPurchaseFragment"
+        android:label="fragment_fuel_purchase"
+        tools:layout="@layout/fragment_fuel_purchase" />
 </navigation>
