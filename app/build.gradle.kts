@@ -1,11 +1,15 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.safeArgs)
+    alias(libs.plugins.kapt)
+    alias(libs.plugins.mapsplatform)
 }
 
 android {
     namespace = "com.keremkulac.journeylog"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.keremkulac.journeylog"
@@ -26,6 +30,13 @@ android {
             )
         }
     }
+
+    packaging {
+        resources {
+            excludes.add("/META-INF/gradle/incremental.annotation.processors")
+        }
+    }
+    
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -42,6 +53,32 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.hilt)
+    implementation(libs.hilt.compiler)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
+    implementation(libs.gson)
+    implementation(libs.navigation.ui)
+    implementation(libs.navigation.fragment)
+    implementation(libs.fragment)
+    implementation(libs.lifecycle.livedata)
+    implementation(libs.lifecycle.common)
+    implementation(libs.lifecycle.viewmodel)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.core.splashscreen)
+    implementation(libs.circleimageview)
+    implementation(libs.glide)
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.ktx.core)
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
+    implementation(libs.androidx.runtime.saved.instance.state)
+    implementation(libs.play.services.cast.framework)
+    implementation(libs.androidx.viewpager2)
+    implementation(libs.circleindicator)
+    implementation(libs.datastore.preferences)
+    implementation(libs.work.manager)
+    kapt(libs.hilt.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
