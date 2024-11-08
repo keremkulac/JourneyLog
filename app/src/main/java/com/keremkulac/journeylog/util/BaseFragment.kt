@@ -1,4 +1,4 @@
-package com.keremkulac.journeylog
+package com.keremkulac.journeylog.util
 
 import android.os.Bundle
 import android.view.LayoutInflater

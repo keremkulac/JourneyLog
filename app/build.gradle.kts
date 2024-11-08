@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.safeArgs)
     alias(libs.plugins.kapt)
     alias(libs.plugins.mapsplatform)
+    alias(libs.plugins.googleGmsGoogleServices)
 }
 
 android {
@@ -82,6 +83,7 @@ dependencies {
     implementation(libs.circleindicator)
     implementation(libs.datastore.preferences)
     implementation(libs.work.manager)
+    implementation(libs.firebase.auth)
     kapt(libs.hilt.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
