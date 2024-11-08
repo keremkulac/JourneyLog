@@ -7,8 +7,9 @@ import androidx.navigation.fragment.findNavController
 import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentJourneyBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class JourneyFragment : BaseFragment<FragmentJourneyBinding>(FragmentJourneyBinding::inflate) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
