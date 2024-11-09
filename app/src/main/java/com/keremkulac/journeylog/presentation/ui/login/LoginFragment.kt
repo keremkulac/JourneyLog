@@ -16,9 +16,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
     private val viewModel by viewModels<LoginViewModel>()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeIsLoggedUserInResult()
         login()
         navigateSignup()
         observeLoginResult()
@@ -40,9 +40,20 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             }
         }
     }
+
+    private fun observeIsLoggedUserInResult(){
+        viewModel.isLoggedUserIn.observe(viewLifecycleOwner){isLoggedInResult->
+            when(isLoggedInResult){
+                is AuthResult.Error -> Toast.makeText(requireContext(),isLoggedInResult.error.toString(),Toast.LENGTH_SHORT).show()
+                is AuthResult.Success -> isLoggedInResult.data?.let { findNavController().navigate(R.id.action_loginFragment_to_homeFragment) }
+            }
+        }
+    }
+
     private fun navigateSignup(){
         binding.register.setOnClickListener{
             findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
         }
     }
+
 }

@@ -1,5 +1,6 @@
 package com.keremkulac.journeylog.domain.repository
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.keremkulac.journeylog.util.AuthResult
 import kotlinx.coroutines.tasks.await
@@ -25,4 +26,24 @@ class AuthRepositoryImp @Inject constructor(
             AuthResult.Error(e.message)
         }
     }
+
+    override suspend fun signOut(): AuthResult {
+        return try {
+            val data = auth.signOut()
+            AuthResult.Success(data)
+        }catch (e : Exception){
+            AuthResult.Error(e.message)
+        }
+    }
+
+    override suspend fun isUserLoggedIn(): AuthResult {
+        return try {
+            val data = auth.currentUser
+            AuthResult.Success(data)
+        }catch (e : Exception){
+            AuthResult.Error(e.message)
+        }
+    }
+
+
 }
