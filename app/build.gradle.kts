@@ -18,8 +18,8 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders["GOOGLE_MAP_API_KEY"] ="AIzaSyAq3bXhYQfh1GxknLhjN8bxmXvFDfqAP18"
     }
 
     buildTypes {
@@ -48,6 +48,7 @@ android {
 
     buildFeatures{
         viewBinding = true
+        buildConfig = true
     }
 }
 
