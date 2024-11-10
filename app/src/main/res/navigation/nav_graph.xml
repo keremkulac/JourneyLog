@@ -35,11 +35,7 @@
         android:id="@+id/fuelPurchaseFragment"
         android:name="com.keremkulac.journeylog.presentation.ui.fuelPurchase.FuelPurchaseFragment"
         android:label="fragment_fuel_purchase"
-        tools:layout="@layout/fragment_fuel_purchase" >
-        <action
-            android:id="@+id/action_fuelPurchaseFragment_to_addFuelPurchaseFragment"
-            app:destination="@id/addFuelPurchaseFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_fuel_purchase" />
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.keremkulac.journeylog.presentation.ui.login.LoginFragment"
@@ -61,9 +57,4 @@
             android:id="@+id/action_signupFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/addFuelPurchaseFragment"
-        android:name="com.keremkulac.journeylog.presentation.ui.addFuelPurchase.AddFuelPurchaseFragment"
-        android:label="fragment_add_fuel_purchase"
-        tools:layout="@layout/fragment_add_fuel_purchase" />
 </navigation>
