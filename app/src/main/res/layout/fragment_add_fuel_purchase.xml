@@ -35,18 +35,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:hint="22/10/2020"
                 app:layout_constraintStart_toStartOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                tools:text="22/10/2020" />
 
             <TextView
                 android:id="@+id/receiptTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:hint="11:20"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                tools:text="11:20" />
 
             <TextView
                 android:id="@+id/receiptStationTitle"
@@ -83,20 +83,41 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/receiptStation" />
 
-            <Spinner
+            <com.google.android.material.chip.ChipGroup
                 android:id="@+id/receiptPurchasedFuelType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/receiptPurchasedFuelTypeTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/receiptPurchasedFuelTypeTitle"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/gasoline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Benzin"
+                    app:checkedIconEnabled="true"
+                    android:checkable="true"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/diesel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dizel"
+                    app:checkedIconEnabled="true"
+                    android:checkable="true"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/lpg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LPG"
+                    app:checkedIconEnabled="true"
+                    android:checkable="true"/>
+            </com.google.android.material.chip.ChipGroup>
 
             <TextView
-                android:id="@+id/receiptPurchasePriceTitle"
+                android:id="@+id/receiptLiterPriceTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -107,14 +128,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/receiptPurchasedFuelType" />
 
             <EditText
-                android:id="@+id/receiptPurchasePrice"
+                android:id="@+id/receiptLiterPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
-                android:inputType="text"
+                android:inputType="numberDecimal"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/receiptPurchasePriceTitle"
+                app:layout_constraintTop_toBottomOf="@+id/receiptLiterPriceTitle"
                 tools:ignore="LabelFor" />
 
             <TextView
@@ -126,14 +148,14 @@
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/receiptPurchasePrice" />
+                app:layout_constraintTop_toBottomOf="@+id/receiptLiterPrice" />
 
             <EditText
                 android:id="@+id/receiptPurchaseLiter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
-                android:inputType="text"
+                android:inputType="numberDecimal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/receiptPurchaseLiterTitle"
@@ -165,11 +187,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="170TL"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/receiptTotalTaxTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/receiptTotalTaxTitle"
+                tools:text="170TL" />
 
 
             <TextView
@@ -188,11 +210,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="3500TL"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/receiptTotalPriceTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/receiptTotalPriceTitle"
+                tools:text="3500TL" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
