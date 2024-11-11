@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".presentation.ui.addFuelPurchase.AddFuelPurchaseFragment">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/receipt"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ödeme"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/receiptDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layout_constraintStart_toStartOf="@+id/textView"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                tools:text="22/10/2020" />
+
+            <TextView
+                android:id="@+id/receiptTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                tools:text="11:20" />
+
+            <TextView
+                android:id="@+id/receiptStationTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="İstasyon"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/receiptDate" />
+
+            <EditText
+                android:id="@+id/receiptStation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/receiptStationTitle"
+                tools:ignore="LabelFor" />
+
+            <TextView
+                android:id="@+id/receiptPurchasedFuelTypeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Akaryakıt türü"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/receiptStation" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/receiptPurchasedFuelType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/receiptPurchasedFuelTypeTitle"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/gasoline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Benzin"
+                    app:checkedIconEnabled="true"
+                    android:checkable="true"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/diesel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dizel"
+                    app:checkedIconEnabled="true"
+                    android:checkable="true"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/lpg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LPG"
+                    app:checkedIconEnabled="true"
+                    android:checkable="true"/>
+            </com.google.android.material.chip.ChipGroup>
+
+            <TextView
+                android:id="@+id/receiptLiterPriceTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Alış fiyatı"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/receiptPurchasedFuelType" />
+
+            <EditText
+                android:id="@+id/receiptLiterPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/receiptLiterPriceTitle"
+                tools:ignore="LabelFor" />
+
+            <TextView
+                android:id="@+id/receiptPurchaseLiterTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Alınan litre"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/receiptLiterPrice" />
+
+            <EditText
+                android:id="@+id/receiptPurchaseLiter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/receiptPurchaseLiterTitle"
+                tools:ignore="LabelFor" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/receiptPurchaseLiter" />
+
+            <TextView
+                android:id="@+id/receiptTotalTaxTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="KDV"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+
+            <TextView
+                android:id="@+id/receiptTotalTax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/receiptTotalTaxTitle"
+                tools:text="170TL" />
+
+
+            <TextView
+                android:id="@+id/receiptTotalPriceTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Toplam"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/receiptTotalTax" />
+
+            <TextView
+                android:id="@+id/receiptTotalPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/receiptTotalPriceTitle"
+                tools:text="3500TL" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
