@@ -85,6 +85,7 @@ dependencies {
     implementation(libs.datastore.preferences)
     implementation(libs.work.manager)
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
     kapt(libs.hilt.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
