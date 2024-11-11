@@ -34,7 +34,7 @@
                 android:id="@+id/receiptDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="@+id/textView"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
                 tools:text="22/10/2020" />
@@ -43,7 +43,7 @@
                 android:id="@+id/receiptTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView"
                 tools:text="11:20" />
@@ -218,13 +218,14 @@
 
             <Button
                 android:id="@+id/receiptSave"
-                android:text="Kaydet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/receiptTotalPrice"
+                android:layout_marginTop="8dp"
+                android:text="Kaydet"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@+id/receiptTotalPrice" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
