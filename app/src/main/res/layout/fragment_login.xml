@@ -24,7 +24,8 @@
             android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Email"
+            android:hint="@string/login_email"
+            android:importantForAutofill="no"
             android:inputType="textEmailAddress"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -47,7 +48,8 @@
             android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="Şifre"
+            android:hint="@string/login_password"
+            android:importantForAutofill="no"
             android:inputType="textPassword"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -58,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_marginTop="16dp"
-        android:text="Giriş yap"
+        android:text="@string/login_login_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputPassword" />
@@ -69,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="end"
-        android:text="Henüz bir hesabın yok mu?"
+        android:text="@string/login_register_text"
         android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@id/register"
         app:layout_constraintStart_toStartOf="@+id/login"
@@ -81,8 +83,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
+        android:text="@string/login_register_button_text"
         android:textSize="16sp"
-        android:text="Kayıt ol"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/login"
         app:layout_constraintStart_toEndOf="@id/registerText"
@@ -110,5 +112,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/loginWithGoogle"
         app:layout_constraintTop_toBottomOf="@+id/register" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

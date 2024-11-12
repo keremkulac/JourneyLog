@@ -65,5 +65,9 @@
         android:id="@+id/addFuelPurchaseFragment"
         android:name="com.keremkulac.journeylog.presentation.ui.addFuelPurchase.AddFuelPurchaseFragment"
         android:label="fragment_add_fuel_purchase"
-        tools:layout="@layout/fragment_add_fuel_purchase" />
+        tools:layout="@layout/fragment_add_fuel_purchase" >
+        <action
+            android:id="@+id/action_addFuelPurchaseFragment_to_fuelPurchaseFragment"
+            app:destination="@id/fuelPurchaseFragment" />
+    </fragment>
 </navigation>

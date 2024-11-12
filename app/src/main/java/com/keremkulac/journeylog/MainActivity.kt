@@ -1,7 +1,6 @@
 package com.keremkulac.journeylog
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -29,8 +28,9 @@ class MainActivity : AppCompatActivity() {
         setBottomNavigationVisibility()
     }
 
-    private fun setNavigationView(){
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+    private fun setNavigationView() {
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
         val navView: BottomNavigationView = binding.bottomNavigationView
         navView.itemIconTintList = null
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setBottomNavigationVisibility(){
+    private fun setBottomNavigationVisibility() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             viewModel.bottomNavigationVisibility(destination.id)
         }

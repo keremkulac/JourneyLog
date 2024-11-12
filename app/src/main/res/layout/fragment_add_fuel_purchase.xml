@@ -24,7 +24,7 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ödeme"
+                android:text="@string/add_fuel_purchase_main_title"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="İstasyon"
+                android:text="@string/add_fuel_purchase_station"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -77,7 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Akaryakıt türü"
+                android:text="@string/add_fuel_purchase_fuel_type"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -95,25 +95,25 @@
                     android:id="@+id/gasoline"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Benzin"
-                    app:checkedIconEnabled="true"
-                    android:checkable="true"/>
+                    android:checkable="true"
+                    android:text="@string/fuel_type_gasoline"
+                    app:checkedIconEnabled="true" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/diesel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dizel"
-                    app:checkedIconEnabled="true"
-                    android:checkable="true"/>
+                    android:checkable="true"
+                    android:text="@string/fuel_type_diesel"
+                    app:checkedIconEnabled="true" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/lpg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="LPG"
-                    app:checkedIconEnabled="true"
-                    android:checkable="true"/>
+                    android:checkable="true"
+                    android:text="@string/fuel_type_LPG"
+                    app:checkedIconEnabled="true" />
             </com.google.android.material.chip.ChipGroup>
 
             <TextView
@@ -121,7 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Alış fiyatı"
+                android:text="@string/add_fuel_purchase_liter_price"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -144,7 +144,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Alınan litre"
+                android:text="@string/add_fuel_purchase_liter"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -175,7 +175,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="KDV"
+                android:text="@string/add_fuel_purchase_tax"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -186,7 +186,7 @@
                 android:id="@+id/receiptTotalTax"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -199,7 +199,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Toplam"
+                android:text="@string/add_fuel_purchase_total"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -209,7 +209,7 @@
                 android:id="@+id/receiptTotalPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -218,10 +218,10 @@
 
             <Button
                 android:id="@+id/receiptSave"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Kaydet"
+                android:text="@string/add_fuel_purchase_save_receipt"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -232,10 +232,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

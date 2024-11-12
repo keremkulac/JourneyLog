@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentLoginBinding
-import com.keremkulac.journeylog.util.AuthResult
+import com.keremkulac.journeylog.util.Result
 import com.keremkulac.journeylog.util.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,34 +24,46 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         observeLoginResult()
     }
 
-    private fun login(){
+    private fun login() {
         binding.login.setOnClickListener {
             val email = binding.editTextEmail.text.toString().trim()
             val password = binding.editTextPassword.text.toString().trim()
-            viewModel.login(email,password)
+            viewModel.login(email, password)
         }
     }
 
-    private fun observeLoginResult(){
-        viewModel.loginResult.observe(viewLifecycleOwner){loginResult->
-            when(loginResult){
-                is AuthResult.Error -> Toast.makeText(requireContext(),loginResult.error.toString(),Toast.LENGTH_SHORT).show()
-                is AuthResult.Success -> findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+    private fun observeLoginResult() {
+        viewModel.loginResult.observe(viewLifecycleOwner) { loginResult ->
+            when (loginResult) {
+                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Result.Failure -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), loginResult.error, Toast.LENGTH_SHORT).show()
+                }
+
+                is Result.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), loginResult.data, Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                }
             }
         }
     }
 
-    private fun observeIsLoggedUserInResult(){
-        viewModel.isLoggedUserIn.observe(viewLifecycleOwner){isLoggedInResult->
-            when(isLoggedInResult){
-                is AuthResult.Error -> Toast.makeText(requireContext(),isLoggedInResult.error.toString(),Toast.LENGTH_SHORT).show()
-                is AuthResult.Success -> isLoggedInResult.data?.let { findNavController().navigate(R.id.action_loginFragment_to_homeFragment) }
+
+    private fun observeIsLoggedUserInResult() {
+        viewModel.keepUserLoggedIn.observe(viewLifecycleOwner) { isLoggedInResult ->
+            when (isLoggedInResult) {
+                Result.Loading -> TODO()
+                is Result.Failure -> TODO()
+                is Result.Success -> findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             }
         }
     }
 
-    private fun navigateSignup(){
-        binding.register.setOnClickListener{
+
+    private fun navigateSignup() {
+        binding.register.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
         }
     }

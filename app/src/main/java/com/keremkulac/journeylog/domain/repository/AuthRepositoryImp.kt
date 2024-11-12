@@ -1,71 +1,86 @@
 package com.keremkulac.journeylog.domain.repository
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FirebaseFirestore
-import com.keremkulac.journeylog.domain.model.Receipt
-import com.keremkulac.journeylog.util.AuthResult
-import kotlinx.coroutines.tasks.await
+import com.keremkulac.journeylog.util.Result
 import javax.inject.Inject
 
 class AuthRepositoryImp @Inject constructor(
-    private val auth: FirebaseAuth,
-    private val firestore: FirebaseFirestore
-) : AuthRepository{
-    override suspend fun registerUser(email: String, password: String): AuthResult {
-        return try {
-            val data = auth.createUserWithEmailAndPassword(email, password).await()
-            AuthResult.Success(data)
-        } catch (e: Exception) {
-            AuthResult.Error(e.message)
+    private val auth: FirebaseAuth
+) : AuthRepository {
+
+    override suspend fun registerUser(
+        email: String,
+        password: String,
+        result: (Result<String>) -> Unit
+    ) {
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                result.invoke(Result.Success("Kullanıcı başarıyla kaydedildi"))
+            } else {
+                try {
+                    throw task.exception ?: java.lang.Exception("Invalid authentication")
+                } catch (e: FirebaseAuthWeakPasswordException) {
+                    result.invoke(Result.Failure("Şifre en az 6 karakterden oluşmalı"))
+                } catch (e: FirebaseAuthInvalidCredentialsException) {
+                    result.invoke(Result.Failure("Geçersiz email girildi. Lütfen kontrol edip tekrar deneyin"))
+                } catch (e: FirebaseAuthUserCollisionException) {
+                    result.invoke(Result.Failure("Bu email zaten kayıtlı"))
+                } catch (e: Exception) {
+                    result.invoke(Result.Failure(e.message))
+                }
+            }
         }
     }
 
-    override suspend fun loginUser(email: String, password: String): AuthResult {
-        return try {
-           val data =  auth.signInWithEmailAndPassword(email,password).await()
-            AuthResult.Success(data)
-        }catch (e : Exception){
-            AuthResult.Error(e.message)
+    override suspend fun loginUser(
+        email: String,
+        password: String,
+        result: (Result<String>) -> Unit
+    ) {
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                result.invoke(Result.Success("Giriş başarılı"))
+            } else {
+                try {
+                    throw task.exception ?: java.lang.Exception("Invalid authentication")
+                } catch (e: FirebaseAuthInvalidCredentialsException) {
+                    result.invoke(Result.Failure("Geçersiz giriş bilgileri"))
+                } catch (e: FirebaseAuthInvalidUserException) {
+                    result.invoke(Result.Failure("Kullanıcı bulunamadı"))
+                } catch (e: Exception) {
+                    result.invoke(Result.Failure("Bilinmeyen bir hata oluştu"))
+                }
+            }
         }
     }
 
-    override suspend fun signOut(): AuthResult {
-        return try {
-            val data = auth.signOut()
-            AuthResult.Success(data)
-        }catch (e : Exception){
-            AuthResult.Error(e.message)
+    override suspend fun keepUserLoggedIn(
+        result: (Result<String>) -> Unit
+    ) {
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            result.invoke(Result.Success("Kullanıcı daha önce giriş yapmış"))
+        } else {
+            result.invoke(Result.Failure("Kullanıcı daha önce giriş yapmamış"))
         }
     }
 
-    override suspend fun isUserLoggedIn(): AuthResult {
-        return try {
-            val data = auth.currentUser
-            AuthResult.Success(data)
-        }catch (e : Exception){
-            AuthResult.Error(e.message)
-        }
+    override suspend fun signOut(result: (Result<String>) -> Unit) {
+        auth.signOut()
+        Result.Success("Çıkış yapıldı")
     }
 
-    override suspend fun saveReceipt(receipt: Receipt): AuthResult {
-        return try {
-           val data = firestore.collection("receipt").add(receipt)
-               .addOnSuccessListener {}
-               .addOnFailureListener { e->
-                   AuthResult.Error(e.message)
-               }
-            AuthResult.Success(data)
-        }catch (e : Exception){
-            AuthResult.Error(e.message)
-        }
-    }
-
-    override suspend fun getCurrentUser() : FirebaseUser? {
-        return try {
-            auth.currentUser
-        }catch (e : Exception){
-            null
+    override suspend fun getCurrentUser(result: (Result<FirebaseUser?>) -> Unit) {
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            result.invoke(Result.Success(currentUser))
+        } else {
+            result.invoke(Result.Failure("Kullanıcı bulunamadı"))
         }
     }
 

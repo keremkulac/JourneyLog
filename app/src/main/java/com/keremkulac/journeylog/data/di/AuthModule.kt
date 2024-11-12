@@ -6,6 +6,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 import com.keremkulac.journeylog.domain.repository.AuthRepository
 import com.keremkulac.journeylog.domain.repository.AuthRepositoryImp
+import com.keremkulac.journeylog.domain.repository.ReceiptRepository
+import com.keremkulac.journeylog.domain.repository.ReceiptRepositoryImp
 import com.keremkulac.journeylog.domain.usecase.RegisterUseCase
 import dagger.Module
 import dagger.Provides
@@ -18,12 +20,18 @@ import javax.inject.Singleton
 object AuthModule {
 
     @Provides
-    fun provideAuthRepository(firebaseAuth: FirebaseAuth,firestore: FirebaseFirestore): AuthRepository{
-        return AuthRepositoryImp(firebaseAuth,firestore)
+    fun provideAuthRepository(firebaseAuth: FirebaseAuth): AuthRepository {
+        return AuthRepositoryImp(firebaseAuth)
     }
 
     @Provides
-    fun provideRegisterUseCase(authRepositoryImp: AuthRepositoryImp) = RegisterUseCase(authRepositoryImp)
+    fun provideReceiptRepository(firestore: FirebaseFirestore): ReceiptRepository {
+        return ReceiptRepositoryImp(firestore)
+    }
+
+    @Provides
+    fun provideRegisterUseCase(authRepositoryImp: AuthRepositoryImp) =
+        RegisterUseCase(authRepositoryImp)
 
     @Provides
     @Singleton
@@ -31,6 +39,6 @@ object AuthModule {
 
     @Provides
     @Singleton
-    fun provideFirebaseFirestore() : FirebaseFirestore = Firebase.firestore
+    fun provideFirebaseFirestore(): FirebaseFirestore = Firebase.firestore
 
 }

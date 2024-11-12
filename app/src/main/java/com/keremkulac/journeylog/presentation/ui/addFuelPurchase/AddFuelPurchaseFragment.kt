@@ -1,18 +1,18 @@
 package com.keremkulac.journeylog.presentation.ui.addFuelPurchase
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
+import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentAddFuelPurchaseBinding
 import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.util.BaseFragment
+import com.keremkulac.journeylog.util.Result
 import com.keremkulac.journeylog.util.TextWatcher
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 
 @AndroidEntryPoint
 class AddFuelPurchaseFragment :
@@ -23,6 +23,7 @@ class AddFuelPurchaseFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeSaveResult()
         observeAndSetValues()
         getSelectedFuelType()
         setDateTime()
@@ -73,7 +74,6 @@ class AddFuelPurchaseFragment :
     }
 
     private fun saveReceipt() {
-
         binding.receiptSave.setOnClickListener {
             val id = viewModel.createUUID()
             val email = viewModel.currentUser()?.email
@@ -85,17 +85,6 @@ class AddFuelPurchaseFragment :
             val total = binding.receiptTotalPrice.text.trim().toString()
             val date = binding.receiptDate.text.trim().toString()
             val time = binding.receiptTime.text.trim().toString()
-            Log.d("TAG", id.toString())
-            Log.d("TAG", email.toString())
-            Log.d("TAG", stationName.toString())
-            Log.d("TAG", fuelType.toString())
-            Log.d("TAG", literPrice.toString())
-            Log.d("TAG", liter.toString())
-            Log.d("TAG", tax.toString())
-            Log.d("TAG", total.toString())
-            Log.d("TAG", date.toString())
-            Log.d("TAG", time.toString())
-
             if (id.isBlank() || email.isNullOrBlank() || stationName.isBlank() || fuelType.isBlank() || literPrice.isBlank() || liter.isBlank() ||
                 tax.isBlank() || total.isBlank() || date.isBlank() || time.isBlank()
             ) {
@@ -114,7 +103,29 @@ class AddFuelPurchaseFragment :
                     date = date,
                     time = time
                 )
-               viewModel.saveReceipt(receipt)
+                viewModel.saveReceipt(receipt)
+            }
+        }
+    }
+
+
+    private fun observeSaveResult() {
+        viewModel.saveResult.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+
+                is Result.Failure -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
+                }
+
+                is Result.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), result.data, Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_addFuelPurchaseFragment_to_fuelPurchaseFragment)
+                }
             }
         }
     }

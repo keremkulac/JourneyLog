@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.ui.signup.SignupFragment">
 
 
@@ -15,18 +15,20 @@
         android:layout_marginTop="16dp"
         app:boxCornerRadiusBottomEnd="16dp"
         app:boxCornerRadiusBottomStart="16dp"
-        app:boxCornerRadiusTopStart="16dp"
         app:boxCornerRadiusTopEnd="16dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:boxCornerRadiusTopStart="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <EditText
             android:id="@+id/userEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:hint="@string/register_email"
+            android:importantForAutofill="no"
             android:inputType="textEmailAddress"
-            android:maxLines="1"
-            android:hint="Email"/>
+            android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -37,30 +39,41 @@
         android:layout_marginTop="8dp"
         app:boxCornerRadiusBottomEnd="16dp"
         app:boxCornerRadiusBottomStart="16dp"
-        app:boxCornerRadiusTopStart="16dp"
         app:boxCornerRadiusTopEnd="16dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:boxCornerRadiusTopStart="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputEmail">
+
         <EditText
             android:id="@+id/userPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:hint="@string/register_password"
+            android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:maxLines="1"
-            android:hint="Şifre"/>
+            android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/register"
-        android:text="Kayıt ol"
-        android:layout_margin="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:layout_marginTop="16dp"
+        android:text="@string/register_register_button_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputPassword" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
