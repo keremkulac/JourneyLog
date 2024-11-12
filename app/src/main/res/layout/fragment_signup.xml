@@ -7,6 +7,56 @@
     android:padding="16dp"
     tools:context=".presentation.ui.signup.SignupFragment">
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputUserName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:boxCornerRadiusBottomEnd="16dp"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxCornerRadiusTopStart="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textInputLastname"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/userName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/ic_user"
+            android:drawablePadding="8dp"
+            android:hint="Ad"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLastname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:boxCornerRadiusBottomEnd="16dp"
+        app:boxCornerRadiusBottomStart="16dp"
+        app:boxCornerRadiusTopEnd="16dp"
+        app:boxCornerRadiusTopStart="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textInputUserName"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/userLastname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Soyadı"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:maxLines="1" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputEmail"
@@ -19,12 +69,14 @@
         app:boxCornerRadiusTopStart="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/textInputUserName">
 
         <EditText
             android:id="@+id/userEmail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:drawableLeft="@drawable/ic_email"
+            android:drawablePadding="8dp"
             android:hint="@string/register_email"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
@@ -49,6 +101,8 @@
             android:id="@+id/userPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:drawableLeft="@drawable/ic_pass"
+            android:drawablePadding="8dp"
             android:hint="@string/register_password"
             android:importantForAutofill="no"
             android:inputType="textPassword"

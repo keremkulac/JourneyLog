@@ -20,8 +20,8 @@ import javax.inject.Singleton
 object AuthModule {
 
     @Provides
-    fun provideAuthRepository(firebaseAuth: FirebaseAuth): AuthRepository {
-        return AuthRepositoryImp(firebaseAuth)
+    fun provideAuthRepository(firebaseAuth: FirebaseAuth,firestore: FirebaseFirestore): AuthRepository {
+        return AuthRepositoryImp(firebaseAuth,firestore)
     }
 
     @Provides

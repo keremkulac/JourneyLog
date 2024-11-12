@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentSignupBinding
+import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.util.Result
 import com.keremkulac.journeylog.util.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,10 +27,11 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
         binding.register.setOnClickListener {
             val email = binding.userEmail.text.toString().trim()
             val password = binding.userPassword.text.toString().trim()
-            viewModel.register(email, password)
+            if (validation()) {
+                viewModel.register(email, password, getUser())
+            }
         }
     }
-
 
     private fun observeRegisterResult() {
         viewModel.registerResult.observe(viewLifecycleOwner) { result ->
@@ -43,10 +45,44 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(requireContext(), result.data, Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
+                    findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
                 }
             }
 
         }
     }
+
+    private fun getUser(): User {
+        return User(
+            id = "",
+            name = binding.userName.text.trim().toString(),
+            lastName = binding.userLastname.text.trim().toString(),
+            email = binding.userEmail.text.trim().toString()
+        )
+    }
+
+    private fun validation(): Boolean {
+        var isValid = true
+        if (binding.userName.text.isNullOrEmpty()) {
+            isValid = false
+            Toast.makeText(requireContext(), "İsim giriniz", Toast.LENGTH_SHORT).show()
+        }
+
+        if (binding.userLastname.text.isNullOrEmpty()) {
+            isValid = false
+            Toast.makeText(requireContext(), "Soyad giriniz", Toast.LENGTH_SHORT).show()
+        }
+
+        if (binding.userEmail.text.isNullOrEmpty()) {
+            isValid = false
+            Toast.makeText(requireContext(), "Email giriniz", Toast.LENGTH_SHORT).show()
+        }
+
+        if (binding.userPassword.text.isNullOrEmpty()) {
+            isValid = false
+            Toast.makeText(requireContext(), "Şifre giriniz", Toast.LENGTH_SHORT).show()
+        }
+        return isValid
+    }
+
 }

@@ -6,21 +6,32 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
+import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.util.Result
 import javax.inject.Inject
 
 class AuthRepositoryImp @Inject constructor(
-    private val auth: FirebaseAuth
+    private val auth: FirebaseAuth,
+    private val firestore: FirebaseFirestore
 ) : AuthRepository {
 
     override suspend fun registerUser(
         email: String,
         password: String,
+        user: User,
         result: (Result<String>) -> Unit
     ) {
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                result.invoke(Result.Success("Kullanıcı başarıyla kaydedildi"))
+                user.id = task.result.user?.uid ?: ""
+                firestore.collection("user").add(user).addOnCompleteListener { saveUserTask ->
+                    if (saveUserTask.isSuccessful) {
+                        result.invoke(Result.Success("Kayıt başarılı"))
+                    } else {
+                        result.invoke(Result.Failure("Kayıt başarısız"))
+                    }
+                }
             } else {
                 try {
                     throw task.exception ?: java.lang.Exception("Invalid authentication")
@@ -36,6 +47,7 @@ class AuthRepositoryImp @Inject constructor(
             }
         }
     }
+
 
     override suspend fun loginUser(
         email: String,

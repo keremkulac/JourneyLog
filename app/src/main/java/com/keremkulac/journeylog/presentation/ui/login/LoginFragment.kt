@@ -54,9 +54,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     private fun observeIsLoggedUserInResult() {
         viewModel.keepUserLoggedIn.observe(viewLifecycleOwner) { isLoggedInResult ->
             when (isLoggedInResult) {
-                Result.Loading -> TODO()
-                is Result.Failure -> TODO()
                 is Result.Success -> findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                else ->{}
             }
         }
     }
