@@ -22,13 +22,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         login()
         navigateSignup()
         observeLoginResult()
+        observeValidation()
     }
 
     private fun login() {
         binding.login.setOnClickListener {
             val email = binding.editTextEmail.text.toString().trim()
             val password = binding.editTextPassword.text.toString().trim()
-            viewModel.login(email, password)
+            if (isValid()) {
+                viewModel.login(email, password)
+            }
         }
     }
 
@@ -55,9 +58,23 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         viewModel.keepUserLoggedIn.observe(viewLifecycleOwner) { isLoggedInResult ->
             when (isLoggedInResult) {
                 is Result.Success -> findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                else ->{}
+                else -> {}
             }
         }
+    }
+
+    private fun observeValidation() {
+        viewModel.validationMessage.observe(viewLifecycleOwner) { message ->
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun isValid(): Boolean {
+        val isValid = viewModel.validateInputs(
+            binding.editTextEmail.text.toString().trim(),
+            binding.editTextPassword.text.toString().trim()
+        )
+        return isValid
     }
 
 

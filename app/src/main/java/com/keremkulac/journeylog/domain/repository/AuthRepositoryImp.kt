@@ -25,7 +25,7 @@ class AuthRepositoryImp @Inject constructor(
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 user.id = task.result.user?.uid ?: ""
-                firestore.collection("user").add(user).addOnCompleteListener { saveUserTask ->
+                firestore.collection("users").add(user).addOnCompleteListener { saveUserTask ->
                     if (saveUserTask.isSuccessful) {
                         result.invoke(Result.Success("Kayıt başarılı"))
                     } else {
@@ -94,6 +94,22 @@ class AuthRepositoryImp @Inject constructor(
         } else {
             result.invoke(Result.Failure("Kullanıcı bulunamadı"))
         }
+    }
+
+    override suspend fun getUser(id: String, result: (Result<Any>) -> Unit) {
+        firestore.collection("users")
+            .get()
+            .addOnSuccessListener { task ->
+                val user = task.toObjects(User::class.java)
+                for (userObject in user) {
+                    if (userObject.id == id) {
+                        result.invoke(Result.Success(userObject))
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                result.invoke(Result.Failure(exception.message))
+            }
     }
 
 }

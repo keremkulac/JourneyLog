@@ -34,7 +34,7 @@ workManager = "2.10.0"
 googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.1.0"
 firebaseFirestore = "25.1.1"
-playServices = "17.0.0"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -44,6 +44,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-runtime-saved-instance-state = { group = "androidx.compose.runtime", name = "runtime-saved-instance-state", version.ref = "runtimeSavedInstanceState" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
@@ -55,31 +56,28 @@ fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "
 lifecycle-common = { group = "androidx.lifecycle", name = "lifecycle-common-java8", version.ref = "lifecycle" }
 lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }
 lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
-okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okHttp"}
-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashScreen"}
-circleimageview = { group = "de.hdodenhof", name = "circleimageview", version.ref = "circleImageView"}
-glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide"}
+okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okHttp" }
+core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashScreen" }
+circleimageview = { group = "de.hdodenhof", name = "circleimageview", version.ref = "circleImageView" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 androidx-core = { group = "androidx.core", name = "core", version.ref = "core" }
 androidx-ktx-core = { group = "androidx.core", name = "core-ktx", version.ref = "ktxCore" }
 play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "maps" }
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "location" }
-androidx-runtime-saved-instance-state = { group = "androidx.compose.runtime", name = "runtime-saved-instance-state", version.ref = "runtimeSavedInstanceState" }
 play-services-cast-framework = { group = "com.google.android.gms", name = "play-services-cast-framework", version.ref = "playServicesCastFramework" }
 androidx-viewpager2 = { group = "androidx.viewpager2", name = "viewpager2", version.ref = "viewpager2" }
 circleindicator = { group = "me.relex", name = "circleindicator", version.ref = "circleindicator" }
-datastore-preferences= { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastorePreferences" }
+datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastorePreferences" }
 work-manager = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workManager" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
-play-services = { group = "com.google.android.gms", name = "play-services", version.ref = "playServices" }
-
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 safeArgs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "safeArgs" }
-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin"}
-mapsplatform = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "mapsplatform"}
+kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+mapsplatform = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "mapsplatform" }
 googleGmsGoogleServices = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
 

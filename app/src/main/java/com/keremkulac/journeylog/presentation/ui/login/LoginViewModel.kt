@@ -17,12 +17,14 @@ class LoginViewModel @Inject constructor(
     private val keepUserLoggedInUseCase: KeepUserLoggedInUseCase
 ) : ViewModel() {
 
-
     private val _loginResult = MutableLiveData<Result<String>>()
     val loginResult: LiveData<Result<String>> get() = _loginResult
 
     private val _keepUserLoggedIn = MutableLiveData<Result<String>>()
     val keepUserLoggedIn: LiveData<Result<String>> get() = _keepUserLoggedIn
+
+    private val _validationMessage = MutableLiveData<String>()
+    val validationMessage: LiveData<String> get() = _validationMessage
 
     init {
         keepUserLoggedIn()
@@ -43,6 +45,26 @@ class LoginViewModel @Inject constructor(
             loginUseCase.invoke(email, password) { result ->
                 _loginResult.value = result
             }
+        }
+    }
+
+    fun validateInputs(
+        userEmail: String?,
+        userPassword: String?
+    ): Boolean {
+        return when {
+
+            userEmail.isNullOrEmpty() -> {
+                _validationMessage.value = "Email giriniz"
+                false
+            }
+
+            userPassword.isNullOrEmpty() -> {
+                _validationMessage.value = "Şifre giriniz"
+                false
+            }
+
+            else -> true
         }
     }
 

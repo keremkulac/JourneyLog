@@ -17,11 +17,15 @@
     <string name="login_login_button">Giriş yap</string>
     <string name="login_register_text">Henüz bir hesabın yok mu? <b>Kayıt ol</b></string>
     <string name="login_register_button_text">Kayıt ol</string>
-    <string name="register_password">Şifre</string>
+    <string name="register_password_hint">Şifre</string>
     <string name="register_register_button_text">Kayıt ol</string>
     <string name="register_login_text">Zaten bir hesabın var mı? <b>Giriş yap</b></string>
-    <string name="register_email">Email</string>
+    <string name="register_email_hint">Email</string>
     <string name="bottom_navigation_home_title">Ana sayfa</string>
     <string name="bottom_navigation_purchase_fuel_title">Yakıt alımlarım</string>
     <string name="bottom_navigation_journey_title">Yolculuklarım</string>
+    <string name="register_name_hint">Ad</string>
+    <string name="register_lastname_hint">Soyad</string>
+    <string name="remember_me_text">Beni hatırla</string>
+    <string name="forgot_password_text">Şifrenizi mi unuttunuz?</string>
 </resources>

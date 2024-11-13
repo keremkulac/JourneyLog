@@ -10,12 +10,11 @@ class ReceiptRepositoryImp @Inject constructor(
 ) : ReceiptRepository {
 
     override suspend fun saveReceipt(receipt: Receipt, result: (Result<String>) -> Unit) {
-        firestore.collection("receipt").add(receipt).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                result.invoke(Result.Success("Kayıt başarılı"))
-            } else {
-                result.invoke(Result.Failure("Kayıt başarısız"))
-            }
+        firestore.collection("receipts").add(receipt).addOnSuccessListener {
+            result.invoke(Result.Success("Kayıt başarılı"))
+
+        }.addOnFailureListener { exception ->
+            result.invoke(Result.Failure(exception.message))
         }
     }
 

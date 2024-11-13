@@ -3,6 +3,7 @@ package com.keremkulac.journeylog.presentation.ui.home
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.databinding.FragmentHomeBinding
@@ -16,13 +17,40 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.fuelPrices.observe(viewLifecycleOwner){fuelPrices->
-            Log.d("TAG",fuelPrices.toString())
-            when(fuelPrices){
-                is Result.Failure -> TODO()
-                Result.Loading -> TODO()
-                is Result.Success -> Log.d("TAG",fuelPrices.toString())
+        onBackPressCancel()
+        getCurrentUser()
+    }
+
+    private fun getCurrentUser() {
+        viewModel.currentUser.observe(viewLifecycleOwner) { currentUser ->
+            when (currentUser) {
+                is Result.Success -> getUser(currentUser.data!!.uid)
+                else -> {}
             }
         }
     }
+
+    private fun getUser(id: String) {
+        viewModel.getUser(id)
+        viewModel.userResult.observe(viewLifecycleOwner) { userResult ->
+            when (userResult) {
+                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Result.Failure -> binding.progressBar.visibility = View.GONE
+                is Result.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    Log.d("TAG", userResult.data.toString())
+                }
+            }
+        }
+    }
+
+    private fun onBackPressCancel() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                }
+            })
+    }
+
 }
