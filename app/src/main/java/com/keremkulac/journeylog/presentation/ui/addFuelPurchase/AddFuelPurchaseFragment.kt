@@ -77,14 +77,14 @@ class AddFuelPurchaseFragment :
         binding.receiptSave.setOnClickListener {
             val id = viewModel.createUUID()
             val email = viewModel.currentUser()?.email
-            val stationName = binding.receiptStation.text.trim().toString()
-            val fuelType = selectedType
-            val literPrice = binding.receiptLiterPrice.text.trim().toString()
-            val liter = binding.receiptPurchaseLiter.text.trim().toString()
-            val tax = binding.receiptTotalTax.text.trim().toString()
-            val total = binding.receiptTotalPrice.text.trim().toString()
-            val date = binding.receiptDate.text.trim().toString()
-            val time = binding.receiptTime.text.trim().toString()
+            val stationName = binding.receiptStation.text.toString().trim()
+            val fuelType = selectedType.trim()
+            val literPrice = binding.receiptLiterPrice.text.toString().trim()
+            val liter = binding.receiptPurchaseLiter.text.toString().trim()
+            val tax = binding.receiptTotalTax.text.toString().trim()
+            val total = binding.receiptTotalPrice.text.toString().trim()
+            val date = binding.receiptDate.text.toString().trim()
+            val time = binding.receiptTime.text.toString().trim()
             if (id.isBlank() || email.isNullOrBlank() || stationName.isBlank() || fuelType.isBlank() || literPrice.isBlank() || liter.isBlank() ||
                 tax.isBlank() || total.isBlank() || date.isBlank() || time.isBlank()
             ) {

@@ -15,10 +15,11 @@
     <string name="login_email">Email</string>
     <string name="login_password">Şifre</string>
     <string name="login_login_button">Giriş yap</string>
-    <string name="login_register_text">Henüz bir hesabın yok mu?</string>
+    <string name="login_register_text">Henüz bir hesabın yok mu? <b>Kayıt ol</b></string>
     <string name="login_register_button_text">Kayıt ol</string>
     <string name="register_password">Şifre</string>
     <string name="register_register_button_text">Kayıt ol</string>
+    <string name="register_login_text">Zaten bir hesabın var mı? <b>Giriş yap</b></string>
     <string name="register_email">Email</string>
     <string name="bottom_navigation_home_title">Ana sayfa</string>
     <string name="bottom_navigation_purchase_fuel_title">Yakıt alımlarım</string>

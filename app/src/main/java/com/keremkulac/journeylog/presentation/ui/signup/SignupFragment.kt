@@ -21,13 +21,15 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
         super.onViewCreated(view, savedInstanceState)
         register()
         observeRegisterResult()
+        navigateLogin()
+        observeValidation()
     }
 
     private fun register() {
         binding.register.setOnClickListener {
             val email = binding.userEmail.text.toString().trim()
             val password = binding.userPassword.text.toString().trim()
-            if (validation()) {
+            if (isValid()) {
                 viewModel.register(email, password, getUser())
             }
         }
@@ -55,34 +57,32 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
     private fun getUser(): User {
         return User(
             id = "",
-            name = binding.userName.text.trim().toString(),
-            lastName = binding.userLastname.text.trim().toString(),
-            email = binding.userEmail.text.trim().toString()
+            name = binding.userName.text.toString().trim(),
+            lastName = binding.userLastname.text.toString().trim(),
+            email = binding.userEmail.text.toString().trim()
         )
     }
 
-    private fun validation(): Boolean {
-        var isValid = true
-        if (binding.userName.text.isNullOrEmpty()) {
-            isValid = false
-            Toast.makeText(requireContext(), "İsim giriniz", Toast.LENGTH_SHORT).show()
+    private fun observeValidation() {
+        viewModel.validationMessage.observe(viewLifecycleOwner) { message ->
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
         }
+    }
 
-        if (binding.userLastname.text.isNullOrEmpty()) {
-            isValid = false
-            Toast.makeText(requireContext(), "Soyad giriniz", Toast.LENGTH_SHORT).show()
-        }
-
-        if (binding.userEmail.text.isNullOrEmpty()) {
-            isValid = false
-            Toast.makeText(requireContext(), "Email giriniz", Toast.LENGTH_SHORT).show()
-        }
-
-        if (binding.userPassword.text.isNullOrEmpty()) {
-            isValid = false
-            Toast.makeText(requireContext(), "Şifre giriniz", Toast.LENGTH_SHORT).show()
-        }
+    private fun isValid(): Boolean {
+        val isValid = viewModel.validateInputs(
+            binding.userName.text.toString().trim(),
+            binding.userLastname.text.toString().trim(),
+            binding.userEmail.text.toString().trim(),
+            binding.userPassword.text.toString().trim()
+        )
         return isValid
+    }
+
+    private fun navigateLogin() {
+        binding.loginText.setOnClickListener {
+            findNavController().navigate(R.id.action_signupFragment_to_loginFragment)
+        }
     }
 
 }

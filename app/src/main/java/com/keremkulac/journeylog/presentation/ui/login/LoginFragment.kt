@@ -62,7 +62,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
 
     private fun navigateSignup() {
-        binding.register.setOnClickListener {
+        binding.registerText.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
         }
     }

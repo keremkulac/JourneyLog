@@ -1,6 +1,8 @@
 package com.keremkulac.journeylog.presentation.ui.map
 
+import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -20,7 +22,7 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mapFragment = childFragmentManager.findFragmentById(R.id.mapFragment) as? SupportMapFragment
+        mapFragment = childFragmentManager.findFragmentById(R.id.googleMap) as? SupportMapFragment
         mapFragment?.getMapAsync(this)
     }
 
@@ -32,6 +34,9 @@ class MapFragment : BaseFragment<FragmentMapBinding>(FragmentMapBinding::inflate
         val homeLatLng = LatLng(latitude, longitude)
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(homeLatLng, zoomLevel))
         map.addMarker(MarkerOptions().position(homeLatLng).title("title"))?.showInfoWindow()
+        val results = FloatArray(1)
+        Location.distanceBetween(40.732466, 31.607964, 39.933445, 32.859795, results)
+        Log.d("TAG",(results[0]/1000).toString())
     }
 
 }
