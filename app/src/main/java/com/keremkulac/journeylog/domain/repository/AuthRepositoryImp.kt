@@ -1,11 +1,15 @@
 package com.keremkulac.journeylog.domain.repository
 
+import android.content.Context
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.util.Result
@@ -13,7 +17,9 @@ import javax.inject.Inject
 
 class AuthRepositoryImp @Inject constructor(
     private val auth: FirebaseAuth,
-    private val firestore: FirebaseFirestore
+    private val firestore: FirebaseFirestore,
+    private val googleSignInClient: GoogleSignInClient,
+    private val context: Context
 ) : AuthRepository {
 
     override suspend fun registerUser(
@@ -44,6 +50,16 @@ class AuthRepositoryImp @Inject constructor(
                 } catch (e: Exception) {
                     result.invoke(Result.Failure(e.message))
                 }
+            }
+        }
+    }
+
+    override suspend fun register(user: User, result: (Result<String>) -> Unit) {
+        firestore.collection("users").add(user).addOnCompleteListener { saveUserTask ->
+            if (saveUserTask.isSuccessful) {
+                result.invoke(Result.Success("Kayıt başarılı"))
+            } else {
+                result.invoke(Result.Failure("Kayıt başarısız"))
             }
         }
     }
@@ -110,6 +126,37 @@ class AuthRepositoryImp @Inject constructor(
             .addOnFailureListener { exception ->
                 result.invoke(Result.Failure(exception.message))
             }
+    }
+
+    override suspend fun signInWithGoogle(token: String, result: (Result<String>) -> Unit) {
+        val signInIntent = googleSignInClient.signInIntent
+        GoogleSignIn.getSignedInAccountFromIntent(signInIntent)
+        val credential = GoogleAuthProvider.getCredential(token, null)
+        auth.signInWithCredential(credential).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                task.result?.user?.let { firebaseUser ->
+                    val googleAccount = GoogleSignIn.getLastSignedInAccount(context)
+                    val user = User(
+                        id = firebaseUser.uid,
+                        name = googleAccount?.givenName ?: "",
+                        surname = googleAccount?.familyName ?: "",
+                        email = firebaseUser.email ?: ""
+                    )
+                    firestore.collection("users").add(user).addOnCompleteListener { saveUserTask ->
+                        if (saveUserTask.isSuccessful) {
+                            result.invoke(Result.Success("Kayıt başarılı"))
+                        } else {
+                            result.invoke(Result.Failure("Kayıt başarısız"))
+                        }
+                    }
+                }
+                result.invoke(Result.Success("Başarılı"))
+            } else {
+                result.invoke(
+                    (Result.Failure(task.exception?.message ?: "Firebase sign-in failed"))
+                )
+            }
+        }
     }
 
 }

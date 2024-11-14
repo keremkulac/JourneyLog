@@ -1,11 +1,16 @@
 package com.keremkulac.journeylog.presentation.ui.login
 
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentLoginBinding
 import com.keremkulac.journeylog.util.Result
@@ -23,6 +28,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         navigateSignup()
         observeLoginResult()
         observeValidation()
+        sign()
     }
 
     private fun login() {
@@ -81,6 +87,48 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     private fun navigateSignup() {
         binding.registerText.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
+        }
+    }
+
+    private fun sign() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        val signClient = GoogleSignIn.getClient(requireContext(), gso)
+        binding.loginWithGoogle.setOnClickListener {
+            startActivityForResult(signClient.signInIntent, 9001)
+            viewModel.loginWithGoogle.observe(viewLifecycleOwner) { result ->
+                when (result) {
+                    Result.Loading -> binding.progressBar.visibility = View.VISIBLE
+                    is Result.Failure -> {
+                        binding.progressBar.visibility = View.GONE
+                        Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
+                    }
+
+                    is Result.Success -> {
+                        binding.progressBar.visibility = View.GONE
+                        Toast.makeText(requireContext(), result.data, Toast.LENGTH_SHORT).show()
+                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                    }
+                }
+            }
+
+        }
+
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 9001) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                viewModel.loginWithGoogle(account.idToken!!)
+            } catch (e: ApiException) {
+                Log.w("TAG", "Google sign in failed", e)
+            }
         }
     }
 

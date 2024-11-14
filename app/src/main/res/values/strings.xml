@@ -30,4 +30,6 @@
     <string name="forgot_password_text">Şifrenizi mi unuttunuz?</string>
     <string name="welcome_title_text">Hoş geldiniz</string>
     <string name="last_journey_title_text">Son yolculuğum</string>
+    <string name="default_web_client_id">892926815505-2nspplf6ni3hkbpntjp8jc8tg95ad6d2.apps.googleusercontent.com</string>
+
 </resources>

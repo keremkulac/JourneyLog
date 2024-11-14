@@ -34,7 +34,8 @@ workManager = "2.10.0"
 googleGmsGoogleServices = "4.4.2"
 firebaseAuth = "23.1.0"
 firebaseFirestore = "25.1.1"
-
+firebaseBom = "33.4.0"
+playServicesAuth = "21.2.0"
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -65,12 +66,15 @@ androidx-ktx-core = { group = "androidx.core", name = "core-ktx", version.ref = 
 play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "maps" }
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "location" }
 play-services-cast-framework = { group = "com.google.android.gms", name = "play-services-cast-framework", version.ref = "playServicesCastFramework" }
+play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth" }
 androidx-viewpager2 = { group = "androidx.viewpager2", name = "viewpager2", version.ref = "viewpager2" }
 circleindicator = { group = "me.relex", name = "circleindicator", version.ref = "circleindicator" }
 datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastorePreferences" }
 work-manager = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workManager" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.keremkulac.journeylog.domain.usecase.KeepUserLoggedInUseCase
 import com.keremkulac.journeylog.domain.usecase.LoginUseCase
+import com.keremkulac.journeylog.domain.usecase.LoginWithGoogleUseCase
 import com.keremkulac.journeylog.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -14,6 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
+    private val loginWithGoogleUseCase: LoginWithGoogleUseCase,
     private val keepUserLoggedInUseCase: KeepUserLoggedInUseCase
 ) : ViewModel() {
 
@@ -25,6 +27,9 @@ class LoginViewModel @Inject constructor(
 
     private val _validationMessage = MutableLiveData<String>()
     val validationMessage: LiveData<String> get() = _validationMessage
+
+    private val _loginWithGoogle = MutableLiveData<Result<String>>()
+    val loginWithGoogle: LiveData<Result<String>> get() = _loginWithGoogle
 
     init {
         keepUserLoggedIn()
@@ -45,6 +50,16 @@ class LoginViewModel @Inject constructor(
             loginUseCase.invoke(email, password) { result ->
                 _loginResult.value = result
             }
+        }
+    }
+
+    fun loginWithGoogle(token: String) {
+        viewModelScope.launch {
+            _loginWithGoogle.value = Result.Loading
+            loginWithGoogleUseCase.invoke(token) { result ->
+                _loginWithGoogle.value = result
+            }
+
         }
     }
 
