@@ -58,7 +58,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
         return User(
             id = "",
             name = binding.userName.text.toString().trim(),
-            lastName = binding.userLastname.text.toString().trim(),
+            surname = binding.userSurname.text.toString().trim(),
             email = binding.userEmail.text.toString().trim()
         )
     }
@@ -72,7 +72,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
     private fun isValid(): Boolean {
         val isValid = viewModel.validateInputs(
             binding.userName.text.toString().trim(),
-            binding.userLastname.text.toString().trim(),
+            binding.userSurname.text.toString().trim(),
             binding.userEmail.text.toString().trim(),
             binding.userPassword.text.toString().trim()
         )

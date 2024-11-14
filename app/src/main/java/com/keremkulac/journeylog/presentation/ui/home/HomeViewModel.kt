@@ -19,10 +19,10 @@ class HomeViewModel @Inject constructor(
 ) :
     ViewModel() {
     private val _userResult = MutableLiveData<Result<Any>>()
-    val userResult : LiveData<Result<Any>> get() = _userResult
+    val userResult: LiveData<Result<Any>> get() = _userResult
 
     private val _currentUser = MutableLiveData<Result<FirebaseUser?>>()
-    val currentUser : LiveData<Result<FirebaseUser?>> get() = _currentUser
+    val currentUser: LiveData<Result<FirebaseUser?>> get() = _currentUser
 
     init {
         getCurrentUser()
@@ -34,19 +34,34 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun getCurrentUser(){
+    private fun getCurrentUser() {
         viewModelScope.launch {
+            _currentUser.value = Result.Loading
             getCurrentUserUseCase.invoke {
                 _currentUser.value = it
             }
         }
     }
 
-    fun getUser(id : String){
+    fun getUser(id: String) {
         viewModelScope.launch {
-            getUserUseCase.invoke(id){
+            _userResult.value = Result.Loading
+            getUserUseCase.invoke(id) {
                 _userResult.value = it
             }
+        }
+    }
+
+    fun formatFullName(name: String, lastName: String): String {
+        val formattedName = name.replaceFirstChar { it.uppercase() }
+        val formattedSurname = lastName.replaceFirstChar { it.uppercase() }
+        return "$formattedName $formattedSurname"
+    }
+
+    fun formatInitials(name: String, lastName: String): String {
+        return buildString {
+            append(name.firstOrNull()?.uppercase() ?: "")
+            append(lastName.firstOrNull()?.uppercase() ?: "")
         }
     }
 }

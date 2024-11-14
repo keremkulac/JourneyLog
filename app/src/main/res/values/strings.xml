@@ -28,4 +28,6 @@
     <string name="register_lastname_hint">Soyad</string>
     <string name="remember_me_text">Beni hatırla</string>
     <string name="forgot_password_text">Şifrenizi mi unuttunuz?</string>
+    <string name="welcome_title_text">Hoş geldiniz</string>
+    <string name="last_journey_title_text">Son yolculuğum</string>
 </resources>

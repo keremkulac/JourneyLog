@@ -1,12 +1,12 @@
 package com.keremkulac.journeylog.presentation.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.databinding.FragmentHomeBinding
+import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.util.Result
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,26 +19,32 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         super.onViewCreated(view, savedInstanceState)
         onBackPressCancel()
         getCurrentUser()
+
     }
 
     private fun getCurrentUser() {
         viewModel.currentUser.observe(viewLifecycleOwner) { currentUser ->
             when (currentUser) {
-                is Result.Success -> getUser(currentUser.data!!.uid)
-                else -> {}
+                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Result.Failure -> binding.progressBar.visibility = View.GONE
+                is Result.Success -> {
+                    viewModel.getUser(currentUser.data!!.uid)
+                    getUser()
+                }
             }
         }
     }
 
-    private fun getUser(id: String) {
-        viewModel.getUser(id)
+    private fun getUser() {
         viewModel.userResult.observe(viewLifecycleOwner) { userResult ->
             when (userResult) {
                 Result.Loading -> binding.progressBar.visibility = View.VISIBLE
                 is Result.Failure -> binding.progressBar.visibility = View.GONE
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
-                    Log.d("TAG", userResult.data.toString())
+                    val user = userResult.data as User
+                    binding.initials.text = viewModel.formatInitials(user.name, user.surname)
+                    binding.userFullName.text = viewModel.formatFullName(user.name, user.surname)
                 }
             }
         }
@@ -52,5 +58,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 }
             })
     }
+
 
 }
