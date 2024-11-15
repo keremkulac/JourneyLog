@@ -10,34 +10,24 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.firestore.FirebaseFirestore
 import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.util.Result
 import javax.inject.Inject
 
 class AuthRepositoryImp @Inject constructor(
     private val auth: FirebaseAuth,
-    private val firestore: FirebaseFirestore,
     private val googleSignInClient: GoogleSignInClient,
     private val context: Context
 ) : AuthRepository {
 
-    override suspend fun registerUser(
+    override suspend fun createUserWithEmailAndPassword(
         email: String,
         password: String,
-        user: User,
         result: (Result<String>) -> Unit
     ) {
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                user.id = task.result.user?.uid ?: ""
-                firestore.collection("users").add(user).addOnCompleteListener { saveUserTask ->
-                    if (saveUserTask.isSuccessful) {
-                        result.invoke(Result.Success("Kayıt başarılı"))
-                    } else {
-                        result.invoke(Result.Failure("Kayıt başarısız"))
-                    }
-                }
+                result.invoke(Result.Success(task.result.user?.uid ?: ""))
             } else {
                 try {
                     throw task.exception ?: java.lang.Exception("Invalid authentication")
@@ -50,16 +40,6 @@ class AuthRepositoryImp @Inject constructor(
                 } catch (e: Exception) {
                     result.invoke(Result.Failure(e.message))
                 }
-            }
-        }
-    }
-
-    override suspend fun register(user: User, result: (Result<String>) -> Unit) {
-        firestore.collection("users").add(user).addOnCompleteListener { saveUserTask ->
-            if (saveUserTask.isSuccessful) {
-                result.invoke(Result.Success("Kayıt başarılı"))
-            } else {
-                result.invoke(Result.Failure("Kayıt başarısız"))
             }
         }
     }
@@ -112,23 +92,8 @@ class AuthRepositoryImp @Inject constructor(
         }
     }
 
-    override suspend fun getUser(id: String, result: (Result<Any>) -> Unit) {
-        firestore.collection("users")
-            .get()
-            .addOnSuccessListener { task ->
-                val user = task.toObjects(User::class.java)
-                for (userObject in user) {
-                    if (userObject.id == id) {
-                        result.invoke(Result.Success(userObject))
-                    }
-                }
-            }
-            .addOnFailureListener { exception ->
-                result.invoke(Result.Failure(exception.message))
-            }
-    }
 
-    override suspend fun signInWithGoogle(token: String, result: (Result<String>) -> Unit) {
+    override suspend fun signInWithGoogle(token: String, result: (Result<Any>) -> Unit) {
         val signInIntent = googleSignInClient.signInIntent
         GoogleSignIn.getSignedInAccountFromIntent(signInIntent)
         val credential = GoogleAuthProvider.getCredential(token, null)
@@ -140,17 +105,10 @@ class AuthRepositoryImp @Inject constructor(
                         id = firebaseUser.uid,
                         name = googleAccount?.givenName ?: "",
                         surname = googleAccount?.familyName ?: "",
-                        email = firebaseUser.email ?: ""
+                        email = googleAccount?.email ?: ""
                     )
-                    firestore.collection("users").add(user).addOnCompleteListener { saveUserTask ->
-                        if (saveUserTask.isSuccessful) {
-                            result.invoke(Result.Success("Kayıt başarılı"))
-                        } else {
-                            result.invoke(Result.Failure("Kayıt başarısız"))
-                        }
-                    }
+                    result.invoke(Result.Success(user))
                 }
-                result.invoke(Result.Success("Başarılı"))
             } else {
                 result.invoke(
                     (Result.Failure(task.exception?.message ?: "Firebase sign-in failed"))

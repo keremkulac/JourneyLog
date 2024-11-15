@@ -21,6 +21,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
         super.onViewCreated(view, savedInstanceState)
         register()
         observeRegisterResult()
+        observeCreateUserWithEmailAndPasswordResult()
         navigateLogin()
         observeValidation()
     }
@@ -30,8 +31,28 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
             val email = binding.userEmail.text.toString().trim()
             val password = binding.userPassword.text.toString().trim()
             if (isValid()) {
-                viewModel.register(email, password, getUser())
+                viewModel.createUserWithEmailAndPassword(email, password)
             }
+        }
+    }
+
+    private fun observeCreateUserWithEmailAndPasswordResult() {
+        viewModel.createUserWithEmailAndPassword.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Result.Failure -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
+                }
+
+                is Result.Success -> {
+                    val user = getUser().apply { id = result.data }
+                    viewModel.register(user)
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), result.data, Toast.LENGTH_SHORT).show()
+                }
+            }
+
         }
     }
 

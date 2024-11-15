@@ -4,9 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.domain.usecase.KeepUserLoggedInUseCase
 import com.keremkulac.journeylog.domain.usecase.LoginUseCase
 import com.keremkulac.journeylog.domain.usecase.LoginWithGoogleUseCase
+import com.keremkulac.journeylog.domain.usecase.RegisterUseCase
 import com.keremkulac.journeylog.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -16,7 +18,8 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val loginWithGoogleUseCase: LoginWithGoogleUseCase,
-    private val keepUserLoggedInUseCase: KeepUserLoggedInUseCase
+    private val keepUserLoggedInUseCase: KeepUserLoggedInUseCase,
+    private val registerUseCase: RegisterUseCase
 ) : ViewModel() {
 
     private val _loginResult = MutableLiveData<Result<String>>()
@@ -28,8 +31,11 @@ class LoginViewModel @Inject constructor(
     private val _validationMessage = MutableLiveData<String>()
     val validationMessage: LiveData<String> get() = _validationMessage
 
-    private val _loginWithGoogle = MutableLiveData<Result<String>>()
-    val loginWithGoogle: LiveData<Result<String>> get() = _loginWithGoogle
+    private val _loginWithGoogleResult = MutableLiveData<Result<Any>>()
+    val loginWithGoogleResult: LiveData<Result<Any>> get() = _loginWithGoogleResult
+
+    private val _registerResult = MutableLiveData<Result<String>>()
+    val registerResult: LiveData<Result<String>> get() = _registerResult
 
     init {
         keepUserLoggedIn()
@@ -55,11 +61,20 @@ class LoginViewModel @Inject constructor(
 
     fun loginWithGoogle(token: String) {
         viewModelScope.launch {
-            _loginWithGoogle.value = Result.Loading
+            _loginWithGoogleResult.value = Result.Loading
             loginWithGoogleUseCase.invoke(token) { result ->
-                _loginWithGoogle.value = result
+                _loginWithGoogleResult.value = result
             }
 
+        }
+    }
+
+    fun register(user: User) {
+        viewModelScope.launch {
+            _registerResult.value = Result.Loading
+            registerUseCase.invoke(user) { result ->
+                _registerResult.value = result
+            }
         }
     }
 

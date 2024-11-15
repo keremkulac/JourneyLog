@@ -11,8 +11,8 @@ import com.google.firebase.firestore.firestore
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.domain.repository.AuthRepository
 import com.keremkulac.journeylog.domain.repository.AuthRepositoryImp
-import com.keremkulac.journeylog.domain.repository.ReceiptRepository
-import com.keremkulac.journeylog.domain.repository.ReceiptRepositoryImp
+import com.keremkulac.journeylog.domain.repository.FirestoreRepository
+import com.keremkulac.journeylog.domain.repository.FirestoreRepositoryImp
 import com.keremkulac.journeylog.domain.usecase.RegisterUseCase
 import dagger.Module
 import dagger.Provides
@@ -26,8 +26,8 @@ import javax.inject.Singleton
 object AuthModule {
 
     @Provides
-    fun provideAuthRepository(firebaseAuth: FirebaseAuth,firestore: FirebaseFirestore,googleSignInClient: GoogleSignInClient,context: Context): AuthRepository {
-        return AuthRepositoryImp(firebaseAuth,firestore,googleSignInClient,context)
+    fun provideAuthRepository(firebaseAuth: FirebaseAuth,googleSignInClient: GoogleSignInClient,context: Context): AuthRepository {
+        return AuthRepositoryImp(firebaseAuth,googleSignInClient,context)
     }
 
     @Provides
@@ -43,13 +43,10 @@ object AuthModule {
     }
 
     @Provides
-    fun provideReceiptRepository(firestore: FirebaseFirestore): ReceiptRepository {
-        return ReceiptRepositoryImp(firestore)
+    fun provideReceiptRepository(firestore: FirebaseFirestore): FirestoreRepository {
+        return FirestoreRepositoryImp(firestore)
     }
 
-    @Provides
-    fun provideRegisterUseCase(authRepositoryImp: AuthRepositoryImp) =
-        RegisterUseCase(authRepositoryImp)
 
     @Provides
     @Singleton

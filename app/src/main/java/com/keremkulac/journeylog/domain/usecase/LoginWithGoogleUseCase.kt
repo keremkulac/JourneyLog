@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class LoginWithGoogleUseCase @Inject constructor(private val authRepository: AuthRepository) {
 
-    suspend fun invoke(token : String,result: (Result<String>) -> Unit) {
+    suspend fun invoke(token : String,result: (Result<Any>) -> Unit) {
         authRepository.signInWithGoogle(token) {
             result.invoke(it)
         }

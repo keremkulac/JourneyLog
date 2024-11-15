@@ -1,11 +1,14 @@
 package com.keremkulac.journeylog.presentation.ui.login
 
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -13,6 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentLoginBinding
+import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.util.Result
 import com.keremkulac.journeylog.util.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,14 +25,19 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
     private val viewModel by viewModels<LoginViewModel>()
+    private lateinit var googleSignInLauncher: ActivityResultLauncher<Intent>
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activityResult()
         observeIsLoggedUserInResult()
         login()
         navigateSignup()
         observeLoginResult()
         observeValidation()
-        sign()
+        loginWithGoogle()
+        observeLoginWithGoogleResult()
+        observeRegisterResult()
     }
 
     private fun login() {
@@ -59,7 +68,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
     }
 
-
     private fun observeIsLoggedUserInResult() {
         viewModel.keepUserLoggedIn.observe(viewLifecycleOwner) { isLoggedInResult ->
             when (isLoggedInResult) {
@@ -83,6 +91,68 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         return isValid
     }
 
+    private fun loginWithGoogle() {
+        val signClient by lazy {
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
+            GoogleSignIn.getClient(requireContext(), gso)
+        }
+        binding.loginWithGoogle.setOnClickListener {
+            googleSignInLauncher.launch(signClient.signInIntent)
+        }
+    }
+
+    private fun observeLoginWithGoogleResult() {
+        viewModel.loginWithGoogleResult.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Result.Failure -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
+                }
+
+                is Result.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    viewModel.register(result.data as User)
+                }
+            }
+        }
+    }
+
+    private fun observeRegisterResult() {
+        viewModel.registerResult.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Result.Failure -> {
+                    binding.progressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
+                }
+
+                is Result.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                }
+            }
+        }
+    }
+
+    private fun activityResult() {
+        googleSignInLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                try {
+                    val account = task.getResult(ApiException::class.java)
+                    viewModel.loginWithGoogle(account.idToken!!)
+                } catch (e: ApiException) {
+                    Log.w("TAG", "Google sign in failed", e)
+                }
+            }
+        }
+    }
 
     private fun navigateSignup() {
         binding.registerText.setOnClickListener {
@@ -90,46 +160,5 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
     }
 
-    private fun sign() {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-        val signClient = GoogleSignIn.getClient(requireContext(), gso)
-        binding.loginWithGoogle.setOnClickListener {
-            startActivityForResult(signClient.signInIntent, 9001)
-            viewModel.loginWithGoogle.observe(viewLifecycleOwner) { result ->
-                when (result) {
-                    Result.Loading -> binding.progressBar.visibility = View.VISIBLE
-                    is Result.Failure -> {
-                        binding.progressBar.visibility = View.GONE
-                        Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
-                    }
-
-                    is Result.Success -> {
-                        binding.progressBar.visibility = View.GONE
-                        Toast.makeText(requireContext(), result.data, Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                    }
-                }
-            }
-
-        }
-
-    }
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 9001) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                val account = task.getResult(ApiException::class.java)
-                viewModel.loginWithGoogle(account.idToken!!)
-            } catch (e: ApiException) {
-                Log.w("TAG", "Google sign in failed", e)
-            }
-        }
-    }
 
 }

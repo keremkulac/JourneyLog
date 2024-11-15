@@ -7,16 +7,17 @@ import com.keremkulac.journeylog.util.Result
 
 interface AuthRepository {
 
-    suspend fun registerUser(
+    suspend fun createUserWithEmailAndPassword(
         email: String,
         password: String,
-        user: User,
         result: (Result<String>) -> Unit
     )
 
-    suspend fun register(user: User, result: (Result<String>) -> Unit)
-
-    suspend fun loginUser(email: String, password: String, result: (Result<String>) -> Unit)
+    suspend fun loginUser(
+        email: String,
+        password: String,
+        result: (Result<String>) -> Unit
+    )
 
     suspend fun keepUserLoggedIn(result: (Result<String>) -> Unit)
 
@@ -24,8 +25,6 @@ interface AuthRepository {
 
     suspend fun getCurrentUser(result: (Result<FirebaseUser?>) -> Unit)
 
-    suspend fun getUser(id: String, result: (Result<Any>) -> Unit)
-
-    suspend fun signInWithGoogle(token: String, result: (Result<String>) -> Unit)
+    suspend fun signInWithGoogle(token: String, result: (Result<Any>) -> Unit)
 
 }

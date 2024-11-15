@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.keremkulac.journeylog.domain.model.User
+import com.keremkulac.journeylog.domain.usecase.CreateUserWithEmailAndPasswordUseCase
 import com.keremkulac.journeylog.domain.usecase.RegisterUseCase
 import com.keremkulac.journeylog.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,6 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignupViewModel @Inject constructor(
+    private val createUserWithEmailAndPasswordUseCase: CreateUserWithEmailAndPasswordUseCase,
     private val registerUseCase: RegisterUseCase
 ) : ViewModel() {
 
@@ -22,10 +24,22 @@ class SignupViewModel @Inject constructor(
     private val _validationMessage = MutableLiveData<String>()
     val validationMessage: LiveData<String> get() = _validationMessage
 
-    fun register(email: String, password: String, user: User) {
+    private val _createUserWithEmailAndPassword = MutableLiveData<Result<String>>()
+    val createUserWithEmailAndPassword: LiveData<Result<String>> get() = _createUserWithEmailAndPassword
+
+    fun createUserWithEmailAndPassword(email: String, password: String) {
+        viewModelScope.launch {
+            _createUserWithEmailAndPassword.value = Result.Loading
+            createUserWithEmailAndPasswordUseCase.invoke(email, password) { result ->
+                _createUserWithEmailAndPassword.value = result
+            }
+        }
+    }
+
+    fun register(user: User){
         viewModelScope.launch {
             _registerResult.value = Result.Loading
-            registerUseCase.invoke(email, password, user) { result ->
+            registerUseCase.invoke(user){ result ->
                 _registerResult.value = result
             }
         }
