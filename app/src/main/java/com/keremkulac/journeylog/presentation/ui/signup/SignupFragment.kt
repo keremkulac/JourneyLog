@@ -95,7 +95,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
             binding.userSurname.text.toString().trim(),
             binding.userEmail.text.toString().trim(),
             binding.userPassword.text.toString().trim()
-        )
+        ) && viewModel.isValidEmail(binding.userEmail.text.toString().trim())
         return isValid
     }
 

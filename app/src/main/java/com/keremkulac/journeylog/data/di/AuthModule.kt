@@ -13,7 +13,7 @@ import com.keremkulac.journeylog.domain.repository.AuthRepository
 import com.keremkulac.journeylog.domain.repository.AuthRepositoryImp
 import com.keremkulac.journeylog.domain.repository.FirestoreRepository
 import com.keremkulac.journeylog.domain.repository.FirestoreRepositoryImp
-import com.keremkulac.journeylog.domain.usecase.RegisterUseCase
+import com.keremkulac.journeylog.util.FirebaseException
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,8 +26,13 @@ import javax.inject.Singleton
 object AuthModule {
 
     @Provides
-    fun provideAuthRepository(firebaseAuth: FirebaseAuth,googleSignInClient: GoogleSignInClient,context: Context): AuthRepository {
-        return AuthRepositoryImp(firebaseAuth,googleSignInClient,context)
+    fun provideAuthRepository(firebaseAuth: FirebaseAuth,googleSignInClient: GoogleSignInClient,context: Context,firebaseException: FirebaseException): AuthRepository {
+        return AuthRepositoryImp(firebaseAuth,googleSignInClient,context,firebaseException)
+    }
+
+    @Provides
+    fun provideFirebaseException() : FirebaseException{
+        return FirebaseException()
     }
 
     @Provides

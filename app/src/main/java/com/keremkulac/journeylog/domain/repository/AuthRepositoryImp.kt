@@ -4,20 +4,18 @@ import android.content.Context
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
-import com.google.firebase.auth.FirebaseAuthInvalidUserException
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.keremkulac.journeylog.domain.model.User
+import com.keremkulac.journeylog.util.FirebaseException
 import com.keremkulac.journeylog.util.Result
 import javax.inject.Inject
 
 class AuthRepositoryImp @Inject constructor(
     private val auth: FirebaseAuth,
     private val googleSignInClient: GoogleSignInClient,
-    private val context: Context
+    private val context: Context,
+    private val firebaseException: FirebaseException
 ) : AuthRepository {
 
     override suspend fun createUserWithEmailAndPassword(
@@ -25,22 +23,10 @@ class AuthRepositoryImp @Inject constructor(
         password: String,
         result: (Result<String>) -> Unit
     ) {
-        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                result.invoke(Result.Success(task.result.user?.uid ?: ""))
-            } else {
-                try {
-                    throw task.exception ?: java.lang.Exception("Invalid authentication")
-                } catch (e: FirebaseAuthWeakPasswordException) {
-                    result.invoke(Result.Failure("Şifre en az 6 karakterden oluşmalı"))
-                } catch (e: FirebaseAuthInvalidCredentialsException) {
-                    result.invoke(Result.Failure("Geçersiz email girildi. Lütfen kontrol edip tekrar deneyin"))
-                } catch (e: FirebaseAuthUserCollisionException) {
-                    result.invoke(Result.Failure("Bu email zaten kayıtlı"))
-                } catch (e: Exception) {
-                    result.invoke(Result.Failure(e.message))
-                }
-            }
+        auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener { authResult ->
+            result.invoke(Result.Success(authResult.user?.uid ?: ""))
+        }.addOnFailureListener { exception ->
+            result.invoke(Result.Failure(firebaseException.findExceptionMessage(exception)))
         }
     }
 
@@ -50,21 +36,12 @@ class AuthRepositoryImp @Inject constructor(
         password: String,
         result: (Result<String>) -> Unit
     ) {
-        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnSuccessListener { authResult ->
                 result.invoke(Result.Success("Giriş başarılı"))
-            } else {
-                try {
-                    throw task.exception ?: java.lang.Exception("Invalid authentication")
-                } catch (e: FirebaseAuthInvalidCredentialsException) {
-                    result.invoke(Result.Failure("Geçersiz giriş bilgileri"))
-                } catch (e: FirebaseAuthInvalidUserException) {
-                    result.invoke(Result.Failure("Kullanıcı bulunamadı"))
-                } catch (e: Exception) {
-                    result.invoke(Result.Failure("Bilinmeyen bir hata oluştu"))
-                }
+            }.addOnFailureListener { exception ->
+                result.invoke(Result.Failure(firebaseException.findExceptionMessage(exception)))
             }
-        }
     }
 
     override suspend fun keepUserLoggedIn(
@@ -97,9 +74,9 @@ class AuthRepositoryImp @Inject constructor(
         val signInIntent = googleSignInClient.signInIntent
         GoogleSignIn.getSignedInAccountFromIntent(signInIntent)
         val credential = GoogleAuthProvider.getCredential(token, null)
-        auth.signInWithCredential(credential).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                task.result?.user?.let { firebaseUser ->
+        auth.signInWithCredential(credential)
+            .addOnSuccessListener { authResult ->
+                authResult.user?.let { firebaseUser ->
                     val googleAccount = GoogleSignIn.getLastSignedInAccount(context)
                     val user = User(
                         id = firebaseUser.uid,
@@ -109,22 +86,18 @@ class AuthRepositoryImp @Inject constructor(
                     )
                     result.invoke(Result.Success(user))
                 }
-            } else {
-                result.invoke(
-                    (Result.Failure(task.exception?.message ?: "Firebase sign-in failed"))
-                )
+            }.addOnFailureListener { exception ->
+                result.invoke(Result.Failure(firebaseException.findExceptionMessage(exception)))
             }
-        }
     }
 
     override suspend fun forgotPassword(email: String, result: (Result<String>) -> Unit) {
-        auth.sendPasswordResetEmail(email).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
+        auth.sendPasswordResetEmail(email)
+            .addOnSuccessListener { task ->
                 result.invoke(Result.Success("Şifre sıfırlama maili gönderildi"))
-            } else {
-                result.invoke(Result.Failure("Şifre sıfırlama maili gönderilemedi"))
+            }.addOnFailureListener { exception ->
+                result.invoke(Result.Failure(firebaseException.findExceptionMessage(exception)))
             }
-        }
     }
 
 }

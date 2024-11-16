@@ -36,10 +36,10 @@ class SignupViewModel @Inject constructor(
         }
     }
 
-    fun register(user: User){
+    fun register(user: User) {
         viewModelScope.launch {
             _registerResult.value = Result.Loading
-            registerUseCase.invoke(user){ result ->
+            registerUseCase.invoke(user) { result ->
                 _registerResult.value = result
             }
         }
@@ -74,6 +74,15 @@ class SignupViewModel @Inject constructor(
             }
 
             else -> true
+        }
+    }
+
+    fun isValidEmail(email: String): Boolean {
+        if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            return true
+        } else {
+            _validationMessage.value = "Geçerli bir email giriniz"
+            return false
         }
     }
 
