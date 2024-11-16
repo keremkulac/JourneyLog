@@ -14,7 +14,8 @@
     <string name="add_fuel_purchase_station">İstasyon</string>
     <string name="login_email">Email</string>
     <string name="login_password">Şifre</string>
-    <string name="login_login_button">Giriş yap</string>
+    <string name="login_with_email_button_text">Email ile giriş yap</string>
+    <string name="login_with_google_button_text">Google ile giriş yap</string>
     <string name="login_register_text">Henüz bir hesabın yok mu? <b>Kayıt ol</b></string>
     <string name="login_register_button_text">Kayıt ol</string>
     <string name="register_password_hint">Şifre</string>

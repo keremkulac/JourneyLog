@@ -78,20 +78,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
     }
 
-    private fun observeValidation() {
-        viewModel.validationMessage.observe(viewLifecycleOwner) { message ->
-            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun isValid(): Boolean {
-        val isValid = viewModel.validateInputs(
-            binding.editTextEmail.text.toString().trim(),
-            binding.editTextPassword.text.toString().trim()
-        )
-        return isValid
-    }
-
     private fun loginWithGoogle() {
         val signClient by lazy {
             val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -138,8 +124,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
     }
 
-    private fun forgotPassword(){
-        binding.forgotPassword.setOnClickListener{
+    private fun forgotPassword() {
+        binding.forgotPassword.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
         }
     }
@@ -158,6 +144,20 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 }
             }
         }
+    }
+
+    private fun observeValidation() {
+        viewModel.validationMessage.observe(viewLifecycleOwner) { message ->
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun isValid(): Boolean {
+        val isValid = viewModel.validateInputs(
+            binding.editTextEmail.text.toString().trim(),
+            binding.editTextPassword.text.toString().trim()
+        )
+        return isValid
     }
 
     private fun navigateSignup() {

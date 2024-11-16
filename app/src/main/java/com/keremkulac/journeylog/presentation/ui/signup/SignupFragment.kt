@@ -49,7 +49,6 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
                     val user = getUser().apply { id = result.data }
                     viewModel.register(user)
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), result.data, Toast.LENGTH_SHORT).show()
                 }
             }
 
