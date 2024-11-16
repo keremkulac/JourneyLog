@@ -27,4 +27,6 @@ interface AuthRepository {
 
     suspend fun signInWithGoogle(token: String, result: (Result<Any>) -> Unit)
 
+    suspend fun forgotPassword(email: String, result: (Result<String>) -> Unit)
+
 }

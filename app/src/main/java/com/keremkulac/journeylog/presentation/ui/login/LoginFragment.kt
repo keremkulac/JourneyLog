@@ -38,6 +38,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         loginWithGoogle()
         observeLoginWithGoogleResult()
         observeRegisterResult()
+        forgotPassword()
     }
 
     private fun login() {
@@ -114,7 +115,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                 }
 
                 is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
                     viewModel.register(result.data as User)
                 }
             }
@@ -138,6 +138,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
     }
 
+    private fun forgotPassword(){
+        binding.forgotPassword.setOnClickListener{
+            findNavController().navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+        }
+    }
+
     private fun activityResult() {
         googleSignInLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -148,7 +154,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                     val account = task.getResult(ApiException::class.java)
                     viewModel.loginWithGoogle(account.idToken!!)
                 } catch (e: ApiException) {
-                    Log.w("TAG", "Google sign in failed", e)
+                    Toast.makeText(requireContext(), e.message ?: "", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -159,6 +165,5 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
         }
     }
-
 
 }

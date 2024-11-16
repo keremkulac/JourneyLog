@@ -117,4 +117,14 @@ class AuthRepositoryImp @Inject constructor(
         }
     }
 
+    override suspend fun forgotPassword(email: String, result: (Result<String>) -> Unit) {
+        auth.sendPasswordResetEmail(email).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                result.invoke(Result.Success("Şifre sıfırlama maili gönderildi"))
+            } else {
+                result.invoke(Result.Failure("Şifre sıfırlama maili gönderilemedi"))
+            }
+        }
+    }
+
 }
