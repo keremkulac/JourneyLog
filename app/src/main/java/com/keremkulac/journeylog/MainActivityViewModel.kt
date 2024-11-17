@@ -8,14 +8,17 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainActivityViewModel @Inject constructor(): ViewModel() {
+class MainActivityViewModel @Inject constructor() : ViewModel() {
 
     private val _bottomNavigationVisibility = MutableLiveData<Int>()
     val bottomNavVisibility: LiveData<Int> = _bottomNavigationVisibility
 
     fun bottomNavigationVisibility(destinationId: Int) {
         _bottomNavigationVisibility.value = when (destinationId) {
-            R.id.loginFragment, R.id.signupFragment -> View.GONE
+            R.id.loginFragment,
+            R.id.signupFragment,
+            R.id.forgotPasswordFragment -> View.GONE
+
             else -> View.VISIBLE
         }
     }

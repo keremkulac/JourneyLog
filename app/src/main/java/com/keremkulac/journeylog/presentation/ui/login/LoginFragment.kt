@@ -4,7 +4,6 @@ package com.keremkulac.journeylog.presentation.ui.login
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -70,7 +69,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun observeIsLoggedUserInResult() {
-        viewModel.keepUserLoggedIn.observe(viewLifecycleOwner) { isLoggedInResult ->
+        viewModel.currentUser.observe(viewLifecycleOwner) { isLoggedInResult ->
             when (isLoggedInResult) {
                 is Result.Success -> findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 else -> {}

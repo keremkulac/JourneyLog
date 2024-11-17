@@ -21,8 +21,7 @@
     <EditText
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="50dp"
         android:background="@drawable/input_style"
         android:drawableStart="@drawable/ic_user"
         android:drawablePadding="8dp"
@@ -37,7 +36,7 @@
     <EditText
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/input_style"
         android:drawableStart="@drawable/ic_pass"
@@ -74,51 +73,19 @@
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/login_with_email_button_text"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rememberMe" />
 
-    <View
-        android:id="@+id/dividerLeft"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/dividerText"
-        app:layout_constraintEnd_toStartOf="@+id/dividerText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/dividerText" />
-
-    <TextView
-        android:id="@+id/dividerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:text="YA DA"
-        app:layout_constraintEnd_toStartOf="@+id/dividerRight"
-        app:layout_constraintStart_toEndOf="@+id/dividerLeft"
-        app:layout_constraintTop_toBottomOf="@id/login" />
-
-    <View
-        android:id="@+id/dividerRight"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/dividerText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/dividerText"
-        app:layout_constraintTop_toTopOf="@+id/dividerText" />
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loginWithGoogle"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:drawableLeft="@drawable/ic_google"
         android:letterSpacing="0"
         android:text="@string/login_with_google_button_text"
@@ -129,7 +96,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dividerText"
+        app:layout_constraintTop_toBottomOf="@+id/login"
         app:strokeColor="#3F3F3FFF"
         app:strokeWidth="1dp" />
 

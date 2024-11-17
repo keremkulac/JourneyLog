@@ -4,8 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseUser
 import com.keremkulac.journeylog.domain.model.User
-import com.keremkulac.journeylog.domain.usecase.KeepUserLoggedInUseCase
+import com.keremkulac.journeylog.domain.usecase.GetCurrentUserUseCase
 import com.keremkulac.journeylog.domain.usecase.LoginUseCase
 import com.keremkulac.journeylog.domain.usecase.LoginWithGoogleUseCase
 import com.keremkulac.journeylog.domain.usecase.RegisterUseCase
@@ -18,15 +19,15 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val loginWithGoogleUseCase: LoginWithGoogleUseCase,
-    private val keepUserLoggedInUseCase: KeepUserLoggedInUseCase,
+    private val getCurrentUserUseCase: GetCurrentUserUseCase,
     private val registerUseCase: RegisterUseCase
 ) : ViewModel() {
 
     private val _loginResult = MutableLiveData<Result<String>>()
     val loginResult: LiveData<Result<String>> get() = _loginResult
 
-    private val _keepUserLoggedIn = MutableLiveData<Result<String>>()
-    val keepUserLoggedIn: LiveData<Result<String>> get() = _keepUserLoggedIn
+    private val _currentUser = MutableLiveData<Result<FirebaseUser?>>()
+    val currentUser: LiveData<Result<FirebaseUser?>> get() = _currentUser
 
     private val _validationMessage = MutableLiveData<String>()
     val validationMessage: LiveData<String> get() = _validationMessage
@@ -43,9 +44,9 @@ class LoginViewModel @Inject constructor(
 
     private fun keepUserLoggedIn() {
         viewModelScope.launch {
-            _keepUserLoggedIn.value = Result.Loading
-            keepUserLoggedInUseCase.invoke { result ->
-                _keepUserLoggedIn.value = result
+            _currentUser.value = Result.Loading
+            getCurrentUserUseCase.invoke { result ->
+                _currentUser.value = result
             }
         }
     }

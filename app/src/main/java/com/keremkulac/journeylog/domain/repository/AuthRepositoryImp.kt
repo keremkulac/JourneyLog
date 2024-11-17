@@ -44,16 +44,6 @@ class AuthRepositoryImp @Inject constructor(
             }
     }
 
-    override suspend fun keepUserLoggedIn(
-        result: (Result<String>) -> Unit
-    ) {
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            result.invoke(Result.Success("Kullanıcı daha önce giriş yapmış"))
-        } else {
-            result.invoke(Result.Failure("Kullanıcı daha önce giriş yapmamış"))
-        }
-    }
 
     override suspend fun signOut(result: (Result<String>) -> Unit) {
         auth.signOut()

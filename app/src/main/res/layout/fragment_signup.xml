@@ -21,8 +21,7 @@
     <EditText
         android:id="@+id/userName"
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="50dp"
         android:background="@drawable/input_style"
         android:drawableStart="@drawable/ic_user"
         android:drawablePadding="8dp"
@@ -38,9 +37,8 @@
     <EditText
         android:id="@+id/userSurname"
         android:layout_width="0dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:background="@drawable/input_style"
         android:hint="@string/register_lastname_hint"
         android:importantForAutofill="no"
@@ -53,7 +51,7 @@
     <EditText
         android:id="@+id/userEmail"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/input_style"
         android:drawableStart="@drawable/ic_email"
@@ -69,7 +67,7 @@
     <EditText
         android:id="@+id/userPassword"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/input_style"
         android:drawableStart="@drawable/ic_pass"
