@@ -3,6 +3,7 @@ package com.keremkulac.journeylog.domain.repository
 import android.content.Context
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -37,7 +38,7 @@ class AuthRepositoryImp @Inject constructor(
         result: (Result<String>) -> Unit
     ) {
         auth.signInWithEmailAndPassword(email, password)
-            .addOnSuccessListener { authResult ->
+            .addOnSuccessListener {
                 result.invoke(Result.Success("Giriş başarılı"))
             }.addOnFailureListener { exception ->
                 result.invoke(Result.Failure(firebaseException.findExceptionMessage(exception)))
@@ -87,11 +88,30 @@ class AuthRepositoryImp @Inject constructor(
 
     override suspend fun forgotPassword(email: String, result: (Result<String>) -> Unit) {
         auth.sendPasswordResetEmail(email)
-            .addOnSuccessListener { task ->
+            .addOnSuccessListener {
                 result.invoke(Result.Success("Şifre sıfırlama maili gönderildi"))
             }.addOnFailureListener { exception ->
                 result.invoke(Result.Failure(firebaseException.findExceptionMessage(exception)))
             }
+    }
+
+    override suspend fun updatePassword(
+        oldPassword: String,
+        newPassword: String,
+        result: (Result<String>) -> Unit
+    ) {
+        val user = auth.currentUser
+        val credential =
+            EmailAuthProvider.getCredential(user!!.email!!, oldPassword) // Mevcut şifre gerekiyor
+        user.reauthenticate(credential).addOnSuccessListener {
+            user.updatePassword(newPassword).addOnSuccessListener {
+                result.invoke(Result.Success("Şifre başarıyla güncellendi"))
+            }.addOnFailureListener { exception ->
+                result.invoke(Result.Failure(firebaseException.findExceptionMessage(exception)))
+            }
+        }.addOnFailureListener {
+            result.invoke(Result.Failure("Mevcut şifre yanlış"))
+        }
     }
 
 }

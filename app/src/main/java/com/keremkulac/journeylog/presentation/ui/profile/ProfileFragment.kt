@@ -25,12 +25,19 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         signOut()
         observeSharedData()
         observeSignOutResult()
+        passwordChange()
     }
 
     private fun observeSharedData() {
         sharedViewModel.sharedData.observe(viewLifecycleOwner) { user ->
             Log.d("TAG1", user.toString())
 
+        }
+    }
+
+    private fun passwordChange() {
+        binding.passwordSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_updatePasswordFragment)
         }
     }
 
