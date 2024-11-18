@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentProfileBinding
 import com.keremkulac.journeylog.util.BaseFragment
+import com.keremkulac.journeylog.util.CustomDialog
 import com.keremkulac.journeylog.util.Result
 import com.keremkulac.journeylog.util.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,7 +44,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     private fun signOut() {
         binding.logout.setOnClickListener {
-            viewModel.signOut()
+            showDialog()
         }
     }
 
@@ -62,6 +63,18 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                     findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
                 }
             }
+        }
+    }
+
+    private fun showDialog() {
+        CustomDialog.showConfirmationDialog(
+            requireContext(),
+            "Çıkış yap",
+            "Hesabınızdan çıkış yapmak istediğinize emin misiniz?",
+            "Çıkış yap",
+            "İptal"
+        ) {
+            viewModel.signOut()
         }
     }
 

@@ -4,8 +4,11 @@ package com.keremkulac.journeylog.presentation.ui.login
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
@@ -25,9 +28,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     private val viewModel by viewModels<LoginViewModel>()
     private lateinit var googleSignInLauncher: ActivityResultLauncher<Intent>
+    private var backPressedOnce = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        onBackPressed()
         activityResult()
         observeIsLoggedUserInResult()
         login()
@@ -43,7 +48,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     private fun login() {
         binding.login.setOnClickListener {
             val email = binding.editTextEmail.text.toString().trim()
-            val password = binding.editTextPassword.text.toString().trim()
+            val password = binding.editTextPasswordInput.text.toString().trim()
             if (isValid()) {
                 viewModel.login(email, password)
             }
@@ -154,7 +159,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     private fun isValid(): Boolean {
         val isValid = viewModel.validateInputs(
             binding.editTextEmail.text.toString().trim(),
-            binding.editTextPassword.text.toString().trim()
+            binding.editTextPasswordInput.text.toString().trim()
         )
         return isValid
     }
@@ -163,6 +168,26 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         binding.registerText.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
         }
+    }
+
+    private fun onBackPressed() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (backPressedOnce) {
+                        requireActivity().finish()
+                    } else {
+                        backPressedOnce = true
+                        Toast.makeText(context, "Çıkmak için tekrar basın", Toast.LENGTH_SHORT)
+                            .show()
+                        Handler(Looper.getMainLooper()).postDelayed(
+                            { backPressedOnce = false },
+                            2000
+                        )
+                    }
+                }
+            })
     }
 
 }

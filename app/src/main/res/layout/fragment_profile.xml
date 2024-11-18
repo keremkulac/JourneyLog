@@ -11,6 +11,7 @@
         android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/todo"
         android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -63,10 +64,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_profile"
+            app:drawableStartCompat="@drawable/ic_profile"
             android:drawablePadding="8dp"
             android:padding="24dp"
-            android:text="Profili düzenle"
+            android:text="@string/profile_edit_profile_button_text"
             android:textSize="16sp"
             android:textStyle="bold" />
     </androidx.cardview.widget.CardView>
@@ -85,10 +86,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_profile_password"
+            app:drawableStartCompat="@drawable/ic_profile_password"
             android:drawablePadding="8dp"
             android:padding="24dp"
-            android:text="Şifre ayarları"
+            android:text="@string/profile_password_settings_button_text"
             android:textSize="16sp"
             android:textStyle="bold" />
     </androidx.cardview.widget.CardView>
@@ -107,10 +108,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_settings"
+            app:drawableStartCompat="@drawable/ic_settings"
             android:drawablePadding="8dp"
             android:padding="24dp"
-            android:text="Uygulama ayarları"
+            android:text="@string/profile_app_settings_button_text"
             android:textSize="16sp"
             android:textStyle="bold" />
     </androidx.cardview.widget.CardView>
@@ -129,11 +130,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_logout"
+            app:drawableStartCompat="@drawable/ic_logout"
             android:drawablePadding="8dp"
             android:padding="24dp"
-            android:text="Çıkış yap"
-            android:textColor="#E91E63"
+            android:text="@string/profile_logout_button_text"
+            android:textColor="#F44336"
             android:textSize="16sp"
             android:textStyle="bold" />
     </androidx.cardview.widget.CardView>

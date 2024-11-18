@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentUpdatePasswordBinding
+import com.keremkulac.journeylog.util.CustomDialog
 import com.keremkulac.journeylog.util.Result
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,8 +28,8 @@ class UpdatePasswordFragment : BottomSheetDialogFragment(R.layout.fragment_updat
             val oldPassword = binding.userOldPasswordInput.text.toString().trim()
             val newPassword = binding.userNewPasswordInput.text.toString().trim()
             val newPasswordConfirm = binding.userNewPasswordConfirmInput.text.toString().trim()
-            if (viewModel.validatePassword(oldPassword,newPassword, newPasswordConfirm)) {
-                viewModel.updatePassword(oldPassword, newPassword)
+            if (viewModel.validatePassword(oldPassword, newPassword, newPasswordConfirm)) {
+                showDialog(oldPassword, newPassword)
             }
         }
     }
@@ -56,6 +57,19 @@ class UpdatePasswordFragment : BottomSheetDialogFragment(R.layout.fragment_updat
     private fun observeValidationMessage() {
         viewModel.validationMessage.observe(viewLifecycleOwner) { messageResult ->
             Toast.makeText(requireContext(), messageResult, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun showDialog(oldPassword: String, newPassword: String) {
+        CustomDialog.showConfirmationDialog(
+            requireContext(),
+            "Şifre değiştirme",
+            "Şifrenizi değiştirmek istediğinize emin misiniz?",
+            "Onayla",
+            "İptal"
+        ) {
+            viewModel.updatePassword(oldPassword, newPassword)
+
         }
     }
 

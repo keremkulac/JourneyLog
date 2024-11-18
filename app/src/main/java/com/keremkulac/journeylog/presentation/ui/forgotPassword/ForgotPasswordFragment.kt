@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentForgotPasswordBinding
+import com.keremkulac.journeylog.util.CustomDialog
 import com.keremkulac.journeylog.util.Result
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,7 +28,7 @@ class ForgotPasswordFragment : BottomSheetDialogFragment(R.layout.fragment_forgo
         binding.send.setOnClickListener {
             val email = binding.userEmail.text.toString()
             if (email.isNotEmpty()) {
-                viewModel.forgotPassword(email)
+                showDialog(email)
             } else {
                 Toast.makeText(
                     requireContext(),
@@ -46,12 +47,26 @@ class ForgotPasswordFragment : BottomSheetDialogFragment(R.layout.fragment_forgo
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
                 }
+
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(requireContext(), result.data, Toast.LENGTH_SHORT).show()
                     dismiss()
                 }
             }
+        }
+    }
+
+    private fun showDialog(email: String) {
+        CustomDialog.showConfirmationDialog(
+            requireContext(),
+            "Şifre sıfırlama",
+            "Şifrenizi sıfırlamak istediğinize emin misiniz?",
+            "Sıfırla",
+            "İptal"
+        ) {
+            viewModel.forgotPassword(email)
+
         }
     }
 
