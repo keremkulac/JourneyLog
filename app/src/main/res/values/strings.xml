@@ -36,5 +36,14 @@
     <string name="forgot_password_email_hint">Email</string>
     <string name="forgot_password_send_button_text">Gönder</string>
     <string name="forgot_password_title_text">Şifrenizi mi unuttunuz?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="update_password_old_password_title">Eski şifrenizi giriniz</string>
+    <string name="update_password_new_password_title">Yeni şifrenizi giriniz</string>
+    <string name="update_password_new_password_confirm_title">Yeni şifrenizi onaylayın</string>
+    <string name="update_password_old_password_hint">Eski şifre</string>
+    <string name="update_password_new_password_hint">Yeni şifre</string>
+    <string name="update_password_new_password_confirm_hint">Yeni şifre tekrar</string>
+    <string name="update_password_confirm_button_text">Onayla</string>
 
 </resources>
