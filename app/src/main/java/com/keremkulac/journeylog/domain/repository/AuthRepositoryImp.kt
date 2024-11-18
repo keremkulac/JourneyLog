@@ -46,8 +46,12 @@ class AuthRepositoryImp @Inject constructor(
 
 
     override suspend fun signOut(result: (Result<String>) -> Unit) {
-        auth.signOut()
-        Result.Success("Çıkış yapıldı")
+        try {
+            auth.signOut()
+            result.invoke(Result.Success("Çıkış yapıldı"))
+        } catch (e: Exception) {
+            result.invoke(Result.Failure("Beklenmeyen hata"))
+        }
     }
 
     override suspend fun getCurrentUser(result: (Result<FirebaseUser?>) -> Unit) {
