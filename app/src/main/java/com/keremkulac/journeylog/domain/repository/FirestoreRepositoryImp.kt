@@ -59,6 +59,19 @@ class FirestoreRepositoryImp @Inject constructor(
             }
     }
 
+    override suspend fun getProfilePictureUrl(
+        path: String,
+        result: (Result<String>) -> Unit
+    ) {
+        firebaseStorage.getReference("images/${path}").downloadUrl
+            .addOnSuccessListener { uri ->
+                result.invoke(Result.Success(uri.toString()))
+            }
+            .addOnFailureListener { exception ->
+                result.invoke(Result.Failure("Resim URL'si alınamadı: ${exception.localizedMessage}"))
+            }
+    }
+
     override suspend fun updateUser(user: User, result: (Result<String>) -> Unit) {
         firestore.collection("users").document(user.id).set(user).addOnSuccessListener {
             result.invoke(Result.Success("Kullanıcı başarıyla güncellendi"))
@@ -82,5 +95,6 @@ class FirestoreRepositoryImp @Inject constructor(
                 result.invoke(Result.Failure(exception.message))
             }
     }
+
 
 }

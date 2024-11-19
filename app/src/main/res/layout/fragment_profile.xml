@@ -21,8 +21,10 @@
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginTop="16dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/back"
         app:shapeAppearanceOverlay="@style/circleImageView" />
@@ -64,12 +66,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:drawableStartCompat="@drawable/ic_profile"
             android:drawablePadding="8dp"
             android:padding="24dp"
             android:text="@string/profile_edit_profile_button_text"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_profile" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -86,12 +88,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:drawableStartCompat="@drawable/ic_profile_password"
             android:drawablePadding="8dp"
             android:padding="24dp"
             android:text="@string/profile_password_settings_button_text"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_profile_password" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -108,12 +110,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:drawableStartCompat="@drawable/ic_settings"
             android:drawablePadding="8dp"
             android:padding="24dp"
             android:text="@string/profile_app_settings_button_text"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_settings" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -130,13 +132,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:drawableStartCompat="@drawable/ic_logout"
             android:drawablePadding="8dp"
             android:padding="24dp"
             android:text="@string/profile_logout_button_text"
             android:textColor="#F44336"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_logout" />
     </androidx.cardview.widget.CardView>
 
     <ProgressBar

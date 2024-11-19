@@ -16,4 +16,6 @@ interface FirestoreRepository {
     suspend fun saveProfilePicture(imageUri: Uri, path: String, result: (Result<String>) -> Unit)
 
     suspend fun updateUser(user: User, result: (Result<String>) -> Unit)
+
+    suspend fun getProfilePictureUrl(path: String, result: (Result<String>) -> Unit)
 }

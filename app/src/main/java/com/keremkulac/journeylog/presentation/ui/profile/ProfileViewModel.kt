@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.keremkulac.journeylog.domain.model.User
+import com.keremkulac.journeylog.domain.usecase.GetProfilePictureUrlUseCase
 import com.keremkulac.journeylog.domain.usecase.SaveProfilePictureUseCase
 import com.keremkulac.journeylog.domain.usecase.SignOutUseCase
 import com.keremkulac.journeylog.domain.usecase.UpdateUserUseCase
@@ -19,13 +20,17 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val signOutUseCase: SignOutUseCase,
     private val saveProfilePictureUseCase: SaveProfilePictureUseCase,
-    private val updateUserUseCase: UpdateUserUseCase
+    private val updateUserUseCase: UpdateUserUseCase,
+    private val getProfilePictureUrlUseCase: GetProfilePictureUrlUseCase
 ) : ViewModel() {
     private val _signOutResult = MutableLiveData<Result<String>>()
     val signOutResult: LiveData<Result<String>> get() = _signOutResult
 
     private val _saveProfilePictureResult = MutableLiveData<Result<String>>()
     val saveProfilePictureResult: LiveData<Result<String>> get() = _saveProfilePictureResult
+
+    private val _getProfilePictureUrlResult = MutableLiveData<Result<String>>()
+    val getProfilePictureUrlResult: LiveData<Result<String>> get() = _getProfilePictureUrlResult
 
     fun signOut() {
         viewModelScope.launch {
@@ -45,17 +50,36 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    fun getProfilePictureUrl(path: String) {
+        viewModelScope.launch {
+            _getProfilePictureUrlResult.value = Result.Loading
+            getProfilePictureUrlUseCase.invoke(path) { result ->
+                _getProfilePictureUrlResult.value = result
+            }
+        }
+    }
+
     fun createUUID(): String {
         val myUuid = UUID.randomUUID()
         return myUuid.toString()
     }
 
-    fun updateUser(user: User){
+    fun updateUser(user: User) {
         viewModelScope.launch {
-            updateUserUseCase.invoke(user){
-
-            }
+            updateUserUseCase.invoke(user) {}
         }
+    }
 
+    fun formatFullName(name: String, lastName: String): String {
+        val formattedName = name.replaceFirstChar { it.uppercase() }
+        val formattedSurname = lastName.replaceFirstChar { it.uppercase() }
+        return "$formattedName $formattedSurname"
+    }
+
+    fun formatInitials(name: String, lastName: String): String {
+        return buildString {
+            append(name.firstOrNull()?.uppercase() ?: "")
+            append(lastName.firstOrNull()?.uppercase() ?: "")
+        }
     }
 }
