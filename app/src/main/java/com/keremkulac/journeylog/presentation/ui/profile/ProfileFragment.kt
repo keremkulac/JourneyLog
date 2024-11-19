@@ -4,20 +4,18 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.ActivityResultRegistry
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentProfileBinding
+import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.util.CustomDialog
 import com.keremkulac.journeylog.util.Result
@@ -29,6 +27,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     private lateinit var sharedViewModel: SharedViewModel
     private val viewModel by viewModels<ProfileViewModel>()
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+    private var user: User? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
@@ -43,8 +42,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     private fun observeSharedData() {
         sharedViewModel.sharedData.observe(viewLifecycleOwner) { user ->
-            Log.d("TAG1", user.toString())
-
+            this.user = user
         }
     }
 
@@ -128,6 +126,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 try {
                     val path = viewModel.createUUID() + ".jpeg"
                     viewModel.saveProfilePicture(imageUri!!, path)
+                    user?.imageUri = path
+                    user?.let { viewModel.updateUser(it) }
                 } catch (e: ApiException) {
                     Toast.makeText(requireContext(), e.message ?: "", Toast.LENGTH_SHORT).show()
                 }

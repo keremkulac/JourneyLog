@@ -1,14 +1,16 @@
 package com.keremkulac.journeylog.domain.repository
 
-import android.util.Log
+import android.net.Uri
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.util.Result
 import javax.inject.Inject
 
 class FirestoreRepositoryImp @Inject constructor(
-    private val firestore: FirebaseFirestore
+    private val firestore: FirebaseFirestore,
+    private val firebaseStorage: FirebaseStorage
 ) : FirestoreRepository {
 
     override suspend fun saveReceipt(receipt: Receipt, result: (Result<String>) -> Unit) {
@@ -42,6 +44,27 @@ class FirestoreRepositoryImp @Inject constructor(
             .addOnFailureListener { e ->
                 result.invoke(Result.Failure("Kayıt yapılamadı"))
             }
+    }
+
+    override suspend fun saveProfilePicture(
+        imageUri: Uri,
+        path: String,
+        result: (Result<String>) -> Unit
+    ) {
+        firebaseStorage.getReference().child("images/${path}").putFile(imageUri)
+            .addOnSuccessListener {
+                result.invoke(Result.Success("Profil fotoğrafı başarıyla yüklendi"))
+            }.addOnFailureListener {
+                result.invoke(Result.Failure("Profil fotoğrafı yüklenirken hata oluştu"))
+            }
+    }
+
+    override suspend fun updateUser(user: User, result: (Result<String>) -> Unit) {
+        firestore.collection("users").document(user.id).set(user).addOnSuccessListener {
+            result.invoke(Result.Success("Kullanıcı başarıyla güncellendi"))
+        }.addOnFailureListener {
+            result.invoke(Result.Failure("Kullanıcı güncellemesi başarısız"))
+        }
     }
 
     override suspend fun getUser(id: String, result: (Result<Any>) -> Unit) {

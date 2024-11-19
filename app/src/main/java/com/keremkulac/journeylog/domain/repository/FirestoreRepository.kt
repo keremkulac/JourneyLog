@@ -1,5 +1,6 @@
 package com.keremkulac.journeylog.domain.repository
 
+import android.net.Uri
 import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.util.Result
@@ -12,4 +13,7 @@ interface FirestoreRepository {
 
     suspend fun registerUser(user: User, result: (Result<String>) -> Unit)
 
+    suspend fun saveProfilePicture(imageUri: Uri, path: String, result: (Result<String>) -> Unit)
+
+    suspend fun updateUser(user: User, result: (Result<String>) -> Unit)
 }
