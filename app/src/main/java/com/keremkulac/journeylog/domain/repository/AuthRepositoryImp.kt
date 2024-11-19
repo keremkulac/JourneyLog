@@ -77,7 +77,8 @@ class AuthRepositoryImp @Inject constructor(
                         id = firebaseUser.uid,
                         name = googleAccount?.givenName ?: "",
                         surname = googleAccount?.familyName ?: "",
-                        email = googleAccount?.email ?: ""
+                        email = googleAccount?.email ?: "",
+                        imageUri = ""
                     )
                     result.invoke(Result.Success(user))
                 }
@@ -113,5 +114,6 @@ class AuthRepositoryImp @Inject constructor(
             result.invoke(Result.Failure("Mevcut şifre yanlış"))
         }
     }
+
 
 }

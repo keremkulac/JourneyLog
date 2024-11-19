@@ -1,21 +1,28 @@
 package com.keremkulac.journeylog.presentation.ui.profile
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.keremkulac.journeylog.domain.usecase.SaveProfilePictureUseCase
 import com.keremkulac.journeylog.domain.usecase.SignOutUseCase
 import com.keremkulac.journeylog.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val signOutUseCase: SignOutUseCase
+    private val signOutUseCase: SignOutUseCase,
+    private val saveProfilePictureUseCase: SaveProfilePictureUseCase
 ) : ViewModel() {
     private val _signOutResult = MutableLiveData<Result<String>>()
     val signOutResult: LiveData<Result<String>> get() = _signOutResult
+
+    private val _saveProfilePictureResult = MutableLiveData<Result<String>>()
+    val saveProfilePictureResult: LiveData<Result<String>> get() = _saveProfilePictureResult
 
     fun signOut() {
         viewModelScope.launch {
@@ -24,5 +31,19 @@ class ProfileViewModel @Inject constructor(
                 _signOutResult.value = result
             }
         }
+    }
+
+    fun saveProfilePicture(imageUri: Uri, path: String) {
+        viewModelScope.launch {
+            _saveProfilePictureResult.value = Result.Loading
+            saveProfilePictureUseCase.invoke(imageUri, path) { result ->
+                _saveProfilePictureResult.value = result
+            }
+        }
+    }
+
+    fun createUUID(): String {
+        val myUuid = UUID.randomUUID()
+        return myUuid.toString()
     }
 }

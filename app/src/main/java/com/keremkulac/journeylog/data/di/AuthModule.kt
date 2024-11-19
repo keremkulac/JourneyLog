@@ -8,6 +8,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
+import com.google.firebase.storage.FirebaseStorage
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.domain.repository.AuthRepository
 import com.keremkulac.journeylog.domain.repository.AuthRepositoryImp
@@ -26,12 +27,17 @@ import javax.inject.Singleton
 object AuthModule {
 
     @Provides
-    fun provideAuthRepository(firebaseAuth: FirebaseAuth,googleSignInClient: GoogleSignInClient,context: Context,firebaseException: FirebaseException): AuthRepository {
-        return AuthRepositoryImp(firebaseAuth,googleSignInClient,context,firebaseException)
+    fun provideAuthRepository(
+        firebaseAuth: FirebaseAuth,
+        googleSignInClient: GoogleSignInClient,
+        context: Context,
+        firebaseException: FirebaseException
+    ): AuthRepository {
+        return AuthRepositoryImp(firebaseAuth, googleSignInClient, context, firebaseException)
     }
 
     @Provides
-    fun provideFirebaseException() : FirebaseException{
+    fun provideFirebaseException(): FirebaseException {
         return FirebaseException()
     }
 
@@ -48,10 +54,16 @@ object AuthModule {
     }
 
     @Provides
-    fun provideReceiptRepository(firestore: FirebaseFirestore): FirestoreRepository {
-        return FirestoreRepositoryImp(firestore)
+    fun provideReceiptRepository(
+        firestore: FirebaseFirestore,
+        firebaseStorage: FirebaseStorage
+    ): FirestoreRepository {
+        return FirestoreRepositoryImp(firestore, firebaseStorage)
     }
 
+    @Provides
+    @Singleton
+    fun provideFirebaseStorage(): FirebaseStorage = FirebaseStorage.getInstance()
 
     @Provides
     @Singleton
