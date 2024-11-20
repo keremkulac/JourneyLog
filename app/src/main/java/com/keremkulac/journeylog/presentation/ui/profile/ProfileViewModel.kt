@@ -76,10 +76,4 @@ class ProfileViewModel @Inject constructor(
         return "$formattedName $formattedSurname"
     }
 
-    fun formatInitials(name: String, lastName: String): String {
-        return buildString {
-            append(name.firstOrNull()?.uppercase() ?: "")
-            append(lastName.firstOrNull()?.uppercase() ?: "")
-        }
-    }
 }

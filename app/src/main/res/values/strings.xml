@@ -45,5 +45,9 @@
     <string name="update_password_new_password_hint">Yeni şifre</string>
     <string name="update_password_new_password_confirm_hint">Yeni şifre tekrar</string>
     <string name="update_password_confirm_button_text">Onayla</string>
+    <string name="profile_logout_button_text">Çıkış yap</string>
+    <string name="profile_app_settings_button_text">Uygulama ayarları</string>
+    <string name="profile_password_settings_button_text">Şifre ayarları</string>
+    <string name="profile_edit_profile_button_text">Profili düzenle</string>
 
 </resources>

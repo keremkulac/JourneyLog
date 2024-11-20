@@ -1,19 +1,9 @@
 package com.keremkulac.journeylog.presentation.ui.profile
 
-import android.Manifest
-import android.app.Activity.RESULT_OK
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
-import android.provider.Settings
+import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -23,6 +13,7 @@ import com.keremkulac.journeylog.databinding.FragmentProfileBinding
 import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.util.CustomDialog
+import com.keremkulac.journeylog.util.GalleryPermissionManager
 import com.keremkulac.journeylog.util.Result
 import com.keremkulac.journeylog.util.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,25 +22,39 @@ import dagger.hilt.android.AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate) {
     private lateinit var sharedViewModel: SharedViewModel
     private val viewModel by viewModels<ProfileViewModel>()
-
+    private lateinit var galleryPermissionManager: GalleryPermissionManager
     private var user: User? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
         signOut()
+        binding.progressBar.bringToFront()
+        galleryPermissionManager = GalleryPermissionManager(this) { uri ->
+            binding.profilePicture.setImageURI(uri)
+            val path = viewModel.createUUID() + ".jpeg"
+            viewModel.saveProfilePicture(uri, path)
+            user?.let {
+                it.imageUri = path
+                viewModel.updateUser(it)
+            }
+        }
         observeSharedData()
         observeSignOutResult()
         passwordChange()
         selectPicture()
         observeSaveProfilePictureResult()
         observeGetProfilePictureUrlResult()
+        navigateUpdateProfile()
     }
 
     private fun observeSharedData() {
         sharedViewModel.sharedData.observe(viewLifecycleOwner) { user ->
             this.user = user
+            Log.d("TAG12", user.toString())
             setUserFields()
-            viewModel.getProfilePictureUrl(user.imageUri)
+            if (user.imageUri.isNotEmpty()) {
+                viewModel.getProfilePictureUrl(user.imageUri)
+            }
         }
     }
 
@@ -127,83 +132,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     private fun selectPicture() {
         binding.profilePicture.setOnClickListener {
-            checkGalleryPermission()
-        }
-    }
-
-    private fun openGallery() {
-        val galleryIntent = Intent(
-            Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-        )
-        galleryActivityResultLauncher.launch(galleryIntent)
-    }
-
-    private val galleryPermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-            if (isGranted) {
-                openGallery()
-            } else {
-                Toast.makeText(requireContext(), "Galeri izni gereklidir", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-    private val galleryActivityResultLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-                result.data?.data?.let { uri ->
-                    binding.profilePicture.setImageURI(uri)
-                    val path = viewModel.createUUID() + ".jpeg"
-                    viewModel.saveProfilePicture(uri, path)
-                    user?.let {
-                        it.imageUri = path
-                        viewModel.updateUser(it)
-                    }
-                }
-            }
-        }
-
-    private fun checkGalleryPermission() {
-        val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            Manifest.permission.READ_MEDIA_IMAGES
-        } else {
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        }
-
-        when {
-            ContextCompat.checkSelfPermission(requireContext(), permission) == PackageManager.PERMISSION_GRANTED -> {
-                openGallery()
-            }
-
-            ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), permission) ->{
-                if(!shouldShowRequestPermissionRationale(permission)){
-                    galleryPermissionLauncher.launch(permission)
-                }else{
-                    openAppSettingsDialog()
-                }
-            }
-
-            else -> {
-                galleryPermissionLauncher.launch(permission)
-            }
-        }
-    }
-
-    private fun openAppSettingsDialog() {
-        CustomDialog.showConfirmationDialog(
-            requireContext(),
-            "İzin gerekli",
-            "Galeriye erişim izni uygulama ayarlarından manuel olarak etkinleştirilmelidir.",
-            "Ayarlar",
-            "İptal"){
-            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-                data = Uri.fromParts("package", requireContext().packageName, null)
-            }
-            startActivity(intent)
+            galleryPermissionManager.checkGalleryPermission()
         }
     }
 
 
     private fun setUserFields() {
+        val updatedUser = arguments?.getParcelable<User>("user")
+        if (updatedUser != null) {
+            user = updatedUser
+        }
         user?.let {
             if (it.imageUri != "") {
                 Glide.with(requireContext()).load(it.imageUri).into(binding.profilePicture)
@@ -213,4 +151,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         }
     }
 
+    private fun navigateUpdateProfile() {
+        binding.profileEdit.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putParcelable("user", user)
+            findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment, bundle)
+        }
+    }
 }

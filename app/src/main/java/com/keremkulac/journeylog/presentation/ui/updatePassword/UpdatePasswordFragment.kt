@@ -15,6 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class UpdatePasswordFragment : BottomSheetDialogFragment(R.layout.fragment_update_password) {
     private lateinit var binding: FragmentUpdatePasswordBinding
     private val viewModel by viewModels<UpdatePasswordViewModel>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentUpdatePasswordBinding.bind(view)
