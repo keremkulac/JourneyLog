@@ -10,6 +10,7 @@ import com.keremkulac.journeylog.domain.usecase.GetCurrentUserUseCase
 import com.keremkulac.journeylog.domain.usecase.LoginUseCase
 import com.keremkulac.journeylog.domain.usecase.LoginWithGoogleUseCase
 import com.keremkulac.journeylog.domain.usecase.RegisterUseCase
+import com.keremkulac.journeylog.util.InputValidation
 import com.keremkulac.journeylog.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -20,7 +21,8 @@ class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val loginWithGoogleUseCase: LoginWithGoogleUseCase,
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
-    private val registerUseCase: RegisterUseCase
+    private val registerUseCase: RegisterUseCase,
+    private val inputValidation: InputValidation
 ) : ViewModel() {
 
     private val _loginResult = MutableLiveData<Result<String>>()
@@ -83,20 +85,11 @@ class LoginViewModel @Inject constructor(
         userEmail: String?,
         userPassword: String?
     ): Boolean {
-        return when {
-
-            userEmail.isNullOrEmpty() -> {
-                _validationMessage.value = "Email giriniz"
-                false
-            }
-
-            userPassword.isNullOrEmpty() -> {
-                _validationMessage.value = "Şifre giriniz"
-                false
-            }
-
-            else -> true
+        return inputValidation.validateEmailAndPassword(userEmail, userPassword) { message ->
+            _validationMessage.value = message
         }
+
     }
+
 
 }

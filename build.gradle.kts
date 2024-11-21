@@ -7,4 +7,6 @@ plugins {
     alias(libs.plugins.kapt) apply false
     alias(libs.plugins.mapsplatform) apply false
     alias(libs.plugins.googleGmsGoogleServices) apply false
+    alias(libs.plugins.kotlinParcelize) apply false
+
 }

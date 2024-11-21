@@ -36,12 +36,12 @@ class FirestoreRepositoryImp @Inject constructor(
                             result.invoke(Result.Success("Kullanıcı başarıyla kaydedildi"))
 
                         }
-                        .addOnFailureListener { e ->
+                        .addOnFailureListener {
                             result.invoke(Result.Failure("Kayıt yapılamadı"))
                         }
                 }
             }
-            .addOnFailureListener { e ->
+            .addOnFailureListener {
                 result.invoke(Result.Failure("Kayıt yapılamadı"))
             }
     }

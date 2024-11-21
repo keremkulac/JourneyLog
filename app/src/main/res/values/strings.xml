@@ -49,5 +49,6 @@
     <string name="profile_app_settings_button_text">Uygulama ayarları</string>
     <string name="profile_password_settings_button_text">Şifre ayarları</string>
     <string name="profile_edit_profile_button_text">Profili düzenle</string>
+    <string name="update_update_button_text">Güncelle</string>
 
 </resources>

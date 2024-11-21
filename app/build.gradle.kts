@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.kapt)
     alias(libs.plugins.mapsplatform)
     alias(libs.plugins.googleGmsGoogleServices)
+    alias(libs.plugins.kotlinParcelize)
+
 }
 
 android {
@@ -14,7 +16,7 @@ android {
 
     defaultConfig {
         applicationId = "com.keremkulac.journeylog"
-        minSdk = 24
+        minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -79,6 +81,7 @@ dependencies {
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)
     implementation(libs.play.services.auth)
+    implementation(libs.play.services.base)
     implementation(libs.androidx.runtime.saved.instance.state)
     implementation(libs.play.services.cast.framework)
     implementation(libs.androidx.viewpager2)
@@ -88,6 +91,8 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
     implementation(libs.firebase.bom)
+    implementation(libs.firebase.storage)
+    implementation(libs.googleid)
     kapt(libs.hilt.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
