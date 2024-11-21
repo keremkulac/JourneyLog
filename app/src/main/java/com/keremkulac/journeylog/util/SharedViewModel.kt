@@ -1,6 +1,5 @@
 package com.keremkulac.journeylog.util
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,7 +14,6 @@ class SharedViewModel @Inject constructor(): ViewModel(){
     val sharedData: LiveData<User> get() = _sharedData
 
     fun updateData(data: User) {
-        Log.d("TAG12", data.toString())
         _sharedData.value = data
     }
 

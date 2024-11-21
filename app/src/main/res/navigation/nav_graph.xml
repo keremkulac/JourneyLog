@@ -100,6 +100,9 @@
         <action
             android:id="@+id/action_profileFragment_to_updatePasswordFragment"
             app:destination="@id/updatePasswordFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
     </fragment>
     <dialog
         android:id="@+id/updatePasswordFragment"
@@ -109,5 +112,18 @@
         <action
             android:id="@+id/action_updatePasswordFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/editProfileFragment"
+        android:name="com.keremkulac.journeylog.presentation.ui.editProfile.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" >
+        <argument
+            android:name="user"
+            app:argType="com.keremkulac.journeylog.domain.model.User"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </dialog>
 </navigation>
