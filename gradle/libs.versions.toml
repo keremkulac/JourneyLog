@@ -40,6 +40,8 @@ playServicesBase = "18.5.0"
 kotlinParcelize = "1.8.10"
 firebaseStorage = "21.0.1"
 googleid = "1.1.1"
+coroutine = "1.7.3"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -62,6 +64,7 @@ lifecycle-common = { group = "androidx.lifecycle", name = "lifecycle-common-java
 lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }
 lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okHttp" }
+coroutine = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutine" }
 core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashScreen" }
 circleimageview = { group = "de.hdodenhof", name = "circleimageview", version.ref = "circleImageView" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
@@ -72,6 +75,7 @@ play-services-location = { group = "com.google.android.gms", name = "play-servic
 play-services-cast-framework = { group = "com.google.android.gms", name = "play-services-cast-framework", version.ref = "playServicesCastFramework" }
 play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth" }
 play-services-base = { group = "com.google.android.gms", name = "play-services-base", version.ref = "playServicesBase" }
+
 
 androidx-viewpager2 = { group = "androidx.viewpager2", name = "viewpager2", version.ref = "viewpager2" }
 circleindicator = { group = "me.relex", name = "circleindicator", version.ref = "circleindicator" }

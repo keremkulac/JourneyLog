@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseUser
 import com.keremkulac.journeylog.domain.usecase.GetCurrentUserUseCase
+import com.keremkulac.journeylog.domain.usecase.GetFuelOilPricesUseCase
 import com.keremkulac.journeylog.domain.usecase.GetUserUseCase
 import com.keremkulac.journeylog.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getUserUseCase: GetUserUseCase,
-    private val getCurrentUserUseCase: GetCurrentUserUseCase
+    private val getCurrentUserUseCase: GetCurrentUserUseCase,
+    private val getFuelOilPricesUseCase: GetFuelOilPricesUseCase
 ) :
     ViewModel() {
     private val _userResult = MutableLiveData<Result<Any>>()
@@ -24,13 +26,18 @@ class HomeViewModel @Inject constructor(
     private val _currentUser = MutableLiveData<Result<FirebaseUser?>>()
     val currentUser: LiveData<Result<FirebaseUser?>> get() = _currentUser
 
+    private val _fuelPrices = MutableLiveData<Result<Any>>()
+    val fuelPrices: LiveData<Result<Any>> get() = _fuelPrices
+
     init {
         getCurrentUser()
-        getFuelPrices()
     }
 
-    private fun getFuelPrices() {
+    fun getFuelPrices(city : String) {
         viewModelScope.launch {
+            getFuelOilPricesUseCase.invoke(city) {
+                _fuelPrices.value = it
+            }
         }
     }
 

@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
@@ -21,7 +23,12 @@ android {
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        manifestPlaceholders["GOOGLE_MAP_API_KEY"] = "AIzaSyAq3bXhYQfh1GxknLhjN8bxmXvFDfqAP18"
+        val properties = Properties()
+        properties.load(project.rootProject.file("local.properties").reader())
+        manifestPlaceholders["GOOGLE_MAP_API_KEY"] = "\"${properties.getProperty("GOOGLE_MAP_API_KEY")}\""
+        buildConfigField("String", "RAPID_API_KEY", "\"${properties.getProperty("RAPID_API_KEY")}\"")
+
+
     }
 
     buildTypes {
@@ -93,6 +100,7 @@ dependencies {
     implementation(libs.firebase.bom)
     implementation(libs.firebase.storage)
     implementation(libs.googleid)
+    implementation(libs.coroutine)
     kapt(libs.hilt.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
