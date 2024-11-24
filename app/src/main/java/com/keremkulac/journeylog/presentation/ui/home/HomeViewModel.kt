@@ -1,13 +1,17 @@
 package com.keremkulac.journeylog.presentation.ui.home
 
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseUser
+import com.keremkulac.journeylog.domain.model.DistrictData
 import com.keremkulac.journeylog.domain.usecase.GetCurrentUserUseCase
 import com.keremkulac.journeylog.domain.usecase.GetFuelOilPricesUseCase
 import com.keremkulac.journeylog.domain.usecase.GetUserUseCase
+import com.keremkulac.journeylog.util.FuelPriceOperations
+import com.keremkulac.journeylog.util.FuelType
 import com.keremkulac.journeylog.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -17,7 +21,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getUserUseCase: GetUserUseCase,
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
-    private val getFuelOilPricesUseCase: GetFuelOilPricesUseCase
+    private val getFuelOilPricesUseCase: GetFuelOilPricesUseCase,
+    private val fuelPriceOperations: FuelPriceOperations
 ) :
     ViewModel() {
     private val _userResult = MutableLiveData<Result<Any>>()
@@ -29,6 +34,9 @@ class HomeViewModel @Inject constructor(
     private val _fuelPrices = MutableLiveData<Result<Any>>()
     val fuelPrices: LiveData<Result<Any>> get() = _fuelPrices
 
+    private val _averageFuelPrices = MutableLiveData<HashMap<String, Double>>()
+    val averageFuelPrices: LiveData<HashMap<String, Double>> get() = _averageFuelPrices
+
     init {
         getCurrentUser()
     }
@@ -39,6 +47,14 @@ class HomeViewModel @Inject constructor(
                 _fuelPrices.value = it
             }
         }
+    }
+
+    fun calculateAveragePrice(fuelPriceList: List<DistrictData>) {
+        val averageFuelPricesHashMap = HashMap<String, Double>()
+        averageFuelPricesHashMap["Gasoline"] = fuelPriceOperations.calculateAveragePrice(fuelPriceList, FuelType.GASOLINE)
+        averageFuelPricesHashMap["LPG"] = fuelPriceOperations.calculateAveragePrice(fuelPriceList, FuelType.LPG)
+        averageFuelPricesHashMap["Diesel"] = fuelPriceOperations.calculateAveragePrice(fuelPriceList, FuelType.DIESEL)
+        _averageFuelPrices.value = averageFuelPricesHashMap
     }
 
     private fun getCurrentUser() {
