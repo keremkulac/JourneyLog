@@ -25,8 +25,13 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         val properties = Properties()
         properties.load(project.rootProject.file("local.properties").reader())
-        manifestPlaceholders["GOOGLE_MAP_API_KEY"] = "\"${properties.getProperty("GOOGLE_MAP_API_KEY")}\""
-        buildConfigField("String", "RAPID_API_KEY", "\"${properties.getProperty("RAPID_API_KEY")}\"")
+        manifestPlaceholders["GOOGLE_MAP_API_KEY"] =
+            "\"${properties.getProperty("GOOGLE_MAP_API_KEY")}\""
+        buildConfigField(
+            "String",
+            "RAPID_API_KEY",
+            "\"${properties.getProperty("RAPID_API_KEY")}\""
+        )
 
 
     }
@@ -63,46 +68,141 @@ android {
 
 dependencies {
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.hilt)
-    implementation(libs.hilt.compiler)
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.gson)
-    implementation(libs.gson)
-    implementation(libs.navigation.ui)
-    implementation(libs.navigation.fragment)
-    implementation(libs.fragment)
-    implementation(libs.lifecycle.livedata)
-    implementation(libs.lifecycle.common)
-    implementation(libs.lifecycle.viewmodel)
-    implementation(libs.okhttp.logging.interceptor)
-    implementation(libs.core.splashscreen)
-    implementation(libs.circleimageview)
-    implementation(libs.glide)
-    implementation(libs.androidx.core)
-    implementation(libs.androidx.ktx.core)
-    implementation(libs.play.services.maps)
-    implementation(libs.play.services.location)
-    implementation(libs.play.services.auth)
-    implementation(libs.play.services.base)
-    implementation(libs.androidx.runtime.saved.instance.state)
-    implementation(libs.play.services.cast.framework)
-    implementation(libs.androidx.viewpager2)
-    implementation(libs.circleindicator)
-    implementation(libs.datastore.preferences)
-    implementation(libs.work.manager)
-    implementation(libs.firebase.auth)
-    implementation(libs.firebase.firestore)
-    implementation(libs.firebase.bom)
-    implementation(libs.firebase.storage)
-    implementation(libs.googleid)
-    implementation(libs.coroutine)
+    implementation(libs.androidx.core.ktx) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.androidx.appcompat) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.material) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.androidx.activity) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.androidx.constraintlayout) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.hilt) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.hilt.compiler) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.retrofit) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.retrofit.gson) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.gson) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.navigation.ui) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.navigation.fragment) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.fragment) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.lifecycle.livedata) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.lifecycle.common) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.lifecycle.viewmodel) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.okhttp.logging.interceptor) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.core.splashscreen) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.circleimageview) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.glide) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.androidx.core) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.androidx.ktx.core) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.play.services.maps) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.play.services.location) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.play.services.auth) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.play.services.base) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.androidx.runtime.saved.instance.state) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.play.services.cast.framework) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.androidx.viewpager2) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.circleindicator) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.datastore.preferences) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.work.manager) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.firebase.auth) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.firebase.firestore) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.firebase.bom) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.firebase.storage) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.googleid) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.coroutine) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.androidx.room.common) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.androidx.room.runtime) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.androidx.room.compiler) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    implementation(libs.androidx.room.ktx) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
     kapt(libs.hilt.compiler)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    kapt(libs.androidx.room.compiler)
+    testImplementation(libs.junit) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    androidTestImplementation(libs.androidx.junit) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
+    androidTestImplementation(libs.androidx.espresso.core) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
 }
