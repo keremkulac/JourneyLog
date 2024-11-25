@@ -1,12 +1,14 @@
 package com.keremkulac.journeylog.presentation.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
+import com.keremkulac.journeylog.data.local.model.AverageFuelPriceEntity
 import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.databinding.FragmentHomeBinding
 import com.keremkulac.journeylog.domain.model.AverageFuelPrice
@@ -16,6 +18,7 @@ import com.keremkulac.journeylog.util.FuelPriceOperations
 import com.keremkulac.journeylog.util.FuelTypeTranslation
 import com.keremkulac.journeylog.util.Result
 import com.keremkulac.journeylog.util.SharedViewModel
+import com.keremkulac.journeylog.util.toAverageFuelPriceEntity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -32,11 +35,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
         onBackPressCancel()
+        viewModel.getFuelPrices("istanbul")
         getCurrentUser()
-        binding.circleIcon.setOnClickListener {
-            viewModel.getFuelPrices("istanbul")
-            observeFuelPrices()
-        }
+        observeFuelPrices()
         observeAverageFuelPrices()
     }
 
@@ -57,26 +58,45 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     private fun observeAverageFuelPrices() {
-        viewModel.averageFuelPrices.observe(viewLifecycleOwner) { averageFuelPrices ->
-            val averageFuelPriceList = ArrayList<AverageFuelPrice>()
-            for (averagePrice in averageFuelPrices) {
-                val averageFuelPrice = AverageFuelPrice(
-                    FuelTypeTranslation.translateKey(averagePrice.key),
-                    averagePrice.value
-                )
-                averageFuelPriceList.add(averageFuelPrice)
+        viewModel.averageFuelPrices.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Result.Success -> {
+                    binding.progressBar.visibility = View.GONE
+                    val averageFuelPriceList = ArrayList<AverageFuelPrice>()
+                    val averageFuelPriceEntityList = ArrayList<AverageFuelPriceEntity>()
+
+                    for (averagePrice in result.data) {
+                        val averageFuelPrice = AverageFuelPrice(
+                            FuelTypeTranslation.translateKey(averagePrice.key),
+                            averagePrice.value
+                        )
+                        averageFuelPriceEntityList.add(averageFuelPrice.toAverageFuelPriceEntity())
+                        averageFuelPriceList.add(averageFuelPrice)
+                    }
+                    Log.d("TAG",averageFuelPriceEntityList.toString())
+                    viewModel.saveAverageFuelPrices(averageFuelPriceEntityList)
+                    setRecyclerView(averageFuelPriceList)
+                }
+
+                else -> {}
+
             }
-            setRecyclerView(averageFuelPriceList)
+
         }
     }
 
     private fun setRecyclerView(averageFuelPriceList: ArrayList<AverageFuelPrice>) {
+        val adapter = AverageFuelPriceAdapter()
+        val pagerHelper = PagerSnapHelper()
+        adapter.averageFuelPriceList = averageFuelPriceList
         binding.averageFuelPriceRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        PagerSnapHelper().attachToRecyclerView(binding.averageFuelPriceRecyclerView)
-        val adapter = AverageFuelPriceAdapter()
-        adapter.averageFuelPriceList = averageFuelPriceList
         binding.averageFuelPriceRecyclerView.adapter = adapter
+        if (binding.averageFuelPriceRecyclerView.onFlingListener == null) {
+            pagerHelper.attachToRecyclerView(binding.averageFuelPriceRecyclerView)
+        }
+        binding.indicator.attachToRecyclerView(binding.averageFuelPriceRecyclerView, pagerHelper)
     }
 
     private fun getCurrentUser() {

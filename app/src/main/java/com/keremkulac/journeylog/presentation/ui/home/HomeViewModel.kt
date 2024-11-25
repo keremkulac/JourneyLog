@@ -6,10 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseUser
+import com.keremkulac.journeylog.data.local.model.AverageFuelPriceEntity
 import com.keremkulac.journeylog.domain.model.DistrictData
 import com.keremkulac.journeylog.domain.usecase.GetCurrentUserUseCase
+import com.keremkulac.journeylog.domain.usecase.GetFromRoomAverageFuelUseCase
 import com.keremkulac.journeylog.domain.usecase.GetFuelOilPricesUseCase
 import com.keremkulac.journeylog.domain.usecase.GetUserUseCase
+import com.keremkulac.journeylog.domain.usecase.SaveFromRoomAverageFuelUseCase
 import com.keremkulac.journeylog.util.FuelPriceOperations
 import com.keremkulac.journeylog.util.FuelType
 import com.keremkulac.journeylog.util.Result
@@ -22,7 +25,9 @@ class HomeViewModel @Inject constructor(
     private val getUserUseCase: GetUserUseCase,
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
     private val getFuelOilPricesUseCase: GetFuelOilPricesUseCase,
-    private val fuelPriceOperations: FuelPriceOperations
+    private val fuelPriceOperations: FuelPriceOperations,
+    private val saveFromRoomAverageFuelUseCase: SaveFromRoomAverageFuelUseCase,
+    private val getFromRoomAverageFuelUseCase: GetFromRoomAverageFuelUseCase
 ) :
     ViewModel() {
     private val _userResult = MutableLiveData<Result<Any>>()
@@ -34,8 +39,8 @@ class HomeViewModel @Inject constructor(
     private val _fuelPrices = MutableLiveData<Result<Any>>()
     val fuelPrices: LiveData<Result<Any>> get() = _fuelPrices
 
-    private val _averageFuelPrices = MutableLiveData<HashMap<String, Double>>()
-    val averageFuelPrices: LiveData<HashMap<String, Double>> get() = _averageFuelPrices
+    private val _averageFuelPrices = MutableLiveData<Result<HashMap<String, Double>>>()
+    val averageFuelPrices: LiveData<Result<HashMap<String, Double>>> get() = _averageFuelPrices
 
     init {
         getCurrentUser()
@@ -43,6 +48,7 @@ class HomeViewModel @Inject constructor(
 
     fun getFuelPrices(city : String) {
         viewModelScope.launch {
+            _fuelPrices.value = Result.Loading
             getFuelOilPricesUseCase.invoke(city) {
                 _fuelPrices.value = it
             }
@@ -54,7 +60,8 @@ class HomeViewModel @Inject constructor(
         averageFuelPricesHashMap["Gasoline"] = fuelPriceOperations.calculateAveragePrice(fuelPriceList, FuelType.GASOLINE)
         averageFuelPricesHashMap["LPG"] = fuelPriceOperations.calculateAveragePrice(fuelPriceList, FuelType.LPG)
         averageFuelPricesHashMap["Diesel"] = fuelPriceOperations.calculateAveragePrice(fuelPriceList, FuelType.DIESEL)
-        _averageFuelPrices.value = averageFuelPricesHashMap
+        _averageFuelPrices.value = Result.Loading
+        _averageFuelPrices.value = Result.Success(averageFuelPricesHashMap)
     }
 
     private fun getCurrentUser() {
@@ -72,6 +79,12 @@ class HomeViewModel @Inject constructor(
             getUserUseCase.invoke(id) {
                 _userResult.value = it
             }
+        }
+    }
+
+    fun saveAverageFuelPrices(averageFuelPriceList: List<AverageFuelPriceEntity>) {
+        viewModelScope.launch {
+            saveFromRoomAverageFuelUseCase.invoke(averageFuelPriceList)
         }
     }
 
