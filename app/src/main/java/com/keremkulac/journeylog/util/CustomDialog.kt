@@ -13,6 +13,7 @@ object CustomDialog {
         message: String,
         positiveButtonText: String,
         negativeButtonText: String,
+        onNegativeClick: (() -> Unit)? = null,
         onPositiveClick: () -> Unit
     ) {
         val dialog = Dialog(context)
@@ -36,6 +37,7 @@ object CustomDialog {
             dialog.dismiss()
         }
         negativeButton.setOnClickListener {
+            onNegativeClick?.let { negativeClick -> negativeClick() }
             dialog.dismiss()
         }
 

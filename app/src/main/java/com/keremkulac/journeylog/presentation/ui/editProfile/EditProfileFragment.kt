@@ -12,6 +12,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentEditProfileBinding
 import com.keremkulac.journeylog.domain.model.User
+import com.keremkulac.journeylog.util.CameraPermissionManager
+import com.keremkulac.journeylog.util.CustomDialog
 import com.keremkulac.journeylog.util.GalleryPermissionManager
 import com.keremkulac.journeylog.util.Result
 import com.keremkulac.journeylog.util.SharedViewModel
@@ -25,6 +27,7 @@ class EditProfileFragment : BottomSheetDialogFragment(R.layout.fragment_edit_pro
 
     private lateinit var binding: FragmentEditProfileBinding
     private lateinit var galleryPermissionManager: GalleryPermissionManager
+    private lateinit var cameraPermissionManager: CameraPermissionManager
     private var uri: Uri? = null
     private var user: User? = null
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,7 +47,13 @@ class EditProfileFragment : BottomSheetDialogFragment(R.layout.fragment_edit_pro
             binding.profilePicture.setImageURI(uri)
             this.uri = uri
         }
+
+        cameraPermissionManager = CameraPermissionManager(this) { uri ->
+            binding.profilePicture.setImageURI(uri)
+            this.uri = uri
+        }
     }
+
 
     private fun fillFields() {
         sharedViewModel.sharedData.observe(viewLifecycleOwner) { user ->
@@ -63,7 +72,20 @@ class EditProfileFragment : BottomSheetDialogFragment(R.layout.fragment_edit_pro
 
     private fun selectPicture() {
         binding.profilePicture.setOnClickListener {
-            galleryPermissionManager.checkGalleryPermission()
+            CustomDialog.showConfirmationDialog(
+                requireContext(),
+                "Fotoğraf seçimi",
+                "Lütfen fotoğraf seçimi için birini seçiniz",
+                "Kamera ile çek",
+                "Galeriden al",
+                onNegativeClick = {
+                    galleryPermissionManager.checkGalleryPermission()
+                },
+                onPositiveClick = {
+                    cameraPermissionManager.handleCameraPermission()
+
+                }
+            )
         }
     }
 
