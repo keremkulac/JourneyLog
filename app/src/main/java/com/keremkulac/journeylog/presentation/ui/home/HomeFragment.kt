@@ -35,7 +35,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
         onBackPressCancel()
-        viewModel.getFuelPrices("istanbul")
+
+        if (viewModel.checkLastUpdate()){
+            viewModel.getFuelPrices("istanbul")
+            Log.d("TAG","True")
+        }else{
+            viewModel.getFuelAverageFuelPrices()
+            Log.d("TAG","False")
+        }
         getCurrentUser()
         observeFuelPrices()
         observeAverageFuelPrices()
@@ -52,6 +59,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
                     viewModel.calculateAveragePrice(it.data as List<DistrictData>)
+                    viewModel.saveSharedPreferencesTime(System.currentTimeMillis())
                 }
             }
         }
@@ -74,7 +82,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                         averageFuelPriceEntityList.add(averageFuelPrice.toAverageFuelPriceEntity())
                         averageFuelPriceList.add(averageFuelPrice)
                     }
-                    Log.d("TAG",averageFuelPriceEntityList.toString())
+                    Log.d("TAG", averageFuelPriceEntityList.toString())
                     viewModel.saveAverageFuelPrices(averageFuelPriceEntityList)
                     setRecyclerView(averageFuelPriceList)
                 }

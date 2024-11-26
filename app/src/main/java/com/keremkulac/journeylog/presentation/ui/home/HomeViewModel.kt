@@ -1,6 +1,7 @@
 package com.keremkulac.journeylog.presentation.ui.home
 
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,6 +16,7 @@ import com.keremkulac.journeylog.domain.usecase.GetUserUseCase
 import com.keremkulac.journeylog.domain.usecase.SaveFromRoomAverageFuelUseCase
 import com.keremkulac.journeylog.util.FuelPriceOperations
 import com.keremkulac.journeylog.util.FuelType
+import com.keremkulac.journeylog.util.LastUpdateSharedPreferences
 import com.keremkulac.journeylog.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -27,7 +29,8 @@ class HomeViewModel @Inject constructor(
     private val getFuelOilPricesUseCase: GetFuelOilPricesUseCase,
     private val fuelPriceOperations: FuelPriceOperations,
     private val saveFromRoomAverageFuelUseCase: SaveFromRoomAverageFuelUseCase,
-    private val getFromRoomAverageFuelUseCase: GetFromRoomAverageFuelUseCase
+    private val getFromRoomAverageFuelUseCase: GetFromRoomAverageFuelUseCase,
+    private val lastUpdateSharedPreferences: LastUpdateSharedPreferences
 ) :
     ViewModel() {
     private val _userResult = MutableLiveData<Result<Any>>()
@@ -44,9 +47,11 @@ class HomeViewModel @Inject constructor(
 
     init {
         getCurrentUser()
+        checkFirstStart()
     }
 
-    fun getFuelPrices(city : String) {
+    fun getFuelPrices(city: String) {
+        Log.d("TAG1", "API")
         viewModelScope.launch {
             _fuelPrices.value = Result.Loading
             getFuelOilPricesUseCase.invoke(city) {
@@ -55,11 +60,30 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun getFuelAverageFuelPrices() {
+        viewModelScope.launch {
+            Log.d("TAG1", "ROOM")
+            val list = getFromRoomAverageFuelUseCase.invoke()
+            val hashMap = HashMap<String, Double>().apply {
+                list.forEach {
+                    put(it.title, it.price)
+                }
+            }
+            Log.d("TAG1", hashMap.toString())
+            _averageFuelPrices.value = Result.Loading
+            _averageFuelPrices.value = Result.Success(hashMap)
+        }
+
+    }
+
     fun calculateAveragePrice(fuelPriceList: List<DistrictData>) {
         val averageFuelPricesHashMap = HashMap<String, Double>()
-        averageFuelPricesHashMap["Gasoline"] = fuelPriceOperations.calculateAveragePrice(fuelPriceList, FuelType.GASOLINE)
-        averageFuelPricesHashMap["LPG"] = fuelPriceOperations.calculateAveragePrice(fuelPriceList, FuelType.LPG)
-        averageFuelPricesHashMap["Diesel"] = fuelPriceOperations.calculateAveragePrice(fuelPriceList, FuelType.DIESEL)
+        averageFuelPricesHashMap["Gasoline"] =
+            fuelPriceOperations.calculateAveragePrice(fuelPriceList, FuelType.GASOLINE)
+        averageFuelPricesHashMap["LPG"] =
+            fuelPriceOperations.calculateAveragePrice(fuelPriceList, FuelType.LPG)
+        averageFuelPricesHashMap["Diesel"] =
+            fuelPriceOperations.calculateAveragePrice(fuelPriceList, FuelType.DIESEL)
         _averageFuelPrices.value = Result.Loading
         _averageFuelPrices.value = Result.Success(averageFuelPricesHashMap)
     }
@@ -88,6 +112,22 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    private fun getSharedPreferencesTime(): String? {
+        return lastUpdateSharedPreferences.getData()
+    }
+
+    fun saveSharedPreferencesTime(time: Long) {
+        return lastUpdateSharedPreferences.saveData(time)
+    }
+
+    fun checkLastUpdate(): Boolean {
+        val time = getSharedPreferencesTime()
+        return if (time != null) {
+            System.currentTimeMillis() - time.toLong() > 3_600_000
+        } else
+            false
+    }
+
     fun formatFullName(name: String, lastName: String): String {
         val formattedName = name.replaceFirstChar { it.uppercase() }
         val formattedSurname = lastName.replaceFirstChar { it.uppercase() }
@@ -98,6 +138,12 @@ class HomeViewModel @Inject constructor(
         return buildString {
             append(name.firstOrNull()?.uppercase() ?: "")
             append(lastName.firstOrNull()?.uppercase() ?: "")
+        }
+    }
+
+    private fun checkFirstStart() {
+        if (lastUpdateSharedPreferences.getData() == null) {
+            getFuelPrices("istanbul")
         }
     }
 }

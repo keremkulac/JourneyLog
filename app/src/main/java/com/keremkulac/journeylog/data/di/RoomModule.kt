@@ -6,6 +6,7 @@ import com.keremkulac.journeylog.data.local.dao.AverageFuelPriceDao
 import com.keremkulac.journeylog.data.local.database.AverageFuelPriceDatabase
 import com.keremkulac.journeylog.data.repository.AverageFuelPrice
 import com.keremkulac.journeylog.data.repository.AverageFuelPriceImp
+import com.keremkulac.journeylog.util.LastUpdateSharedPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,5 +39,11 @@ object RoomModule {
     @Singleton
     fun provideMyRepository(averageFuelPriceDao: AverageFuelPriceDao): AverageFuelPrice {
         return AverageFuelPriceImp(averageFuelPriceDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(@ApplicationContext appContext: Context): LastUpdateSharedPreferences {
+        return LastUpdateSharedPreferences(appContext)
     }
 }
