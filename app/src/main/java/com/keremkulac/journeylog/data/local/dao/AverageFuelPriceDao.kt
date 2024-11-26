@@ -13,4 +13,7 @@ interface AverageFuelPriceDao {
 
     @Query("SELECT * FROM average_fuel_price")
     suspend fun getAverageFuelPrices(): List<AverageFuelPriceEntity>
+
+    @Query("DELETE FROM average_fuel_price")
+    suspend fun deleteAllAverageFuelPrices()
 }

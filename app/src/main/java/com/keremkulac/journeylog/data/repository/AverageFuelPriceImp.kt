@@ -14,4 +14,8 @@ class AverageFuelPriceImp @Inject constructor(
     override suspend fun getFuelPrices(): List<AverageFuelPriceEntity> {
         return averageFuelPriceDao.getAverageFuelPrices()
     }
+
+    override suspend fun deleteAllAverageFuelPrices() {
+        averageFuelPriceDao.deleteAllAverageFuelPrices()
+    }
 }

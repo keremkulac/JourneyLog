@@ -7,4 +7,6 @@ interface AverageFuelPrice {
     suspend fun saveFuelPrices(averageFuelPriceEntityList: List<AverageFuelPriceEntity>)
 
     suspend fun getFuelPrices() : List<AverageFuelPriceEntity>
+
+    suspend fun deleteAllAverageFuelPrices()
 }
