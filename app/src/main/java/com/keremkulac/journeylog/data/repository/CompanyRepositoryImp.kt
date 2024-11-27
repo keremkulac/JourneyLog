@@ -15,4 +15,7 @@ class CompanyRepositoryImp @Inject constructor(
         return companyDao.getCompanies()
     }
 
+    override suspend fun deleteAllCompanies() {
+        companyDao.deleteCompanies()
+    }
 }

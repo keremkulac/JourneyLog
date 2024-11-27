@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.keremkulac.journeylog.data.local.model.AverageFuelPriceEntity
 import com.keremkulac.journeylog.data.local.model.CompanyEntity
 import com.keremkulac.journeylog.domain.model.DistrictData
+import com.keremkulac.journeylog.domain.usecase.DeleteAllCompaniesUseCase
 import com.keremkulac.journeylog.domain.usecase.GetCurrentUserUseCase
 import com.keremkulac.journeylog.domain.usecase.GetFromRoomAverageFuelUseCase
 import com.keremkulac.journeylog.domain.usecase.GetFuelOilPricesUseCase
@@ -32,6 +33,7 @@ class HomeViewModel @Inject constructor(
     private val saveFromRoomAverageFuelUseCase: SaveFromRoomAverageFuelUseCase,
     private val getFromRoomAverageFuelUseCase: GetFromRoomAverageFuelUseCase,
     private val saveFromRoomCompanyUseCase: SaveFromRoomCompanyUseCase,
+    private val deleteAllCompaniesUseCase: DeleteAllCompaniesUseCase,
     private val lastUpdateSharedPreferences: LastUpdateSharedPreferences
 ) :
     ViewModel() {
@@ -84,6 +86,7 @@ class HomeViewModel @Inject constructor(
             fuelPriceOperations.calculateAveragePrice(fuelPriceList, FuelType.LPG)
         averageFuelPricesHashMap["Diesel"] =
             fuelPriceOperations.calculateAveragePrice(fuelPriceList, FuelType.DIESEL)
+        deleteAllCompanies()
         saveCompanyList(fuelPriceOperations.getCompanyList(fuelPriceList))
         _averageFuelPrices.value = Result.Loading
         _averageFuelPrices.value = Result.Success(averageFuelPricesHashMap)
@@ -117,6 +120,11 @@ class HomeViewModel @Inject constructor(
         return lastUpdateSharedPreferences.getData()
     }
 
+    private fun deleteAllCompanies() {
+        viewModelScope.launch {
+            deleteAllCompaniesUseCase.invoke()
+        }
+    }
 
     fun saveSharedPreferencesTime(time: Long) {
         return lastUpdateSharedPreferences.saveData(time)

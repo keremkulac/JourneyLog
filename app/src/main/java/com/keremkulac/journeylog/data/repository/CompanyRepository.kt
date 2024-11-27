@@ -7,4 +7,5 @@ interface CompanyRepository {
 
     suspend fun getCompanies() : List<CompanyEntity>
 
+    suspend fun deleteAllCompanies()
 }

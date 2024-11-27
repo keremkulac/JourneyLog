@@ -14,4 +14,7 @@ interface CompanyDao {
     @Query("SELECT * FROM company")
     suspend fun getCompanies(): List<CompanyEntity>
 
+    @Query("DELETE FROM company")
+    suspend fun deleteCompanies()
+
 }
