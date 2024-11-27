@@ -117,11 +117,12 @@ class HomeViewModel @Inject constructor(
         return lastUpdateSharedPreferences.getData()
     }
 
+
     fun saveSharedPreferencesTime(time: Long) {
         return lastUpdateSharedPreferences.saveData(time)
     }
 
-    fun saveCompanyList(list: List<CompanyEntity>) {
+    private fun saveCompanyList(list: List<CompanyEntity>) {
         viewModelScope.launch {
             saveFromRoomCompanyUseCase.invoke(list)
         }

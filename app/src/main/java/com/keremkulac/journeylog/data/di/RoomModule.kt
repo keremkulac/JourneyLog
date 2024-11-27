@@ -3,6 +3,7 @@ package com.keremkulac.journeylog.data.di
 import android.content.Context
 import androidx.room.Room
 import com.keremkulac.journeylog.data.local.dao.AverageFuelPriceDao
+import com.keremkulac.journeylog.data.local.dao.CompanyDao
 import com.keremkulac.journeylog.data.local.database.AverageFuelPriceDatabase
 import com.keremkulac.journeylog.data.repository.AverageFuelPriceRepository
 import com.keremkulac.journeylog.data.repository.AverageFuelPriceRepositoryImp
@@ -33,6 +34,12 @@ object RoomModule {
     @Singleton
     fun provideDao(averageFuelPriceDatabase: AverageFuelPriceDatabase): AverageFuelPriceDao {
         return averageFuelPriceDatabase.averageFuelPriceDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCompanyDao(averageFuelPriceDatabase: AverageFuelPriceDatabase): CompanyDao {
+        return averageFuelPriceDatabase.companyDao()
     }
 
     @Provides
