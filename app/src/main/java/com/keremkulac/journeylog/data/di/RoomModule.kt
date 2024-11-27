@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.keremkulac.journeylog.data.local.dao.AverageFuelPriceDao
 import com.keremkulac.journeylog.data.local.database.AverageFuelPriceDatabase
-import com.keremkulac.journeylog.data.repository.AverageFuelPrice
-import com.keremkulac.journeylog.data.repository.AverageFuelPriceImp
+import com.keremkulac.journeylog.data.repository.AverageFuelPriceRepository
+import com.keremkulac.journeylog.data.repository.AverageFuelPriceRepositoryImp
 import com.keremkulac.journeylog.util.LastUpdateSharedPreferences
 import dagger.Module
 import dagger.Provides
@@ -37,8 +37,8 @@ object RoomModule {
 
     @Provides
     @Singleton
-    fun provideMyRepository(averageFuelPriceDao: AverageFuelPriceDao): AverageFuelPrice {
-        return AverageFuelPriceImp(averageFuelPriceDao)
+    fun provideMyRepository(averageFuelPriceDao: AverageFuelPriceDao): AverageFuelPriceRepository {
+        return AverageFuelPriceRepositoryImp(averageFuelPriceDao)
     }
 
     @Provides

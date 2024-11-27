@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:backgroundTint="#3F51B5"
+    android:backgroundTint="#43A047"
     app:cardCornerRadius="16dp"
-    app:cardElevation="16dp"
+    android:layout_marginStart="48dp"
+    android:layout_marginEnd="48dp"
+    app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
@@ -20,12 +21,12 @@
             android:id="@+id/fuelPriceTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Dizel"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Dizel" />
 
         <TextView
             android:id="@+id/fuelPrice"
@@ -43,9 +44,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/todo"
-            android:src="@drawable/ic_fuel"
+            android:src="@drawable/ic_average_fuel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.cardview.widget.CardView>
 

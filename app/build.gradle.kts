@@ -158,9 +158,6 @@ dependencies {
     implementation(libs.circleindicator) {
         exclude(group = "com.intellij", module = "annotations")
     }
-    implementation(libs.datastore.preferences) {
-        exclude(group = "com.intellij", module = "annotations")
-    }
     implementation(libs.work.manager) {
         exclude(group = "com.intellij", module = "annotations")
     }

@@ -4,8 +4,8 @@ import com.keremkulac.journeylog.data.local.dao.AverageFuelPriceDao
 import com.keremkulac.journeylog.data.local.model.AverageFuelPriceEntity
 import javax.inject.Inject
 
-class AverageFuelPriceImp @Inject constructor(
-    private val averageFuelPriceDao: AverageFuelPriceDao) : AverageFuelPrice {
+class AverageFuelPriceRepositoryImp @Inject constructor(
+    private val averageFuelPriceDao: AverageFuelPriceDao) : AverageFuelPriceRepository {
 
     override suspend fun saveFuelPrices(averageFuelPriceEntityList: List<AverageFuelPriceEntity>) {
         averageFuelPriceDao.insertAverageFuelPrices(averageFuelPriceEntityList)

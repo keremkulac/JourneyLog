@@ -2,7 +2,7 @@ package com.keremkulac.journeylog.data.repository
 
 import com.keremkulac.journeylog.data.local.model.AverageFuelPriceEntity
 
-interface AverageFuelPrice {
+interface AverageFuelPriceRepository {
 
     suspend fun saveFuelPrices(averageFuelPriceEntityList: List<AverageFuelPriceEntity>)
 

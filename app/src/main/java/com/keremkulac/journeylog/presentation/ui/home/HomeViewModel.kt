@@ -1,19 +1,20 @@
 package com.keremkulac.journeylog.presentation.ui.home
 
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseUser
 import com.keremkulac.journeylog.data.local.model.AverageFuelPriceEntity
+import com.keremkulac.journeylog.data.local.model.CompanyEntity
 import com.keremkulac.journeylog.domain.model.DistrictData
 import com.keremkulac.journeylog.domain.usecase.GetCurrentUserUseCase
 import com.keremkulac.journeylog.domain.usecase.GetFromRoomAverageFuelUseCase
 import com.keremkulac.journeylog.domain.usecase.GetFuelOilPricesUseCase
 import com.keremkulac.journeylog.domain.usecase.GetUserUseCase
 import com.keremkulac.journeylog.domain.usecase.SaveFromRoomAverageFuelUseCase
+import com.keremkulac.journeylog.domain.usecase.SaveFromRoomCompanyUseCase
 import com.keremkulac.journeylog.util.FuelPriceOperations
 import com.keremkulac.journeylog.util.FuelType
 import com.keremkulac.journeylog.util.LastUpdateSharedPreferences
@@ -30,6 +31,7 @@ class HomeViewModel @Inject constructor(
     private val fuelPriceOperations: FuelPriceOperations,
     private val saveFromRoomAverageFuelUseCase: SaveFromRoomAverageFuelUseCase,
     private val getFromRoomAverageFuelUseCase: GetFromRoomAverageFuelUseCase,
+    private val saveFromRoomCompanyUseCase: SaveFromRoomCompanyUseCase,
     private val lastUpdateSharedPreferences: LastUpdateSharedPreferences
 ) :
     ViewModel() {
@@ -51,7 +53,6 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getFuelPrices(city: String) {
-        Log.d("TAG1", "API")
         viewModelScope.launch {
             _fuelPrices.value = Result.Loading
             getFuelOilPricesUseCase.invoke(city) {
@@ -62,19 +63,18 @@ class HomeViewModel @Inject constructor(
 
     fun getFuelAverageFuelPrices() {
         viewModelScope.launch {
-            Log.d("TAG1", "ROOM")
             val list = getFromRoomAverageFuelUseCase.invoke()
             val hashMap = HashMap<String, Double>().apply {
                 list.forEach {
                     put(it.title, it.price)
                 }
             }
-            Log.d("TAG1", hashMap.toString())
             _averageFuelPrices.value = Result.Loading
             _averageFuelPrices.value = Result.Success(hashMap)
         }
 
     }
+
 
     fun calculateAveragePrice(fuelPriceList: List<DistrictData>) {
         val averageFuelPricesHashMap = HashMap<String, Double>()
@@ -84,6 +84,7 @@ class HomeViewModel @Inject constructor(
             fuelPriceOperations.calculateAveragePrice(fuelPriceList, FuelType.LPG)
         averageFuelPricesHashMap["Diesel"] =
             fuelPriceOperations.calculateAveragePrice(fuelPriceList, FuelType.DIESEL)
+        saveCompanyList(fuelPriceOperations.getCompanyList(fuelPriceList))
         _averageFuelPrices.value = Result.Loading
         _averageFuelPrices.value = Result.Success(averageFuelPricesHashMap)
     }
@@ -118,6 +119,12 @@ class HomeViewModel @Inject constructor(
 
     fun saveSharedPreferencesTime(time: Long) {
         return lastUpdateSharedPreferences.saveData(time)
+    }
+
+    fun saveCompanyList(list: List<CompanyEntity>) {
+        viewModelScope.launch {
+            saveFromRoomCompanyUseCase.invoke(list)
+        }
     }
 
     fun checkLastUpdate(): Boolean {
