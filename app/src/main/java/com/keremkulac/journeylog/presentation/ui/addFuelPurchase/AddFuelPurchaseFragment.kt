@@ -2,6 +2,8 @@ package com.keremkulac.journeylog.presentation.ui.addFuelPurchase
 
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -20,6 +22,8 @@ class AddFuelPurchaseFragment :
 
     private val viewModel by viewModels<AddFuelPurchaseViewModel>()
     private var selectedType = ""
+    private var selectedCompany = ""
+    private var companyList = listOf<String>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,6 +32,8 @@ class AddFuelPurchaseFragment :
         getSelectedFuelType()
         setDateTime()
         saveReceipt()
+        observeAllCompanies()
+        selectCompany()
     }
 
     private fun getSelectedFuelType() {
@@ -77,7 +83,7 @@ class AddFuelPurchaseFragment :
         binding.receiptSave.setOnClickListener {
             val id = viewModel.createUUID()
             val email = viewModel.currentUser()?.email
-            val stationName = binding.receiptStation.text.toString().trim()
+            val stationName = selectedCompany.trim()
             val fuelType = selectedType.trim()
             val literPrice = binding.receiptLiterPrice.text.toString().trim()
             val liter = binding.receiptPurchaseLiter.text.toString().trim()
@@ -105,6 +111,7 @@ class AddFuelPurchaseFragment :
                 )
                 viewModel.saveReceipt(receipt)
             }
+
         }
     }
 
@@ -126,6 +133,33 @@ class AddFuelPurchaseFragment :
                     Toast.makeText(requireContext(), result.data, Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_addFuelPurchaseFragment_to_fuelPurchaseFragment)
                 }
+            }
+        }
+    }
+
+    private fun observeAllCompanies() {
+        viewModel.allCompanies.observe(viewLifecycleOwner) { list ->
+            val adapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, list)
+            binding.receiptStation.adapter = adapter
+            companyList = list
+        }
+    }
+
+    private fun selectCompany() {
+        binding.receiptStation.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                selectedCompany = companyList[position]
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Toast.makeText(requireContext(), "Lütfen bir şirket seçin", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseUser
 import com.keremkulac.journeylog.domain.model.Receipt
+import com.keremkulac.journeylog.domain.usecase.GetAllCompaniesUseCase
 import com.keremkulac.journeylog.domain.usecase.GetCurrentUserUseCase
 import com.keremkulac.journeylog.domain.usecase.SaveReceiptUseCase
 import com.keremkulac.journeylog.util.Result
@@ -20,7 +21,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AddFuelPurchaseViewModel @Inject constructor(
     private val saveReceiptUseCase: SaveReceiptUseCase,
-    private val getCurrentUser: GetCurrentUserUseCase
+    private val getCurrentUser: GetCurrentUserUseCase,
+    private val getAllCompaniesUseCase: GetAllCompaniesUseCase
 ) : ViewModel() {
 
     private val _totalPrice = MutableLiveData<String>()
@@ -31,6 +33,14 @@ class AddFuelPurchaseViewModel @Inject constructor(
 
     private val _saveResult = MutableLiveData<Result<String>>()
     val saveResult: LiveData<Result<String>> get() = _saveResult
+
+
+    private val _allCompanies = MutableLiveData<List<String>>()
+    val allCompanies: LiveData<List<String>> get() = _allCompanies
+
+    init {
+        getAllCompanies()
+    }
 
     fun calculateTotal(liter: Double, literPrice: Double) {
         val total = liter * literPrice
@@ -79,6 +89,13 @@ class AddFuelPurchaseViewModel @Inject constructor(
             }
         }
         return firebaseUser
+    }
+
+    private fun getAllCompanies() {
+        viewModelScope.launch {
+            val list = getAllCompaniesUseCase.invoke().map { it.companyName }
+            _allCompanies.value = list
+        }
     }
 
 
