@@ -18,4 +18,6 @@ interface FirestoreRepository {
     suspend fun updateUser(user: User, result: (Result<String>) -> Unit)
 
     suspend fun getProfilePictureUrl(path: String, result: (Result<String>) -> Unit)
+
+    suspend fun getAllReceipts(result: (Result<Any>) -> Unit)
 }

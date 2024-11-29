@@ -72,6 +72,21 @@ class FirestoreRepositoryImp @Inject constructor(
             }
     }
 
+    override suspend fun getAllReceipts(result: (Result<Any>) -> Unit) {
+        firestore.collection("receipts").get()
+            .addOnSuccessListener { snapshot ->
+                val receipt = snapshot.toObjects(Receipt::class.java)
+                val list = mutableListOf<Receipt>()
+                for (receiptObject in receipt) {
+                    list.add(receiptObject)
+                }
+                result.invoke(Result.Success(list))
+
+            }.addOnFailureListener { exception ->
+                result.invoke(Result.Failure("Veri çekme başarısız"))
+            }
+    }
+
     override suspend fun updateUser(user: User, result: (Result<String>) -> Unit) {
         firestore.collection("users").document(user.id).set(user).addOnSuccessListener {
             result.invoke(Result.Success("Kullanıcı başarıyla güncellendi"))
