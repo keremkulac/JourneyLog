@@ -63,9 +63,9 @@ class FuelPurchaseAdapter : RecyclerView.Adapter<FuelPurchaseAdapter.ViewHolder>
             fuelPriceTitle.text = receipt.stationName
             fuelPrice.text = receipt.fuelType
             date.text = receipt.date
-            liter.text = receipt.liter
-            literPrice.text = receipt.literPrice
-            totalPrice.text = receipt.total
+            liter.text = "Alınan litre: " + receipt.liter + " L"
+            literPrice.text = "Litre fiyatı: " + receipt.literPrice + " ₺"
+            totalPrice.text = "Toplam: " + receipt.total + " ₺"
 
         }
     }

@@ -1,14 +1,14 @@
 package com.keremkulac.journeylog.domain.model
 
 data class Receipt(
-    val id : String,
-    val email : String,
-    val stationName : String,
-    val fuelType: String,
-    val literPrice: String,
-    val liter : String,
-    val tax : String,
-    val total : String,
-    val date: String,
-    val time: String
+    var id: String = "",
+    var email: String = "",
+    var stationName: String = "",
+    var fuelType: String = "",
+    var literPrice: String = "",
+    var liter: String = "",
+    var tax: String = "",
+    var total: String = "",
+    var date: String = "",
+    var time: String = ""
 )
