@@ -12,6 +12,7 @@ import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentAddFuelPurchaseBinding
 import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.util.BaseFragment
+import com.keremkulac.journeylog.util.CustomDialog
 import com.keremkulac.journeylog.util.Result
 import com.keremkulac.journeylog.util.TextWatcher
 import dagger.hilt.android.AndroidEntryPoint
@@ -109,7 +110,7 @@ class AddFuelPurchaseFragment :
                     date = date,
                     time = time
                 )
-                viewModel.saveReceipt(receipt)
+                createDialog(receipt)
             }
 
         }
@@ -164,4 +165,17 @@ class AddFuelPurchaseFragment :
         }
     }
 
+    private fun createDialog(receipt: Receipt) {
+        CustomDialog.showConfirmationDialog(
+            requireContext(),
+            "Uyarı",
+            "Bu bilgileri kaydetmek istediğinize emin misiniz?",
+            "Evet",
+            "Hayır",
+            null,
+            onPositiveClick = {
+                viewModel.saveReceipt(receipt)
+            }
+        )
+    }
 }

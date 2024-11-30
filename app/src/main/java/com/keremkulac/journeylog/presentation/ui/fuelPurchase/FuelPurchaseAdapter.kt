@@ -57,14 +57,11 @@ class FuelPurchaseAdapter : RecyclerView.Adapter<FuelPurchaseAdapter.ViewHolder>
             val fuelPrice = itemView.findViewById<TextView>(R.id.fuelType)
             val date = itemView.findViewById<TextView>(R.id.date)
             val liter = itemView.findViewById<TextView>(R.id.liter)
-            val literPrice = itemView.findViewById<TextView>(R.id.literPrice)
             val totalPrice = itemView.findViewById<TextView>(R.id.totalPrice)
-
             fuelPriceTitle.text = receipt.stationName
-            fuelPrice.text = receipt.fuelType
+            fuelPrice.text = receipt.fuelType + " - " + receipt.literPrice + " ₺"
             date.text = receipt.date
             liter.text = "Alınan litre: " + receipt.liter + " L"
-            literPrice.text = "Litre fiyatı: " + receipt.literPrice + " ₺"
             totalPrice.text = "Toplam: " + receipt.total + " ₺"
 
         }

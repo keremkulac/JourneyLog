@@ -63,6 +63,8 @@
                 android:id="@+id/receiptStation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="-16dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/receiptStationTitle" />
@@ -113,22 +115,22 @@
 
             <TextView
                 android:id="@+id/receiptLiterPriceTitle"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/add_fuel_purchase_liter_price"
                 android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/receiptPurchaseLiterTitle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/receiptPurchasedFuelType" />
 
             <EditText
                 android:id="@+id/receiptLiterPrice"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
                 android:inputType="numberDecimal"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/receiptPurchaseLiter"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/receiptLiterPriceTitle"
@@ -136,24 +138,24 @@
 
             <TextView
                 android:id="@+id/receiptPurchaseLiterTitle"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/add_fuel_purchase_liter"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/receiptLiterPrice" />
+                app:layout_constraintStart_toEndOf="@+id/receiptLiterPriceTitle"
+                app:layout_constraintTop_toBottomOf="@+id/receiptPurchasedFuelType" />
 
             <EditText
                 android:id="@+id/receiptPurchaseLiter"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:importantForAutofill="no"
                 android:inputType="numberDecimal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/receiptPurchaseLiterTitle"
+                app:layout_constraintStart_toEndOf="@+id/receiptLiterPrice"
+                app:layout_constraintTop_toBottomOf="@+id/receiptLiterPriceTitle"
                 tools:ignore="LabelFor" />
 
             <com.google.android.material.divider.MaterialDivider
@@ -162,6 +164,7 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/receiptPurchaseLiter" />
 
@@ -215,9 +218,8 @@
                 android:id="@+id/receiptSave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/add_fuel_purchase_save_receipt"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/receiptTotalPrice" />
