@@ -179,8 +179,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                         requireActivity().finish()
                     } else {
                         backPressedOnce = true
-                        Toast.makeText(context, "Çıkmak için tekrar basın", Toast.LENGTH_SHORT)
-                            .show()
+                        requireContext().apply {
+                            Toast.makeText(this, getString(R.string.warning_logout_message), Toast.LENGTH_SHORT).show()
+                        }
                         Handler(Looper.getMainLooper()).postDelayed(
                             { backPressedOnce = false },
                             2000

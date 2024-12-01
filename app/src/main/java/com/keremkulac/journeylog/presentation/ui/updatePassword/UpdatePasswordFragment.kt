@@ -62,15 +62,17 @@ class UpdatePasswordFragment : BottomSheetDialogFragment(R.layout.fragment_updat
     }
 
     private fun showDialog(oldPassword: String, newPassword: String) {
-        CustomDialog.showConfirmationDialog(
-            requireContext(),
-            "Şifre değiştirme",
-            "Şifrenizi değiştirmek istediğinize emin misiniz?",
-            "Onayla",
-            "İptal"
-        ) {
-            viewModel.updatePassword(oldPassword, newPassword)
+        requireContext().apply {
+            CustomDialog.showConfirmationDialog(
+                requireContext(),
+                getString(R.string.dialog_change_password_title),
+                getString(R.string.dialog_change_password_message),
+                getString(R.string.dialog_change_password_positive_button_text),
+                getString(R.string.dialog_change_password_negative_button_text)
+            ) {
+                viewModel.updatePassword(oldPassword, newPassword)
 
+            }
         }
     }
 

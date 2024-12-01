@@ -95,8 +95,9 @@ class AddFuelPurchaseFragment :
             if (id.isBlank() || email.isNullOrBlank() || stationName.isBlank() || fuelType.isBlank() || literPrice.isBlank() || liter.isBlank() ||
                 tax.isBlank() || total.isBlank() || date.isBlank() || time.isBlank()
             ) {
-                Toast.makeText(requireContext(), "Lütfen tüm alanları doldurun", Toast.LENGTH_SHORT)
-                    .show()
+                requireContext().apply {
+                    Toast.makeText(this, getString(R.string.warning_please_fill_all_fields), Toast.LENGTH_SHORT).show()
+                }
             } else {
                 val receipt = Receipt(
                     id = id,
@@ -159,23 +160,28 @@ class AddFuelPurchaseFragment :
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                Toast.makeText(requireContext(), "Lütfen bir şirket seçin", Toast.LENGTH_SHORT)
-                    .show()
+                requireContext().apply {
+                    Toast.makeText(this, getString(R.string.warning_please_select_company), Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
 
     private fun createDialog(receipt: Receipt) {
-        CustomDialog.showConfirmationDialog(
-            requireContext(),
-            "Uyarı",
-            "Bu bilgileri kaydetmek istediğinize emin misiniz?",
-            "Evet",
-            "Hayır",
-            null,
-            onPositiveClick = {
-                viewModel.saveReceipt(receipt)
-            }
-        )
+        requireContext().apply {
+
+            CustomDialog.showConfirmationDialog(
+                this,
+                getString(R.string.dialog_add_fuel_purchase_title),
+                getString(R.string.dialog_add_fuel_purchase_message),
+                getString(R.string.dialog_add_fuel_purchase_positive_button_text),
+                getString(R.string.dialog_add_fuel_purchase_negative_button_text),
+                onPositiveClick = {
+                    viewModel.saveReceipt(receipt)
+                }
+            )
+        }
     }
+
+
 }

@@ -72,21 +72,24 @@ class EditProfileFragment : BottomSheetDialogFragment(R.layout.fragment_edit_pro
 
     private fun selectPicture() {
         binding.profilePicture.setOnClickListener {
-            CustomDialog.showConfirmationDialog(
-                requireContext(),
-                "Fotoğraf seçimi",
-                "Lütfen fotoğraf seçimi için birini seçiniz",
-                "Kamera ile çek",
-                "Galeriden al",
-                onNegativeClick = {
-                    galleryPermissionManager.checkGalleryPermission()
-                },
-                onPositiveClick = {
-                    cameraPermissionManager.handleCameraPermission()
+            requireContext().apply {
+                CustomDialog.showConfirmationDialog(
+                    this,
+                    getString(R.string.dialog_select_picture_title),
+                    getString(R.string.dialog_select_picture_message),
+                    getString(R.string.dialog_select_picture_positive_button_text),
+                    getString(R.string.dialog_select_picture_negative_button_text),
+                    onNegativeClick = {
+                        galleryPermissionManager.checkGalleryPermission()
+                    },
+                    onPositiveClick = {
+                        cameraPermissionManager.handleCameraPermission()
 
-                }
-            )
+                    }
+                )
+            }
         }
+
     }
 
     private fun observeProfilePictureUrl() {
@@ -183,9 +186,8 @@ class EditProfileFragment : BottomSheetDialogFragment(R.layout.fragment_edit_pro
     private fun isValid(): Boolean {
         val isValid = viewModel.validateInputs(
             binding.userName.text.toString().trim(),
-            binding.userSurname.text.toString().trim(),
-            binding.userEmail.text.toString().trim(),
-        ) && viewModel.isValidEmail(binding.userEmail.text.toString().trim())
+            binding.userSurname.text.toString().trim()
+        )
         return isValid
     }
 }

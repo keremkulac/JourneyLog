@@ -1,6 +1,5 @@
 package com.keremkulac.journeylog.presentation.ui.profile
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -35,7 +34,6 @@ class ProfileViewModel @Inject constructor(
 
     fun getProfilePictureUrl(path: String) {
         viewModelScope.launch {
-            Log.d("TAG","getProfilePictureUrl")
             _getProfilePictureUrlResult.value = Result.Loading
             getProfilePictureUrlUseCase.invoke(path) { result ->
                 _getProfilePictureUrlResult.value = result

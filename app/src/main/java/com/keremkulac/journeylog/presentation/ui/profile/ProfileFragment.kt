@@ -96,16 +96,20 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             }
         }
     }
+
     private fun showDialog() {
-        CustomDialog.showConfirmationDialog(
-            requireContext(),
-            "Çıkış yap",
-            "Hesabınızdan çıkış yapmak istediğinize emin misiniz?",
-            "Çıkış yap",
-            "İptal"
-        ) {
-            viewModel.signOut()
+        requireContext().apply {
+            CustomDialog.showConfirmationDialog(
+                this,
+                getString(R.string.dialog_forgot_password_title),
+                getString(R.string.dialog_forgot_password_message),
+                getString(R.string.dialog_forgot_password_positive_button_text),
+                getString(R.string.dialog_forgot_password_negative_button_text)
+            ) {
+                viewModel.signOut()
+            }
         }
+
     }
 
     private fun navigateUpdateProfile() {

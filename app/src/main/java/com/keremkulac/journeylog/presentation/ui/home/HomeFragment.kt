@@ -35,14 +35,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
         onBackPressCancel()
-
-        if (viewModel.checkLastUpdate()){
-            viewModel.getFuelPrices("istanbul")
-            Log.d("TAG","True")
-        }else{
-            viewModel.getFuelAverageFuelPrices()
-            Log.d("TAG","False")
-        }
+        checkLastUpdate()
         getCurrentUser()
         observeFuelPrices()
         observeAverageFuelPrices()
@@ -133,6 +126,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     sharedViewModel.updateData(user)
                 }
             }
+        }
+    }
+
+    private fun checkLastUpdate(){
+        if (viewModel.checkLastUpdate()){
+            viewModel.getFuelPrices("istanbul")
+            Log.d("TAG","True")
+        }else{
+            viewModel.getFuelAverageFuelPrices()
+            Log.d("TAG","False")
         }
     }
 

@@ -30,11 +30,9 @@ class ForgotPasswordFragment : BottomSheetDialogFragment(R.layout.fragment_forgo
             if (email.isNotEmpty()) {
                 showDialog(email)
             } else {
-                Toast.makeText(
-                    requireContext(),
-                    "Lütfen email adresinizi giriniz",
-                    Toast.LENGTH_SHORT
-                ).show()
+                requireContext().apply {
+                    Toast.makeText(this, getString(R.string.warning_please_enter_email), Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
@@ -58,16 +56,18 @@ class ForgotPasswordFragment : BottomSheetDialogFragment(R.layout.fragment_forgo
     }
 
     private fun showDialog(email: String) {
-        CustomDialog.showConfirmationDialog(
-            requireContext(),
-            "Şifre sıfırlama",
-            "Şifrenizi sıfırlamak istediğinize emin misiniz?",
-            "Sıfırla",
-            "İptal"
-        ) {
-            viewModel.forgotPassword(email)
-
+        requireContext().apply {
+            CustomDialog.showConfirmationDialog(
+                this,
+                getString(R.string.dialog_forgot_password_title),
+                getString(R.string.dialog_forgot_password_message),
+                getString(R.string.dialog_forgot_password_positive_button_text),
+                getString(R.string.dialog_forgot_password_negative_button_text)
+            ) {
+                viewModel.forgotPassword(email)
+            }
         }
     }
+
 
 }
