@@ -36,8 +36,6 @@
     <string name="forgot_password_email_hint">Email</string>
     <string name="forgot_password_send_button_text">Gönder</string>
     <string name="forgot_password_title_text">Şifrenizi mi unuttunuz?</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="update_password_old_password_title">Eski şifrenizi giriniz</string>
     <string name="update_password_new_password_title">Yeni şifrenizi giriniz</string>
     <string name="update_password_new_password_confirm_title">Yeni şifrenizi onaylayın</string>
@@ -50,5 +48,67 @@
     <string name="profile_password_settings_button_text">Şifre ayarları</string>
     <string name="profile_edit_profile_button_text">Profili düzenle</string>
     <string name="update_update_button_text">Güncelle</string>
+    <string name="liters_taken">Alınan litre: %s L</string>
+    <string name="total_price">Toplam: %s ₺</string>"
+    <string name="fuel_price">%s - %s ₺</string>"
+
+    <string name="dialog_add_fuel_purchase_title">Uyarı</string>
+    <string name="dialog_add_fuel_purchase_message">Bu bilgileri kaydetmek istediğinize emin misiniz?</string>
+    <string name="dialog_add_fuel_purchase_positive_button_text">Evet</string>
+    <string name="dialog_add_fuel_purchase_negative_button_text">Hayır</string>
+
+    <string name="dialog_select_picture_title">Fotoğraf seçimi</string>
+    <string name="dialog_select_picture_message">Lütfen fotoğraf seçimi için birini seçiniz</string>
+    <string name="dialog_select_picture_positive_button_text">Kamera ile çek</string>
+    <string name="dialog_select_picture_negative_button_text">Galeriden al</string>
+
+    <string name="dialog_forgot_password_title">Şifre sıfırlama</string>
+    <string name="dialog_forgot_password_message">Şifrenizi sıfırlamak istediğinize emin misiniz?</string>
+    <string name="dialog_forgot_password_positive_button_text">Sıfırla</string>
+    <string name="dialog_forgot_password_negative_button_text">İptal</string>
+
+    <string name="dialog_logout_title">Çıkış yap</string>
+    <string name="dialog_logout_message">Hesabınızdan çıkış yapmak istediğinize emin misiniz?</string>
+    <string name="dialog_logout_positive_button_text">Çıkış yap</string>
+    <string name="dialog_logout_negative_button_text">İptal</string>
+
+    <string name="dialog_change_password_title">Şifre değiştirme</string>
+    <string name="dialog_change_password_message">Şifrenizi değiştirmek istediğinize emin misiniz?</string>
+    <string name="dialog_change_password_positive_button_text">Onayla</string>
+    <string name="dialog_change_password_negative_button_text">İptal</string>
+
+    <string name="dialog_camera_permission_title">İzin gerekli</string>
+    <string name="dialog_camera_permission_message">Kameraya erişim izni uygulama ayarlarından manuel olarak etkinleştirilmelidir.</string>
+    <string name="dialog_camera_permission_positive_button_text">Ayarlar</string>
+    <string name="dialog_camera_permission_negative_button_text">İptal</string>
+
+    <string name="dialog_gallery_permission_title">İzin gerekli</string>
+    <string name="dialog_gallery_permission_message">Galeriye erişim izni uygulama ayarlarından manuel olarak etkinleştirilmelidir.</string>
+    <string name="dialog_gallery_permission_positive_button_text">Ayarlar</string>
+    <string name="dialog_gallery_permission_negative_button_text">İptal</string>
+
+
+    <string name="warning_please_select_company">Lütfen bir şirket seçin</string>
+    <string name="warning_please_fill_all_fields">Lütfen tüm alanları doldurun</string>
+    <string name="warning_please_enter_email">Lütfen email adresinizi giriniz</string>
+    <string name="warning_logout_message">Çıkmak için tekrar basın</string>
+    <string name="warning_old_password_not_empty_message">Eski şifre boş bırakılamaz</string>
+    <string name="warning_new_password_not_empty_message">Yeni şifre boş bırakılamaz</string>
+    <string name="warning_new_password_confirm_not_empty_message">Yeni şifre onay boş bırakılamaz</string>
+    <string name="warning_old_password_must_6_character_message">Eski şifre en az 6 karakter olmalıdır</string>
+    <string name="warning_new_password_must_6_character_message">Yeni şifre en az 6 karakter olmalıdır</string>
+    <string name="warning_new_confirm_password_must_6_character_message">Yeni şifre onay en az 6 karakter olmalıdır</string>
+    <string name="warning_passwords_must_be_same_message">Şifreler aynı olmalıdır</string>
+    <string name="warning_camera_permission_required_message">Kamera izni gereklidir</string>
+    <string name="warning_gallery_permission_required_message">Galeri izni gereklidir</string>
+
+
+    <string name="validation_message_empty_name">İsim giriniz</string>
+    <string name="validation_message_empty_surname">Soyad giriniz</string>
+    <string name="validation_message_empty_email">Email giriniz</string>
+    <string name="validation_message_empty_password">Şifre giriniz</string>
+    <string name="validation_message_valid_email">Geçerli bir email giriniz</string>
+
+
 
 </resources>

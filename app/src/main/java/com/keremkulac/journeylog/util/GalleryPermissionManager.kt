@@ -13,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.keremkulac.journeylog.R
 
 
 class GalleryPermissionManager(
@@ -27,8 +28,9 @@ class GalleryPermissionManager(
         if (isGranted) {
             openGallery()
         } else {
-            Toast.makeText(fragment.requireContext(), "Galeri izni gereklidir", Toast.LENGTH_SHORT)
-                .show()
+            fragment.requireContext().apply {
+                Toast.makeText(this, getString(R.string.warning_gallery_permission_required_message), Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -83,18 +85,21 @@ class GalleryPermissionManager(
     }
 
     private fun openAppSettingsDialog() {
-        CustomDialog.showConfirmationDialog(
-            fragment.requireContext(),
-            "İzin gerekli",
-            "Galeriye erişim izni uygulama ayarlarından manuel olarak etkinleştirilmelidir.",
-            "Ayarlar",
-            "İptal"
-        ) {
-            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-                data = Uri.fromParts("package", fragment.requireContext().packageName, null)
+        fragment.requireContext().apply {
+            CustomDialog.showConfirmationDialog(
+                this,
+                getString(R.string.dialog_gallery_permission_title),
+                getString(R.string.dialog_gallery_permission_message),
+                getString(R.string.dialog_gallery_permission_positive_button_text),
+                getString(R.string.dialog_gallery_permission_negative_button_text)
+            ) {
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                    data = Uri.fromParts("package", fragment.requireContext().packageName, null)
+                }
+                fragment.startActivity(intent)
             }
-            fragment.startActivity(intent)
         }
+
     }
 
 
