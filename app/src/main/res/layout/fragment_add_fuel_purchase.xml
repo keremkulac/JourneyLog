@@ -158,15 +158,37 @@
                 app:layout_constraintTop_toBottomOf="@+id/receiptLiterPriceTitle"
                 tools:ignore="LabelFor" />
 
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
+
+            <TextView
+                android:id="@+id/vehicleKmTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                android:text="Araç kilometre"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/receiptPurchaseLiter" />
+                app:layout_constraintTop_toBottomOf="@+id/receiptLiterPrice" />
+
+            <ImageView
+                android:id="@+id/vehicleKmInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_info"
+                android:layout_marginStart="4dp"
+                app:layout_constraintBottom_toBottomOf="@id/vehicleKmTitle"
+                app:layout_constraintStart_toEndOf="@+id/vehicleKmTitle"
+                app:layout_constraintTop_toTopOf="@id/vehicleKmTitle" />
+
+            <EditText
+                android:id="@+id/vehicleKm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                app:layout_constraintEnd_toEndOf="@+id/receiptLiterPrice"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vehicleKmTitle"
+                tools:ignore="LabelFor" />
 
             <TextView
                 android:id="@+id/receiptTotalTaxTitle"
@@ -177,8 +199,7 @@
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider" />
-
+                app:layout_constraintTop_toBottomOf="@+id/vehicleKm" />
 
             <TextView
                 android:id="@+id/receiptTotalTax"
@@ -190,7 +211,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/receiptTotalTaxTitle"
                 tools:text="170TL" />
-
 
             <TextView
                 android:id="@+id/receiptTotalPriceTitle"

@@ -102,6 +102,17 @@
     <string name="warning_camera_permission_required_message">Kamera izni gereklidir</string>
     <string name="warning_gallery_permission_required_message">Galeri izni gereklidir</string>
 
+    <string name="warning_receipt_id_not_empty_message">ID alınamadı</string>
+    <string name="warning_receipt_email_not_empty_message">Email alınamadı</string>
+    <string name="warning_receipt_station_name_not_empty_message">İstasyon seçiniz</string>
+    <string name="warning_receipt_fuel_type_empty_message">Yakıt türü seçiniz</string>
+    <string name="warning_receipt_liter_price_empty_message">Litre fiyatı giriniz</string>
+    <string name="warning_receipt_liter_empty_message">Litre giriniz</string>
+    <string name="warning_receipt_tax_empty_message">Vergi hesaplanamadı</string>
+    <string name="warning_receipt_total_empty_message">Toplam tutar hesaplanamadı</string>
+    <string name="warning_receipt_date_empty_message">Tarih alınamadı</string>
+    <string name="warning_receipt_time_empty_message">Saat alınamadı</string>
+
 
     <string name="validation_message_empty_name">İsim giriniz</string>
     <string name="validation_message_empty_surname">Soyad giriniz</string>

@@ -9,6 +9,7 @@ import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.domain.usecase.GetAllCompaniesUseCase
 import com.keremkulac.journeylog.domain.usecase.GetCurrentUserUseCase
 import com.keremkulac.journeylog.domain.usecase.SaveReceiptUseCase
+import com.keremkulac.journeylog.util.InputValidation
 import com.keremkulac.journeylog.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -22,7 +23,8 @@ import javax.inject.Inject
 class AddFuelPurchaseViewModel @Inject constructor(
     private val saveReceiptUseCase: SaveReceiptUseCase,
     private val getCurrentUser: GetCurrentUserUseCase,
-    private val getAllCompaniesUseCase: GetAllCompaniesUseCase
+    private val getAllCompaniesUseCase: GetAllCompaniesUseCase,
+    private val inputValidation: InputValidation
 ) : ViewModel() {
 
     private val _totalPrice = MutableLiveData<String>()
@@ -37,6 +39,9 @@ class AddFuelPurchaseViewModel @Inject constructor(
 
     private val _allCompanies = MutableLiveData<List<String>>()
     val allCompanies: LiveData<List<String>> get() = _allCompanies
+
+    private val _validationMessage = MutableLiveData<String>()
+    val validationMessage: LiveData<String> get() = _validationMessage
 
     init {
         getAllCompanies()
@@ -95,6 +100,34 @@ class AddFuelPurchaseViewModel @Inject constructor(
         viewModelScope.launch {
             val list = getAllCompaniesUseCase.invoke().map { it.companyName }
             _allCompanies.value = list
+        }
+    }
+
+    fun validateInputs(
+        id: String?,
+        email: String?,
+        stationName: String?,
+        fuelType: String?,
+        literPrice: String?,
+        liter: String?,
+        tax: String?,
+        total: String?,
+        date: String?,
+        time: String?
+    ) : Boolean{
+        return inputValidation.validateReceipt(
+            id,
+            email,
+            stationName,
+            fuelType,
+            literPrice,
+            liter,
+            tax,
+            total,
+            date,
+            time
+        ) { message ->
+            _validationMessage.value = message
         }
     }
 

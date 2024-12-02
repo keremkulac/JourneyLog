@@ -15,6 +15,7 @@ import com.keremkulac.journeylog.domain.repository.AuthRepositoryImp
 import com.keremkulac.journeylog.domain.repository.FirestoreRepository
 import com.keremkulac.journeylog.domain.repository.FirestoreRepositoryImp
 import com.keremkulac.journeylog.util.FirebaseException
+import com.keremkulac.journeylog.util.InputValidation
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -78,5 +79,12 @@ object AuthModule {
     fun provideContext(@ApplicationContext context: Context): Context {
         return context
     }
+
+    @Provides
+    @Singleton
+    fun provideInputValidation(context: Context): InputValidation {
+        return InputValidation(context)
+    }
+
 
 }

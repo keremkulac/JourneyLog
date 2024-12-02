@@ -9,6 +9,7 @@ import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.domain.usecase.GetProfilePictureUrlUseCase
 import com.keremkulac.journeylog.domain.usecase.SaveProfilePictureUseCase
 import com.keremkulac.journeylog.domain.usecase.UpdateUserUseCase
+import com.keremkulac.journeylog.util.InputValidation
 import com.keremkulac.journeylog.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -18,7 +19,8 @@ import javax.inject.Inject
 class EditProfileViewModel @Inject constructor(
     private val getProfilePictureUrlUseCase: GetProfilePictureUrlUseCase,
     private val saveProfilePictureUseCase: SaveProfilePictureUseCase,
-    private val updateUserUseCase: UpdateUserUseCase
+    private val updateUserUseCase: UpdateUserUseCase,
+    private val inputValidation: InputValidation
 ) : ViewModel() {
 
     private val _getProfilePictureUrlResult = MutableLiveData<Result<String>>()
@@ -61,37 +63,13 @@ class EditProfileViewModel @Inject constructor(
     }
 
     fun validateInputs(
-        userName: String?,
-        userLastname: String?,
-        userEmail: String?
+        userEmail: String?,
+        userPassword: String?
     ): Boolean {
-        return when {
-            userName.isNullOrEmpty() -> {
-                _validationMessage.value = "İsim giriniz"
-                false
-            }
-
-            userLastname.isNullOrEmpty() -> {
-                _validationMessage.value = "Soyad giriniz"
-                false
-            }
-
-            userEmail.isNullOrEmpty() -> {
-                _validationMessage.value = "Email giriniz"
-                false
-            }
-
-            else -> true
+        return inputValidation.validateEmailAndPassword(userEmail, userPassword) { message ->
+            _validationMessage.value = message
         }
-    }
 
-    fun isValidEmail(email: String): Boolean {
-        if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            return true
-        } else {
-            _validationMessage.value = "Geçerli bir email giriniz"
-            return false
-        }
     }
 
 }

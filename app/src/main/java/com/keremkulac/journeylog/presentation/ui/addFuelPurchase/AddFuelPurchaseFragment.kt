@@ -35,6 +35,7 @@ class AddFuelPurchaseFragment :
         saveReceipt()
         observeAllCompanies()
         selectCompany()
+        observeValidation()
     }
 
     private fun getSelectedFuelType() {
@@ -82,38 +83,9 @@ class AddFuelPurchaseFragment :
 
     private fun saveReceipt() {
         binding.receiptSave.setOnClickListener {
-            val id = viewModel.createUUID()
-            val email = viewModel.currentUser()?.email
-            val stationName = selectedCompany.trim()
-            val fuelType = selectedType.trim()
-            val literPrice = binding.receiptLiterPrice.text.toString().trim()
-            val liter = binding.receiptPurchaseLiter.text.toString().trim()
-            val tax = binding.receiptTotalTax.text.toString().trim()
-            val total = binding.receiptTotalPrice.text.toString().trim()
-            val date = binding.receiptDate.text.toString().trim()
-            val time = binding.receiptTime.text.toString().trim()
-            if (id.isBlank() || email.isNullOrBlank() || stationName.isBlank() || fuelType.isBlank() || literPrice.isBlank() || liter.isBlank() ||
-                tax.isBlank() || total.isBlank() || date.isBlank() || time.isBlank()
-            ) {
-                requireContext().apply {
-                    Toast.makeText(this, getString(R.string.warning_please_fill_all_fields), Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                val receipt = Receipt(
-                    id = id,
-                    email = email,
-                    stationName = stationName,
-                    fuelType = fuelType,
-                    literPrice = literPrice,
-                    liter = liter,
-                    tax = tax,
-                    total = total,
-                    date = date,
-                    time = time
-                )
-                createDialog(receipt)
+            if (isValid()) {
+                createDialog(getReceipt())
             }
-
         }
     }
 
@@ -147,6 +119,13 @@ class AddFuelPurchaseFragment :
         }
     }
 
+    private fun observeValidation() {
+        viewModel.validationMessage.observe(viewLifecycleOwner) { message ->
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
     private fun selectCompany() {
         binding.receiptStation.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
@@ -161,7 +140,11 @@ class AddFuelPurchaseFragment :
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 requireContext().apply {
-                    Toast.makeText(this, getString(R.string.warning_please_select_company), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        getString(R.string.warning_please_select_company),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -183,5 +166,35 @@ class AddFuelPurchaseFragment :
         }
     }
 
+    private fun getReceipt(): Receipt {
+        return Receipt(
+            id = viewModel.createUUID(),
+            email = viewModel.currentUser()?.email.toString().trim(),
+            stationName = selectedCompany.trim(),
+            fuelType = selectedType.trim(),
+            literPrice = binding.receiptLiterPrice.text.toString().trim(),
+            liter = binding.receiptPurchaseLiter.text.toString().trim(),
+            tax = binding.receiptTotalTax.text.toString().trim(),
+            total = binding.receiptTotalPrice.text.toString().trim(),
+            date = binding.receiptDate.text.toString().trim(),
+            time = binding.receiptTime.text.toString().trim(),
+        )
+    }
+
+    private fun isValid(): Boolean {
+        val isValid = viewModel.validateInputs(
+            viewModel.createUUID(),
+            viewModel.currentUser()?.email.toString().trim(),
+            selectedCompany.trim(),
+            selectedType.trim(),
+            binding.receiptLiterPrice.text.toString().trim(),
+            binding.receiptPurchaseLiter.text.toString().trim(),
+            binding.receiptTotalTax.text.toString().trim(),
+            binding.receiptTotalPrice.text.toString().trim(),
+            binding.receiptDate.text.toString().trim(),
+            binding.receiptTime.text.toString().trim()
+        )
+        return isValid
+    }
 
 }
