@@ -14,7 +14,7 @@ import java.util.ArrayList
 class VehicleSelectFragment : BottomSheetDialogFragment(R.layout.fragment_vehicle_select) {
 
     private lateinit var binding: FragmentVehicleSelectBinding
-    private lateinit var adapter : VehicleAdapter
+    private lateinit var adapter: VehicleAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,12 +32,15 @@ class VehicleSelectFragment : BottomSheetDialogFragment(R.layout.fragment_vehicl
             Vehicle(R.drawable.ic_van, "Ticari"),
             Vehicle(R.drawable.ic_truck, "Kamyonet")
         )
-        binding.selectVehicleRecyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.selectVehicleRecyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         adapter.vehicleList = ArrayList(vehicleItems)
         binding.selectVehicleRecyclerView.adapter = adapter
     }
 
-    private fun vehicleClick(){
-        adapter.clickListener = {vehicle-> }
+    private fun vehicleClick() {
+        adapter.clickListener = { vehicle ->
+            binding.continueLicensePlate.visibility = View.VISIBLE
+        }
     }
 }

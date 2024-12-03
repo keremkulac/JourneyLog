@@ -4,30 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
+    android:background="@drawable/vehicle_select_style"
     tools:context=".presentation.ui.vehicleSelect.VehicleSelectFragment">
+
+    <TextView
+        android:id="@+id/selectVehicleTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="Araç türünüzü seçiniz"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/selectVehicleRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/selectVehicleTitle" />
 
 
     <TextView
-        android:id="@+id/selectedVehicle"
+        android:id="@+id/continueLicensePlate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_truck"
-        android:text="Seçili araç"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:text="Devam et"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:gravity="center"
-        android:drawablePadding="8dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selectVehicleRecyclerView" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
