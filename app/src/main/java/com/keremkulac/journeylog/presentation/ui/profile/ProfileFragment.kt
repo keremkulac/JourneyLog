@@ -29,6 +29,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         observeSignOutResult()
         passwordChange()
         navigateUpdateProfile()
+        vehicleSettings()
     }
 
     private fun observeSharedData() {
@@ -45,9 +46,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         }
     }
 
-    private fun signOut() {
-        binding.logout.setOnClickListener {
-            showDialog()
+    private fun vehicleSettings(){
+        binding.vehicleSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_vehicleSettingsFragment)
         }
     }
 
@@ -110,6 +111,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             }
         }
 
+    }
+
+    private fun signOut() {
+        binding.logout.setOnClickListener {
+            showDialog()
+        }
     }
 
     private fun navigateUpdateProfile() {
