@@ -103,6 +103,9 @@
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_vehicleSettingsFragment"
+            app:destination="@id/vehicleSettingsFragment" />
     </fragment>
     <dialog
         android:id="@+id/updatePasswordFragment"
@@ -126,4 +129,9 @@
             android:id="@+id/action_editProfileFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
     </dialog>
+    <dialog
+        android:id="@+id/vehicleSettingsFragment"
+        android:name="com.keremkulac.journeylog.presentation.ui.vehicleSelect.VehicleSelectFragment"
+        android:label="fragment_vehicle_settings"
+        tools:layout="@layout/fragment_vehicle_select" />
 </navigation>
