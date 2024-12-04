@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.keremkulac.journeylog.domain.usecase.ForgotPasswordUseCase
+import com.keremkulac.journeylog.util.InputValidation
 import com.keremkulac.journeylog.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -12,10 +13,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ForgotPasswordViewModel @Inject constructor(
-    private val forgotPasswordUseCase: ForgotPasswordUseCase
+    private val forgotPasswordUseCase: ForgotPasswordUseCase,
+    private val inputValidation: InputValidation
 ) : ViewModel() {
+
     private val _forgotPasswordResult = MutableLiveData<Result<String>>()
     val forgotPasswordResult: LiveData<Result<String>> get() = _forgotPasswordResult
+
+    private val _validationMessage = MutableLiveData<String>()
+    val validationMessage: LiveData<String> get() = _validationMessage
 
     fun forgotPassword(email: String) {
         viewModelScope.launch {
@@ -25,4 +31,14 @@ class ForgotPasswordViewModel @Inject constructor(
             }
         }
     }
+
+    fun validateEmail(
+        userEmail: String?,
+    ): Boolean {
+        return inputValidation.isValidEmail(userEmail) { message ->
+            _validationMessage.value = message
+        }
+
+    }
+
 }

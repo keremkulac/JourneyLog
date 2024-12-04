@@ -9,8 +9,8 @@ import androidx.navigation.fragment.findNavController
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentSignupBinding
 import com.keremkulac.journeylog.domain.model.User
-import com.keremkulac.journeylog.util.Result
 import com.keremkulac.journeylog.util.BaseFragment
+import com.keremkulac.journeylog.util.HandleResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,39 +38,26 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
 
     private fun observeCreateUserWithEmailAndPasswordResult() {
         viewModel.createUserWithEmailAndPassword.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Result.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Result.Failure -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
-                }
-
-                is Result.Success -> {
-                    val user = getUser().apply { id = result.data }
+            HandleResult.handleResult(binding.progressBar, result,
+                onSuccess = { data ->
+                    val user = getUser().apply { id = data }
                     viewModel.register(user)
                     binding.progressBar.visibility = View.GONE
-                }
-            }
-
+                }, onFailure = { message ->
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                })
         }
     }
 
     private fun observeRegisterResult() {
         viewModel.registerResult.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Result.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Result.Failure -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
-                }
-
-                is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), result.data, Toast.LENGTH_SHORT).show()
+            HandleResult.handleResult(binding.progressBar, result,
+                onSuccess = { data ->
+                    Toast.makeText(requireContext(), data, Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_signupFragment_to_homeFragment)
-                }
-            }
-
+                }, onFailure = { message ->
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                })
         }
     }
 

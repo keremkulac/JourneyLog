@@ -3,7 +3,6 @@ package com.keremkulac.journeylog.presentation.ui.fuelPurchase
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
@@ -12,7 +11,7 @@ import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.databinding.FragmentFuelPurchaseBinding
 import com.keremkulac.journeylog.domain.model.Receipt
-import com.keremkulac.journeylog.util.Result
+import com.keremkulac.journeylog.util.HandleResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,24 +33,16 @@ class FuelPurchaseFragment :
                 null,
                 navOptions {
                     popUpTo(R.id.fuelPurchaseFragment) { inclusive = true }
-                })
+                }
+            )
         }
     }
 
     private fun observeAllReceipts() {
         viewModel.allReceipts.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Result.Failure -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
-                }
-
-                is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    createRecyclerView(result.data as List<Receipt>)
-                }
-            }
+            HandleResult.handleResult(binding.progressBar, result, onSuccess = { data ->
+                createRecyclerView(data as List<Receipt>)
+            })
         }
     }
 

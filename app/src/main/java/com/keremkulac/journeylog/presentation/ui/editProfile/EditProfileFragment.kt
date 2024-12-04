@@ -15,7 +15,7 @@ import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.util.CameraPermissionManager
 import com.keremkulac.journeylog.util.CustomDialog
 import com.keremkulac.journeylog.util.GalleryPermissionManager
-import com.keremkulac.journeylog.util.Result
+import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.UUID
@@ -94,55 +94,29 @@ class EditProfileFragment : BottomSheetDialogFragment(R.layout.fragment_edit_pro
 
     private fun observeProfilePictureUrl() {
         viewModel.getProfilePictureUrlResult.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Result.Failure -> {
-                    binding.progressBar.visibility = View.GONE
-                }
-
-                is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    Glide.with(requireContext()).load(result.data).into(binding.profilePicture)
-                }
-
-                else -> {}
-            }
+            HandleResult.handleResult(binding.progressBar, result, onSuccess = { url ->
+                Glide.with(requireContext()).load(url).into(binding.profilePicture)
+            })
         }
     }
 
-    private fun observeSavaProfilePictureResult() {
+    private fun observeSaveProfilePictureResult() {
         viewModel.saveProfilePictureResult.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Result.Failure -> {
-                    binding.progressBar.visibility = View.GONE
-                }
-
-                is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), result.data, Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
-                }
-            }
+            HandleResult.handleResult(binding.progressBar, result, onSuccess = { data ->
+                findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
+            })
         }
     }
-
 
     private fun observeUpdateUserResult() {
         viewModel.updateUserResult.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Result.Failure -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
-                }
-
-                is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), result.data, Toast.LENGTH_SHORT).show()
+            HandleResult.handleResult(binding.progressBar, result,
+                onSuccess = { data ->
+                    Toast.makeText(requireContext(), data, Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_editProfileFragment_to_profileFragment)
-                }
-            }
+                }, onFailure = { message ->
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                })
         }
     }
 
@@ -171,7 +145,8 @@ class EditProfileFragment : BottomSheetDialogFragment(R.layout.fragment_edit_pro
                     sharedViewModel.updateData(updatedUser)
                     viewModel.saveProfilePicture(uri!!, path)
                     viewModel.updateUser(updatedUser)
-                    observeSavaProfilePictureResult()
+                    observeSaveProfilePictureResult()
+                    observeUpdateUserResult()
                 }
             }
         }

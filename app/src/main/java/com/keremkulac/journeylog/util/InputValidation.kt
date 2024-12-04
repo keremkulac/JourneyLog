@@ -71,14 +71,14 @@ class InputValidation @Inject constructor(private val context: Context) {
         }
     }
 
-    private fun isValidEmail(email: String?, validationMessage: (String) -> Unit): Boolean {
+    fun isValidEmail(email: String?, validationMessage: (String) -> Unit): Boolean {
         if (android.util.Patterns.EMAIL_ADDRESS.matcher(email!!).matches()) {
             return true
         } else {
             validationMessage(context.getString(R.string.validation_message_valid_email))
-
             return false
         }
+
     }
 
 
@@ -197,4 +197,26 @@ class InputValidation @Inject constructor(private val context: Context) {
         }
 
     }
+
+    fun validateUpdateUser(
+        userName: String?,
+        userLastname: String?,
+        validationMessage: (String) -> Unit
+    ): Boolean {
+        return when {
+            userName.isNullOrEmpty() -> {
+                validationMessage(context.getString(R.string.validation_message_empty_name))
+                false
+            }
+
+            userLastname.isNullOrEmpty() -> {
+                validationMessage(context.getString(R.string.validation_message_empty_surname))
+                false
+            }
+
+            else -> true
+        }
+    }
+
+
 }

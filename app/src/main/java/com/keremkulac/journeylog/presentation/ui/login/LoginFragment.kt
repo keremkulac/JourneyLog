@@ -19,8 +19,8 @@ import com.google.android.gms.common.api.ApiException
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentLoginBinding
 import com.keremkulac.journeylog.domain.model.User
-import com.keremkulac.journeylog.util.Result
 import com.keremkulac.journeylog.util.BaseFragment
+import com.keremkulac.journeylog.util.HandleResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -57,28 +57,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     private fun observeLoginResult() {
         viewModel.loginResult.observe(viewLifecycleOwner) { loginResult ->
-            when (loginResult) {
-                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Result.Failure -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), loginResult.error, Toast.LENGTH_SHORT).show()
-                }
-
-                is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), loginResult.data, Toast.LENGTH_SHORT).show()
+            HandleResult.handleResult(binding.progressBar, loginResult,
+                onSuccess = { data ->
+                    Toast.makeText(requireContext(), data, Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                }
-            }
+                }, onFailure = { message ->
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                })
         }
     }
 
     private fun observeIsLoggedUserInResult() {
         viewModel.currentUser.observe(viewLifecycleOwner) { isLoggedInResult ->
-            when (isLoggedInResult) {
-                is Result.Success -> findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                else -> {}
-            }
+            HandleResult.handleResult(binding.progressBar, isLoggedInResult,
+                onSuccess = {
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                })
         }
     }
 
@@ -97,34 +91,23 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     private fun observeLoginWithGoogleResult() {
         viewModel.loginWithGoogleResult.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Result.Failure -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
-                }
-
-                is Result.Success -> {
-                    viewModel.register(result.data as User)
-                }
-            }
+            HandleResult.handleResult(binding.progressBar, result,
+                onSuccess = { data ->
+                    viewModel.register(data as User)
+                }, onFailure = { message ->
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                })
         }
     }
 
     private fun observeRegisterResult() {
         viewModel.registerResult.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Result.Failure -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
-                }
-
-                is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
+            HandleResult.handleResult(binding.progressBar, result,
+                onSuccess = {
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                }
-            }
+                }, onFailure = { message ->
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                })
         }
     }
 
@@ -179,7 +162,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                     } else {
                         backPressedOnce = true
                         requireContext().apply {
-                            Toast.makeText(this, getString(R.string.warning_logout_message), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this,
+                                getString(R.string.warning_logout_message),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                         Handler(Looper.getMainLooper()).postDelayed(
                             { backPressedOnce = false },
@@ -187,7 +174,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                         )
                     }
                 }
-            })
+            }
+        )
     }
 
 }

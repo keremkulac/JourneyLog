@@ -16,7 +16,7 @@ import com.keremkulac.journeylog.domain.model.DistrictData
 import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.util.FuelPriceOperations
 import com.keremkulac.journeylog.util.FuelTypeTranslation
-import com.keremkulac.journeylog.util.Result
+import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
 import com.keremkulac.journeylog.util.toAverageFuelPriceEntity
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,48 +42,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     private fun observeFuelPrices() {
-        viewModel.fuelPrices.observe(viewLifecycleOwner) {
-            when (it) {
-                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Result.Failure -> {
-                    binding.progressBar.visibility = View.GONE
-                }
-
-                is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    viewModel.calculateAveragePrice(it.data as List<DistrictData>)
-                    viewModel.saveSharedPreferencesTime(System.currentTimeMillis())
-                }
-            }
+        viewModel.fuelPrices.observe(viewLifecycleOwner) { result ->
+            HandleResult.handleResult(binding.progressBar, result, onSuccess = { data ->
+                viewModel.calculateAveragePrice(data as List<DistrictData>)
+                viewModel.saveSharedPreferencesTime(System.currentTimeMillis())
+            })
         }
     }
 
     private fun observeAverageFuelPrices() {
         viewModel.averageFuelPrices.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    val averageFuelPriceList = ArrayList<AverageFuelPrice>()
-                    val averageFuelPriceEntityList = ArrayList<AverageFuelPriceEntity>()
-
-                    for (averagePrice in result.data) {
-                        val averageFuelPrice = AverageFuelPrice(
-                            FuelTypeTranslation.translateKey(averagePrice.key),
-                            averagePrice.value
-                        )
-                        averageFuelPriceEntityList.add(averageFuelPrice.toAverageFuelPriceEntity())
-                        averageFuelPriceList.add(averageFuelPrice)
-                    }
-                    Log.d("TAG", averageFuelPriceEntityList.toString())
-                    viewModel.saveAverageFuelPrices(averageFuelPriceEntityList)
-                    setRecyclerView(averageFuelPriceList)
+            HandleResult.handleResult(binding.progressBar, result, onSuccess = { data ->
+                val averageFuelPriceList = ArrayList<AverageFuelPrice>()
+                val averageFuelPriceEntityList = ArrayList<AverageFuelPriceEntity>()
+                for (averagePrice in data) {
+                    val averageFuelPrice = AverageFuelPrice(
+                        FuelTypeTranslation.translateKey(averagePrice.key),
+                        averagePrice.value
+                    )
+                    averageFuelPriceEntityList.add(averageFuelPrice.toAverageFuelPriceEntity())
+                    averageFuelPriceList.add(averageFuelPrice)
                 }
-
-                else -> {}
-
-            }
-
+                viewModel.saveAverageFuelPrices(averageFuelPriceEntityList)
+                setRecyclerView(averageFuelPriceList)
+            })
         }
     }
 
@@ -102,40 +84,31 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun getCurrentUser() {
         viewModel.currentUser.observe(viewLifecycleOwner) { currentUser ->
-            when (currentUser) {
-                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Result.Failure -> binding.progressBar.visibility = View.GONE
-                is Result.Success -> {
-                    viewModel.getUser(currentUser.data!!.uid)
-                    getUser()
-                }
-            }
+            HandleResult.handleResult(binding.progressBar, currentUser, onSuccess = { data ->
+                viewModel.getUser(data!!.uid)
+                getUser()
+            })
         }
     }
 
     private fun getUser() {
         viewModel.userResult.observe(viewLifecycleOwner) { userResult ->
-            when (userResult) {
-                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Result.Failure -> binding.progressBar.visibility = View.GONE
-                is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    val user = userResult.data as User
-                    binding.initials.text = viewModel.formatInitials(user.name, user.surname)
-                    binding.userFullName.text = viewModel.formatFullName(user.name, user.surname)
-                    sharedViewModel.updateData(user)
-                }
-            }
+            HandleResult.handleResult(binding.progressBar, userResult, onSuccess = { data ->
+                val user = data as User
+                binding.initials.text = viewModel.formatInitials(user.name, user.surname)
+                binding.userFullName.text = viewModel.formatFullName(user.name, user.surname)
+                sharedViewModel.updateData(user)
+            })
         }
     }
 
-    private fun checkLastUpdate(){
-        if (viewModel.checkLastUpdate()){
+    private fun checkLastUpdate() {
+        if (viewModel.checkLastUpdate()) {
             viewModel.getFuelPrices("istanbul")
-            Log.d("TAG","True")
-        }else{
+            Log.d("TAG", "True")
+        } else {
             viewModel.getFuelAverageFuelPrices()
-            Log.d("TAG","False")
+            Log.d("TAG", "False")
         }
     }
 
@@ -143,9 +116,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                }
-            })
+                override fun handleOnBackPressed() {}
+            }
+        )
     }
 
 }

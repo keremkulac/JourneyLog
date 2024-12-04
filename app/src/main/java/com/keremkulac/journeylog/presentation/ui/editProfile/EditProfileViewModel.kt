@@ -63,10 +63,10 @@ class EditProfileViewModel @Inject constructor(
     }
 
     fun validateInputs(
-        userEmail: String?,
-        userPassword: String?
+        userName: String?,
+        userLastname: String?
     ): Boolean {
-        return inputValidation.validateEmailAndPassword(userEmail, userPassword) { message ->
+        return inputValidation.validateUpdateUser(userName, userLastname) { message ->
             _validationMessage.value = message
         }
 

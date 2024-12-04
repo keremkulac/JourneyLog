@@ -12,7 +12,7 @@ import com.keremkulac.journeylog.databinding.FragmentProfileBinding
 import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.util.CustomDialog
-import com.keremkulac.journeylog.util.Result
+import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -46,7 +46,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         }
     }
 
-    private fun vehicleSettings(){
+    private fun vehicleSettings() {
         binding.vehicleSettings.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_vehicleSettingsFragment)
         }
@@ -54,37 +54,21 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     private fun observeSignOutResult() {
         viewModel.signOutResult.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Result.Failure -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
-                }
-
-                is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), result.data, Toast.LENGTH_SHORT).show()
+            HandleResult.handleResult(binding.progressBar, result,
+                onSuccess = { data ->
+                    Toast.makeText(requireContext(), data, Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_profileFragment_to_loginFragment)
-                }
-            }
+                }, onFailure = { message ->
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                })
         }
     }
 
     private fun observeGetProfilePictureUrlResult() {
         viewModel.getProfilePictureUrlResult.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Result.Failure -> {
-                    binding.progressBar.visibility = View.GONE
-                }
-
-                is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    Glide.with(requireContext()).load(result.data).into(binding.profilePicture)
-                }
-
-                else -> {}
-            }
+            HandleResult.handleResult(binding.progressBar, result, onSuccess = { url ->
+                Glide.with(requireContext()).load(url).into(binding.profilePicture)
+            })
         }
     }
 
@@ -102,10 +86,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         requireContext().apply {
             CustomDialog.showConfirmationDialog(
                 this,
-                getString(R.string.dialog_forgot_password_title),
-                getString(R.string.dialog_forgot_password_message),
-                getString(R.string.dialog_forgot_password_positive_button_text),
-                getString(R.string.dialog_forgot_password_negative_button_text)
+                getString(R.string.dialog_logout_title),
+                getString(R.string.dialog_logout_message),
+                getString(R.string.dialog_logout_positive_button_text),
+                getString(R.string.dialog_logout_negative_button_text)
             ) {
                 viewModel.signOut()
             }

@@ -8,7 +8,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentUpdatePasswordBinding
 import com.keremkulac.journeylog.util.CustomDialog
-import com.keremkulac.journeylog.util.Result
+import com.keremkulac.journeylog.util.HandleResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,23 +35,15 @@ class UpdatePasswordFragment : BottomSheetDialogFragment(R.layout.fragment_updat
         }
     }
 
-
     private fun observePasswordResult() {
         viewModel.updatePasswordResult.observe(viewLifecycleOwner) { updateResult ->
-            when (updateResult) {
-                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Result.Failure -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), updateResult.error, Toast.LENGTH_SHORT)
-                        .show()
-                }
-
-                is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), updateResult.data, Toast.LENGTH_SHORT).show()
+            HandleResult.handleResult(binding.progressBar, updateResult,
+                onSuccess = { data ->
+                    Toast.makeText(requireContext(), data, Toast.LENGTH_SHORT).show()
                     dismiss()
-                }
-            }
+                }, onFailure = { message ->
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                })
         }
     }
 
@@ -71,7 +63,6 @@ class UpdatePasswordFragment : BottomSheetDialogFragment(R.layout.fragment_updat
                 getString(R.string.dialog_change_password_negative_button_text)
             ) {
                 viewModel.updatePassword(oldPassword, newPassword)
-
             }
         }
     }

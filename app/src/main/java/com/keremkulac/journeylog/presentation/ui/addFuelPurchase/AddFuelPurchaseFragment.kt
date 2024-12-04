@@ -13,7 +13,7 @@ import com.keremkulac.journeylog.databinding.FragmentAddFuelPurchaseBinding
 import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.util.CustomDialog
-import com.keremkulac.journeylog.util.Result
+import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.TextWatcher
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -92,22 +92,15 @@ class AddFuelPurchaseFragment :
 
     private fun observeSaveResult() {
         viewModel.saveResult.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Result.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
-                }
-
-                is Result.Failure -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
-                }
-
-                is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), result.data, Toast.LENGTH_SHORT).show()
+            HandleResult.handleResult(binding.progressBar, result,
+                onSuccess = { data ->
+                    Toast.makeText(requireContext(), data, Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_addFuelPurchaseFragment_to_fuelPurchaseFragment)
+                },
+                onFailure = { message->
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 }
-            }
+            )
         }
     }
 
@@ -124,7 +117,6 @@ class AddFuelPurchaseFragment :
             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
         }
     }
-
 
     private fun selectCompany() {
         binding.receiptStation.onItemSelectedListener = object :

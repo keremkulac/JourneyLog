@@ -8,7 +8,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentForgotPasswordBinding
 import com.keremkulac.journeylog.util.CustomDialog
-import com.keremkulac.journeylog.util.Result
+import com.keremkulac.journeylog.util.HandleResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,16 +22,21 @@ class ForgotPasswordFragment : BottomSheetDialogFragment(R.layout.fragment_forgo
         binding = FragmentForgotPasswordBinding.bind(view)
         forgotPassword()
         observeForgotPasswordResult()
+        observeValidation()
     }
 
     private fun forgotPassword() {
         binding.send.setOnClickListener {
             val email = binding.userEmail.text.toString()
-            if (email.isNotEmpty()) {
+            if (email.isNotEmpty() && viewModel.validateEmail(email)) {
                 showDialog(email)
             } else {
                 requireContext().apply {
-                    Toast.makeText(this, getString(R.string.warning_please_enter_email), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        getString(R.string.warning_please_enter_email),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -39,19 +44,13 @@ class ForgotPasswordFragment : BottomSheetDialogFragment(R.layout.fragment_forgo
 
     private fun observeForgotPasswordResult() {
         viewModel.forgotPasswordResult.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                Result.Loading -> binding.progressBar.visibility = View.VISIBLE
-                is Result.Failure -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), result.error, Toast.LENGTH_SHORT).show()
-                }
-
-                is Result.Success -> {
-                    binding.progressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), result.data, Toast.LENGTH_SHORT).show()
+            HandleResult.handleResult(binding.progressBar, result,
+                onSuccess = { data ->
+                    Toast.makeText(requireContext(), data, Toast.LENGTH_SHORT).show()
                     dismiss()
-                }
-            }
+                }, onFailure = { message ->
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                })
         }
     }
 
@@ -69,5 +68,9 @@ class ForgotPasswordFragment : BottomSheetDialogFragment(R.layout.fragment_forgo
         }
     }
 
-
+    private fun observeValidation() {
+        viewModel.validationMessage.observe(viewLifecycleOwner) { message ->
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        }
+    }
 }
