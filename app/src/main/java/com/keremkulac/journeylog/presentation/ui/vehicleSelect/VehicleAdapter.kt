@@ -34,7 +34,7 @@ class VehicleAdapter : RecyclerView.Adapter<VehicleAdapter.ViewHolder>() {
             notifyItemChanged(previousPosition)
             notifyItemChanged(selectedPosition)
         }
-        holder.cardViewItem.setBackgroundColor(if (selectedPosition == position) Color.parseColor("#EEEEEE") else Color.TRANSPARENT)
+        holder.cardViewItem.setBackgroundColor(if (selectedPosition == position) Color.parseColor("#E0E0E0") else Color.TRANSPARENT)
 
     }
 

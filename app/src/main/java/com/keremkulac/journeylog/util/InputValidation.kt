@@ -2,6 +2,7 @@ package com.keremkulac.journeylog.util
 
 import android.content.Context
 import com.keremkulac.journeylog.R
+import com.keremkulac.journeylog.domain.model.Vehicle
 import javax.inject.Inject
 
 class InputValidation @Inject constructor(private val context: Context) {
@@ -218,5 +219,31 @@ class InputValidation @Inject constructor(private val context: Context) {
         }
     }
 
+    fun validateLicensePlate(
+        licensePlate: String?,
+        vehicle: Vehicle?,
+        validationMessage: (String) -> Unit
+    ): Boolean {
+        return when {
 
+            vehicle == null -> {
+                validationMessage(context.getString(R.string.validation_message_empty_vehicle))
+                false
+            }
+
+            licensePlate.isNullOrEmpty() -> {
+                validationMessage(context.getString(R.string.validation_message_empty_license_plate))
+                false
+            }
+
+            licensePlate.length < 9 || licensePlate.length > 10 -> {
+                validationMessage(context.getString(R.string.validation_message_valid_license_plate))
+                false
+            }
+
+
+            else -> true
+        }
+
+    }
 }
