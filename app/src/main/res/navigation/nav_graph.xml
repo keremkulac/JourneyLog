@@ -105,7 +105,7 @@
             app:destination="@id/editProfileFragment" />
         <action
             android:id="@+id/action_profileFragment_to_vehicleSettingsFragment"
-            app:destination="@id/vehicleSettingsFragment" />
+            app:destination="@id/vehicleSelectFragment" />
     </fragment>
     <dialog
         android:id="@+id/updatePasswordFragment"
@@ -130,8 +130,22 @@
             app:destination="@id/profileFragment" />
     </dialog>
     <dialog
-        android:id="@+id/vehicleSettingsFragment"
+        android:id="@+id/vehicleSelectFragment"
         android:name="com.keremkulac.journeylog.presentation.ui.vehicleSelect.VehicleSelectFragment"
-        android:label="fragment_vehicle_settings"
-        tools:layout="@layout/fragment_vehicle_select" />
+        android:label="fragment_vehicle_select"
+        tools:layout="@layout/fragment_vehicle_select" >
+        <action
+            android:id="@+id/action_vehicleSelectFragment_to_licensePlateFragment"
+            app:destination="@id/licensePlateFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/licensePlateFragment"
+        android:name="com.keremkulac.journeylog.presentation.ui.licensePlate.LicensePlateFragment"
+        android:label="fragment_license_plate"
+        tools:layout="@layout/fragment_license_plate" >
+        <argument
+            android:name="vehicle"
+            app:argType="com.keremkulac.journeylog.domain.model.Vehicle"
+            app:nullable="true" />
+    </dialog>
 </navigation>

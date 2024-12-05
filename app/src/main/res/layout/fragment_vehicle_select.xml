@@ -38,10 +38,12 @@
         android:text="Devam et"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/selectVehicleRecyclerView" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

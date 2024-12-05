@@ -120,6 +120,8 @@
     <string name="validation_message_empty_password">Şifre giriniz</string>
     <string name="validation_message_valid_email">Geçerli bir email giriniz</string>
     <string name="profile_vehicle_settings_button_text">Otomobil ayarları</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
