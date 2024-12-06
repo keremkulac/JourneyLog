@@ -87,6 +87,11 @@
     <string name="dialog_gallery_permission_positive_button_text">Ayarlar</string>
     <string name="dialog_gallery_permission_negative_button_text">İptal</string>
 
+    <string name="dialog_save_vehicle_title">Araç kaydı</string>
+    <string name="dialog_save_vehicle_message">Bu aracı kaydetmek istediğinizden emin misiniz?</string>
+    <string name="dialog_save_vehicle_positive_button_text">Kaydet</string>
+    <string name="dialog_save_vehicle_negative_button_text">İptal</string>
+
 
     <string name="warning_please_select_company">Lütfen bir şirket seçin</string>
     <string name="warning_please_fill_all_fields">Lütfen tüm alanları doldurun</string>

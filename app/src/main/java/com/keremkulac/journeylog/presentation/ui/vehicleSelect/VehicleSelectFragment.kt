@@ -13,6 +13,8 @@ import com.keremkulac.journeylog.databinding.FragmentVehicleSelectBinding
 import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.domain.model.Vehicle
 import com.keremkulac.journeylog.util.BaseFragment
+import com.keremkulac.journeylog.util.CustomDialog
+import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.ArrayList
@@ -36,6 +38,7 @@ class VehicleSelectFragment :
         observeValidation()
         licensesPlateInfo()
         createVehicle()
+        observeSaveVehicleResult()
     }
 
     private fun createRecyclerView() {
@@ -77,6 +80,7 @@ class VehicleSelectFragment :
                     selectedVehicle?.let { vehicle ->
                         vehicle.userId = it.id
                         vehicle.licensePlate = licensePlate
+                        showDialog(vehicle)
                     }
                 }
             }
@@ -93,6 +97,31 @@ class VehicleSelectFragment :
     private fun observeUser() {
         sharedViewModel.sharedData.observe(viewLifecycleOwner) { user ->
             this.user = user
+        }
+    }
+
+    private fun observeSaveVehicleResult() {
+        viewModel.saveVehicleResult.observe(viewLifecycleOwner) { result ->
+            HandleResult.handleResult(binding.progressBar, result,
+                onSuccess = { data ->
+                    Toast.makeText(requireContext(), data, Toast.LENGTH_SHORT).show()
+                }, onFailure = { message ->
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                })
+        }
+    }
+
+    private fun showDialog(vehicle: Vehicle) {
+        requireContext().apply {
+            CustomDialog.showConfirmationDialog(
+                this,
+                getString(R.string.dialog_save_vehicle_title),
+                getString(R.string.dialog_save_vehicle_message),
+                getString(R.string.dialog_save_vehicle_positive_button_text),
+                getString(R.string.dialog_save_vehicle_negative_button_text)
+            ) {
+                viewModel.saveVehicle(vehicle)
+            }
         }
     }
 

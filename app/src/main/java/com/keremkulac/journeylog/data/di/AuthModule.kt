@@ -57,9 +57,10 @@ object AuthModule {
     @Provides
     fun provideReceiptRepository(
         firestore: FirebaseFirestore,
-        firebaseStorage: FirebaseStorage
+        firebaseStorage: FirebaseStorage,
+        firebaseException: FirebaseException
     ): FirestoreRepository {
-        return FirestoreRepositoryImp(firestore, firebaseStorage)
+        return FirestoreRepositoryImp(firestore, firebaseStorage,firebaseException)
     }
 
     @Provides

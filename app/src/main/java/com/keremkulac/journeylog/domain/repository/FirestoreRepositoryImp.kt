@@ -5,12 +5,15 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.domain.model.User
+import com.keremkulac.journeylog.domain.model.Vehicle
+import com.keremkulac.journeylog.util.FirebaseException
 import com.keremkulac.journeylog.util.Result
 import javax.inject.Inject
 
 class FirestoreRepositoryImp @Inject constructor(
     private val firestore: FirebaseFirestore,
-    private val firebaseStorage: FirebaseStorage
+    private val firebaseStorage: FirebaseStorage,
+    private val firebaseException: FirebaseException
 ) : FirestoreRepository {
 
     override suspend fun saveReceipt(receipt: Receipt, result: (Result<String>) -> Unit) {
@@ -18,7 +21,7 @@ class FirestoreRepositoryImp @Inject constructor(
             result.invoke(Result.Success("Kayıt başarılı"))
 
         }.addOnFailureListener { exception ->
-            result.invoke(Result.Failure(exception.message))
+            result.invoke(Result.Failure(firebaseException.findExceptionMessage(exception)))
         }
     }
 
@@ -87,6 +90,14 @@ class FirestoreRepositoryImp @Inject constructor(
             }
     }
 
+    override suspend fun saveVehicle(vehicle: Vehicle, result: (Result<String>) -> Unit) {
+        firestore.collection("vehicles").add(vehicle).addOnSuccessListener {
+            result.invoke(Result.Success("Araç kaydı başarılı"))
+        }.addOnFailureListener { exception ->
+            result.invoke(Result.Failure(firebaseException.findExceptionMessage(exception)))
+        }
+    }
+
     override suspend fun updateUser(user: User, result: (Result<String>) -> Unit) {
         firestore.collection("users").document(user.id).set(user).addOnSuccessListener {
             result.invoke(Result.Success("Kullanıcı başarıyla güncellendi"))
@@ -107,7 +118,7 @@ class FirestoreRepositoryImp @Inject constructor(
                 }
             }
             .addOnFailureListener { exception ->
-                result.invoke(Result.Failure(exception.message))
+                result.invoke(Result.Failure(firebaseException.findExceptionMessage(exception)))
             }
     }
 
