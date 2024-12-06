@@ -23,4 +23,7 @@ interface FirestoreRepository {
     suspend fun getAllReceipts(result: (Result<Any>) -> Unit)
 
     suspend fun saveVehicle(vehicle: Vehicle, result: (Result<String>) -> Unit)
+
+    suspend fun getAllVehicles(userId : String,result: (Result<Any>) -> Unit)
+
 }

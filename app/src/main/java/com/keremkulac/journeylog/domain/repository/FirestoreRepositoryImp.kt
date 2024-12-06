@@ -98,6 +98,21 @@ class FirestoreRepositoryImp @Inject constructor(
         }
     }
 
+    override suspend fun getAllVehicles(userId: String, result: (Result<Any>) -> Unit) {
+        firestore.collection("vehicles").get().addOnSuccessListener { snapshot ->
+            val vehicle = snapshot.toObjects(Vehicle::class.java)
+            val list = mutableListOf<Vehicle>()
+            for (vehicleObject in vehicle) {
+                if (vehicleObject.userId == userId) {
+                    list.add(vehicleObject)
+                }
+            }
+            result.invoke(Result.Success(list))
+        }.addOnFailureListener { exception ->
+            result.invoke(Result.Failure(firebaseException.findExceptionMessage(exception)))
+        }
+    }
+
     override suspend fun updateUser(user: User, result: (Result<String>) -> Unit) {
         firestore.collection("users").document(user.id).set(user).addOnSuccessListener {
             result.invoke(Result.Success("Kullanıcı başarıyla güncellendi"))
