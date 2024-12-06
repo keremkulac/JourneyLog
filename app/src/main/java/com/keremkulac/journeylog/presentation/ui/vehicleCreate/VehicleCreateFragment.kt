@@ -1,4 +1,4 @@
-package com.keremkulac.journeylog.presentation.ui.vehicleSelect
+package com.keremkulac.journeylog.presentation.ui.vehicleCreate
 
 import android.os.Bundle
 import android.os.Handler
@@ -7,9 +7,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.keremkulac.journeylog.R
-import com.keremkulac.journeylog.databinding.FragmentVehicleSelectBinding
+import com.keremkulac.journeylog.databinding.FragmentVehicleCreateBinding
 import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.domain.model.Vehicle
 import com.keremkulac.journeylog.util.BaseFragment
@@ -20,15 +21,15 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.ArrayList
 
 @AndroidEntryPoint
-class VehicleSelectFragment :
-    BaseFragment<FragmentVehicleSelectBinding>(FragmentVehicleSelectBinding::inflate) {
+class VehicleCreateFragment :
+    BaseFragment<FragmentVehicleCreateBinding>(FragmentVehicleCreateBinding::inflate) {
 
 
-    private lateinit var adapter: VehicleAdapter
+    private lateinit var adapter: VehicleCreateAdapter
     private lateinit var sharedViewModel: SharedViewModel
     private var selectedVehicle: Vehicle? = null
     private var user: User? = null
-    private val viewModel by viewModels<VehicleSelectViewModel>()
+    private val viewModel by viewModels<VehicleCreateViewModel>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
@@ -42,7 +43,7 @@ class VehicleSelectFragment :
     }
 
     private fun createRecyclerView() {
-        adapter = VehicleAdapter()
+        adapter = VehicleCreateAdapter()
         val vehicleItems = listOf(
             Vehicle(iconResId = R.drawable.ic_bike, title = "Motorsiklet"),
             Vehicle(iconResId = R.drawable.ic_car, title = "Otomobil"),
@@ -121,6 +122,7 @@ class VehicleSelectFragment :
                 getString(R.string.dialog_save_vehicle_negative_button_text)
             ) {
                 viewModel.saveVehicle(vehicle)
+                findNavController().navigate(R.id.action_vehicleCreateFragment_to_vehicleViewFragment)
             }
         }
     }

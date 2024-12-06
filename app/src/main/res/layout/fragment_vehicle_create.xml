@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/vehicle_select_style"
     android:padding="16dp"
-    tools:context=".presentation.ui.vehicleSelect.VehicleSelectFragment">
+    tools:context=".presentation.ui.vehicleCreate.VehicleCreateFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/selectVehicleCardView"

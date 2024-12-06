@@ -48,7 +48,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
     private fun vehicleSettings() {
         binding.vehicleSettings.setOnClickListener {
-            findNavController().navigate(R.id.action_profileFragment_to_vehicleSettingsFragment)
+            findNavController().navigate(R.id.action_profileFragment_to_vehicleViewFragment)
         }
     }
 

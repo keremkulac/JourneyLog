@@ -1,4 +1,4 @@
-package com.keremkulac.journeylog.presentation.ui.vehicleSelect
+package com.keremkulac.journeylog.presentation.ui.vehicleCreate
 
 import android.annotation.SuppressLint
 import android.graphics.Color
@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.domain.model.Vehicle
 
-class VehicleAdapter : RecyclerView.Adapter<VehicleAdapter.ViewHolder>() {
+class VehicleCreateAdapter : RecyclerView.Adapter<VehicleCreateAdapter.ViewHolder>() {
 
     var clickListener: ((Vehicle) -> Unit)? = null
     private var selectedPosition = RecyclerView.NO_POSITION

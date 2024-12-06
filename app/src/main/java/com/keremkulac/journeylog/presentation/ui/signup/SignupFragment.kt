@@ -42,7 +42,6 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
                 onSuccess = { data ->
                     val user = getUser().apply { id = data }
                     viewModel.register(user)
-                    binding.progressBar.visibility = View.GONE
                 }, onFailure = { message ->
                     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 })

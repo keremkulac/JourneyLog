@@ -88,12 +88,12 @@
         android:id="@+id/profileFragment"
         android:name="com.keremkulac.journeylog.presentation.ui.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <argument
             android:name="user"
+            android:defaultValue="@null"
             app:argType="com.keremkulac.journeylog.domain.model.User"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -104,14 +104,15 @@
             android:id="@+id/action_profileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
         <action
-            android:id="@+id/action_profileFragment_to_vehicleSettingsFragment"
-            app:destination="@id/vehicleSelectFragment" />
+            android:id="@+id/action_profileFragment_to_vehicleViewFragment"
+            app:destination="@id/vehicleViewFragment" />
+
     </fragment>
     <dialog
         android:id="@+id/updatePasswordFragment"
         android:name="com.keremkulac.journeylog.presentation.ui.updatePassword.UpdatePasswordFragment"
         android:label="fragment_update_password"
-        tools:layout="@layout/fragment_update_password" >
+        tools:layout="@layout/fragment_update_password">
         <action
             android:id="@+id/action_updatePasswordFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -120,7 +121,7 @@
         android:id="@+id/editProfileFragment"
         android:name="com.keremkulac.journeylog.presentation.ui.editProfile.EditProfileFragment"
         android:label="fragment_edit_profile"
-        tools:layout="@layout/fragment_edit_profile" >
+        tools:layout="@layout/fragment_edit_profile">
         <argument
             android:name="user"
             app:argType="com.keremkulac.journeylog.domain.model.User"
@@ -130,10 +131,24 @@
             app:destination="@id/profileFragment" />
     </dialog>
     <fragment
-        android:id="@+id/vehicleSelectFragment"
-        android:name="com.keremkulac.journeylog.presentation.ui.vehicleSelect.VehicleSelectFragment"
-        android:label="fragment_vehicle_select"
-        tools:layout="@layout/fragment_vehicle_select" >
+        android:id="@+id/vehicleCreateFragment"
+        android:name="com.keremkulac.journeylog.presentation.ui.vehicleCreate.VehicleCreateFragment"
+        android:label="fragment_vehicle_create"
+        tools:layout="@layout/fragment_vehicle_create">
+        <action
+            android:id="@+id/action_vehicleCreateFragment_to_vehicleViewFragment"
+            app:destination="@id/vehicleViewFragment"
+            app:popUpTo="@id/vehicleViewFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/vehicleViewFragment"
+        android:name="com.keremkulac.journeylog.presentation.ui.vehicleView.VehicleViewFragment"
+        android:label="fragment_vehicle_view"
+        tools:layout="@layout/fragment_vehicle_view">
+        <action
+            android:id="@+id/action_vehicleViewFragment_to_vehicleCreateFragment"
+            app:destination="@id/vehicleCreateFragment" />
     </fragment>
 
 </navigation>

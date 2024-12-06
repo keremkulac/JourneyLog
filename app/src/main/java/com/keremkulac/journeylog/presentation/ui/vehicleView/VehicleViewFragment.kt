@@ -5,15 +5,18 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentVehicleViewBinding
 import com.keremkulac.journeylog.domain.model.Vehicle
 import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.ArrayList
 
-
+@AndroidEntryPoint
 class VehicleViewFragment :
     BaseFragment<FragmentVehicleViewBinding>(FragmentVehicleViewBinding::inflate) {
 
@@ -24,6 +27,7 @@ class VehicleViewFragment :
         sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
         observeUser()
         observeAllVehicles()
+        navigateVehicleCreate()
     }
 
     private fun observeAllVehicles() {
@@ -52,5 +56,11 @@ class VehicleViewFragment :
         binding.vehiclesRecyclerView.adapter = adapter
     }
 
+
+    private fun navigateVehicleCreate() {
+        binding.fab.setOnClickListener {
+            findNavController().navigate(R.id.action_vehicleViewFragment_to_vehicleCreateFragment)
+        }
+    }
 
 }

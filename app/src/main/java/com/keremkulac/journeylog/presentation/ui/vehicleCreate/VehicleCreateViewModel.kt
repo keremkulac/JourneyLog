@@ -1,4 +1,4 @@
-package com.keremkulac.journeylog.presentation.ui.vehicleSelect
+package com.keremkulac.journeylog.presentation.ui.vehicleCreate
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class VehicleSelectViewModel @Inject constructor(
+class VehicleCreateViewModel @Inject constructor(
     private val inputValidation: InputValidation,
     private val saveVehicleUseCase: SaveVehicleUseCase
 ) : ViewModel() {
