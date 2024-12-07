@@ -12,6 +12,9 @@ import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.domain.model.Vehicle
 
 class VehicleViewAdapter : RecyclerView.Adapter<VehicleViewAdapter.ViewHolder>() {
+
+    var clickListener: ((Vehicle) -> Unit)? = null
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -20,6 +23,7 @@ class VehicleViewAdapter : RecyclerView.Adapter<VehicleViewAdapter.ViewHolder>()
             LayoutInflater.from(parent.context).inflate(R.layout.item_all_vehicle, parent, false)
         )
     }
+
 
     private val diffUtil = object : DiffUtil.ItemCallback<Vehicle>() {
         override fun areItemsTheSame(
@@ -46,6 +50,9 @@ class VehicleViewAdapter : RecyclerView.Adapter<VehicleViewAdapter.ViewHolder>()
 
     override fun onBindViewHolder(holder: VehicleViewAdapter.ViewHolder, position: Int) {
         holder.binds(vehicleList[position])
+        holder.itemView.setOnClickListener {
+            clickListener?.invoke(vehicleList[position])
+        }
     }
 
     override fun getItemCount(): Int {
@@ -55,10 +62,8 @@ class VehicleViewAdapter : RecyclerView.Adapter<VehicleViewAdapter.ViewHolder>()
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun binds(vehicle: Vehicle) {
             val icon: ImageView = itemView.findViewById(R.id.vehicleIcon)
-            val title: TextView = itemView.findViewById(R.id.vehicleTitle)
-            val licensePlate : TextView = itemView.findViewById(R.id.licensePlate)
+            val licensePlate: TextView = itemView.findViewById(R.id.licensePlate)
             icon.setImageResource(vehicle.iconResId!!)
-            title.text = vehicle.title
             licensePlate.text = vehicle.licensePlate
         }
     }

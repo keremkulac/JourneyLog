@@ -149,6 +149,20 @@
         <action
             android:id="@+id/action_vehicleViewFragment_to_vehicleCreateFragment"
             app:destination="@id/vehicleCreateFragment" />
+        <action
+            android:id="@+id/action_vehicleViewFragment_to_vehicleDetailFragment"
+            app:destination="@id/vehicleDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/vehicleDetailFragment"
+        android:name="com.keremkulac.journeylog.presentation.ui.vehicleDetail.VehicleDetailFragment"
+        android:label="fragment_vehicle_detail"
+        tools:layout="@layout/fragment_vehicle_detail" >
+        <argument
+            android:name="vehicle"
+            app:argType="com.keremkulac.journeylog.domain.model.Vehicle"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 
 </navigation>

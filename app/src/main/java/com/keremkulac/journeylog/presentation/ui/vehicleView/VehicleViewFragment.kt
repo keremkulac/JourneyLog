@@ -22,6 +22,7 @@ class VehicleViewFragment :
 
     private lateinit var sharedViewModel: SharedViewModel
     private val viewModel by viewModels<VehicleViewViewModel>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
@@ -54,6 +55,7 @@ class VehicleViewFragment :
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         adapter.vehicleList = ArrayList(vehicleList)
         binding.vehiclesRecyclerView.adapter = adapter
+        clickVehicle(adapter)
     }
 
 
@@ -63,4 +65,15 @@ class VehicleViewFragment :
         }
     }
 
+    private fun clickVehicle(adapter: VehicleViewAdapter) {
+        adapter.clickListener = { vehicle ->
+            val bundle = Bundle()
+            bundle.putParcelable("vehicle", vehicle)
+            findNavController().navigate(
+                VehicleViewFragmentDirections.actionVehicleViewFragmentToVehicleDetailFragment(
+                    vehicle
+                )
+            )
+        }
+    }
 }
