@@ -124,7 +124,7 @@
     <string name="validation_message_empty_email">Email giriniz</string>
     <string name="validation_message_empty_password">Şifre giriniz</string>
     <string name="validation_message_valid_email">Geçerli bir email giriniz</string>
-    <string name="profile_vehicle_settings_button_text">Otomobil ayarları</string>
+    <string name="profile_my_vehicles_button_text">Araçlarım</string>
     <string name="validation_message_empty_license_plate">Lütfen bir plaka giriniz</string>
     <string name="validation_message_valid_license_plate">Lütfen geçerli bir plaka giriniz</string>
     <string name="validation_message_empty_vehicle">Lütfen bir araç seçiniz"</string>

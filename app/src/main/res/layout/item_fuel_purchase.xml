@@ -24,28 +24,27 @@
             tools:text="Aygaz" />
 
         <TextView
-            android:id="@+id/date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:drawablePadding="8dp"
-            android:gravity="center"
-            app:drawableStartCompat="@drawable/ic_date"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/totalPrice"
-            tools:text="22/05/2021" />
-
-        <TextView
             android:id="@+id/fuelType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:drawablePadding="8dp"
             android:gravity="center"
+            android:textSize="14sp"
+            android:textStyle="bold"
             app:drawableStartCompat="@drawable/ic_fuel2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/stationName"
             tools:text="Benzin - 12.5 ₺" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fuelType" />
 
         <TextView
             android:id="@+id/liter"
@@ -54,10 +53,21 @@
             android:layout_marginTop="8dp"
             android:drawablePadding="8dp"
             android:gravity="center"
+            android:textSize="14sp"
+            android:textStyle="bold"
             app:drawableStartCompat="@drawable/ic_fuel_pump"
             app:layout_constraintStart_toStartOf="@+id/fuelType"
-            app:layout_constraintTop_toBottomOf="@+id/fuelType"
+            app:layout_constraintTop_toBottomOf="@+id/divider1"
             tools:text="Alınan litre: 22.1 L" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/liter" />
 
         <TextView
             android:id="@+id/totalPrice"
@@ -66,10 +76,35 @@
             android:layout_marginTop="8dp"
             android:drawablePadding="8dp"
             android:gravity="center"
+            android:textSize="14sp"
+            android:textStyle="bold"
             app:drawableStartCompat="@drawable/ic_turkish_lira"
-            app:layout_constraintStart_toStartOf="@+id/liter"
-            app:layout_constraintTop_toBottomOf="@+id/liter"
+            app:layout_constraintStart_toStartOf="@+id/divider2"
+            app:layout_constraintTop_toBottomOf="@+id/divider2"
             tools:text="Toplam: 651.6 ₺ " />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/totalPrice" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider3"
+            tools:text="22/05/2021" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

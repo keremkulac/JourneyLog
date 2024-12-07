@@ -138,7 +138,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="8dp"
                 android:padding="24dp"
-                android:text="@string/profile_vehicle_settings_button_text"
+                android:text="@string/profile_my_vehicles_button_text"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:drawableStartCompat="@drawable/ic_profile_car" />
