@@ -7,19 +7,6 @@
     tools:context=".presentation.ui.vehicleView.VehicleViewFragment">
 
 
-    <TextView
-        android:id="@+id/vehicleTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Araçlarım"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/vehiclesRecyclerView"
         android:layout_width="match_parent"
@@ -28,7 +15,7 @@
         app:layout_constraintBottom_toTopOf="@+id/fab"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vehicleTitle" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -44,7 +31,7 @@
         android:id="@+id/emptyWarning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Henüz bir kayıt yapılmadı"
+        android:text="@string/warning_empty_list"
         android:textSize="16sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

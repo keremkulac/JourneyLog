@@ -138,5 +138,7 @@
     <string name="fuel_purchase_total_price_title">Toplam</string>
     <string name="fuel_purchase_date_title">Tarih</string>
     <string name="fuel_purchase_liter_taken_title">Alınan litre</string>
+    <string name="warning_empty_list">Henüz bir kayıt yapılmadı</string>
+    <string name="item_fuel_purchase_view_button_text">Görüntüle</string>
 
 </resources>

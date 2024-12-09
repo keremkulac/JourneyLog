@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.util.BaseFragment
@@ -29,11 +28,7 @@ class FuelPurchaseViewFragment :
     private fun navigateAddFuelPurchase() {
         binding.fab.setOnClickListener {
             findNavController().navigate(
-                R.id.action_fuelPurchaseViewFragment_to_addFuelPurchaseFragment,
-                null,
-                navOptions {
-                    popUpTo(R.id.fuelPurchaseViewFragment) { inclusive = true }
-                }
+                R.id.action_fuelPurchaseViewFragment_to_addFuelPurchaseFragment
             )
         }
     }
@@ -53,6 +48,7 @@ class FuelPurchaseViewFragment :
         adapter.receiptList = list as ArrayList<Receipt>
         binding.fuelPurchaseRecyclerView.adapter = adapter
         clickListener(adapter)
+        checkFuelPurchaseList(list)
     }
 
 
@@ -63,6 +59,16 @@ class FuelPurchaseViewFragment :
                     receipt
                 )
             )
+        }
+    }
+
+    private fun checkFuelPurchaseList(list: List<Receipt>) {
+        if (list.isEmpty()) {
+            binding.fuelPurchaseRecyclerView.visibility = View.GONE
+            binding.emptyWarning.visibility = View.VISIBLE
+        } else {
+            binding.fuelPurchaseRecyclerView.visibility = View.VISIBLE
+            binding.emptyWarning.visibility = View.GONE
         }
     }
 }

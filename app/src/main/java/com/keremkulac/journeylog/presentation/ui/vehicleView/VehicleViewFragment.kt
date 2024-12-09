@@ -80,8 +80,6 @@ class VehicleViewFragment :
 
     private fun clickVehicle(adapter: VehicleViewAdapter) {
         adapter.clickListener = { vehicle ->
-            val bundle = Bundle()
-            bundle.putParcelable("vehicle", vehicle)
             findNavController().navigate(
                 VehicleViewFragmentDirections.actionVehicleViewFragmentToVehicleDetailFragment(
                     vehicle
