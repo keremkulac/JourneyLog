@@ -135,5 +135,8 @@
     <string name="vehicle_select_create_button_text">Aracı oluştur</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fuel_purchase_total_price_title">Toplam</string>
+    <string name="fuel_purchase_date_title">Tarih</string>
+    <string name="fuel_purchase_liter_taken_title">Alınan litre</string>
 
 </resources>
