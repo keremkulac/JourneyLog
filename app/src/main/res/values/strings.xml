@@ -48,9 +48,9 @@
     <string name="profile_password_settings_button_text">Şifre ayarları</string>
     <string name="profile_edit_profile_button_text">Profili düzenle</string>
     <string name="update_update_button_text">Güncelle</string>
-    <string name="liters_taken">Alınan litre: %s L</string>
-    <string name="total_price">Toplam: %s ₺</string>"
-    <string name="fuel_price">%s - %s ₺</string>"
+    <string name="liters_taken"> %s L</string>
+    <string name="total_price">%s ₺</string>"
+    <string name="fuel_liter_price">%s ₺</string>"
 
     <string name="dialog_add_fuel_purchase_title">Uyarı</string>
     <string name="dialog_add_fuel_purchase_message">Bu bilgileri kaydetmek istediğinize emin misiniz?</string>

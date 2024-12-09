@@ -37,6 +37,7 @@ class VehicleViewFragment :
                 onSuccess = { data ->
                     val vehicleList = data as List<Vehicle>
                     setRecyclerView(vehicleList)
+                    checkEmptyList(vehicleList)
                 }, onFailure = { message ->
                     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 })
@@ -56,6 +57,18 @@ class VehicleViewFragment :
         adapter.vehicleList = ArrayList(vehicleList)
         binding.vehiclesRecyclerView.adapter = adapter
         clickVehicle(adapter)
+    }
+
+    private fun checkEmptyList(vehicleList: List<Vehicle>) {
+        if (vehicleList.isEmpty()) {
+            binding.vehiclesRecyclerView.visibility = View.GONE
+            binding.vehicleTitle.visibility = View.GONE
+            binding.emptyWarning.visibility = View.VISIBLE
+        } else {
+            binding.vehiclesRecyclerView.visibility = View.VISIBLE
+            binding.vehicleTitle.visibility = View.VISIBLE
+            binding.emptyWarning.visibility = View.GONE
+        }
     }
 
 

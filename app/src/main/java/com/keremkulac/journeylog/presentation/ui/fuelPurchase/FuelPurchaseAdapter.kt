@@ -53,18 +53,14 @@ class FuelPurchaseAdapter : RecyclerView.Adapter<FuelPurchaseAdapter.ViewHolder>
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindItems(receipt: Receipt) {
-            val fuelPriceTitle = itemView.findViewById<TextView>(R.id.stationName)
-            val fuelPrice = itemView.findViewById<TextView>(R.id.fuelType)
-            val date = itemView.findViewById<TextView>(R.id.date)
-            val liter = itemView.findViewById<TextView>(R.id.liter)
-            val totalPrice = itemView.findViewById<TextView>(R.id.totalPrice)
-            fuelPriceTitle.text = receipt.stationName
+            val fuelTotalPrice = itemView.findViewById<TextView>(R.id.fuelTotalPrice)
+            val fuelType = itemView.findViewById<TextView>(R.id.fuelType)
+
             itemView.context.apply {
-                fuelPrice.text = getString(R.string.fuel_price).format(receipt.fuelType,receipt.literPrice)
-                liter.text = getString(R.string.liters_taken).format(receipt.liter)
-                totalPrice.text = getString(R.string.total_price).format(receipt.total)
+                fuelTotalPrice.text = getString(R.string.total_price).format(receipt.total)
+                fuelType.text = receipt.fuelType
             }
-            date.text = receipt.date
+
         }
     }
 }
