@@ -1,5 +1,9 @@
 package com.keremkulac.journeylog.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Receipt(
     var id: String = "",
     var email: String = "",
@@ -11,4 +15,4 @@ data class Receipt(
     var total: String = "",
     var date: String = "",
     var time: String = ""
-)
+) : Parcelable

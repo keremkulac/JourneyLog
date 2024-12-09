@@ -14,8 +14,8 @@
             android:id="@+id/action_homeFragment_to_journeyFragment"
             app:destination="@id/journeyFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_fuelPurchaseFragment"
-            app:destination="@id/fuelPurchaseFragment" />
+            android:id="@+id/action_homeFragment_to_fuelPurchaseViewFragment"
+            app:destination="@id/fuelPurchaseViewFragment" />
         <action
             android:id="@+id/action_homeFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
@@ -35,13 +35,16 @@
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" />
     <fragment
-        android:id="@+id/fuelPurchaseFragment"
-        android:name="com.keremkulac.journeylog.presentation.ui.fuelPurchase.FuelPurchaseFragment"
+        android:id="@+id/fuelPurchaseViewFragment"
+        android:name="com.keremkulac.journeylog.presentation.ui.fuelPurchaseView.FuelPurchaseViewFragment"
         android:label="fragment_fuel_purchase"
-        tools:layout="@layout/fragment_fuel_purchase">
+        tools:layout="@layout/fragment_fuel_purchase_view">
         <action
-            android:id="@+id/action_fuelPurchaseFragment_to_addFuelPurchaseFragment"
+            android:id="@+id/action_fuelPurchaseViewFragment_to_addFuelPurchaseFragment"
             app:destination="@id/addFuelPurchaseFragment" />
+        <action
+            android:id="@+id/action_fuelPurchaseViewFragment_to_fuelPurchaseDetailFragment"
+            app:destination="@id/fuelPurchaseDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -76,8 +79,8 @@
         android:label="fragment_add_fuel_purchase"
         tools:layout="@layout/fragment_add_fuel_purchase">
         <action
-            android:id="@+id/action_addFuelPurchaseFragment_to_fuelPurchaseFragment"
-            app:destination="@id/fuelPurchaseFragment" />
+            android:id="@+id/action_addFuelPurchaseFragment_to_fuelPurchaseViewFragment"
+            app:destination="@id/fuelPurchaseViewFragment" />
     </fragment>
     <dialog
         android:id="@+id/forgotPasswordFragment"
@@ -161,6 +164,17 @@
         <argument
             android:name="vehicle"
             app:argType="com.keremkulac.journeylog.domain.model.Vehicle"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/fuelPurchaseDetailFragment"
+        android:name="com.keremkulac.journeylog.presentation.ui.fuelPurchaseDetail.FuelPurchaseDetailFragment"
+        android:label="fragment_fuel_purchase_detail"
+        tools:layout="@layout/fragment_fuel_purchase_detail" >
+        <argument
+            android:name="receipt"
+            app:argType="com.keremkulac.journeylog.domain.model.Receipt"
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>

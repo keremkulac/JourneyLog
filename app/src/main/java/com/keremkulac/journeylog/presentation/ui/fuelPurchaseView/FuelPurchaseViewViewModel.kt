@@ -1,4 +1,4 @@
-package com.keremkulac.journeylog.presentation.ui.fuelPurchase
+package com.keremkulac.journeylog.presentation.ui.fuelPurchaseView
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FuelPurchaseViewModel @Inject constructor(
+class FuelPurchaseViewViewModel @Inject constructor(
     private val getAllReceiptsUseCase: GetAllReceiptsUseCase
 ) : ViewModel() {
     private val _allReceipts = MutableLiveData<Result<Any>>()

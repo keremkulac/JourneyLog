@@ -6,7 +6,7 @@
         android:title="@string/bottom_navigation_home_title" />
 
     <item
-        android:id="@+id/fuelPurchaseFragment"
+        android:id="@+id/fuelPurchaseViewFragment"
         android:icon="@drawable/ic_fuel"
         android:title="@string/bottom_navigation_purchase_fuel_title" />
 

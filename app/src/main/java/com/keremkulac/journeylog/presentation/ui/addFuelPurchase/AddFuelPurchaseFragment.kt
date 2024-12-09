@@ -95,7 +95,7 @@ class AddFuelPurchaseFragment :
             HandleResult.handleResult(binding.progressBar, result,
                 onSuccess = { data ->
                     Toast.makeText(requireContext(), data, Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_addFuelPurchaseFragment_to_fuelPurchaseFragment)
+                    findNavController().navigate(R.id.action_addFuelPurchaseFragment_to_fuelPurchaseViewFragment)
                 },
                 onFailure = { message->
                     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()

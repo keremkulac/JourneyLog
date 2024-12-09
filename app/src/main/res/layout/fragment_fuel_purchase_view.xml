@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".presentation.ui.fuelPurchase.FuelPurchaseFragment">
+    tools:context=".presentation.ui.fuelPurchaseView.FuelPurchaseViewFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fuelPurchaseRecyclerView"

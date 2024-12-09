@@ -1,8 +1,9 @@
-package com.keremkulac.journeylog.presentation.ui.fuelPurchase
+package com.keremkulac.journeylog.presentation.ui.fuelPurchaseView
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -10,11 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.domain.model.Receipt
 
-class FuelPurchaseAdapter : RecyclerView.Adapter<FuelPurchaseAdapter.ViewHolder>() {
+class FuelPurchaseViewAdapter : RecyclerView.Adapter<FuelPurchaseViewAdapter.ViewHolder>() {
+
+    var clickListener: ((Receipt) -> Unit)? = null
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): FuelPurchaseAdapter.ViewHolder {
+    ): FuelPurchaseViewAdapter.ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_fuel_purchase, parent, false)
         )
@@ -43,7 +47,7 @@ class FuelPurchaseAdapter : RecyclerView.Adapter<FuelPurchaseAdapter.ViewHolder>
             recyclerListDiffer.submitList(value as List<Receipt?>?)
         }
 
-    override fun onBindViewHolder(holder: FuelPurchaseAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FuelPurchaseViewAdapter.ViewHolder, position: Int) {
         holder.bindItems(receiptList[position])
     }
 
@@ -55,12 +59,12 @@ class FuelPurchaseAdapter : RecyclerView.Adapter<FuelPurchaseAdapter.ViewHolder>
         fun bindItems(receipt: Receipt) {
             val fuelTotalPrice = itemView.findViewById<TextView>(R.id.fuelTotalPrice)
             val fuelType = itemView.findViewById<TextView>(R.id.fuelType)
-
+            val viewButton = itemView.findViewById<Button>(R.id.view)
             itemView.context.apply {
                 fuelTotalPrice.text = getString(R.string.total_price).format(receipt.total)
                 fuelType.text = receipt.fuelType
             }
-
+            viewButton.setOnClickListener { clickListener?.invoke(receipt) }
         }
     }
 }

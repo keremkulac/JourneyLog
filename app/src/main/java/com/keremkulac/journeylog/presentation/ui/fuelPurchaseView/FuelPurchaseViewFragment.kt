@@ -1,4 +1,4 @@
-package com.keremkulac.journeylog.presentation.ui.fuelPurchase
+package com.keremkulac.journeylog.presentation.ui.fuelPurchaseView
 
 
 import android.os.Bundle
@@ -9,16 +9,16 @@ import androidx.navigation.navOptions
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.util.BaseFragment
-import com.keremkulac.journeylog.databinding.FragmentFuelPurchaseBinding
+import com.keremkulac.journeylog.databinding.FragmentFuelPurchaseViewBinding
 import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.util.HandleResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FuelPurchaseFragment :
-    BaseFragment<FragmentFuelPurchaseBinding>(FragmentFuelPurchaseBinding::inflate) {
+class FuelPurchaseViewFragment :
+    BaseFragment<FragmentFuelPurchaseViewBinding>(FragmentFuelPurchaseViewBinding::inflate) {
 
-    private val viewModel by viewModels<FuelPurchaseViewModel>()
+    private val viewModel by viewModels<FuelPurchaseViewViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,10 +29,10 @@ class FuelPurchaseFragment :
     private fun navigateAddFuelPurchase() {
         binding.fab.setOnClickListener {
             findNavController().navigate(
-                R.id.action_fuelPurchaseFragment_to_addFuelPurchaseFragment,
+                R.id.action_fuelPurchaseViewFragment_to_addFuelPurchaseFragment,
                 null,
                 navOptions {
-                    popUpTo(R.id.fuelPurchaseFragment) { inclusive = true }
+                    popUpTo(R.id.fuelPurchaseViewFragment) { inclusive = true }
                 }
             )
         }
@@ -47,10 +47,22 @@ class FuelPurchaseFragment :
     }
 
     private fun createRecyclerView(list: List<Receipt>) {
-        val adapter = FuelPurchaseAdapter()
+        val adapter = FuelPurchaseViewAdapter()
         binding.fuelPurchaseRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         adapter.receiptList = list as ArrayList<Receipt>
         binding.fuelPurchaseRecyclerView.adapter = adapter
+        clickListener(adapter)
+    }
+
+
+    private fun clickListener(adapter: FuelPurchaseViewAdapter) {
+        adapter.clickListener = { receipt ->
+            findNavController().navigate(
+                FuelPurchaseViewFragmentDirections.actionFuelPurchaseViewFragmentToFuelPurchaseDetailFragment(
+                    receipt
+                )
+            )
+        }
     }
 }
