@@ -23,11 +23,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
+        binding.toolbar.title = ""
         setContentView(R.layout.activity_main)
         setContentView(binding.root)
         setNavigationView()
         observeBottomNavigationVisibility()
         setBottomNavigationVisibility()
+        setToolbar()
+        observeToolbarVisibility()
     }
 
     private fun setNavigationView() {
@@ -42,17 +45,26 @@ class MainActivity : AppCompatActivity() {
     private fun observeBottomNavigationVisibility() {
         viewModel.bottomNavVisibility.observe(this) { visibility ->
             binding.bottomNavigationView.visibility = visibility
-            if (visibility == View.VISIBLE) {
-                setToolbar()
-            }
         }
     }
 
     private fun setBottomNavigationVisibility() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             viewModel.bottomNavigationVisibility(destination.id)
+            viewModel.toolBarVisibility(destination.id)
             toolBarSet(destination.id)
         }
+    }
+
+    private fun observeToolbarVisibility() {
+        viewModel.toolbarVisibility.observe(this) { visibility ->
+            if (visibility != View.VISIBLE) {
+                binding.toolbar.visibility = View.GONE
+            } else {
+                binding.toolbar.visibility = View.VISIBLE
+            }
+        }
+
     }
 
     override fun onDestroy() {
@@ -67,9 +79,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     private val toolbarSettings = mapOf(
-        R.id.homeFragment to Pair("Ana Sayfa", false),
         R.id.profileFragment to Pair("Profil", true),
         R.id.editProfileFragment to Pair("Profil düzenle", true),
         R.id.forgotPasswordFragment to Pair("Şifremi unuttum", true),
@@ -84,6 +94,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun toolBarSet(destinationId: Int) {
         val (title, hasBackButton) = toolbarSettings[destinationId] ?: return
-        ToolbarUtil.setToolbar(this, binding.toolbar, title, true, hasBackButton)
+        ToolbarUtil.setToolbar(this, true, hasBackButton)
+        binding.toolbarTitle.text = title
     }
 }
