@@ -1,4 +1,4 @@
-package com.keremkulac.journeylog.presentation.ui.addFuelPurchase
+package com.keremkulac.journeylog.presentation.ui.fuelPurchaseAdd
 
 import android.os.Bundle
 import android.view.View
@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import com.keremkulac.journeylog.R
-import com.keremkulac.journeylog.databinding.FragmentAddFuelPurchaseBinding
+import com.keremkulac.journeylog.databinding.FragmentFuelPurchaseAddBinding
 import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.util.CustomDialog
@@ -18,10 +18,10 @@ import com.keremkulac.journeylog.util.TextWatcher
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddFuelPurchaseFragment :
-    BaseFragment<FragmentAddFuelPurchaseBinding>(FragmentAddFuelPurchaseBinding::inflate) {
+class FuelPurchaseAddFragment :
+    BaseFragment<FragmentFuelPurchaseAddBinding>(FragmentFuelPurchaseAddBinding::inflate) {
 
-    private val viewModel by viewModels<AddFuelPurchaseViewModel>()
+    private val viewModel by viewModels<FuelPurchaseAddViewModel>()
     private var selectedType = ""
     private var selectedCompany = ""
     private var companyList = listOf<String>()
@@ -95,7 +95,7 @@ class AddFuelPurchaseFragment :
             HandleResult.handleResult(binding.progressBar, result,
                 onSuccess = { data ->
                     Toast.makeText(requireContext(), data, Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_addFuelPurchaseFragment_to_fuelPurchaseViewFragment)
+                    findNavController().navigate(R.id.action_fuelPurchaseAddFragment_to_fuelPurchaseViewFragment)
                 },
                 onFailure = { message->
                     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()

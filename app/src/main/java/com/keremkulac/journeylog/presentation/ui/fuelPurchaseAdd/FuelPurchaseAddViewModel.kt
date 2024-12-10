@@ -1,4 +1,4 @@
-package com.keremkulac.journeylog.presentation.ui.addFuelPurchase
+package com.keremkulac.journeylog.presentation.ui.fuelPurchaseAdd
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -20,7 +20,7 @@ import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
-class AddFuelPurchaseViewModel @Inject constructor(
+class FuelPurchaseAddViewModel @Inject constructor(
     private val saveReceiptUseCase: SaveReceiptUseCase,
     private val getCurrentUser: GetCurrentUserUseCase,
     private val getAllCompaniesUseCase: GetAllCompaniesUseCase,
@@ -82,14 +82,13 @@ class AddFuelPurchaseViewModel @Inject constructor(
     fun currentUser(): FirebaseUser? {
         var firebaseUser: FirebaseUser? = null
         viewModelScope.launch {
-            getCurrentUser.invoke { _result ->
-
-                when (_result) {
-                    Result.Loading -> TODO()
-                    is Result.Failure -> TODO()
+            getCurrentUser.invoke { result ->
+                when (result) {
                     is Result.Success -> {
-                        firebaseUser = _result.data
+                        firebaseUser = result.data
                     }
+
+                    else -> {}
                 }
             }
         }
@@ -114,7 +113,7 @@ class AddFuelPurchaseViewModel @Inject constructor(
         total: String?,
         date: String?,
         time: String?
-    ) : Boolean{
+    ): Boolean {
         return inputValidation.validateReceipt(
             id,
             email,

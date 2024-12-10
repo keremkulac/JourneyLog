@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         R.id.updatePasswordFragment to Pair("Şifre güncelle", true),
         R.id.fuelPurchaseViewFragment to Pair("Yakıt alımlarım", true),
         R.id.fuelPurchaseDetailFragment to Pair("Yakıt alımı detayı", true),
-        R.id.addFuelPurchaseFragment to Pair("Yakıt alımı", true),
+        R.id.fuelPurchaseAddFragment to Pair("Yakıt alımı", true),
         R.id.vehicleViewFragment to Pair("Araçlarım", true),
         R.id.vehicleDetailFragment to Pair("Araç detayı", true),
         R.id.vehicleCreateFragment to Pair("Araç oluştur", true)

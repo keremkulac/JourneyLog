@@ -28,7 +28,7 @@ class FuelPurchaseViewFragment :
     private fun navigateAddFuelPurchase() {
         binding.fab.setOnClickListener {
             findNavController().navigate(
-                R.id.action_fuelPurchaseViewFragment_to_addFuelPurchaseFragment
+                R.id.action_fuelPurchaseViewFragment_to_FuelPurchaseAddFragment
             )
         }
     }
@@ -50,7 +50,6 @@ class FuelPurchaseViewFragment :
         clickListener(adapter)
         checkFuelPurchaseList(list)
     }
-
 
     private fun clickListener(adapter: FuelPurchaseViewAdapter) {
         adapter.clickListener = { receipt ->

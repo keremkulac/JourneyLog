@@ -40,8 +40,8 @@
         android:label="fragment_fuel_purchase"
         tools:layout="@layout/fragment_fuel_purchase_view">
         <action
-            android:id="@+id/action_fuelPurchaseViewFragment_to_addFuelPurchaseFragment"
-            app:destination="@id/addFuelPurchaseFragment" />
+            android:id="@+id/action_fuelPurchaseViewFragment_to_FuelPurchaseAddFragment"
+            app:destination="@id/fuelPurchaseAddFragment" />
         <action
             android:id="@+id/action_fuelPurchaseViewFragment_to_fuelPurchaseDetailFragment"
             app:destination="@id/fuelPurchaseDetailFragment" />
@@ -74,12 +74,12 @@
             app:destination="@id/homeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/addFuelPurchaseFragment"
-        android:name="com.keremkulac.journeylog.presentation.ui.addFuelPurchase.AddFuelPurchaseFragment"
-        android:label="fragment_add_fuel_purchase"
-        tools:layout="@layout/fragment_add_fuel_purchase">
+        android:id="@+id/fuelPurchaseAddFragment"
+        android:name="com.keremkulac.journeylog.presentation.ui.fuelPurchaseAdd.FuelPurchaseAddFragment"
+        android:label="fragment_fuel_purchase_add"
+        tools:layout="@layout/fragment_fuel_purchase_add">
         <action
-            android:id="@+id/action_addFuelPurchaseFragment_to_fuelPurchaseViewFragment"
+            android:id="@+id/action_fuelPurchaseAddFragment_to_fuelPurchaseViewFragment"
             app:destination="@id/fuelPurchaseViewFragment" />
     </fragment>
     <dialog
@@ -160,23 +160,23 @@
         android:id="@+id/vehicleDetailFragment"
         android:name="com.keremkulac.journeylog.presentation.ui.vehicleDetail.VehicleDetailFragment"
         android:label="fragment_vehicle_detail"
-        tools:layout="@layout/fragment_vehicle_detail" >
+        tools:layout="@layout/fragment_vehicle_detail">
         <argument
             android:name="vehicle"
+            android:defaultValue="@null"
             app:argType="com.keremkulac.journeylog.domain.model.Vehicle"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/fuelPurchaseDetailFragment"
         android:name="com.keremkulac.journeylog.presentation.ui.fuelPurchaseDetail.FuelPurchaseDetailFragment"
         android:label="fragment_fuel_purchase_detail"
-        tools:layout="@layout/fragment_fuel_purchase_detail" >
+        tools:layout="@layout/fragment_fuel_purchase_detail">
         <argument
             android:name="receipt"
+            android:defaultValue="@null"
             app:argType="com.keremkulac.journeylog.domain.model.Receipt"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
     </fragment>
 
 </navigation>
