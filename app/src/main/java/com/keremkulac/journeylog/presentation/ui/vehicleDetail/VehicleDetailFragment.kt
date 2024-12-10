@@ -1,9 +1,7 @@
 package com.keremkulac.journeylog.presentation.ui.vehicleDetail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.keremkulac.journeylog.databinding.FragmentVehicleDetailBinding
 import com.keremkulac.journeylog.util.BaseFragment

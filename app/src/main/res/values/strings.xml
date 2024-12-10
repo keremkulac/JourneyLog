@@ -9,7 +9,6 @@
     <string name="add_fuel_purchase_tax">KDV</string>
     <string name="add_fuel_purchase_total">Toplam</string>
     <string name="add_fuel_purchase_save_receipt">Kaydet</string>
-    <string name="add_fuel_purchase_main_title">Ödeme</string>
     <string name="add_fuel_purchase_fuel_type">Akaryakıt türü</string>
     <string name="add_fuel_purchase_station">İstasyon</string>
     <string name="login_email">Email</string>
@@ -17,7 +16,6 @@
     <string name="login_with_email_button_text">Email ile giriş yap</string>
     <string name="login_with_google_button_text">Google ile giriş yap</string>
     <string name="login_register_text">Henüz bir hesabın yok mu? <b>Kayıt ol</b></string>
-    <string name="login_register_button_text">Kayıt ol</string>
     <string name="register_password_hint">Şifre</string>
     <string name="register_register_button_text">Kayıt ol</string>
     <string name="register_login_text">Zaten bir hesabın var mı? <b>Giriş yap</b></string>
@@ -113,6 +111,8 @@
     <string name="warning_receipt_fuel_type_empty_message">Yakıt türü seçiniz</string>
     <string name="warning_receipt_liter_price_empty_message">Litre fiyatı giriniz</string>
     <string name="warning_receipt_liter_empty_message">Litre giriniz</string>
+    <string name="warning_receipt_vehicle_license_plate_message">Aracınızın plakasını seçiniz</string>
+    <string name="warning_receipt_vehicle_last_km_message">Aracınızın son kilometresini giriniz</string>
     <string name="warning_receipt_tax_empty_message">Vergi hesaplanamadı</string>
     <string name="warning_receipt_total_empty_message">Toplam tutar hesaplanamadı</string>
     <string name="warning_receipt_date_empty_message">Tarih alınamadı</string>
@@ -133,12 +133,31 @@
     <string name="vehicle_select_license_plate_info">Plakayı girerken boşluk koymayı unutmayın</string>
     <string name="vehicle_select_license_plate_country">TR</string>
     <string name="vehicle_select_create_button_text">Aracı oluştur</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="fuel_purchase_total_price_title">Toplam</string>
     <string name="fuel_purchase_date_title">Tarih</string>
     <string name="fuel_purchase_liter_taken_title">Alınan litre</string>
     <string name="warning_empty_list">Henüz bir kayıt yapılmadı</string>
     <string name="item_fuel_purchase_view_button_text">Görüntüle</string>
+    <string name="fuel_purchase_add_payment_card_title">Ödeme bilgileri</string>
+    <string name="fuel_purchase_add_fuel_card_title">Yakıt bilgileri</string>
+    <string name="fuel_purchase_add_vehicle_card_title">Araç bilgileri</string>
+    <string name="fuel_purchase_add_vehicle_km_title">Araç kilometre</string>
+    <string name="fuel_purchase_add_license_plate_title">Plaka</string>
+
+    <string-array name="companies">
+        <item>Alpet</item>
+        <item>Aygaz</item>
+        <item>Aytemiz</item>
+        <item>Bpet</item>
+        <item>İpragaz</item>
+        <item>Kadoil</item>
+        <item>Milangaz</item>
+        <item>M Oil</item>
+        <item>Opet</item>
+        <item>Petrol Ofisi</item>
+        <item>Türkiye Petrolleri</item>
+
+    </string-array>
 
 </resources>
