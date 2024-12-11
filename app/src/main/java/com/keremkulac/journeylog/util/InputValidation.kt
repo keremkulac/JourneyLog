@@ -137,6 +137,8 @@ class InputValidation @Inject constructor(private val context: Context) {
         fuelType: String?,
         literPrice: String?,
         liter: String?,
+        vehicleLicensePlate: String?,
+        vehicleLastKm: String?,
         tax: String?,
         total: String?,
         date: String?,
@@ -171,6 +173,16 @@ class InputValidation @Inject constructor(private val context: Context) {
 
             liter.isNullOrEmpty() -> {
                 validationMessage(context.getString(R.string.warning_receipt_liter_empty_message))
+                false
+            }
+
+            vehicleLicensePlate.isNullOrEmpty() -> {
+                validationMessage(context.getString(R.string.warning_receipt_vehicle_license_plate_message))
+                false
+            }
+
+            vehicleLastKm.isNullOrEmpty() -> {
+                validationMessage(context.getString(R.string.warning_receipt_vehicle_last_km_message))
                 false
             }
 

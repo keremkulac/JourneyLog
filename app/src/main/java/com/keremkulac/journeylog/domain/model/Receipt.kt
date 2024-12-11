@@ -11,6 +11,8 @@ data class Receipt(
     var fuelType: String = "",
     var literPrice: String = "",
     var liter: String = "",
+    var vehicleLicensePlate: String = "",
+    var vehicleLastKm: String = "",
     var tax: String = "",
     var total: String = "",
     var date: String = "",

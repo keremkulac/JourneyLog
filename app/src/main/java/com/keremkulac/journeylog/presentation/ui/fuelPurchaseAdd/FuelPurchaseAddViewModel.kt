@@ -4,10 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.auth.FirebaseUser
 import com.keremkulac.journeylog.domain.model.Receipt
-import com.keremkulac.journeylog.domain.usecase.GetAllCompaniesUseCase
-import com.keremkulac.journeylog.domain.usecase.GetCurrentUserUseCase
+import com.keremkulac.journeylog.domain.usecase.GetAllVehiclesUseCase
 import com.keremkulac.journeylog.domain.usecase.SaveReceiptUseCase
 import com.keremkulac.journeylog.util.InputValidation
 import com.keremkulac.journeylog.util.Result
@@ -22,8 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class FuelPurchaseAddViewModel @Inject constructor(
     private val saveReceiptUseCase: SaveReceiptUseCase,
-    private val getCurrentUser: GetCurrentUserUseCase,
-    private val getAllCompaniesUseCase: GetAllCompaniesUseCase,
+    private val getAllVehiclesUseCase: GetAllVehiclesUseCase,
     private val inputValidation: InputValidation
 ) : ViewModel() {
 
@@ -36,16 +33,12 @@ class FuelPurchaseAddViewModel @Inject constructor(
     private val _saveResult = MutableLiveData<Result<String>>()
     val saveResult: LiveData<Result<String>> get() = _saveResult
 
-
-    private val _allCompanies = MutableLiveData<List<String>>()
-    val allCompanies: LiveData<List<String>> get() = _allCompanies
-
     private val _validationMessage = MutableLiveData<String>()
     val validationMessage: LiveData<String> get() = _validationMessage
 
-    init {
-        getAllCompanies()
-    }
+    private val _getAllVehicles = MutableLiveData<Result<Any>>()
+    val getAllVehicles: LiveData<Result<Any>> get() = _getAllVehicles
+
 
     fun calculateTotal(liter: Double, literPrice: Double) {
         val total = liter * literPrice
@@ -79,26 +72,12 @@ class FuelPurchaseAddViewModel @Inject constructor(
         return UUID.randomUUID().toString()
     }
 
-    fun currentUser(): FirebaseUser? {
-        var firebaseUser: FirebaseUser? = null
+    fun getAllVehicles(userId: String) {
         viewModelScope.launch {
-            getCurrentUser.invoke { result ->
-                when (result) {
-                    is Result.Success -> {
-                        firebaseUser = result.data
-                    }
-
-                    else -> {}
-                }
+            _getAllVehicles.value = Result.Loading
+            getAllVehiclesUseCase.invoke(userId) { result ->
+                _getAllVehicles.value = result
             }
-        }
-        return firebaseUser
-    }
-
-    private fun getAllCompanies() {
-        viewModelScope.launch {
-            val list = getAllCompaniesUseCase.invoke().map { it.companyName }
-            _allCompanies.value = list
         }
     }
 
@@ -109,6 +88,8 @@ class FuelPurchaseAddViewModel @Inject constructor(
         fuelType: String?,
         literPrice: String?,
         liter: String?,
+        vehicleLicensePlate: String?,
+        vehicleLastKm: String?,
         tax: String?,
         total: String?,
         date: String?,
@@ -121,6 +102,8 @@ class FuelPurchaseAddViewModel @Inject constructor(
             fuelType,
             literPrice,
             liter,
+            vehicleLicensePlate,
+            vehicleLastKm,
             tax,
             total,
             date,

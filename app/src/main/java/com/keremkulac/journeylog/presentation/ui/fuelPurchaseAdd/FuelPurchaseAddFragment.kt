@@ -2,18 +2,22 @@ package com.keremkulac.journeylog.presentation.ui.fuelPurchaseAdd
 
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentFuelPurchaseAddBinding
 import com.keremkulac.journeylog.domain.model.Receipt
+import com.keremkulac.journeylog.domain.model.User
+import com.keremkulac.journeylog.domain.model.Vehicle
 import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.util.CustomDialog
 import com.keremkulac.journeylog.util.HandleResult
+import com.keremkulac.journeylog.util.SharedViewModel
 import com.keremkulac.journeylog.util.TextWatcher
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,20 +26,29 @@ class FuelPurchaseAddFragment :
     BaseFragment<FragmentFuelPurchaseAddBinding>(FragmentFuelPurchaseAddBinding::inflate) {
 
     private val viewModel by viewModels<FuelPurchaseAddViewModel>()
+    private lateinit var sharedViewModel: SharedViewModel
     private var selectedType = ""
     private var selectedCompany = ""
+    private var selectedLicensePlate = ""
     private var companyList = listOf<String>()
+    private var licensePlateList = listOf<String>()
+    private var dateTime = listOf<String>()
+    private var user: User? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
         observeSaveResult()
+        observeCurrentUser()
         observeAndSetValues()
         getSelectedFuelType()
         setDateTime()
         saveReceipt()
-        observeAllCompanies()
+        createCompaniesAdapter()
         selectCompany()
+        selectLicensePlate()
         observeValidation()
+        observeAllVehicles()
     }
 
     private fun getSelectedFuelType() {
@@ -77,8 +90,7 @@ class FuelPurchaseAddFragment :
 
     private fun setDateTime() {
         val dateTime = viewModel.getCurrentDate()
-        binding.receiptDate.text = dateTime[0]
-        binding.receiptTime.text = dateTime[1]
+        this.dateTime = dateTime
     }
 
     private fun saveReceipt() {
@@ -89,6 +101,29 @@ class FuelPurchaseAddFragment :
         }
     }
 
+    private fun observeCurrentUser() {
+        sharedViewModel.sharedData.observe(viewLifecycleOwner) { user ->
+            viewModel.getAllVehicles(user.id)
+            this.user = user
+        }
+    }
+
+    private fun observeAllVehicles() {
+        viewModel.getAllVehicles.observe(viewLifecycleOwner) { result ->
+            HandleResult.handleResult(binding.progressBar, result,
+                onSuccess = { data ->
+                    licensePlateList = createLicensePlateList(data as List<Vehicle>)
+                    val adapter =
+                        ArrayAdapter(requireContext(), R.layout.item_dropdown, licensePlateList)
+                    binding.licensePlate.setAdapter(adapter)
+                },
+                onFailure = {})
+        }
+    }
+
+    private fun createLicensePlateList(list: List<Vehicle>): List<String> {
+        return list.map { it.licensePlate!! }
+    }
 
     private fun observeSaveResult() {
         viewModel.saveResult.observe(viewLifecycleOwner) { result ->
@@ -97,18 +132,18 @@ class FuelPurchaseAddFragment :
                     Toast.makeText(requireContext(), data, Toast.LENGTH_SHORT).show()
                     findNavController().navigate(R.id.action_fuelPurchaseAddFragment_to_fuelPurchaseViewFragment)
                 },
-                onFailure = { message->
+                onFailure = { message ->
                     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 }
             )
         }
     }
 
-    private fun observeAllCompanies() {
-        viewModel.allCompanies.observe(viewLifecycleOwner) { list ->
-            val adapter = ArrayAdapter(requireContext(), R.layout.item_dropdown, list)
-            binding.receiptStation.adapter = adapter
-            companyList = list
+    private fun createCompaniesAdapter() {
+        requireContext().apply {
+            companyList = resources.getStringArray(R.array.companies).toList()
+            val adapter = ArrayAdapter(this, R.layout.item_dropdown, companyList)
+            binding.receiptStation.setAdapter(adapter)
         }
     }
 
@@ -118,28 +153,18 @@ class FuelPurchaseAddFragment :
         }
     }
 
-    private fun selectCompany() {
-        binding.receiptStation.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                selectedCompany = companyList[position]
+    private fun selectLicensePlate() {
+        binding.licensePlate.onItemClickListener =
+            OnItemClickListener { parent, _, position, _ ->
+                selectedLicensePlate = parent.getItemAtPosition(position).toString()
             }
+    }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                requireContext().apply {
-                    Toast.makeText(
-                        this,
-                        getString(R.string.warning_please_select_company),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+    private fun selectCompany() {
+        binding.receiptStation.onItemClickListener =
+            OnItemClickListener { parent, _, position, _ ->
+                selectedCompany = parent.getItemAtPosition(position).toString()
             }
-        }
     }
 
     private fun createDialog(receipt: Receipt) {
@@ -161,30 +186,34 @@ class FuelPurchaseAddFragment :
     private fun getReceipt(): Receipt {
         return Receipt(
             id = viewModel.createUUID(),
-            email = viewModel.currentUser()?.email.toString().trim(),
+            email = user?.email.toString().trim(),
             stationName = selectedCompany.trim(),
             fuelType = selectedType.trim(),
             literPrice = binding.receiptLiterPrice.text.toString().trim(),
             liter = binding.receiptPurchaseLiter.text.toString().trim(),
+            vehicleLicensePlate = selectedLicensePlate.trim(),
+            vehicleLastKm = binding.vehicleKm.text.toString().trim(),
             tax = binding.receiptTotalTax.text.toString().trim(),
             total = binding.receiptTotalPrice.text.toString().trim(),
-            date = binding.receiptDate.text.toString().trim(),
-            time = binding.receiptTime.text.toString().trim(),
+            date = dateTime[0],
+            time = dateTime[1]
         )
     }
 
     private fun isValid(): Boolean {
         val isValid = viewModel.validateInputs(
             viewModel.createUUID(),
-            viewModel.currentUser()?.email.toString().trim(),
+            user?.email.toString().trim(),
             selectedCompany.trim(),
             selectedType.trim(),
             binding.receiptLiterPrice.text.toString().trim(),
             binding.receiptPurchaseLiter.text.toString().trim(),
+            selectedLicensePlate.trim(),
+            binding.vehicleKm.text.toString().trim(),
             binding.receiptTotalTax.text.toString().trim(),
             binding.receiptTotalPrice.text.toString().trim(),
-            binding.receiptDate.text.toString().trim(),
-            binding.receiptTime.text.toString().trim()
+            date = dateTime[0],
+            time = dateTime[1]
         )
         return isValid
     }

@@ -9,34 +9,24 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:padding="16dp">
-
-        <TextView
-            android:id="@+id/fuelCardTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/fuel_purchase_add_fuel_card_title"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/fuelCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:elevation="10dp"
+            android:elevation="5dp"
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fuelCardTitle">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#1A00ACC1"
+                android:background="#F7F8FA"
                 android:padding="16dp">
 
                 <ImageView
@@ -44,10 +34,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/imageview_background"
+                    android:backgroundTint="#E53935"
                     android:contentDescription="@string/todo"
                     android:padding="8dp"
                     android:src="@drawable/ic_fuel2"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/fuelCardTitle1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/fuel_purchase_add_fuel_card_title"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/fuelİcon"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -62,17 +64,23 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fuelİcon" />
 
-                <Spinner
-                    android:id="@+id/receiptStation"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/receiptStationLayout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="-16dp"
-                    android:layout_marginTop="8dp"
-                    android:background="#1A00ACC1"
-                    android:backgroundTint="#1A00ACC1"
+                    android:layout_height="48dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/receiptStationTitle" />
+                    app:layout_constraintTop_toBottomOf="@+id/receiptStationTitle">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/receiptStation"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="none"
+                        tools:ignore="LabelFor" />
+                </com.google.android.material.textfield.TextInputLayout>
+
 
                 <TextView
                     android:id="@+id/receiptPurchasedFuelTypeTitle"
@@ -84,7 +92,7 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/receiptStation" />
+                    app:layout_constraintTop_toBottomOf="@+id/receiptStationLayout" />
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/receiptPurchasedFuelType"
@@ -131,17 +139,28 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/receiptPurchasedFuelType" />
 
-                <EditText
-                    android:id="@+id/receiptLiterPrice"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/receiptLiterPriceLayout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:importantForAutofill="no"
-                    android:inputType="numberDecimal"
-                    app:layout_constraintEnd_toStartOf="@+id/receiptPurchaseLiter"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/receiptPurchaseLiterLayout"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/receiptLiterPriceTitle"
-                    tools:ignore="LabelFor" />
+                    app:layout_constraintTop_toBottomOf="@+id/receiptLiterPriceTitle">
+
+                    <EditText
+                        android:id="@+id/receiptLiterPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        android:inputType="numberDecimal"
+                        app:layout_constraintEnd_toStartOf="@+id/receiptPurchaseLiter"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/receiptLiterPriceTitle"
+                        tools:ignore="LabelFor" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/receiptPurchaseLiterTitle"
@@ -155,48 +174,44 @@
                     app:layout_constraintStart_toEndOf="@+id/receiptLiterPriceTitle"
                     app:layout_constraintTop_toBottomOf="@+id/receiptPurchasedFuelType" />
 
-                <EditText
-                    android:id="@+id/receiptPurchaseLiter"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/receiptPurchaseLiterLayout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:importantForAutofill="no"
-                    android:inputType="numberDecimal"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/receiptLiterPrice"
-                    app:layout_constraintTop_toBottomOf="@+id/receiptLiterPriceTitle"
-                    tools:ignore="LabelFor" />
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/receiptLiterPriceTitle"
+                    app:layout_constraintTop_toBottomOf="@+id/receiptPurchaseLiterTitle">
+
+                    <EditText
+                        android:id="@+id/receiptPurchaseLiter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        android:inputType="numberDecimal"
+                        tools:ignore="LabelFor" />
+                </com.google.android.material.textfield.TextInputLayout>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
-
-        <TextView
-            android:id="@+id/vehicleCardTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/fuel_purchase_add_vehicle_card_title"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fuelCard" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/vehicleCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:elevation="10dp"
+            android:elevation="5dp"
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vehicleCardTitle">
+            app:layout_constraintTop_toBottomOf="@+id/fuelCard">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#1AD81B60"
+                android:background="#F7F8FA"
                 android:padding="16dp">
 
                 <ImageView
@@ -204,10 +219,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/imageview_background"
+                    android:backgroundTint="#3949AB"
                     android:contentDescription="@string/todo"
                     android:padding="8dp"
+
                     android:src="@drawable/ic_car"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/vehicleCardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/fuel_purchase_add_vehicle_card_title"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/carİcon"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -222,16 +251,22 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/carİcon" />
 
-                <Spinner
-                    android:id="@+id/licensePlate"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/licensePlateLayout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="-16dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_height="48dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/vehicleLicensePlateTitle" />
+                    app:layout_constraintTop_toBottomOf="@+id/vehicleLicensePlateTitle">
 
+                    <AutoCompleteTextView
+                        android:id="@+id/licensePlate"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="none"
+                        tools:ignore="LabelFor" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/vehicleKmTitle"
@@ -242,68 +277,49 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/licensePlate" />
+                    app:layout_constraintTop_toBottomOf="@+id/licensePlateLayout" />
 
-                <ImageView
-                    android:id="@+id/vehicleKmInfoIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:contentDescription="@string/todo"
-                    android:src="@drawable/ic_info"
-                    app:layout_constraintBottom_toBottomOf="@id/vehicleKmTitle"
-                    app:layout_constraintStart_toEndOf="@+id/vehicleKmTitle"
-                    app:layout_constraintTop_toTopOf="@id/vehicleKmTitle" />
-
-                <TextView
-                    android:id="@+id/vehicleKmInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Kilometredeki yakıt tüketimini öğrenmek için son kilometre bilginizi giriniz."
-                    android:visibility="gone"
-                    app:layout_constraintStart_toStartOf="@+id/vehicleKmTitle"
-                    app:layout_constraintTop_toBottomOf="@+id/vehicleKmTitle" />
-
-                <EditText
-                    android:id="@+id/vehicleKm"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/vehicleKmLayout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:importantForAutofill="no"
-                    android:inputType="numberDecimal"
-                    app:layout_constraintEnd_toEndOf="@+id/vehicleKmInfoIcon"
+                    app:layout_constraintEnd_toEndOf="@+id/vehicleKmTitle"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/vehicleKmInfo"
-                    tools:ignore="LabelFor" />
+                    app:layout_constraintTop_toBottomOf="@+id/vehicleKmTitle">
+
+                    <EditText
+                        android:id="@+id/vehicleKm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        android:inputType="numberDecimal"
+                        app:layout_constraintEnd_toStartOf="@+id/receiptPurchaseLiter"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/receiptLiterPriceTitle"
+                        tools:ignore="LabelFor" />
+                </com.google.android.material.textfield.TextInputLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/paymentCardTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/fuel_purchase_add_payment_card_title"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vehicleCard" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/paymentCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:elevation="10dp"
+            android:elevation="5dp"
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/paymentCardTitle">
+            app:layout_constraintTop_toBottomOf="@+id/vehicleCard">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#1AFDD835"
+                android:background="#F7F8FA"
                 android:padding="16dp">
 
                 <ImageView
@@ -311,10 +327,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/imageview_background"
+                    android:backgroundTint="#FDD835"
                     android:contentDescription="@string/todo"
                     android:padding="8dp"
                     android:src="@drawable/ic_payment"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/paymentCardTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fuel_purchase_add_payment_card_title"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintStart_toEndOf="@+id/paymentIcon"
                     app:layout_constraintTop_toTopOf="parent" />
 
 
