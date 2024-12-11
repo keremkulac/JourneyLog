@@ -1,8 +1,10 @@
 package com.keremkulac.journeylog.domain.repository
 
 import android.net.Uri
+import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import com.keremkulac.journeylog.domain.model.AverageFuelPrice
 import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.domain.model.Vehicle
@@ -111,6 +113,21 @@ class FirestoreRepositoryImp @Inject constructor(
         }.addOnFailureListener { exception ->
             result.invoke(Result.Failure(firebaseException.findExceptionMessage(exception)))
         }
+    }
+
+    override suspend fun getAverageFuelPrice(result: (Result<Any>) -> Unit) {
+        firestore.collection("averageFuelPrice").get().addOnSuccessListener { snapshot ->
+            val averageFuelPriceList = snapshot.toObjects(AverageFuelPrice::class.java)
+            val list = mutableListOf<AverageFuelPrice>()
+            for (averageFuelPrice in averageFuelPriceList) {
+                list.add(averageFuelPrice)
+                Log.d("TAG",averageFuelPrice.toString())
+            }
+            result.invoke(Result.Success(list))
+        }.addOnFailureListener { exception ->
+            result.invoke(Result.Failure(firebaseException.findExceptionMessage(exception)))
+        }
+
     }
 
     override suspend fun updateUser(user: User, result: (Result<String>) -> Unit) {

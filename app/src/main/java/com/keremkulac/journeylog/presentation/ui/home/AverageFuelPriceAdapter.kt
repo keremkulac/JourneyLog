@@ -46,7 +46,7 @@ class AverageFuelPriceAdapter : RecyclerView.Adapter<AverageFuelPriceAdapter.Vie
             val fuelPriceTitle = itemView.findViewById<TextView>(R.id.fuelPriceTitle)
             val fuelPrice = itemView.findViewById<TextView>(R.id.fuelPrice)
             fuelPriceTitle.text = averageFuelPrice.title
-            fuelPrice.text = averageFuelPrice.price.toString()
+            fuelPrice.text = averageFuelPrice.value
         }
     }
 }
