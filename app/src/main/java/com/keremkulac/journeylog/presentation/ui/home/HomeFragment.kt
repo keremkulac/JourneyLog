@@ -7,6 +7,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.databinding.FragmentHomeBinding
 import com.keremkulac.journeylog.domain.model.AverageFuelPrice
@@ -27,6 +33,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         onBackPressCancel()
         getCurrentUser()
         observeAverageFuelPrices()
+        setupBarChart()
+        loadBarChartData()
     }
 
 
@@ -82,4 +90,60 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         )
     }
 
+
+    private val dates = arrayOf("13/09/2023", "22/10/2023", "02/04/2023", "15/04/2023")
+    private fun setupBarChart() {
+        with(binding.barChart) {
+            description.isEnabled = false
+            setDragEnabled(true)
+            setVisibleXRangeMaximum(3f)
+            axisLeft.apply {
+                setDrawGridLines(false)
+                axisLineWidth = 2f
+                textSize = 10f
+            }
+            axisRight.apply {
+                setDrawGridLines(false)
+                isEnabled = false
+            }
+            xAxis.apply {
+                textSize = 10f
+                axisLineWidth = 2f
+                position = XAxis.XAxisPosition.BOTTOM
+                setCenterAxisLabels(true)
+                granularity = 1f
+                isGranularityEnabled = true
+                setDrawGridLines(false)
+                valueFormatter = IndexAxisValueFormatter(dates)
+                //  axisMinimum = 0.50f
+            }
+
+            xAxis.setDrawAxisLine(true)
+            xAxis.setDrawGridLinesBehindData(true)
+
+            animateY(2000)
+        }
+    }
+
+    private lateinit var barDataSet1: BarDataSet
+
+    private fun loadBarChartData() {
+        barDataSet1 = BarDataSet(getBarChartDataForSet(), "").apply {
+            color = requireContext().getColor(R.color.main)
+        }
+        barDataSet1.valueTextSize = 16f
+
+        val data = BarData(barDataSet1).apply {
+            barWidth = 0.15f
+        }
+
+        binding.barChart.data = data
+    }
+
+    private fun getBarChartDataForSet(): ArrayList<BarEntry> = arrayListOf(
+        BarEntry(1f, 12.7f),
+        BarEntry(2f, 32.3f),
+        BarEntry(3f, 17.9f),
+        BarEntry(4f, 47.6f)
+    )
 }

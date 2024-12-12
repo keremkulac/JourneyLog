@@ -338,10 +338,10 @@
                     android:id="@+id/paymentCardTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:text="@string/fuel_purchase_add_payment_card_title"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:layout_marginStart="16dp"
                     app:layout_constraintStart_toEndOf="@+id/paymentIcon"
                     app:layout_constraintTop_toTopOf="parent" />
 
