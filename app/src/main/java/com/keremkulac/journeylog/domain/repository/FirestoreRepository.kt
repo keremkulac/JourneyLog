@@ -20,7 +20,7 @@ interface FirestoreRepository {
 
     suspend fun getProfilePictureUrl(path: String, result: (Result<String>) -> Unit)
 
-    suspend fun getAllReceipts(result: (Result<Any>) -> Unit)
+    suspend fun getAllReceipts(email: String,result: (Result<Any>) -> Unit)
 
     suspend fun saveVehicle(vehicle: Vehicle, result: (Result<String>) -> Unit)
 

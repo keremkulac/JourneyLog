@@ -77,13 +77,15 @@ class FirestoreRepositoryImp @Inject constructor(
             }
     }
 
-    override suspend fun getAllReceipts(result: (Result<Any>) -> Unit) {
+    override suspend fun getAllReceipts(email: String, result: (Result<Any>) -> Unit) {
         firestore.collection("receipts").get()
             .addOnSuccessListener { snapshot ->
                 val receipt = snapshot.toObjects(Receipt::class.java)
                 val list = mutableListOf<Receipt>()
                 for (receiptObject in receipt) {
-                    list.add(receiptObject)
+                    if (receiptObject.email == email) {
+                        list.add(receiptObject)
+                    }
                 }
                 result.invoke(Result.Success(list))
 
@@ -121,7 +123,7 @@ class FirestoreRepositoryImp @Inject constructor(
             val list = mutableListOf<AverageFuelPrice>()
             for (averageFuelPrice in averageFuelPriceList) {
                 list.add(averageFuelPrice)
-                Log.d("TAG",averageFuelPrice.toString())
+                Log.d("TAG", averageFuelPrice.toString())
             }
             result.invoke(Result.Success(list))
         }.addOnFailureListener { exception ->

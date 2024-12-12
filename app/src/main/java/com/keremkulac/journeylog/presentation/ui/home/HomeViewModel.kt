@@ -5,7 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.mikephil.charting.data.BarEntry
 import com.google.firebase.auth.FirebaseUser
+import com.keremkulac.journeylog.domain.model.Receipt
+import com.keremkulac.journeylog.domain.usecase.GetAllReceiptsUseCase
 import com.keremkulac.journeylog.domain.usecase.GetAverageFuelPriceUseCase
 import com.keremkulac.journeylog.domain.usecase.GetCurrentUserUseCase
 import com.keremkulac.journeylog.domain.usecase.GetUserUseCase
@@ -18,7 +21,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getUserUseCase: GetUserUseCase,
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
-    private val getAverageFuelPriceUseCase: GetAverageFuelPriceUseCase
+    private val getAverageFuelPriceUseCase: GetAverageFuelPriceUseCase,
+    private val getAllReceiptsUseCase: GetAllReceiptsUseCase
 ) :
     ViewModel() {
     private val _userResult = MutableLiveData<Result<Any>>()
@@ -29,6 +33,10 @@ class HomeViewModel @Inject constructor(
 
     private val _averageFuelPrices = MutableLiveData<Result<Any>>()
     val averageFuelPrices: LiveData<Result<Any>> get() = _averageFuelPrices
+
+    private val _allReceipts = MutableLiveData<Result<Any>>()
+    val allReceipts: LiveData<Result<Any>> get() = _allReceipts
+
 
     init {
         getCurrentUser()
@@ -61,6 +69,39 @@ class HomeViewModel @Inject constructor(
                 _userResult.value = it
             }
         }
+    }
+
+    fun getAllReceipts(email: String) {
+        viewModelScope.launch {
+            _allReceipts.value = Result.Loading
+            getAllReceiptsUseCase.invoke(email) {
+                _allReceipts.value = it
+            }
+        }
+    }
+
+    fun getReceiptDates(receiptList: List<Receipt>): List<String> {
+        var count = 0
+        val days = mutableListOf<String>()
+        for (receipt in receiptList) {
+            if (count < 3) {
+                days.add(receipt.date)
+                count++
+            }
+        }
+        return days
+    }
+
+    fun getBarDataSet(receiptList: List<Receipt>): List<BarEntry> {
+        var count = 0
+        val barEntryList = mutableListOf<BarEntry>()
+        for (receipt in receiptList) {
+            if (count < 3) {
+                count++
+                barEntryList.add(BarEntry(count.toFloat(), receipt.liter.toFloat()))
+            }
+        }
+        return barEntryList
     }
 
     fun formatFullName(name: String, lastName: String): String {

@@ -4,6 +4,7 @@ package com.keremkulac.journeylog.presentation.ui.fuelPurchaseView
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.keremkulac.journeylog.R
@@ -11,6 +12,7 @@ import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.databinding.FragmentFuelPurchaseViewBinding
 import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.util.HandleResult
+import com.keremkulac.journeylog.util.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,11 +20,20 @@ class FuelPurchaseViewFragment :
     BaseFragment<FragmentFuelPurchaseViewBinding>(FragmentFuelPurchaseViewBinding::inflate) {
 
     private val viewModel by viewModels<FuelPurchaseViewViewModel>()
+    private lateinit var sharedViewModel: SharedViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
+        observeUser()
         navigateAddFuelPurchase()
         observeAllReceipts()
+    }
+
+    private fun observeUser() {
+        sharedViewModel.sharedData.observe(viewLifecycleOwner) { user ->
+            viewModel.getAllReceipts(user.email)
+        }
     }
 
     private fun navigateAddFuelPurchase() {

@@ -17,14 +17,11 @@ class FuelPurchaseViewViewModel @Inject constructor(
     private val _allReceipts = MutableLiveData<Result<Any>>()
     val allReceipts: LiveData<Result<Any>> get() = _allReceipts
 
-    init {
-        getAllReceipts()
-    }
 
-    private fun getAllReceipts() {
+    fun getAllReceipts(email: String) {
         viewModelScope.launch {
             _allReceipts.value = Result.Loading
-            getAllReceiptsUseCase.invoke {
+            getAllReceiptsUseCase.invoke(email) {
                 _allReceipts.value = it
             }
         }

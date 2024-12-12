@@ -16,6 +16,7 @@ import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.databinding.FragmentHomeBinding
 import com.keremkulac.journeylog.domain.model.AverageFuelPrice
+import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
@@ -26,15 +27,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private val viewModel by viewModels<HomeViewModel>()
     private lateinit var sharedViewModel: SharedViewModel
-
+    private lateinit var barDataSet: BarDataSet
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
         onBackPressCancel()
         getCurrentUser()
         observeAverageFuelPrices()
-        setupBarChart()
-        loadBarChartData()
+        observeAllReceipts()
+
     }
 
 
@@ -42,6 +43,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         viewModel.averageFuelPrices.observe(viewLifecycleOwner) { result ->
             HandleResult.handleResult(binding.progressBar, result, onSuccess = { data ->
                 val averageFuelPriceList = data as List<AverageFuelPrice>
+
                 setRecyclerView(ArrayList(averageFuelPriceList))
             })
         }
@@ -76,23 +78,22 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 binding.initials.text = viewModel.formatInitials(user.name, user.surname)
                 binding.userFullName.text = viewModel.formatFullName(user.name, user.surname)
                 sharedViewModel.updateData(user)
+                viewModel.getAllReceipts(user.email)
             })
         }
     }
 
-
-    private fun onBackPressCancel() {
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {}
-            }
-        )
+    private fun observeAllReceipts() {
+        viewModel.allReceipts.observe(viewLifecycleOwner) { result ->
+            HandleResult.handleResult(binding.progressBar, result, onSuccess = { data ->
+                val list = data as List<Receipt>
+                setupBarChart(viewModel.getReceiptDates(list))
+                loadBarChartData(viewModel.getBarDataSet(list))
+            })
+        }
     }
 
-
-    private val dates = arrayOf("13/09/2023", "22/10/2023", "02/04/2023", "15/04/2023")
-    private fun setupBarChart() {
+    private fun setupBarChart(dates: List<String>) {
         with(binding.barChart) {
             description.isEnabled = false
             setDragEnabled(true)
@@ -125,25 +126,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
-    private lateinit var barDataSet1: BarDataSet
-
-    private fun loadBarChartData() {
-        barDataSet1 = BarDataSet(getBarChartDataForSet(), "").apply {
+    private fun loadBarChartData(barEntryList : List<BarEntry>) {
+        barDataSet = BarDataSet(barEntryList, "").apply {
             color = requireContext().getColor(R.color.main)
         }
-        barDataSet1.valueTextSize = 16f
+        barDataSet.valueTextSize = 16f
 
-        val data = BarData(barDataSet1).apply {
+        val data = BarData(barDataSet).apply {
             barWidth = 0.15f
         }
 
         binding.barChart.data = data
     }
 
-    private fun getBarChartDataForSet(): ArrayList<BarEntry> = arrayListOf(
-        BarEntry(1f, 12.7f),
-        BarEntry(2f, 32.3f),
-        BarEntry(3f, 17.9f),
-        BarEntry(4f, 47.6f)
-    )
+    private fun onBackPressCancel() {
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {}
+            }
+        )
+    }
+
+
 }
