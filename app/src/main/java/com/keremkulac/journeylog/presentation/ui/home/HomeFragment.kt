@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
+import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -43,7 +44,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         viewModel.averageFuelPrices.observe(viewLifecycleOwner) { result ->
             HandleResult.handleResult(binding.progressBar, result, onSuccess = { data ->
                 val averageFuelPriceList = data as List<AverageFuelPrice>
-
                 setRecyclerView(ArrayList(averageFuelPriceList))
             })
         }
@@ -85,58 +85,56 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun observeAllReceipts() {
         viewModel.allReceipts.observe(viewLifecycleOwner) { result ->
-            HandleResult.handleResult(binding.progressBar, result, onSuccess = { data ->
-                val list = data as List<Receipt>
-                setupBarChart(viewModel.getReceiptDates(list))
-                loadBarChartData(viewModel.getBarDataSet(list))
-            })
+            HandleResult.handleResult(binding.progressBar, result,
+                onSuccess = { data ->
+                    val list = data as List<Receipt>
+                    loadBarChartData(viewModel.getBarDataSet(list), viewModel.getReceiptDates(list))
+                    binding.barChart.visibility = View.VISIBLE
+                    binding.lastFuelPurchaseTitle.visibility = View.VISIBLE
+                    binding.literTitle.visibility = View.VISIBLE
+                    binding.datesTitle.visibility = View.VISIBLE
+
+                })
         }
     }
 
-    private fun setupBarChart(dates: List<String>) {
-        with(binding.barChart) {
+    private fun loadBarChartData(barEntryList: List<BarEntry>, dates: List<String>) {
+        barDataSet = BarDataSet(barEntryList, "").apply {
+            color = requireContext().getColor(R.color.main)
+        }
+
+        val barData = BarData(barDataSet).apply {
+            barWidth = 0.15f
+        }
+
+        barDataSet.valueTextSize = 16f
+        binding.barChart.apply {
+            legend.isEnabled = false
+            data = barData
+            animateY(1500)
+            setFitBars(true)
             description.isEnabled = false
             setDragEnabled(true)
-            setVisibleXRangeMaximum(3f)
             axisLeft.apply {
                 setDrawGridLines(false)
                 axisLineWidth = 2f
-                textSize = 10f
+                textSize = 12f
             }
+
             axisRight.apply {
                 setDrawGridLines(false)
                 isEnabled = false
             }
             xAxis.apply {
-                textSize = 10f
+                textSize = 12f
+                granularity = 1f
+                setDrawGridLines(false)
                 axisLineWidth = 2f
                 position = XAxis.XAxisPosition.BOTTOM
-                setCenterAxisLabels(true)
-                granularity = 1f
-                isGranularityEnabled = true
-                setDrawGridLines(false)
                 valueFormatter = IndexAxisValueFormatter(dates)
-                //  axisMinimum = 0.50f
             }
 
-            xAxis.setDrawAxisLine(true)
-            xAxis.setDrawGridLinesBehindData(true)
-
-            animateY(2000)
         }
-    }
-
-    private fun loadBarChartData(barEntryList : List<BarEntry>) {
-        barDataSet = BarDataSet(barEntryList, "").apply {
-            color = requireContext().getColor(R.color.main)
-        }
-        barDataSet.valueTextSize = 16f
-
-        val data = BarData(barDataSet).apply {
-            barWidth = 0.15f
-        }
-
-        binding.barChart.data = data
     }
 
     private fun onBackPressCancel() {
@@ -147,6 +145,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
         )
     }
-
 
 }

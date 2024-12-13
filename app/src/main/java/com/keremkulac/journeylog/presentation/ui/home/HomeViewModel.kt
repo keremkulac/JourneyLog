@@ -97,8 +97,8 @@ class HomeViewModel @Inject constructor(
         val barEntryList = mutableListOf<BarEntry>()
         for (receipt in receiptList) {
             if (count < 3) {
-                count++
                 barEntryList.add(BarEntry(count.toFloat(), receipt.liter.toFloat()))
+                count++
             }
         }
         return barEntryList
