@@ -17,6 +17,7 @@ import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.util.CustomDialog
 import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
+import com.keremkulac.journeylog.util.VehicleItemsUtil
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.ArrayList
 import java.util.Locale
@@ -45,16 +46,9 @@ class VehicleCreateFragment :
 
     private fun createRecyclerView() {
         adapter = VehicleCreateAdapter()
-        val vehicleItems = listOf(
-            Vehicle(iconName = "ic_bike",illustrationName="illustration_motorcycle", title = "Motorsiklet"),
-            Vehicle(iconName = "ic_car",illustrationName="illustration_car", title = "Otomobil"),
-            Vehicle(iconName = "ic_suv", illustrationName="illustration_suv",title = "SUV"),
-            Vehicle(iconName = "ic_van", illustrationName="illustration_van",title = "Ticari"),
-            Vehicle(iconName = "ic_truck",illustrationName="illustration_truck", title = "Kamyonet")
-        )
         binding.selectVehicleRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        adapter.vehicleList = ArrayList(vehicleItems)
+        adapter.vehicleList = ArrayList(VehicleItemsUtil.getVehicleItems())
         binding.selectVehicleRecyclerView.adapter = adapter
     }
 

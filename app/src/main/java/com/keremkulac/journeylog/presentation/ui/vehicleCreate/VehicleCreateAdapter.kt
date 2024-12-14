@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.domain.model.Vehicle
+import com.keremkulac.journeylog.util.ResourceUtil
 
 class VehicleCreateAdapter : RecyclerView.Adapter<VehicleCreateAdapter.ViewHolder>() {
 
@@ -70,12 +71,7 @@ class VehicleCreateAdapter : RecyclerView.Adapter<VehicleCreateAdapter.ViewHolde
         fun bindItem(vehicle: Vehicle) {
             val icon: ImageView = itemView.findViewById(R.id.vehicleIcon)
             val title: TextView = itemView.findViewById(R.id.vehicleName)
-            val resourceId = itemView.resources.getIdentifier(
-                vehicle.iconName,
-                "drawable",
-                itemView.context.packageName
-            )
-            icon.setImageResource(resourceId)
+            icon.setImageResource(ResourceUtil.getResourceId(itemView.resources,vehicle.iconName!!,itemView.context.packageName))
             title.text = vehicle.title
 
         }

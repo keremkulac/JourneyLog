@@ -2,9 +2,12 @@ package com.keremkulac.journeylog.presentation.ui.vehicleDetail
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.navigation.fragment.navArgs
+import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentVehicleDetailBinding
 import com.keremkulac.journeylog.util.BaseFragment
+import com.keremkulac.journeylog.util.ResourceUtil
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,20 +25,12 @@ class VehicleDetailFragment :
         val vehicle = args.vehicle
 
         vehicle?.let {
-            val resourceIconId = resources.getIdentifier(
-                vehicle.iconName,
-                "drawable",
-                requireContext().packageName
-            )
-            val resourceIllustrationId = resources.getIdentifier(
-                vehicle.illustrationName,
-                "drawable",
-                requireContext().packageName
-            )
-            binding.vehicleIllustration.setImageResource(resourceIllustrationId)
+            val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_vehicle_illustration)
+            binding.vehicleIllustration.startAnimation(animation)
+            binding.vehicleIllustration.setImageResource(ResourceUtil.getResourceId(resources,it.illustrationName!!,requireContext().packageName))
             binding.vehicleTitle.text = it.title
             binding.licensePlate.text = it.licensePlate
-            binding.vehicleIcon.setImageResource(resourceIconId)
+            binding.vehicleIcon.setImageResource(ResourceUtil.getResourceId(resources,it.iconName!!,requireContext().packageName))
         }
     }
 
