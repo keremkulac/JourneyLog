@@ -70,7 +70,12 @@ class VehicleCreateAdapter : RecyclerView.Adapter<VehicleCreateAdapter.ViewHolde
         fun bindItem(vehicle: Vehicle) {
             val icon: ImageView = itemView.findViewById(R.id.vehicleIcon)
             val title: TextView = itemView.findViewById(R.id.vehicleName)
-            icon.setImageResource(vehicle.iconResId!!)
+            val resourceId = itemView.resources.getIdentifier(
+                vehicle.iconName,
+                "drawable",
+                itemView.context.packageName
+            )
+            icon.setImageResource(resourceId)
             title.text = vehicle.title
 
         }

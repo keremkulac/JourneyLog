@@ -107,7 +107,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             barWidth = 0.15f
         }
 
-        barDataSet.valueTextSize = 16f
+        barDataSet.valueTextSize = 14f
         binding.barChart.apply {
             legend.isEnabled = false
             data = barData

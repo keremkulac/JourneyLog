@@ -19,6 +19,7 @@ import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.ArrayList
+import java.util.Locale
 
 @AndroidEntryPoint
 class VehicleCreateFragment :
@@ -45,11 +46,11 @@ class VehicleCreateFragment :
     private fun createRecyclerView() {
         adapter = VehicleCreateAdapter()
         val vehicleItems = listOf(
-            Vehicle(iconResId = R.drawable.ic_bike, title = "Motorsiklet"),
-            Vehicle(iconResId = R.drawable.ic_car, title = "Otomobil"),
-            Vehicle(iconResId = R.drawable.ic_suv, title = "SUV"),
-            Vehicle(iconResId = R.drawable.ic_van, title = "Ticari"),
-            Vehicle(iconResId = R.drawable.ic_truck, title = "Kamyonet")
+            Vehicle(iconName = "ic_bike", title = "Motorsiklet"),
+            Vehicle(iconName = "ic_car", title = "Otomobil"),
+            Vehicle(iconName = "ic_suv", title = "SUV"),
+            Vehicle(iconName = "ic_van", title = "Ticari"),
+            Vehicle(iconName = "ic_truck", title = "Kamyonet")
         )
         binding.selectVehicleRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -75,7 +76,7 @@ class VehicleCreateFragment :
 
     private fun createVehicle() {
         binding.confirmVehicle.setOnClickListener {
-            val licensePlate = binding.licensePlate.text.toString()
+            val licensePlate = binding.licensePlate.text.toString().uppercase(Locale.getDefault())
             if (viewModel.validateLicensePlate(licensePlate, selectedVehicle)) {
                 user?.let {
                     selectedVehicle?.let { vehicle ->
@@ -126,7 +127,6 @@ class VehicleCreateFragment :
             }
         }
     }
-
 
 
 }

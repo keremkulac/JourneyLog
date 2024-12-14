@@ -60,10 +60,16 @@ class VehicleViewAdapter : RecyclerView.Adapter<VehicleViewAdapter.ViewHolder>()
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
         fun binds(vehicle: Vehicle) {
             val icon: ImageView = itemView.findViewById(R.id.vehicleIcon)
             val licensePlate: TextView = itemView.findViewById(R.id.licensePlate)
-            icon.setImageResource(vehicle.iconResId!!)
+            val resourceId = itemView.resources.getIdentifier(
+                vehicle.iconName,
+                "drawable",
+                itemView.context.packageName
+            )
+            icon.setImageResource(resourceId)
             licensePlate.text = vehicle.licensePlate
         }
     }
