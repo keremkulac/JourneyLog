@@ -24,13 +24,13 @@
 
             <ImageView
                 android:id="@+id/vehicleIllustration"
-                android:layout_width="150dp"
+                android:layout_width="200dp"
                 android:layout_height="150dp"
                 android:contentDescription="@string/todo"
-                android:src="@drawable/illustration_suv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/illustration_suv" />
 
             <TextView
                 android:id="@+id/licensePlate"
@@ -89,12 +89,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                tools:text="12674 KM"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/kilometerIcon"
                 app:layout_constraintStart_toEndOf="@+id/kilometerIcon"
-                app:layout_constraintTop_toTopOf="@id/kilometerIcon" />
+                app:layout_constraintTop_toTopOf="@id/kilometerIcon"
+                tools:text="12674 KM" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/divider2"
@@ -120,12 +120,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                tools:text="8.5 L"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/fuelPerKilometerIcon"
                 app:layout_constraintStart_toEndOf="@+id/fuelPerKilometerIcon"
-                app:layout_constraintTop_toTopOf="@id/fuelPerKilometerIcon" />
+                app:layout_constraintTop_toTopOf="@id/fuelPerKilometerIcon"
+                tools:text="8.5 L" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

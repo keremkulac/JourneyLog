@@ -22,14 +22,20 @@ class VehicleDetailFragment :
         val vehicle = args.vehicle
 
         vehicle?.let {
-            val resourceId = resources.getIdentifier(
+            val resourceIconId = resources.getIdentifier(
                 vehicle.iconName,
                 "drawable",
                 requireContext().packageName
             )
+            val resourceIllustrationId = resources.getIdentifier(
+                vehicle.illustrationName,
+                "drawable",
+                requireContext().packageName
+            )
+            binding.vehicleIllustration.setImageResource(resourceIllustrationId)
             binding.vehicleTitle.text = it.title
             binding.licensePlate.text = it.licensePlate
-            binding.vehicleIcon.setImageResource(resourceId)
+            binding.vehicleIcon.setImageResource(resourceIconId)
         }
     }
 
