@@ -3,6 +3,7 @@ package com.keremkulac.journeylog.presentation.ui.fuelPurchaseView
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -46,9 +47,10 @@ class FuelPurchaseViewFragment :
 
     private fun observeAllReceipts() {
         viewModel.allReceipts.observe(viewLifecycleOwner) { result ->
-            HandleResult.handleResult(binding.progressBar, result, onSuccess = { data ->
-                createRecyclerView(data as List<Receipt>)
-            })
+            HandleResult.handleResult(binding.progressBar, result,
+                onSuccess = { data ->
+                    createRecyclerView(data as List<Receipt>)
+                })
         }
     }
 

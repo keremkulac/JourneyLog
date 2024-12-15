@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#F7F8FA"
     tools:context=".presentation.ui.fuelPurchaseDetail.FuelPurchaseDetailFragment">
 
     <androidx.cardview.widget.CardView
@@ -16,11 +16,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#F7F8FA"
             android:padding="16dp">
 
             <TextView
@@ -41,13 +39,13 @@
                 android:layout_marginTop="8dp"
                 android:drawablePadding="8dp"
                 android:gravity="center"
-                tools:text="Benzin"
                 android:textColor="#7986CB"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:drawableStartCompat="@drawable/ic_gas2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/stationName" />
+                app:layout_constraintTop_toBottomOf="@+id/stationName"
+                tools:text="Benzin" />
 
             <TextView
                 android:id="@+id/fuelLiterPrice"
@@ -162,12 +160,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                tools:text="22/05/2021"
                 android:textSize="14sp"
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="@+id/dateTitle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/dateTitle" />
+                app:layout_constraintTop_toTopOf="@+id/dateTitle"
+                tools:text="22/05/2021" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

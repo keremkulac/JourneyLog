@@ -1,7 +1,6 @@
 package com.keremkulac.journeylog.domain.repository
 
 import android.net.Uri
-import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.keremkulac.journeylog.domain.model.AverageFuelPrice
@@ -123,7 +122,6 @@ class FirestoreRepositoryImp @Inject constructor(
             val list = mutableListOf<AverageFuelPrice>()
             for (averageFuelPrice in averageFuelPriceList) {
                 list.add(averageFuelPrice)
-                Log.d("TAG", averageFuelPrice.toString())
             }
             result.invoke(Result.Success(list))
         }.addOnFailureListener { exception ->

@@ -1,6 +1,7 @@
 package com.keremkulac.journeylog
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -27,10 +28,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setContentView(binding.root)
         setNavigationView()
-        observeBottomNavigationVisibility()
+        //observeBottomNavigationVisibility()
         setBottomNavigationVisibility()
         setToolbar()
-        observeToolbarVisibility()
+        // observeToolbarVisibility()
     }
 
     private fun setNavigationView() {
@@ -38,38 +39,33 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
         val navView: BottomNavigationView = binding.bottomNavigationView
+        navController.setGraph(R.navigation.nav_graph)
         navView.itemIconTintList = null
         navView.setupWithNavController(navController)
     }
 
-    private fun observeBottomNavigationVisibility() {
-        viewModel.bottomNavVisibility.observe(this) { visibility ->
-            binding.bottomNavigationView.visibility = visibility
-        }
-    }
-
     private fun setBottomNavigationVisibility() {
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            viewModel.bottomNavigationVisibility(destination.id)
-            viewModel.toolBarVisibility(destination.id)
-            toolBarSet(destination.id)
-        }
-    }
+        val hideBottomNavigationIds = setOf(
+            R.id.loginFragment,
+            R.id.signupFragment,
+            R.id.forgotPasswordFragment
+        )
 
-    private fun observeToolbarVisibility() {
-        viewModel.toolbarVisibility.observe(this) { visibility ->
-            if (visibility != View.VISIBLE) {
-                binding.toolbar.visibility = View.GONE
-            } else {
-                binding.toolbar.visibility = View.VISIBLE
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                in hideBottomNavigationIds -> setVisibility(bottomNavVisible = false, toolbarVisible = false)
+                R.id.homeFragment -> setVisibility(bottomNavVisible = true, toolbarVisible = false)
+                else -> {
+                    toolBarSet(destination.id)
+                    setVisibility(bottomNavVisible = true, toolbarVisible = true)
+                }
             }
         }
-
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
+    private fun setVisibility(bottomNavVisible: Boolean, toolbarVisible: Boolean) {
+        binding.bottomNavigationView.visibility = if (bottomNavVisible) View.VISIBLE else View.GONE
+        binding.toolbar.visibility = if (toolbarVisible) View.VISIBLE else View.GONE
     }
 
     private fun setToolbar() {
@@ -97,4 +93,11 @@ class MainActivity : AppCompatActivity() {
         ToolbarUtil.setToolbar(this, true, hasBackButton)
         binding.toolbarTitle.text = title
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+
 }

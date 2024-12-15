@@ -39,7 +39,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     }
 
-
     private fun observeAverageFuelPrices() {
         viewModel.averageFuelPrices.observe(viewLifecycleOwner) { result ->
             HandleResult.handleResult(binding.progressBar, result, onSuccess = { data ->
@@ -89,11 +88,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 onSuccess = { data ->
                     val list = data as List<Receipt>
                     loadBarChartData(viewModel.getBarDataSet(list), viewModel.getReceiptDates(list))
-                    binding.barChart.visibility = View.VISIBLE
-                    binding.lastFuelPurchaseTitle.visibility = View.VISIBLE
-                    binding.literTitle.visibility = View.VISIBLE
-                    binding.datesTitle.visibility = View.VISIBLE
-
+                    binding.lastFuelPurchaseCardView.visibility = View.VISIBLE
                 })
         }
     }
@@ -111,7 +106,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         binding.barChart.apply {
             legend.isEnabled = false
             data = barData
-            animateY(1500)
+            animateY(1000)
             setFitBars(true)
             description.isEnabled = false
             setDragEnabled(true)
