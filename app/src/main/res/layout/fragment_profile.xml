@@ -48,112 +48,121 @@
             app:layout_constraintTop_toBottomOf="@+id/userFullName"
             tools:text="keremkulac@gmail.com" />
 
-        <androidx.cardview.widget.CardView
+        <TextView
             android:id="@+id/profileEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:cardCornerRadius="16dp"
+            android:layout_gravity="center"
+            android:drawablePadding="8dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"
+            android:text="@string/profile_edit_profile_button_text"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:drawableEndCompat="@drawable/ic_enter"
+            app:drawableStartCompat="@drawable/ic_profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userEmail">
+            app:layout_constraintTop_toBottomOf="@+id/userEmail" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
-                android:padding="24dp"
-                android:text="@string/profile_edit_profile_button_text"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:drawableStartCompat="@drawable/ic_profile" />
-        </androidx.cardview.widget.CardView>
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileEdit" />
 
-        <androidx.cardview.widget.CardView
+        <TextView
             android:id="@+id/passwordSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:cardCornerRadius="16dp"
+            android:layout_gravity="center"
+            android:drawablePadding="8dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"
+            android:text="@string/profile_password_settings_button_text"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:drawableEndCompat="@drawable/ic_enter"
+            app:drawableStartCompat="@drawable/ic_profile_password"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileEdit">
+            app:layout_constraintTop_toBottomOf="@+id/divider1" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
-                android:padding="24dp"
-                android:text="@string/profile_password_settings_button_text"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:drawableStartCompat="@drawable/ic_profile_password" />
-        </androidx.cardview.widget.CardView>
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordSettings" />
 
-        <androidx.cardview.widget.CardView
+        <TextView
             android:id="@+id/appSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:cardCornerRadius="16dp"
+            android:layout_gravity="center"
+            android:drawablePadding="8dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"
+            android:text="@string/profile_app_settings_button_text"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:drawableEndCompat="@drawable/ic_enter"
+            app:drawableStartCompat="@drawable/ic_settings"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordSettings">
+            app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
-                android:padding="24dp"
-                android:text="@string/profile_app_settings_button_text"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:drawableStartCompat="@drawable/ic_settings" />
-        </androidx.cardview.widget.CardView>
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appSettings" />
 
-        <androidx.cardview.widget.CardView
+        <TextView
             android:id="@+id/vehicleSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:cardCornerRadius="16dp"
+            android:layout_gravity="center"
+            android:drawablePadding="8dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"
+            android:text="@string/profile_my_vehicles_button_text"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:drawableEndCompat="@drawable/ic_enter"
+            app:drawableStartCompat="@drawable/ic_car4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appSettings">
+            app:layout_constraintTop_toBottomOf="@id/divider3" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
-                android:padding="24dp"
-                android:text="@string/profile_my_vehicles_button_text"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:drawableStartCompat="@drawable/ic_profile_car" />
-        </androidx.cardview.widget.CardView>
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vehicleSettings" />
 
-
-        <androidx.cardview.widget.CardView
+        <TextView
             android:id="@+id/logout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginTop="16dp"
-            app:cardCornerRadius="16dp"
+            android:background="@drawable/button_logout_style"
+            android:gravity="center"
+            android:text="@string/profile_logout_button_text"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vehicleSettings">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
-                android:padding="24dp"
-                android:text="@string/profile_logout_button_text"
-                android:textColor="#F44336"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:drawableStartCompat="@drawable/ic_logout" />
-        </androidx.cardview.widget.CardView>
+            app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
         <ProgressBar
             android:id="@+id/progressBar"

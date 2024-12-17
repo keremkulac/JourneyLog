@@ -109,6 +109,9 @@
         <action
             android:id="@+id/action_profileFragment_to_vehicleViewFragment"
             app:destination="@id/vehicleViewFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_appSettingsFragment"
+            app:destination="@id/appSettingsFragment" />
 
     </fragment>
     <dialog
@@ -178,5 +181,10 @@
             app:argType="com.keremkulac.journeylog.domain.model.Receipt"
             app:nullable="true" />
     </fragment>
+    <fragment
+        android:id="@+id/appSettingsFragment"
+        android:name="com.keremkulac.journeylog.presentation.ui.appSettings.AppSettingsFragment"
+        android:label="fragment_app_settings"
+        tools:layout="@layout/fragment_app_settings" />
 
 </navigation>

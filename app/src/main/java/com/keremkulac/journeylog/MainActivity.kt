@@ -1,7 +1,6 @@
 package com.keremkulac.journeylog
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +18,6 @@ class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
     private lateinit var navController: NavController
-    private val viewModel by viewModels<MainActivityViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,10 +26,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setContentView(binding.root)
         setNavigationView()
-        //observeBottomNavigationVisibility()
         setBottomNavigationVisibility()
         setToolbar()
-        // observeToolbarVisibility()
     }
 
     private fun setNavigationView() {
@@ -53,7 +49,11 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                in hideBottomNavigationIds -> setVisibility(bottomNavVisible = false, toolbarVisible = false)
+                in hideBottomNavigationIds -> setVisibility(
+                    bottomNavVisible = false,
+                    toolbarVisible = false
+                )
+
                 R.id.homeFragment -> setVisibility(bottomNavVisible = true, toolbarVisible = false)
                 else -> {
                     toolBarSet(destination.id)
@@ -85,7 +85,8 @@ class MainActivity : AppCompatActivity() {
         R.id.fuelPurchaseAddFragment to Pair("Yakıt alımı", true),
         R.id.vehicleViewFragment to Pair("Araçlarım", true),
         R.id.vehicleDetailFragment to Pair("Araç detayı", true),
-        R.id.vehicleCreateFragment to Pair("Araç oluştur", true)
+        R.id.vehicleCreateFragment to Pair("Araç oluştur", true),
+        R.id.appSettingsFragment to Pair("Ayarlar", true)
     )
 
     private fun toolBarSet(destinationId: Int) {

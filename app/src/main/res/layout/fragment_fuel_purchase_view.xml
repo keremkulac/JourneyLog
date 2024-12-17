@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F7F8FA"
-    android:padding="16dp"
     tools:context=".presentation.ui.fuelPurchaseView.FuelPurchaseViewFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fuelPurchaseRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fab"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

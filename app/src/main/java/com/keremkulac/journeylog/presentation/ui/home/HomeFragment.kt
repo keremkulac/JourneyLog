@@ -7,7 +7,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
-import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -29,6 +28,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private val viewModel by viewModels<HomeViewModel>()
     private lateinit var sharedViewModel: SharedViewModel
     private lateinit var barDataSet: BarDataSet
+    private var toggle : Boolean = false
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
@@ -36,7 +36,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         getCurrentUser()
         observeAverageFuelPrices()
         observeAllReceipts()
-
+        lastFuelPurchaseCardViewToggle()
     }
 
     private fun observeAverageFuelPrices() {
@@ -88,7 +88,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 onSuccess = { data ->
                     val list = data as List<Receipt>
                     loadBarChartData(viewModel.getBarDataSet(list), viewModel.getReceiptDates(list))
-                    binding.lastFuelPurchaseCardView.visibility = View.VISIBLE
                 })
         }
     }
@@ -129,6 +128,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 valueFormatter = IndexAxisValueFormatter(dates)
             }
 
+        }
+    }
+
+    private fun lastFuelPurchaseCardViewToggle(){
+        binding.lastFuelPurchaseCardViewToggle.setOnClickListener {
+            if (!toggle){
+                binding.lastFuelPurchaseCardView.visibility = View.VISIBLE
+                binding.lastFuelPurchaseCardViewToggle.background = requireContext().getDrawable(R.drawable.toggle_style_active)
+                toggle = true
+            }else{
+                binding.lastFuelPurchaseCardView.visibility = View.GONE
+                binding.lastFuelPurchaseCardViewToggle.background = requireContext().getDrawable(R.drawable.toogle_style_deactive)
+                toggle = false
+            }
         }
     }
 

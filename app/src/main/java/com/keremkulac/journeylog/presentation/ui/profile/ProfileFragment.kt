@@ -30,6 +30,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         passwordChange()
         navigateUpdateProfile()
         vehicleSettings()
+        navigateSettings()
     }
 
     private fun observeSharedData() {
@@ -106,6 +107,12 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
     private fun navigateUpdateProfile() {
         binding.profileEdit.setOnClickListener {
             findNavController().navigate(R.id.action_profileFragment_to_editProfileFragment)
+        }
+    }
+
+    private fun navigateSettings(){
+        binding.appSettings.setOnClickListener {
+            findNavController().navigate(R.id.action_profileFragment_to_appSettingsFragment)
         }
     }
 }
