@@ -28,8 +28,8 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
 
     private fun register() {
         binding.register.setOnClickListener {
-            val email = binding.userEmail.text.toString().trim()
-            val password = binding.userPassword.text.toString().trim()
+            val email = binding.userEmailInput.text.toString().trim()
+            val password = binding.userPasswordInput.text.toString().trim()
             if (isValid()) {
                 viewModel.createUserWithEmailAndPassword(email, password)
             }
@@ -63,9 +63,9 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
     private fun getUser(): User {
         return User(
             id = "",
-            name = binding.userName.text.toString().trim(),
-            surname = binding.userSurname.text.toString().trim(),
-            email = binding.userEmail.text.toString().trim()
+            name = binding.userNameInput.text.toString().trim(),
+            surname = binding.userSurnameInput.text.toString().trim(),
+            email = binding.userEmailInput.text.toString().trim()
         )
     }
 
@@ -77,10 +77,10 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>(FragmentSignupBinding
 
     private fun isValid(): Boolean {
         val isValid = viewModel.validateInputs(
-            binding.userName.text.toString().trim(),
-            binding.userSurname.text.toString().trim(),
-            binding.userEmail.text.toString().trim(),
-            binding.userPassword.text.toString().trim()
+            binding.userNameInput.text.toString().trim(),
+            binding.userSurnameInput.text.toString().trim(),
+            binding.userEmailInput.text.toString().trim(),
+            binding.userPasswordInput.text.toString().trim()
         )
         return isValid
     }

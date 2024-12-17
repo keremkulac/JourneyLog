@@ -27,7 +27,7 @@ class ForgotPasswordFragment : BottomSheetDialogFragment(R.layout.fragment_forgo
 
     private fun forgotPassword() {
         binding.send.setOnClickListener {
-            val email = binding.userEmail.text.toString()
+            val email = binding.userEmailInput.text.toString()
             if (email.isNotEmpty() && viewModel.validateEmail(email)) {
                 showDialog(email)
             } else {

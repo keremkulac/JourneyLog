@@ -59,9 +59,9 @@ class EditProfileFragment : BottomSheetDialogFragment(R.layout.fragment_edit_pro
         sharedViewModel.sharedData.observe(viewLifecycleOwner) { user ->
             user?.let {
                 this.user = user
-                binding.userName.setText(it.name)
-                binding.userSurname.setText(it.surname)
-                binding.userEmail.setText(it.email)
+                binding.userNameInput.setText(it.name)
+                binding.userSurnameInput.setText(it.surname)
+                binding.userEmailInput.setText(it.email)
                 if (it.imageUri.isNotEmpty()) {
                     viewModel.getProfilePictureUrl(it.imageUri)
                 }
@@ -124,8 +124,8 @@ class EditProfileFragment : BottomSheetDialogFragment(R.layout.fragment_edit_pro
 
         return User(
             id = user!!.id,
-            name = binding.userName.text.toString().trim(),
-            surname = binding.userSurname.text.toString().trim(),
+            name = binding.userNameInput.text.toString().trim(),
+            surname = binding.userSurnameInput.text.toString().trim(),
             email = user.email,
             imageUri = user.imageUri
         )
@@ -160,8 +160,8 @@ class EditProfileFragment : BottomSheetDialogFragment(R.layout.fragment_edit_pro
 
     private fun isValid(): Boolean {
         val isValid = viewModel.validateInputs(
-            binding.userName.text.toString().trim(),
-            binding.userSurname.text.toString().trim()
+            binding.userNameInput.text.toString().trim(),
+            binding.userSurnameInput.text.toString().trim()
         )
         return isValid
     }

@@ -41,20 +41,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setBottomNavigationVisibility() {
-        val hideBottomNavigationIds = setOf(
-            R.id.loginFragment,
-            R.id.signupFragment,
-            R.id.forgotPasswordFragment
-        )
-
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                in hideBottomNavigationIds -> setVisibility(
+                in hideBottomNavIds -> setVisibility(
                     bottomNavVisible = false,
                     toolbarVisible = false
                 )
 
-                R.id.homeFragment -> setVisibility(bottomNavVisible = true, toolbarVisible = false)
+                in hideBottomNavShowToolBarIds -> setVisibility(
+                    bottomNavVisible = false,
+                    toolbarVisible = true
+                )
+
+                R.id.homeFragment -> setVisibility(
+                    bottomNavVisible = true,
+                    toolbarVisible = false
+                )
+
                 else -> {
                     toolBarSet(destination.id)
                     setVisibility(bottomNavVisible = true, toolbarVisible = true)
@@ -62,6 +65,19 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    private val hideBottomNavIds = setOf(
+        R.id.loginFragment,
+        R.id.signupFragment,
+        R.id.forgotPasswordFragment
+    )
+
+    private val hideBottomNavShowToolBarIds = setOf(
+        R.id.vehicleDetailFragment,
+        R.id.fuelPurchaseDetailFragment,
+        R.id.fuelPurchaseAddFragment,
+        R.id.vehicleCreateFragment
+    )
 
     private fun setVisibility(bottomNavVisible: Boolean, toolbarVisible: Boolean) {
         binding.bottomNavigationView.visibility = if (bottomNavVisible) View.VISIBLE else View.GONE

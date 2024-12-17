@@ -47,8 +47,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     private fun login() {
         binding.login.setOnClickListener {
-            val email = binding.editTextEmail.text.toString().trim()
-            val password = binding.editTextPasswordInput.text.toString().trim()
+            val email = binding.userEmailInput.text.toString().trim()
+            val password = binding.passwordInput.text.toString().trim()
             if (isValid()) {
                 viewModel.login(email, password)
             }
@@ -141,8 +141,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
     private fun isValid(): Boolean {
         val isValid = viewModel.validateInputs(
-            binding.editTextEmail.text.toString().trim(),
-            binding.editTextPasswordInput.text.toString().trim()
+            binding.userEmailInput.text.toString().trim(),
+            binding.passwordInput.text.toString().trim()
         )
         return isValid
     }

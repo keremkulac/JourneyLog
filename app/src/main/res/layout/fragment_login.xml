@@ -18,44 +18,58 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextEmail"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/userEmail"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/input_style"
-        android:drawableStart="@drawable/ic_user"
-        android:drawablePadding="8dp"
-        android:hint="@string/login_email"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:boxBackgroundColor="@color/white"
+        app:boxStrokeWidth="0.5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerIllustrations" />
+        app:layout_constraintTop_toBottomOf="@+id/registerIllustrations">
+
+        <EditText
+            android:id="@+id/userEmailInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_user"
+            android:drawablePadding="8dp"
+            android:hint="@string/login_email"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editTextPassword"
+        android:id="@+id/password"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:hintEnabled="false"
+        app:boxBackgroundColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
+        app:layout_constraintTop_toBottomOf="@+id/userEmail"
         app:passwordToggleEnabled="true">
 
         <EditText
-            android:id="@+id/editTextPasswordInput"
+            android:id="@+id/passwordInput"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@drawable/input_style"
             android:drawableStart="@drawable/ic_pass"
             android:drawablePadding="8dp"
             android:hint="@string/login_password"
             android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:maxLines="1"/>
+            android:maxLines="1"
+            android:paddingStart="0dp"
+            android:paddingEnd="0dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -66,7 +80,7 @@
         android:text="@string/remember_me_text"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <TextView
         android:id="@+id/forgotPassword"
@@ -96,13 +110,13 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="8dp"
-        app:drawableLeftCompat="@drawable/ic_google"
         android:letterSpacing="0"
         android:text="@string/login_with_google_button_text"
         android:textAllCaps="false"
         android:textColor="#737373"
         android:textSize="18sp"
         app:cornerRadius="60dp"
+        app:drawableLeftCompat="@drawable/ic_google"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
