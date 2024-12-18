@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F8FA"
-    android:padding="16dp"
+    android:background="#FFFFFF"
     tools:context=".presentation.ui.profile.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="16dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/profilePicture"
@@ -49,13 +49,25 @@
             tools:text="keremkulac@gmail.com" />
 
         <TextView
+            android:id="@+id/accountTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Hesap"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userEmail" />
+
+        <TextView
             android:id="@+id/profileEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="16dp"
             android:drawablePadding="8dp"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:text="@string/profile_edit_profile_button_text"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -63,12 +75,12 @@
             app:drawableStartCompat="@drawable/ic_profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userEmail" />
+            app:layout_constraintTop_toBottomOf="@+id/accountTitle" />
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/divider1"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.75dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileEdit" />
@@ -79,8 +91,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:drawablePadding="8dp"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:text="@string/profile_password_settings_button_text"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -90,22 +102,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider1" />
 
+
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/divider2"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.75dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/passwordSettings" />
+
+        <TextView
+            android:id="@+id/settingsTittle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Ayarlar"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
         <TextView
             android:id="@+id/appSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="16dp"
             android:drawablePadding="8dp"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:text="@string/profile_app_settings_button_text"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -113,12 +138,12 @@
             app:drawableStartCompat="@drawable/ic_settings"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/divider2" />
+            app:layout_constraintTop_toBottomOf="@+id/settingsTittle" />
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/divider3"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.75dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appSettings" />
@@ -129,8 +154,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:drawablePadding="8dp"
-            android:paddingTop="24dp"
-            android:paddingBottom="24dp"
+            android:fontFamily=""
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:text="@string/profile_my_vehicles_button_text"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -143,7 +169,7 @@
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/divider4"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.75dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vehicleSettings" />
@@ -152,7 +178,7 @@
             android:id="@+id/logout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/button_logout_style"
             android:gravity="center"
             android:text="@string/profile_logout_button_text"

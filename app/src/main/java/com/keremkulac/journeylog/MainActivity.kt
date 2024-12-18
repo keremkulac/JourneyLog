@@ -2,7 +2,6 @@ package com.keremkulac.journeylog
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -48,15 +47,12 @@ class MainActivity : AppCompatActivity() {
                     toolbarVisible = false
                 )
 
-                in hideBottomNavShowToolBarIds -> setVisibility(
-                    bottomNavVisible = false,
-                    toolbarVisible = true
-                )
+                in hideBottomNavShowToolBarIds -> {
+                    toolBarSet(destination.id)
+                    setVisibility(bottomNavVisible = false, toolbarVisible = true)
+                }
 
-                R.id.homeFragment -> setVisibility(
-                    bottomNavVisible = true,
-                    toolbarVisible = false
-                )
+                R.id.homeFragment -> setVisibility(bottomNavVisible = true, toolbarVisible = false)
 
                 else -> {
                     toolBarSet(destination.id)
@@ -97,7 +93,7 @@ class MainActivity : AppCompatActivity() {
         R.id.forgotPasswordFragment to Pair("Şifremi unuttum", true),
         R.id.updatePasswordFragment to Pair("Şifre güncelle", true),
         R.id.fuelPurchaseViewFragment to Pair("Yakıt alımlarım", true),
-        R.id.fuelPurchaseDetailFragment to Pair("Yakıt alımı detayı", true),
+        R.id.fuelPurchaseDetailFragment to Pair("Yakıt alım detayı", true),
         R.id.fuelPurchaseAddFragment to Pair("Yakıt alımı", true),
         R.id.vehicleViewFragment to Pair("Araçlarım", true),
         R.id.vehicleDetailFragment to Pair("Araç detayı", true),
