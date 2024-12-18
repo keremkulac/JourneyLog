@@ -232,8 +232,9 @@ class InputValidation @Inject constructor(private val context: Context) {
     }
 
     fun validateLicensePlate(
-        licensePlate: String?,
         vehicle: Vehicle?,
+        licensePlate: String?,
+        lastKm: String?,
         validationMessage: (String) -> Unit
     ): Boolean {
         return when {
@@ -253,9 +254,15 @@ class InputValidation @Inject constructor(private val context: Context) {
                 false
             }
 
+            lastKm.isNullOrEmpty() -> {
+                validationMessage(context.getString(R.string.validation_message_empty_vehicle_last_km))
+                false
+            }
 
             else -> true
         }
 
     }
+
+
 }

@@ -1,8 +1,6 @@
 package com.keremkulac.journeylog.presentation.ui.vehicleCreate
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -39,7 +37,6 @@ class VehicleCreateFragment :
         createRecyclerView()
         vehicleClick()
         observeValidation()
-        licensesPlateInfo()
         createVehicle()
         observeSaveVehicleResult()
     }
@@ -58,31 +55,22 @@ class VehicleCreateFragment :
         }
     }
 
-    private fun licensesPlateInfo() {
-        binding.licensePlateInfoIcon.setOnClickListener {
-            binding.licensePlateInfoText.visibility = View.VISIBLE
-            Handler(Looper.getMainLooper()).postDelayed({
-                binding.licensePlateInfoText.visibility = View.GONE
-            }, 2000)
-        }
-
-    }
-
     private fun createVehicle() {
         binding.confirmVehicle.setOnClickListener {
-            val licensePlate = binding.licensePlate.text.toString().uppercase(Locale.getDefault())
-            if (viewModel.validateLicensePlate(licensePlate, selectedVehicle)) {
+            val licensePlate = binding.vehicleLicensePlate.text.toString().uppercase(Locale.getDefault())
+            val lastKm = binding.vehicleLastKm.text.toString()
+            if (viewModel.validateLicensePlate(selectedVehicle, licensePlate, lastKm)) {
                 user?.let {
                     selectedVehicle?.let { vehicle ->
                         vehicle.userId = it.id
                         vehicle.licensePlate = licensePlate
+                        vehicle.lastKm = lastKm
                         showDialog(vehicle)
                     }
                 }
             }
         }
     }
-
 
     private fun observeValidation() {
         viewModel.validationMessage.observe(viewLifecycleOwner) { message ->

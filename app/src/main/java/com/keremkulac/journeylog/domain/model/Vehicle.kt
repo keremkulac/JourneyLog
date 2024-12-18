@@ -8,6 +8,7 @@ data class Vehicle(
     var userId: String? = "",
     val iconName: String? = "",
     val illustrationName: String? = "",
+    var lastKm: String? = "",
     val title: String? = "",
     var licensePlate: String? = ""
 ) : Parcelable
