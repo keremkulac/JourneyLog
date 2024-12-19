@@ -40,7 +40,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/fuelCardTitle1"
+                    android:id="@+id/fuelCardTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -211,14 +211,13 @@
                 android:padding="16dp">
 
                 <ImageView
-                    android:id="@+id/carİcon"
+                    android:id="@+id/carIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/imageview_background"
                     android:backgroundTint="#3949AB"
                     android:contentDescription="@string/todo"
                     android:padding="8dp"
-
                     android:src="@drawable/ic_car"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -232,7 +231,7 @@
                     android:text="@string/fuel_purchase_add_vehicle_card_title"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/carİcon"
+                    app:layout_constraintStart_toEndOf="@+id/carIcon"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -244,7 +243,7 @@
                     android:textSize="14sp"
                     android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/carİcon" />
+                    app:layout_constraintTop_toBottomOf="@+id/carIcon" />
 
                 <TextView
                     android:id="@+id/vehicleLicensePlateTitle"

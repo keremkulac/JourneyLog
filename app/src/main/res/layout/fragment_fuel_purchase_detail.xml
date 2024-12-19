@@ -5,12 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F7F8FA"
+    android:padding="16dp"
     tools:context=".presentation.ui.fuelPurchaseDetail.FuelPurchaseDetailFragment">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/fuelCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
         app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,156 +22,278 @@
             android:layout_height="match_parent"
             android:padding="16dp">
 
+            <ImageView
+                android:id="@+id/fuelİcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/imageview_background"
+                android:backgroundTint="#E53935"
+                android:contentDescription="@string/todo"
+                android:padding="8dp"
+                android:src="@drawable/ic_fuel2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fuelCardTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/fuel_purchase_add_fuel_card_title"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/fuelİcon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/stationNameTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="İstasyon"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fuelİcon" />
+
             <TextView
                 android:id="@+id/stationName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/stationNameTitle"
                 tools:text="Aygaz" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider1"
+                android:layout_width="match_parent"
+                android:layout_height="0.75dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/stationNameTitle" />
 
             <TextView
                 android:id="@+id/fuelTypeTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:drawablePadding="8dp"
-                android:gravity="center"
-                android:textColor="#7986CB"
-                android:textSize="14sp"
+                android:layout_marginTop="16dp"
+                android:text="Yakıt türü"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                app:drawableStartCompat="@drawable/ic_gas2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/stationName"
-                tools:text="Benzin" />
+                app:layout_constraintTop_toBottomOf="@+id/divider1" />
 
             <TextView
-                android:id="@+id/fuelLiterPrice"
+                android:id="@+id/fuelType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="14sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="@+id/fuelTypeTitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/fuelTypeTitle"
-                tools:text="12.5 ₺" />
+                tools:text="Benzin" />
 
             <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider1"
+                android:id="@+id/divider2"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.75dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fuelLiterPrice" />
+                app:layout_constraintTop_toBottomOf="@+id/fuelTypeTitle" />
 
             <TextView
                 android:id="@+id/literTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:drawablePadding="8dp"
-                android:gravity="center"
-                android:text="@string/fuel_purchase_liter_taken_title"
-                android:textColor="#7986CB"
-                android:textSize="14sp"
+                android:layout_marginTop="16dp"
+                android:text="Alınan litre"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                app:drawableStartCompat="@drawable/ic_fuel_pump2"
-                app:layout_constraintStart_toStartOf="@+id/fuelTypeTitle"
-                app:layout_constraintTop_toBottomOf="@+id/divider1" />
-
-            <TextView
-                android:id="@+id/liter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="14sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="@+id/literTitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/literTitle"
-                tools:text="22.1 L" />
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/liter" />
-
-            <TextView
-                android:id="@+id/totalPriceTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:drawablePadding="8dp"
-                android:gravity="center"
-                android:text="@string/fuel_purchase_total_price_title"
-                android:textColor="#7986CB"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:drawableStartCompat="@drawable/ic_turkish_lira"
-                app:layout_constraintStart_toStartOf="@+id/divider2"
                 app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
             <TextView
-                android:id="@+id/totalPrice"
+                android:id="@+id/fuelType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="14sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="@+id/totalPriceTitle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/totalPriceTitle"
-                tools:text="651.6 ₺ " />
-
-            <com.google.android.material.divider.MaterialDivider
-                android:id="@+id/divider3"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/totalPrice" />
-
-            <TextView
-                android:id="@+id/dateTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:drawablePadding="8dp"
-                android:gravity="center"
-                android:text="@string/fuel_purchase_date_title"
-                android:textColor="#7986CB"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:drawableStartCompat="@drawable/ic_date"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider3" />
-
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="14sp"
-                android:textStyle="normal"
-                app:layout_constraintBottom_toBottomOf="@+id/dateTitle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/dateTitle"
-                tools:text="22/05/2021" />
+                app:layout_constraintTop_toTopOf="@+id/literTitle"
+                tools:text="15.7 L" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/vehicleCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fuelCard">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/carIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/imageview_background"
+                android:backgroundTint="#3949AB"
+                android:contentDescription="@string/todo"
+                android:padding="8dp"
+                android:src="@drawable/ic_car"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/vehicleCardTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/fuel_purchase_add_vehicle_card_title"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/carIcon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/vehicleLicensePlateTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Plaka"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/carIcon" />
+
+            <TextView
+                android:id="@+id/vehicleLicensePlate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/vehicleLicensePlateTitle"
+                tools:text="14 ABZ 951" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider1"
+                android:layout_width="match_parent"
+                android:layout_height="0.75dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vehicleLicensePlateTitle" />
+
+            <TextView
+                android:id="@+id/vehicleKmTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Kilometre"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider1" />
+
+            <TextView
+                android:id="@+id/vehicleKm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/vehicleKmTitle"
+                tools:text="15451" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/paymentCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vehicleCard">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/paymentIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/imageview_background"
+                android:backgroundTint="#FDD835"
+                android:contentDescription="@string/todo"
+                android:padding="8dp"
+                android:src="@drawable/ic_payment"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/paymentCardTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/fuel_purchase_add_payment_card_title"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/paymentIcon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/receiptTotalTaxTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/add_fuel_purchase_tax"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/paymentIcon" />
+
+            <TextView
+                android:id="@+id/receiptTotalTax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/receiptTotalTaxTitle"
+                tools:text="170TL" />
+
+            <TextView
+                android:id="@+id/receiptTotalPriceTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/add_fuel_purchase_total"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/receiptTotalTax" />
+
+            <TextView
+                android:id="@+id/receiptTotalPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/receiptTotalPriceTitle"
+                tools:text="3500TL" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
 
