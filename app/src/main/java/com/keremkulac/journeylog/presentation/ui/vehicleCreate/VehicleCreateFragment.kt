@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentVehicleCreateBinding
@@ -30,6 +31,7 @@ class VehicleCreateFragment :
     private var selectedVehicle: Vehicle? = null
     private var user: User? = null
     private val viewModel by viewModels<VehicleCreateViewModel>()
+    private val args by navArgs<VehicleCreateFragmentArgs>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
@@ -57,7 +59,8 @@ class VehicleCreateFragment :
 
     private fun createVehicle() {
         binding.confirmVehicle.setOnClickListener {
-            val licensePlate = binding.vehicleLicensePlate.text.toString().uppercase(Locale.getDefault())
+            val licensePlate =
+                binding.vehicleLicensePlate.text.toString().uppercase(Locale.getDefault())
             val lastKm = binding.vehicleLastKm.text.toString()
             if (viewModel.validateLicensePlate(selectedVehicle, licensePlate, lastKm)) {
                 user?.let {
@@ -105,7 +108,11 @@ class VehicleCreateFragment :
                 getString(R.string.dialog_save_vehicle_negative_button_text)
             ) {
                 viewModel.saveVehicle(vehicle)
-                findNavController().navigate(R.id.action_vehicleCreateFragment_to_vehicleViewFragment)
+                if (args.fromAddPurchase) {
+                    findNavController().navigate(R.id.action_vehicleCreateFragment_to_fuelPurchaseAddFragment)
+                } else {
+                    findNavController().navigate(R.id.action_vehicleCreateFragment_to_vehicleViewFragment)
+                }
             }
         }
     }

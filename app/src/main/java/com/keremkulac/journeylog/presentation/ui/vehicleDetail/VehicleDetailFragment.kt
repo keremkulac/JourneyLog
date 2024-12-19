@@ -30,6 +30,7 @@ class VehicleDetailFragment :
             binding.vehicleIllustration.setImageResource(ResourceUtil.getResourceId(resources,it.illustrationName!!,requireContext().packageName))
             binding.vehicleTitle.text = it.title
             binding.licensePlate.text = it.licensePlate
+            binding.kilometerTitle.text = it.lastKm
             binding.vehicleIcon.setImageResource(ResourceUtil.getResourceId(resources,it.iconName!!,requireContext().packageName))
         }
     }

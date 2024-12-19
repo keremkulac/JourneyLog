@@ -40,6 +40,7 @@ class FuelPurchaseAddFragment :
         sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
         observeSaveResult()
         observeCurrentUser()
+        observeAllVehicles()
         observeAndSetValues()
         getSelectedFuelType()
         setDateTime()
@@ -48,7 +49,8 @@ class FuelPurchaseAddFragment :
         selectCompany()
         selectLicensePlate()
         observeValidation()
-        observeAllVehicles()
+        createVehicle()
+
     }
 
     private fun getSelectedFuelType() {
@@ -122,7 +124,25 @@ class FuelPurchaseAddFragment :
     }
 
     private fun createLicensePlateList(list: List<Vehicle>): List<String> {
+        checkList(list)
         return list.map { it.licensePlate!! }
+    }
+
+    private fun checkList(list: List<Vehicle>) {
+        if (list.isEmpty()) {
+            binding.createVehicle.visibility = View.VISIBLE
+            binding.vehicleLicensePlateTitle.visibility = View.GONE
+            binding.licensePlateLayout.visibility = View.GONE
+            binding.vehicleKmTitle.visibility = View.GONE
+            binding.vehicleKmLayout.visibility = View.GONE
+
+        } else {
+            binding.createVehicle.visibility = View.GONE
+            binding.vehicleLicensePlateTitle.visibility = View.VISIBLE
+            binding.licensePlateLayout.visibility = View.VISIBLE
+            binding.vehicleKmTitle.visibility = View.VISIBLE
+            binding.vehicleKmLayout.visibility = View.VISIBLE
+        }
     }
 
     private fun observeSaveResult() {
@@ -216,6 +236,16 @@ class FuelPurchaseAddFragment :
             time = dateTime[1]
         )
         return isValid
+    }
+
+    private fun createVehicle() {
+        binding.createVehicle.setOnClickListener {
+            findNavController().navigate(
+                FuelPurchaseAddFragmentDirections.actionFuelPurchaseAddFragmentToVehicleCreateFragment(
+                    true
+                )
+            )
+        }
     }
 
 }

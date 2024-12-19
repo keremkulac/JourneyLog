@@ -81,6 +81,14 @@
         <action
             android:id="@+id/action_fuelPurchaseAddFragment_to_fuelPurchaseViewFragment"
             app:destination="@id/fuelPurchaseViewFragment" />
+        <action
+            android:id="@+id/action_fuelPurchaseAddFragment_to_vehicleCreateFragment"
+            app:destination="@id/vehicleCreateFragment" />
+        <argument
+            android:name="createdVehicle"
+            app:argType="com.keremkulac.journeylog.domain.model.Vehicle"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <dialog
         android:id="@+id/forgotPasswordFragment"
@@ -146,6 +154,13 @@
             app:destination="@id/vehicleViewFragment"
             app:popUpTo="@id/vehicleViewFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_vehicleCreateFragment_to_fuelPurchaseAddFragment"
+            app:destination="@id/fuelPurchaseAddFragment" />
+        <argument
+            android:name="fromAddPurchase"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/vehicleViewFragment"

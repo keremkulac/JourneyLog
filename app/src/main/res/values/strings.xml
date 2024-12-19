@@ -104,6 +104,7 @@
     <string name="warning_passwords_must_be_same_message">Şifreler aynı olmalıdır</string>
     <string name="warning_camera_permission_required_message">Kamera izni gereklidir</string>
     <string name="warning_gallery_permission_required_message">Galeri izni gereklidir</string>
+    <string name="warning_please_create_vehicle">Henüz bir araç oluşturulmamış.<b>Lütfen bir araç oluştur</b></string>
 
     <string name="warning_receipt_id_not_empty_message">ID alınamadı</string>
     <string name="warning_receipt_email_not_empty_message">Email alınamadı</string>
