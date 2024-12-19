@@ -25,6 +25,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#0DE53935"
                 android:padding="16dp">
 
                 <ImageView
@@ -34,7 +35,7 @@
                     android:background="@drawable/imageview_background"
                     android:backgroundTint="#E53935"
                     android:contentDescription="@string/todo"
-                    android:padding="8dp"
+                    android:padding="10dp"
                     android:src="@drawable/ic_fuel2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -47,6 +48,7 @@
                     android:text="@string/fuel_purchase_add_fuel_card_title"
                     android:textSize="18sp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/fuelİcon"
                     app:layout_constraintStart_toEndOf="@+id/fuelİcon"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -208,6 +210,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#0D5E35B1"
                 android:padding="16dp">
 
                 <ImageView
@@ -217,7 +220,7 @@
                     android:background="@drawable/imageview_background"
                     android:backgroundTint="#3949AB"
                     android:contentDescription="@string/todo"
-                    android:padding="8dp"
+                    android:padding="10dp"
                     android:src="@drawable/ic_car"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -231,6 +234,7 @@
                     android:text="@string/fuel_purchase_add_vehicle_card_title"
                     android:textSize="18sp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/carIcon"
                     app:layout_constraintStart_toEndOf="@+id/carIcon"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -328,6 +332,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#0DFDD835"
                 android:padding="16dp">
 
                 <ImageView
@@ -337,7 +342,7 @@
                     android:background="@drawable/imageview_background"
                     android:backgroundTint="#FDD835"
                     android:contentDescription="@string/todo"
-                    android:padding="8dp"
+                    android:padding="10dp"
                     android:src="@drawable/ic_payment"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -350,6 +355,7 @@
                     android:text="@string/fuel_purchase_add_payment_card_title"
                     android:textSize="18sp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/paymentIcon"
                     app:layout_constraintStart_toEndOf="@+id/paymentIcon"
                     app:layout_constraintTop_toTopOf="parent" />
 

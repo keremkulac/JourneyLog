@@ -21,14 +21,16 @@ class FuelPurchaseDetailFragment :
         val receipt = args.receipt
         receipt?.let {
             binding.stationName.text = receipt.stationName
+            binding.fuelType.text = receipt.fuelType
             requireContext().apply {
-                binding.fuelTypeTitle.text = receipt.fuelType
-                binding.fuelLiterPrice.text =
-                    getString(R.string.fuel_liter_price).format(receipt.literPrice)
+                binding.literPrice.text = getString(R.string.fuel_liter_price).format(receipt.literPrice)
                 binding.liter.text = getString(R.string.liters_taken).format(receipt.liter)
-                binding.totalPrice.text = getString(R.string.total_price).format(receipt.total)
+                binding.receiptTotalPrice.text = getString(R.string.total_price).format(receipt.total)
+                binding.receiptTotalTax.text = getString(R.string.total_price).format(receipt.tax)
             }
-            binding.date.text = receipt.date
+            binding.vehicleLicensePlate.text = receipt.vehicleLicensePlate
+            binding.vehicleKm.text = receipt.vehicleLastKm
+            //   binding.date.text = receipt.date
 
         }
     }

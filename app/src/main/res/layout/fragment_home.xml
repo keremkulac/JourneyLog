@@ -176,7 +176,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/lastFuelPurchaseCardViewToggle"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:visibility="visible"
             app:cardCornerRadius="16dp"
@@ -186,19 +186,38 @@
             app:layout_constraintTop_toBottomOf="@+id/indicator"
             app:layout_constraintVertical_bias="0.0">
 
-            <TextView
-                android:id="@+id/lastFuelPurchaseTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
-                android:gravity="center"
-                android:padding="16dp"
-                android:text="Son yakıt alımlarım"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:drawableStartCompat="@drawable/ic_fuel4"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#0DE53935">
+
+                <ImageView
+                    android:id="@+id/fuelİcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/imageview_background"
+                    android:backgroundTint="#E53935"
+                    android:contentDescription="@string/todo"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_fuel2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/lastFuelPurchaseTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/home_last_fuel_purchase_title"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/fuelİcon"
+                    app:layout_constraintTop_toBottomOf="@+id/fuelİcon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -227,7 +246,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:text="Litre"
+                    android:text="@string/home_bar_chart_liter_title"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -247,7 +266,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
                     android:gravity="top"
-                    android:text="Tarih"
+                    android:text="@string/home_bar_chart_date_title"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/barChart"
                     app:layout_constraintEnd_toEndOf="parent"

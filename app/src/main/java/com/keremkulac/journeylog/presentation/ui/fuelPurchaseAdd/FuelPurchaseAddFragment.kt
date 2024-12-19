@@ -55,7 +55,9 @@ class FuelPurchaseAddFragment :
 
     private fun getSelectedFuelType() {
         binding.receiptPurchasedFuelType.setOnCheckedStateChangeListener { group, checkedIds ->
-            selectedType = group.findViewById<Chip>(checkedIds[0]).text.toString()
+            if (checkedIds.isNotEmpty()) {
+                selectedType = group.findViewById<Chip>(checkedIds[0]).text.toString()
+            }
         }
     }
 

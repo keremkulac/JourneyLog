@@ -141,9 +141,9 @@
     <string name="fuel_purchase_liter_taken_title">Alınan litre</string>
     <string name="warning_empty_list">Henüz bir kayıt yapılmadı</string>
     <string name="item_fuel_purchase_view_button_text">Görüntüle</string>
-    <string name="fuel_purchase_add_payment_card_title">Ödeme bilgileri</string>
-    <string name="fuel_purchase_add_fuel_card_title">Yakıt bilgileri</string>
-    <string name="fuel_purchase_add_vehicle_card_title">Araç bilgileri</string>
+    <string name="fuel_purchase_add_payment_card_title">Ödeme \nBilgileri</string>
+    <string name="fuel_purchase_add_fuel_card_title">Yakıt \nBilgileri</string>
+    <string name="fuel_purchase_add_vehicle_card_title">Araç \nBilgileri</string>
     <string name="fuel_purchase_add_vehicle_km_title">Araç kilometre</string>
     <string name="fuel_purchase_add_license_plate_title">Plaka</string>
 
@@ -163,5 +163,20 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fuel_purchase_detail_station_name_title">İstasyon</string>
+    <string name="fuel_purchase_detail_fuel_type_title">Yakıt türü</string>
+    <string name="fuel_purchase_detail_liter_price_title">Litre fiyatı</string>
+    <string name="fuel_purchase_detail_liter_title">Alınan litre</string>
+    <string name="fuel_purchase_detail_license_plate_title">Plaka</string>
+    <string name="fuel_purchase_detail_kilometer_title">Kilometre</string>
+    <string name="fuel_purchase_detail_tax_title">KDV</string>
+    <string name="fuel_purchase_detail_total_title">Toplam</string>
+    <string name="fuel_purchase_detail_payment_card_title">Ödeme \nBilgileri</string>
+    <string name="fuel_purchase_detail_vehicle_card_title">Araç \nBilgileri</string>
+    <string name="fuel_purchase_detail_fuel_card_title">Yakıt \nBilgileri</string>
+    <string name="vehicle_select_vehicle_kilometer_title">Araç kilometre</string>
+    <string name="home_last_fuel_purchase_title">Son yakıt alımlarım</string>
+    <string name="home_bar_chart_liter_title">Litre</string>
+    <string name="home_bar_chart_date_title">Tarih</string>
 
 </resources>
