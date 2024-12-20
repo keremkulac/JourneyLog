@@ -2,6 +2,8 @@ package com.keremkulac.journeylog.presentation.ui.vehicleCreate
 
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -25,11 +27,11 @@ import java.util.Locale
 class VehicleCreateFragment :
     BaseFragment<FragmentVehicleCreateBinding>(FragmentVehicleCreateBinding::inflate) {
 
-
     private lateinit var adapter: VehicleCreateAdapter
     private lateinit var sharedViewModel: SharedViewModel
     private var selectedVehicle: Vehicle? = null
     private var user: User? = null
+    private var selectedFuelType : String? = null
     private val viewModel by viewModels<VehicleCreateViewModel>()
     private val args by navArgs<VehicleCreateFragmentArgs>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,7 +43,10 @@ class VehicleCreateFragment :
         observeValidation()
         createVehicle()
         observeSaveVehicleResult()
+        createFuelType()
+        selectFuelType()
     }
+
 
     private fun createRecyclerView() {
         adapter = VehicleCreateAdapter()
@@ -57,17 +62,27 @@ class VehicleCreateFragment :
         }
     }
 
+    private fun createFuelType() {
+        val adapter =
+            ArrayAdapter(
+                requireContext(),
+                R.layout.item_dropdown,
+                resources.getStringArray(R.array.fuelTypes)
+            )
+        binding.vehicleFuelType.setAdapter(adapter)
+    }
+
     private fun createVehicle() {
         binding.confirmVehicle.setOnClickListener {
-            val licensePlate =
-                binding.vehicleLicensePlate.text.toString().uppercase(Locale.getDefault())
+            val licensePlate = binding.vehicleLicensePlate.text.toString().uppercase(Locale.getDefault())
             val lastKm = binding.vehicleLastKm.text.toString()
-            if (viewModel.validateLicensePlate(selectedVehicle, licensePlate, lastKm)) {
+            if (viewModel.validateLicensePlate(selectedVehicle, licensePlate, lastKm,selectedFuelType)) {
                 user?.let {
                     selectedVehicle?.let { vehicle ->
                         vehicle.userId = it.id
                         vehicle.licensePlate = licensePlate
                         vehicle.lastKm = lastKm
+                        vehicle.vehicleFuelType = selectedFuelType
                         showDialog(vehicle)
                     }
                 }
@@ -96,6 +111,13 @@ class VehicleCreateFragment :
                     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 })
         }
+    }
+
+    private fun selectFuelType(){
+        binding.vehicleFuelType.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, _, position, _ ->
+                selectedFuelType = parent.getItemAtPosition(position).toString()
+            }
     }
 
     private fun showDialog(vehicle: Vehicle) {

@@ -24,8 +24,8 @@ class VehicleCreateViewModel @Inject constructor(
     private val _validationMessage = MutableLiveData<String>()
     val validationMessage: LiveData<String> get() = _validationMessage
 
-    fun validateLicensePlate(vehicle: Vehicle?,licensePlate: String?,lastKm: String?): Boolean {
-        return inputValidation.validateLicensePlate(vehicle,licensePlate,lastKm) { message ->
+    fun validateLicensePlate(vehicle: Vehicle?,licensePlate: String?,lastKm: String?,selectedFuelType : String?): Boolean {
+        return inputValidation.validateLicensePlate(vehicle,licensePlate,lastKm,selectedFuelType) { message ->
             _validationMessage.value = message
         }
     }

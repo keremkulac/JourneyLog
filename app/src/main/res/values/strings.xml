@@ -130,7 +130,8 @@
     <string name="validation_message_valid_license_plate">Lütfen geçerli bir plaka giriniz</string>
     <string name="validation_message_empty_vehicle">Lütfen bir araç seçiniz"</string>
     <string name="validation_message_empty_vehicle_last_km">Araç kilometresini giriniz"</string>
-    <string name="vehicle_select_vehicle_select_title">Araç türünüzü seçiniz</string>
+    <string name="validation_message_empty_fuel_type">Lütfen bir yakıt türü seçiniz</string>
+    <string name="vehicle_select_vehicle_select_title">Araç \nSeçiniz</string>
     <string name="vehicle_select_license_plate_title">Plaka giriniz</string>
     <string name="vehicle_select_license_plate_info">Plakayı girerken boşluk koymayı unutmayın</string>
     <string name="vehicle_select_license_plate_country">TR</string>
@@ -160,6 +161,12 @@
         <item>Petrol Ofisi</item>
         <item>Türkiye Petrolleri</item>
 
+    </string-array>
+
+    <string-array name="fuelTypes">
+        <item>LPG</item>
+        <item>Benzin</item>
+        <item>Dizel</item>
     </string-array>
 
     <string name="fuel_purchase_detail_station_name_title">İstasyon</string>

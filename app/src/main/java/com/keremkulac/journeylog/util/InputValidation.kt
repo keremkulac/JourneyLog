@@ -235,6 +235,7 @@ class InputValidation @Inject constructor(private val context: Context) {
         vehicle: Vehicle?,
         licensePlate: String?,
         lastKm: String?,
+        selectedFuelType: String?,
         validationMessage: (String) -> Unit
     ): Boolean {
         return when {
@@ -251,6 +252,11 @@ class InputValidation @Inject constructor(private val context: Context) {
 
             licensePlate.length < 9 || licensePlate.length > 10 -> {
                 validationMessage(context.getString(R.string.validation_message_valid_license_plate))
+                false
+            }
+
+            selectedFuelType.isNullOrEmpty() -> {
+                validationMessage(context.getString(R.string.validation_message_empty_fuel_type))
                 false
             }
 
