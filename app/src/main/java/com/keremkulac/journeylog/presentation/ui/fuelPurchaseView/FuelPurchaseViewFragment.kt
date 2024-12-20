@@ -48,7 +48,9 @@ class FuelPurchaseViewFragment :
         viewModel.allReceipts.observe(viewLifecycleOwner) { result ->
             HandleResult.handleResult(binding.progressBar, result,
                 onSuccess = { data ->
-                    createRecyclerView(data as List<Receipt>)
+                    val list = data as List<Receipt>
+                    createRecyclerView(list)
+                    binding.totalPrice.text = getString(R.string.fuel_purchase_view_total_price).format(viewModel.calculateTotalPrice(list))
                 })
         }
     }

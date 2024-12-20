@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.domain.usecase.GetAllReceiptsUseCase
 import com.keremkulac.journeylog.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,5 +26,9 @@ class FuelPurchaseViewViewModel @Inject constructor(
                 _allReceipts.value = it
             }
         }
+    }
+
+    fun calculateTotalPrice(list: List<Receipt>): Double {
+        return list.sumOf { it.total.replace(",",".").toDouble() }
     }
 }
