@@ -136,10 +136,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             if (!toggle){
                 binding.lastFuelPurchaseCardView.visibility = View.VISIBLE
                 binding.lastFuelPurchaseCardViewToggle.background = requireContext().getDrawable(R.drawable.toggle_style_active)
+                binding.openFuelPurchaseCardView.setImageDrawable(requireContext().getDrawable(R.drawable.ic_close))
                 toggle = true
             }else{
                 binding.lastFuelPurchaseCardView.visibility = View.GONE
                 binding.lastFuelPurchaseCardViewToggle.background = requireContext().getDrawable(R.drawable.toogle_style_deactive)
+                binding.openFuelPurchaseCardView.setImageDrawable(requireContext().getDrawable(R.drawable.ic_open))
                 toggle = false
             }
         }
