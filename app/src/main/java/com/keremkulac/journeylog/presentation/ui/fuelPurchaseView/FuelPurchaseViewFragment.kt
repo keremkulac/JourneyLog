@@ -15,6 +15,7 @@ import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentFuelPurchaseViewBinding
 import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.util.BaseFragment
+import com.keremkulac.journeylog.util.FuelType
 import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,27 +51,47 @@ class FuelPurchaseViewFragment :
     }
 
     private fun setPieChart(receiptList: List<Receipt>) {
-        val colors = ArrayList<Int>()
-        val pieEntries = ArrayList<PieEntry>()
-        colors.add(Color.parseColor("#FF6361"))
-        colors.add(Color.parseColor("#58508D"))
-        colors.add(Color.parseColor("#FFA600"))
-        pieEntries.add(viewModel.calculateFuelTypePrice(receiptList, "Benzin"))
-        pieEntries.add(viewModel.calculateFuelTypePrice(receiptList, "LPG"))
-        pieEntries.add(viewModel.calculateFuelTypePrice(receiptList, "Dizel"))
-        val pieDataSet = PieDataSet(pieEntries, "")
-        pieDataSet.apply {
+        val pieEntries = createPieEntries(receiptList)
+        val pieDataSet = createPieDataSet(pieEntries)
+        val pieData = createPieData(pieDataSet)
+
+        setupPieChart(pieData)
+    }
+
+    private fun getChartColors(): List<Int> = listOf(
+        Color.parseColor("#FF6361"),
+        Color.parseColor("#58508D"),
+        Color.parseColor("#FFA600")
+    )
+
+    private fun createPieDataSet(entries: ArrayList<PieEntry>): PieDataSet {
+        return PieDataSet(entries, "").apply {
             valueTextSize = 12f
-            this.colors = colors
+            colors = getChartColors()
             valueTextColor = Color.BLACK
         }
-        val pieData = PieData(pieDataSet)
-        pieData.setDrawValues(true)
+    }
+
+    private fun createPieData(dataSet: PieDataSet): PieData {
+        return PieData(dataSet).apply {
+            setDrawValues(true)
+        }
+    }
+
+    private fun setupPieChart(pieData: PieData) {
         binding.pieChart.apply {
             description.isEnabled = false
             setDrawEntryLabels(false)
             data = pieData
             invalidate()
+        }
+    }
+
+    private fun createPieEntries(receiptList: List<Receipt>): ArrayList<PieEntry> {
+        return ArrayList<PieEntry>().apply {
+            FuelType.entries.forEach { fuelType ->
+                add(viewModel.calculateFuelTypePrice(receiptList, fuelType.value))
+            }
         }
     }
 
@@ -101,7 +122,11 @@ class FuelPurchaseViewFragment :
 
     private fun clickListener(adapter: FuelPurchaseViewAdapter) {
         adapter.clickListener = { receipt ->
-            findNavController().navigate(FuelPurchaseViewFragmentDirections.actionFuelPurchaseViewFragmentToFuelPurchaseDetailFragment(receipt))
+            findNavController().navigate(
+                FuelPurchaseViewFragmentDirections.actionFuelPurchaseViewFragmentToFuelPurchaseDetailFragment(
+                    receipt
+                )
+            )
         }
     }
 
