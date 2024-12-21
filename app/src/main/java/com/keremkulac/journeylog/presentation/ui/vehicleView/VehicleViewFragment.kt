@@ -66,8 +66,10 @@ class VehicleViewFragment :
         } else {
             binding.vehiclesRecyclerView.visibility = View.VISIBLE
             binding.emptyWarning.visibility = View.GONE
+            binding.vehicleCardInfo.text = getString(R.string.vehicle_view_card_info_text).format(vehicleList.size)
         }
     }
+
 
 
     private fun navigateVehicleCreate() {

@@ -1,19 +1,24 @@
 package com.keremkulac.journeylog.presentation.ui.fuelPurchaseView
 
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
 import com.keremkulac.journeylog.R
-import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.databinding.FragmentFuelPurchaseViewBinding
 import com.keremkulac.journeylog.domain.model.Receipt
+import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class FuelPurchaseViewFragment :
@@ -44,13 +49,42 @@ class FuelPurchaseViewFragment :
         }
     }
 
+    private fun setPieChart(receiptList: List<Receipt>) {
+        val colors = ArrayList<Int>()
+        val pieEntries = ArrayList<PieEntry>()
+        colors.add(Color.parseColor("#FF6361"))
+        colors.add(Color.parseColor("#58508D"))
+        colors.add(Color.parseColor("#FFA600"))
+        pieEntries.add(viewModel.calculateFuelTypePrice(receiptList, "Benzin"))
+        pieEntries.add(viewModel.calculateFuelTypePrice(receiptList, "LPG"))
+        pieEntries.add(viewModel.calculateFuelTypePrice(receiptList, "Dizel"))
+        val pieDataSet = PieDataSet(pieEntries, "")
+        pieDataSet.apply {
+            valueTextSize = 12f
+            this.colors = colors
+            valueTextColor = Color.BLACK
+        }
+        val pieData = PieData(pieDataSet)
+        pieData.setDrawValues(true)
+        binding.pieChart.apply {
+            description.isEnabled = false
+            setDrawEntryLabels(false)
+            data = pieData
+            invalidate()
+        }
+    }
+
     private fun observeAllReceipts() {
         viewModel.allReceipts.observe(viewLifecycleOwner) { result ->
             HandleResult.handleResult(binding.progressBar, result,
                 onSuccess = { data ->
                     val list = data as List<Receipt>
                     createRecyclerView(list)
-                    binding.totalPrice.text = getString(R.string.fuel_purchase_view_total_price).format(viewModel.calculateTotalPrice(list))
+                    binding.totalPrice.text =
+                        getString(R.string.fuel_purchase_view_total_price).format(
+                            viewModel.calculateTotalPrice(list)
+                        )
+                    setPieChart(list)
                 })
         }
     }
@@ -67,11 +101,7 @@ class FuelPurchaseViewFragment :
 
     private fun clickListener(adapter: FuelPurchaseViewAdapter) {
         adapter.clickListener = { receipt ->
-            findNavController().navigate(
-                FuelPurchaseViewFragmentDirections.actionFuelPurchaseViewFragmentToFuelPurchaseDetailFragment(
-                    receipt
-                )
-            )
+            findNavController().navigate(FuelPurchaseViewFragmentDirections.actionFuelPurchaseViewFragmentToFuelPurchaseDetailFragment(receipt))
         }
     }
 

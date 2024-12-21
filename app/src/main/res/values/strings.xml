@@ -187,4 +187,7 @@
     <string name="fuel_purchase_view_total_price_title">Toplam \nAlımlarım</string>
     <string name="fuel_purchase_view_total_price">%s ₺</string>
 
+
+    <string name="vehicle_view_card_info_text">Toplam araç sayısı <b>%d</b></string>
+
 </resources>
