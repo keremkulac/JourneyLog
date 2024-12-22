@@ -27,6 +27,8 @@
             android:textSize="20sp"
             android:textStyle="bold"
             tools:text="Başlık" />
+
+
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.fragment.app.FragmentContainerView

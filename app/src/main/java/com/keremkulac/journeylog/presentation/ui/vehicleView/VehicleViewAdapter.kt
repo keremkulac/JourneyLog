@@ -75,4 +75,9 @@ class VehicleViewAdapter : RecyclerView.Adapter<VehicleViewAdapter.ViewHolder>()
             licensePlate.text = vehicle.licensePlate
         }
     }
+
+    fun filterList(filterList : ArrayList<Vehicle>){
+        vehicleList = filterList
+        notifyDataSetChanged()
+    }
 }

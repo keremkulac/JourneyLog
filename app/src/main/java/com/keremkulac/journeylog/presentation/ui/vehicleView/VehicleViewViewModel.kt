@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.keremkulac.journeylog.domain.model.Vehicle
 import com.keremkulac.journeylog.domain.usecase.GetAllVehiclesUseCase
 import com.keremkulac.journeylog.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,5 +26,15 @@ class VehicleViewViewModel @Inject constructor(
                 _getAllVehicles.value = result
             }
         }
+    }
+
+    fun filter(text: String,list: List<Vehicle>) : ArrayList<Vehicle>{
+        val filteredList: ArrayList<Vehicle> = ArrayList()
+        for (item in list) {
+            if (item.licensePlate!!.lowercase().contains(text.lowercase())) {
+                filteredList.add(item)
+            }
+        }
+        return filteredList
     }
 }
