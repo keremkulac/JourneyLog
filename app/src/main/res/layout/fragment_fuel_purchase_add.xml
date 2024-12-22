@@ -16,7 +16,6 @@
             android:id="@+id/fuelCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             app:cardCornerRadius="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +24,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#0DE53935"
                 android:padding="16dp">
 
                 <ImageView
@@ -36,7 +34,7 @@
                     android:backgroundTint="#E53935"
                     android:contentDescription="@string/todo"
                     android:padding="10dp"
-                    android:src="@drawable/ic_fuel2"
+                    android:src="@drawable/ic_fuel"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -210,7 +208,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#0D5E35B1"
                 android:padding="16dp">
 
                 <ImageView
@@ -218,7 +215,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/imageview_background"
-                    android:backgroundTint="#3949AB"
+                    android:backgroundTint="#1E88E5"
                     android:contentDescription="@string/todo"
                     android:padding="10dp"
                     android:src="@drawable/ic_car"
@@ -332,7 +329,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#0DFDD835"
                 android:padding="16dp">
 
                 <ImageView

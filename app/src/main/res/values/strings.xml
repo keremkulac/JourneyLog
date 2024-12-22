@@ -189,5 +189,8 @@
 
 
     <string name="vehicle_view_card_info_text">Toplam araç sayısı <b>%d</b></string>
+    <string name="fuel_purchase_view_all_fuel_purchase_title">İşlemlerim</string>
+    <string name="vehicle_view_vehicle_title">Araç \nBilgileri</string>
+    <string name="vehicle_view_all_vehicle_title">Araçlarım</string>
 
 </resources>
