@@ -44,4 +44,14 @@ class FuelPurchaseViewViewModel @Inject constructor(
         }
         return PieEntry(total.toFloat(), fuelType)
     }
+
+    fun filter(text: String,list: List<Receipt>) : ArrayList<Receipt>{
+        val filteredList: ArrayList<Receipt> = ArrayList()
+        for (item in list) {
+            if (item.date.lowercase().contains(text.lowercase())) {
+                filteredList.add(item)
+            }
+        }
+        return filteredList
+    }
 }

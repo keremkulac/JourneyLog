@@ -67,4 +67,9 @@ class FuelPurchaseViewAdapter : RecyclerView.Adapter<FuelPurchaseViewAdapter.Vie
             viewButton.setOnClickListener { clickListener?.invoke(receipt) }
         }
     }
+
+    fun filterList(filterList : ArrayList<Receipt>){
+        receiptList = filterList
+        notifyDataSetChanged()
+    }
 }

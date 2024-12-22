@@ -1,10 +1,17 @@
 package com.keremkulac.journeylog.presentation.ui.fuelPurchaseView
 
 
+import android.app.DatePickerDialog
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +26,9 @@ import com.keremkulac.journeylog.util.FuelType
 import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 
 @AndroidEntryPoint
@@ -27,6 +37,8 @@ class FuelPurchaseViewFragment :
 
     private val viewModel by viewModels<FuelPurchaseViewViewModel>()
     private lateinit var sharedViewModel: SharedViewModel
+    private lateinit var searchView: SearchView
+    private lateinit var adapter: FuelPurchaseViewAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -101,6 +113,7 @@ class FuelPurchaseViewFragment :
                 onSuccess = { data ->
                     val list = data as List<Receipt>
                     createRecyclerView(list)
+                    checkFuelPurchaseList(list)
                     binding.totalPrice.text =
                         getString(R.string.fuel_purchase_view_total_price).format(
                             viewModel.calculateTotalPrice(list)
@@ -111,13 +124,13 @@ class FuelPurchaseViewFragment :
     }
 
     private fun createRecyclerView(list: List<Receipt>) {
-        val adapter = FuelPurchaseViewAdapter()
+        adapter = FuelPurchaseViewAdapter()
         binding.fuelPurchaseRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         adapter.receiptList = list as ArrayList<Receipt>
         binding.fuelPurchaseRecyclerView.adapter = adapter
         clickListener(adapter)
-        checkFuelPurchaseList(list)
+        optionsMenu(list)
     }
 
     private fun clickListener(adapter: FuelPurchaseViewAdapter) {
@@ -137,6 +150,69 @@ class FuelPurchaseViewFragment :
         } else {
             binding.fuelPurchaseRecyclerView.visibility = View.VISIBLE
             binding.emptyWarning.visibility = View.GONE
+            adapter.filterList(list as ArrayList<Receipt>)
         }
     }
+
+    private fun optionsMenu(receiptList: List<Receipt>) {
+        requireActivity().addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_search, menu)
+                val search = menu.findItem(R.id.action_search)
+                searchView = search.actionView as SearchView
+                searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        return false
+                    }
+
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        if (!newText.isNullOrEmpty()) {
+                            checkFuelPurchaseList(viewModel.filter(newText, receiptList))
+                        }
+                        return true
+                    }
+                })
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.action_search -> {
+                        showDatePicker()
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+    }
+
+    private fun showDatePicker() {
+        val calendar = Calendar.getInstance()
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            { _, year, month, day ->
+                val selectedDate = formatDate(day, month, year)
+                searchView.setQuery(selectedDate, false)
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        val minDate = Calendar.getInstance()
+        minDate.add(Calendar.MONTH, -6)
+        datePickerDialog.datePicker.minDate = minDate.timeInMillis
+        datePickerDialog.datePicker.maxDate = calendar.timeInMillis
+        datePickerDialog.show()
+    }
+
+    private fun formatDate(day: Int, month: Int, year: Int): String {
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        val calendar = Calendar.getInstance()
+        calendar.set(year, month, day)
+        return dateFormat.format(calendar.time)
+    }
+
 }

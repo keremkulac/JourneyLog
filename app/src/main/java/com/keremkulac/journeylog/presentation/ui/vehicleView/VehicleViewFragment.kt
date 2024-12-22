@@ -73,8 +73,7 @@ class VehicleViewFragment :
         } else {
             binding.vehiclesRecyclerView.visibility = View.VISIBLE
             binding.emptyWarning.visibility = View.GONE
-            binding.vehicleCardInfo.text =
-                getString(R.string.vehicle_view_card_info_text).format(vehicleList.size)
+            binding.vehicleCardInfo.text = getString(R.string.vehicle_view_card_info_text).format(vehicleList.size)
             adapter.filterList(vehicleList as ArrayList<Vehicle>)
         }
     }
@@ -82,6 +81,7 @@ class VehicleViewFragment :
     private fun optionsMenu(vehicleList: List<Vehicle>) {
         requireActivity().addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menu.clear()
                 menuInflater.inflate(R.menu.menu_search, menu)
                 val search = menu.findItem(R.id.action_search)
                 val searchView = search.actionView as SearchView
