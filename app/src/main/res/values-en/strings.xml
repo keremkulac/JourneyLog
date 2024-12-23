@@ -1,0 +1,210 @@
+<resources >
+    <string name="app_name">JourneyLog</string>
+    <string name="todo">TODO</string>
+    <string name="fuel_type_LPG">LPG</string>
+    <string name="fuel_type_diesel">Diesel</string>
+    <string name="fuel_type_gasoline">Gasoline</string>
+    <string name="add_fuel_purchase_liter_price">Purchase Price</string>
+    <string name="add_fuel_purchase_liter">Liters Taken</string>
+    <string name="add_fuel_purchase_tax">VAT</string>
+    <string name="add_fuel_purchase_total">Total</string>
+    <string name="add_fuel_purchase_save_receipt">Total</string>
+    <string name="add_fuel_purchase_fuel_type">Fuel Type</string>
+    <string name="add_fuel_purchase_station">Station</string>
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_with_email_button_text">Sign in with Email</string>
+    <string name="login_with_google_button_text">Sign in with Google</string>
+    <string name="login_register_text">Don\'t have an account yet? <b>Register</b></string>
+    <string name="register_password_hint">Password</string>
+    <string name="register_register_button_text">Register</string>
+    <string name="register_login_text">Already have an account? <b>Sign in</b></string>
+    <string name="register_email_hint">Email</string>
+    <string name="bottom_navigation_home_title">Home</string>
+    <string name="bottom_navigation_purchase_fuel_title">Fuel Purchases</string>
+    <string name="bottom_navigation_journey_title">My Journeys</string>
+    <string name="register_name_hint">Name</string>
+    <string name="register_lastname_hint">Last Name</string>
+    <string name="remember_me_text">Remember Me</string>
+    <string name="forgot_password_text">Forgot Password?</string>
+    <string name="welcome_title_text">Welcome</string>
+    <string name="last_journey_title_text">My Last Journey</string>
+    <string name="default_web_client_id">892926815505-2nspplf6ni3hkbpntjp8jc8tg95ad6d2.apps.googleusercontent.com</string>
+    <string name="bottom_navigation_profile_title">Profile</string>
+    <string name="forgot_password_email_hint">Email</string>
+    <string name="forgot_password_send_button_text">Send</string>
+    <string name="forgot_password_title_text">Forgot Password?</string>
+    <string name="update_password_old_password_title">Enter your old password</string>
+    <string name="update_password_new_password_title">Enter your new password</string>
+    <string name="update_password_new_password_confirm_title">Confirm your new password</string>
+    <string name="update_password_old_password_hint">Old Password</string>
+    <string name="update_password_new_password_hint">New Password</string>
+    <string name="update_password_new_password_confirm_hint">Confirm New Password</string>
+    <string name="update_password_confirm_button_text">Confirm</string>
+    <string name="profile_logout_button_text">Logout</string>
+    <string name="profile_app_settings_button_text">App Settings</string>
+    <string name="profile_password_settings_button_text">Password Settings</string>
+    <string name="profile_edit_profile_button_text">Edit Profile</string>
+    <string name="update_update_button_text">Update</string>
+    <string name="liters_taken">%s L</string>
+    <string name="total_price">%s ₺</string>
+    <string name="fuel_liter_price">%s ₺</string>
+
+    <string name="dialog_add_fuel_purchase_title">Warning</string>
+    <string name="dialog_add_fuel_purchase_message">Are you sure you want to save this information?</string>
+    <string name="dialog_add_fuel_purchase_positive_button_text">Yes</string>
+    <string name="dialog_add_fuel_purchase_negative_button_text">No</string>
+
+    <string name="dialog_select_picture_title">Picture Selection</string>
+    <string name="dialog_select_picture_message">Please choose one for picture selection</string>
+    <string name="dialog_select_picture_positive_button_text">Take Photo</string>
+    <string name="dialog_select_picture_negative_button_text">Select from Gallery</string>
+
+    <string name="dialog_forgot_password_title">Password Reset</string>
+    <string name="dialog_forgot_password_message">Are you sure you want to reset your password?</string>
+    <string name="dialog_forgot_password_positive_button_text">Reset</string>
+    <string name="dialog_forgot_password_negative_button_text">Cancel</string>
+
+    <string name="dialog_logout_title">Logout</string>
+    <string name="dialog_logout_message">Are you sure you want to log out?</string>
+    <string name="dialog_logout_positive_button_text">Logout</string>
+    <string name="dialog_logout_negative_button_text">Cancel</string>
+
+    <string name="dialog_change_password_title">Change Password</string>
+    <string name="dialog_change_password_message">Are you sure you want to change your password?</string>
+    <string name="dialog_change_password_positive_button_text">Confirm</string>
+    <string name="dialog_change_password_negative_button_text">Cancel</string>
+
+    <string name="dialog_camera_permission_title">Permission Required</string>
+    <string name="dialog_camera_permission_message">Camera access permission must be manually enabled from app settings.</string>
+    <string name="dialog_camera_permission_positive_button_text">Settings</string>
+    <string name="dialog_camera_permission_negative_button_text">Cancel</string>
+
+    <string name="dialog_gallery_permission_title">Permission Required</string>
+    <string name="dialog_gallery_permission_message">Gallery access permission must be manually enabled from app settings.</string>
+    <string name="dialog_gallery_permission_positive_button_text">Settings</string>
+    <string name="dialog_gallery_permission_negative_button_text">Cancel</string>
+
+    <string name="dialog_save_vehicle_title">Vehicle Registration</string>
+    <string name="dialog_save_vehicle_message">Are you sure you want to save this vehicle?</string>
+    <string name="dialog_save_vehicle_positive_button_text">Save</string>
+    <string name="dialog_save_vehicle_negative_button_text">Cancel</string>
+
+
+    <string name="warning_please_select_company">Please select a company</string>
+    <string name="warning_please_fill_all_fields">Please fill in all fields</string>
+    <string name="warning_please_enter_email">Please enter your email address</string>
+    <string name="warning_logout_message">Press again to exit</string>
+    <string name="warning_old_password_not_empty_message">Old password cannot be empty</string>
+    <string name="warning_new_password_not_empty_message">New password cannot be empty</string>
+    <string name="warning_new_password_confirm_not_empty_message">Yeni şifre onay boş bırakılamaz</string>
+    <string name="warning_old_password_must_6_character_message">Old password must be at least 6 characters</string>
+    <string name="warning_new_password_must_6_character_message">New password must be at least 6 characters</string>
+    <string name="warning_new_confirm_password_must_6_character_message">New password confirmation must be at least 6 characters</string>
+    <string name="warning_passwords_must_be_same_message">Passwords must match</string>
+    <string name="warning_camera_permission_required_message">Camera permission is required</string>
+    <string name="warning_gallery_permission_required_message">Gallery permission is required</string>
+    <string name="warning_please_create_vehicle">No vehicle has been created yet.<b>Please create a vehicle</b></string>
+
+    <string name="warning_receipt_id_not_empty_message">Receipt ID is missing</string>
+    <string name="warning_receipt_email_not_empty_message">Email is missing</string>
+    <string name="warning_receipt_station_name_not_empty_message">Select a station</string>
+    <string name="warning_receipt_fuel_type_empty_message">Select a fuel type</string>
+    <string name="warning_receipt_liter_price_empty_message">Enter liter price</string>
+    <string name="warning_receipt_liter_empty_message">Enter liter amount</string>
+    <string name="warning_receipt_vehicle_license_plate_message">Select your vehicle\'s license plate</string>
+    <string name="warning_receipt_vehicle_last_km_message">Enter your vehicle\'s last mileage</string>
+    <string name="warning_receipt_tax_empty_message">VAT could not be calculated</string>
+    <string name="warning_receipt_total_empty_message">Total amount could not be calculated</string>
+    <string name="warning_receipt_date_empty_message">Date is missing</string>
+    <string name="warning_receipt_time_empty_message">Time is missing</string>
+
+
+    <string name="validation_message_empty_name">Enter name</string>
+    <string name="validation_message_empty_surname">Enter surname</string>
+    <string name="validation_message_empty_email">Enter email</string>
+    <string name="validation_message_empty_password">Enter password</string>
+    <string name="validation_message_valid_email">Enter a valid email</string>
+    <string name="profile_my_vehicles_button_text">My Vehicles</string>
+    <string name="validation_message_empty_license_plate">Enter a license plate</string>
+    <string name="validation_message_valid_license_plate">Enter a valid license plate</string>
+    <string name="validation_message_empty_vehicle">Select a vehicle</string>
+    <string name="validation_message_empty_vehicle_last_km">Enter vehicle mileage</string>
+    <string name="validation_message_empty_fuel_type">Select a fuel type</string>
+    <string name="vehicle_select_vehicle_select_title">Select Vehicle</string>
+    <string name="vehicle_select_license_plate_title">Enter License Plate</string>
+    <string name="vehicle_select_license_plate_info">Do not forget to add spaces when entering the license plate</string>
+    <string name="vehicle_select_license_plate_country">TR</string>
+    <string name="vehicle_select_create_button_text">Create Vehicle</string>
+
+    <string name="fuel_purchase_total_price_title">Total</string>
+    <string name="fuel_purchase_date_title">Date</string>
+    <string name="fuel_purchase_liter_taken_title">Liters Taken</string>
+    <string name="warning_empty_list">No records yet</string>
+    <string name="item_fuel_purchase_view_button_text">View</string>
+    <string name="fuel_purchase_add_payment_card_title">Payment Info</string>
+    <string name="fuel_purchase_add_fuel_card_title">Fuel Info</string>
+    <string name="fuel_purchase_add_vehicle_card_title">Vehicle Info</string>
+    <string name="fuel_purchase_add_vehicle_km_title">Vehicle Mileage</string>
+    <string name="fuel_purchase_add_license_plate_title">License Plate</string>
+
+    <string-array name="companies">
+        <item>Alpet</item>
+        <item>Aygaz</item>
+        <item>Aytemiz</item>
+        <item>Bpet</item>
+        <item>İpragaz</item>
+        <item>Kadoil</item>
+        <item>Milangaz</item>
+        <item>M Oil</item>
+        <item>Opet</item>
+        <item>Petrol Ofisi</item>
+        <item>Türkiye Petrolleri</item>
+
+    </string-array>
+
+    <string-array name="fuelTypes">
+        <item>LPG</item>
+        <item>Gasoline</item>
+        <item>Diesel</item>
+    </string-array>
+
+    <string name="fuel_purchase_detail_station_name_title">Station</string>
+    <string name="fuel_purchase_detail_fuel_type_title">Fuel Type</string>
+    <string name="fuel_purchase_detail_liter_price_title">Price per Liter</string>
+    <string name="fuel_purchase_detail_liter_title">Liters Taken</string>
+    <string name="fuel_purchase_detail_license_plate_title">License Plate</string>
+    <string name="fuel_purchase_detail_kilometer_title">Kilometer</string>
+    <string name="fuel_purchase_detail_tax_title">VAT</string>
+    <string name="fuel_purchase_detail_total_title">Total</string>
+    <string name="fuel_purchase_detail_payment_card_title">Payment \nInformation</string>
+    <string name="fuel_purchase_detail_vehicle_card_title">Vehicle \nInformation</string>
+    <string name="fuel_purchase_detail_fuel_card_title">Fuel \nInformation</string>
+
+    <string name="vehicle_select_vehicle_kilometer_title">Vehicle Kilometer</string>
+    <string name="home_last_fuel_purchase_title">My Recent Fuel Purchases</string>
+    <string name="home_bar_chart_liter_title">Liter</string>
+    <string name="home_bar_chart_date_title">Date</string>
+    <string name="fuel_purchase_view_total_price_title">Total \nPurchases</string>
+    <string name="fuel_purchase_view_total_price">%s ₺</string>
+
+    <string name="vehicle_view_card_info_text">Total number of vehicles: <b>%d</b></string>
+    <string name="fuel_purchase_view_all_fuel_purchase_title">My Transactions</string>
+    <string name="vehicle_view_vehicle_title">Vehicle \nInformation</string>
+    <string name="vehicle_view_all_vehicle_title">My Vehicles</string>
+
+    <string name="profile_toolbar_title">Profile</string>
+    <string name="edit_profile_toolbar_title">Edit Profile</string>
+    <string name="forgot_password_toolbar_title">Forgot Password</string>
+    <string name="update_password_toolbar_title">Update Password</string>
+    <string name="fuel_purchase_view_toolbar_title">My Fuel Purchases</string>
+    <string name="fuel_purchase_detail_toolbar_title">Fuel Purchase Details</string>
+    <string name="fuel_purchase_add_toolbar_title">Fuel Purchase</string>
+    <string name="vehicle_view_toolbar_title">My Vehicles</string>
+    <string name="vehicle_detail_toolbar_title">Vehicle Details</string>
+    <string name="vehicle_create_toolbar_title">Create Vehicle</string>
+    <string name="app_settings_toolbar_title">Settings</string>
+
+    <string name="turkish_language_title">Turkish</string>
+    <string name="english_language_title">English</string>
+</resources>
