@@ -87,21 +87,26 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private val toolbarSettings = mapOf(
-        R.id.profileFragment to Pair("Profil", true),
-        R.id.editProfileFragment to Pair("Profil düzenle", true),
-        R.id.forgotPasswordFragment to Pair("Şifremi unuttum", true),
-        R.id.updatePasswordFragment to Pair("Şifre güncelle", true),
-        R.id.fuelPurchaseViewFragment to Pair("Yakıt alımlarım", true),
-        R.id.fuelPurchaseDetailFragment to Pair("Yakıt alım detayı", true),
-        R.id.fuelPurchaseAddFragment to Pair("Yakıt alımı", true),
-        R.id.vehicleViewFragment to Pair("Araçlarım", true),
-        R.id.vehicleDetailFragment to Pair("Araç detayı", true),
-        R.id.vehicleCreateFragment to Pair("Araç oluştur", true),
-        R.id.appSettingsFragment to Pair("Ayarlar", true)
-    )
+
+    private fun getToolbarSettings(): Map<Int, Pair<String, Boolean>> {
+        return mapOf(
+            R.id.profileFragment to Pair(getString(R.string.profile_toolbar_title), true),
+            R.id.editProfileFragment to Pair(getString(R.string.edit_profile_toolbar_title), true),
+            R.id.forgotPasswordFragment to Pair(getString(R.string.forgot_password_toolbar_title), true),
+            R.id.updatePasswordFragment to Pair(getString(R.string.update_password_toolbar_title), true),
+            R.id.fuelPurchaseViewFragment to Pair(getString(R.string.fuel_purchase_view_toolbar_title), true),
+            R.id.fuelPurchaseDetailFragment to Pair(getString(R.string.fuel_purchase_detail_toolbar_title), true),
+            R.id.fuelPurchaseAddFragment to Pair(getString(R.string.fuel_purchase_add_toolbar_title), true),
+            R.id.vehicleViewFragment to Pair(getString(R.string.vehicle_view_toolbar_title), true),
+            R.id.vehicleDetailFragment to Pair(getString(R.string.vehicle_detail_toolbar_title), true),
+            R.id.vehicleCreateFragment to Pair(getString(R.string.vehicle_create_toolbar_title), true),
+            R.id.appSettingsFragment to Pair(getString(R.string.app_settings_toolbar_title), true)
+        )
+    }
+
 
     private fun toolBarSet(destinationId: Int) {
+        val toolbarSettings = getToolbarSettings()
         val (title, hasBackButton) = toolbarSettings[destinationId] ?: return
         ToolbarUtil.setToolbar(this, true, hasBackButton)
         binding.toolbarTitle.text = title

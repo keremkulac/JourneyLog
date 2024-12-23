@@ -2,12 +2,14 @@ package com.keremkulac.journeylog.presentation.ui.fuelPurchaseView
 
 
 import android.app.DatePickerDialog
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
@@ -196,6 +198,7 @@ class FuelPurchaseViewFragment :
             { _, year, month, day ->
                 val selectedDate = formatDate(day, month, year)
                 searchView.setQuery(selectedDate, false)
+                searchView.hideKeyboard()
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
@@ -206,6 +209,10 @@ class FuelPurchaseViewFragment :
         datePickerDialog.datePicker.minDate = minDate.timeInMillis
         datePickerDialog.datePicker.maxDate = calendar.timeInMillis
         datePickerDialog.show()
+    }
+    fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
     private fun formatDate(day: Int, month: Int, year: Int): String {

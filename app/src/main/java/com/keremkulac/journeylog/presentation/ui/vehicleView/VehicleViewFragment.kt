@@ -73,7 +73,8 @@ class VehicleViewFragment :
         } else {
             binding.vehiclesRecyclerView.visibility = View.VISIBLE
             binding.emptyWarning.visibility = View.GONE
-            binding.vehicleCardInfo.text = getString(R.string.vehicle_view_card_info_text).format(vehicleList.size)
+            binding.vehicleCardInfo.text =
+                getString(R.string.vehicle_view_card_info_text).format(vehicleList.size)
             adapter.filterList(vehicleList as ArrayList<Vehicle>)
         }
     }
@@ -91,7 +92,7 @@ class VehicleViewFragment :
                     }
 
                     override fun onQueryTextChange(newText: String?): Boolean {
-                        newText?.let {
+                        if (!newText.isNullOrEmpty()) {
                             checkEmptyList(viewModel.filter(newText, vehicleList))
                         }
                         return true
@@ -105,6 +106,7 @@ class VehicleViewFragment :
 
                         true
                     }
+
                     else -> false
                 }
             }

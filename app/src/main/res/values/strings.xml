@@ -193,4 +193,19 @@
     <string name="vehicle_view_vehicle_title">Araç \nBilgileri</string>
     <string name="vehicle_view_all_vehicle_title">Araçlarım</string>
 
+
+
+    <string name="profile_toolbar_title">Profil</string>
+    <string name="edit_profile_toolbar_title">Profil düzenle</string>
+    <string name="forgot_password_toolbar_title">Şifremi unuttum</string>
+    <string name="update_password_toolbar_title">Şifre güncelle</string>
+    <string name="fuel_purchase_view_toolbar_title">Yakıt alımlarım</string>
+    <string name="fuel_purchase_detail_toolbar_title">Yakıt alım detayı</string>
+    <string name="fuel_purchase_add_toolbar_title">Yakıt alımı</string>
+    <string name="vehicle_view_toolbar_title">Araçlarım</string>
+    <string name="vehicle_detail_toolbar_title">Araç detayı</string>
+    <string name="vehicle_create_toolbar_title">Araç oluştur</string>
+    <string name="app_settings_toolbar_title">Ayarlar</string>
+
+
 </resources>
