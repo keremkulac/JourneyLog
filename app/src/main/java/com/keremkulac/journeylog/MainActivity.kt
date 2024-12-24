@@ -19,10 +19,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setLocale()
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         binding.toolbar.title = ""
-        setContentView(R.layout.activity_main)
         setContentView(binding.root)
         setNavigationView()
         setBottomNavigationVisibility()
@@ -117,5 +117,9 @@ class MainActivity : AppCompatActivity() {
         _binding = null
     }
 
+    private fun setLocale(){
+        val localeCode = LocaleHelper.loadLanguagePreference(this)
+        LocaleHelper.setLocale(this,localeCode)
+    }
 
 }

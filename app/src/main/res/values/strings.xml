@@ -85,68 +85,68 @@
     <string name="dialog_gallery_permission_positive_button_text">Ayarlar</string>
     <string name="dialog_gallery_permission_negative_button_text">İptal</string>
 
-    <string name="dialog_save_vehicle_title">Araç kaydı</string>
-    <string name="dialog_save_vehicle_message">Bu aracı kaydetmek istediğinizden emin misiniz?</string>
-    <string name="dialog_save_vehicle_positive_button_text">Kaydet</string>
-    <string name="dialog_save_vehicle_negative_button_text">İptal</string>
+    <string name="dialog_save_vehicle_title" translatable="false">Araç kaydı</string>
+    <string name="dialog_save_vehicle_message" translatable="false">Bu aracı kaydetmek istediğinizden emin misiniz?</string>
+    <string name="dialog_save_vehicle_positive_button_text" translatable="false">Kaydet</string>
+    <string name="dialog_save_vehicle_negative_button_text" translatable="false">İptal</string>
 
 
-    <string name="warning_please_select_company">Lütfen bir şirket seçin</string>
-    <string name="warning_please_fill_all_fields">Lütfen tüm alanları doldurun</string>
-    <string name="warning_please_enter_email">Lütfen email adresinizi giriniz</string>
-    <string name="warning_logout_message">Çıkmak için tekrar basın</string>
-    <string name="warning_old_password_not_empty_message">Eski şifre boş bırakılamaz</string>
-    <string name="warning_new_password_not_empty_message">Yeni şifre boş bırakılamaz</string>
-    <string name="warning_new_password_confirm_not_empty_message">Yeni şifre onay boş bırakılamaz</string>
-    <string name="warning_old_password_must_6_character_message">Eski şifre en az 6 karakter olmalıdır</string>
-    <string name="warning_new_password_must_6_character_message">Yeni şifre en az 6 karakter olmalıdır</string>
-    <string name="warning_new_confirm_password_must_6_character_message">Yeni şifre onay en az 6 karakter olmalıdır</string>
-    <string name="warning_passwords_must_be_same_message">Şifreler aynı olmalıdır</string>
-    <string name="warning_camera_permission_required_message">Kamera izni gereklidir</string>
-    <string name="warning_gallery_permission_required_message">Galeri izni gereklidir</string>
-    <string name="warning_please_create_vehicle">Henüz bir araç oluşturulmamış.<b>Lütfen bir araç oluştur</b></string>
+    <string name="warning_please_select_company" translatable="false">Lütfen bir şirket seçin</string>
+    <string name="warning_please_fill_all_fields" translatable="false">Lütfen tüm alanları doldurun</string>
+    <string name="warning_please_enter_email" translatable="false">Lütfen email adresinizi giriniz</string>
+    <string name="warning_logout_message" translatable="false">Çıkmak için tekrar basın</string>
+    <string name="warning_old_password_not_empty_message" translatable="false">Eski şifre boş bırakılamaz</string>
+    <string name="warning_new_password_not_empty_message" translatable="false">Yeni şifre boş bırakılamaz</string>
+    <string name="warning_new_password_confirm_not_empty_message" translatable="false">Yeni şifre onay boş bırakılamaz</string>
+    <string name="warning_old_password_must_6_character_message" translatable="false">Eski şifre en az 6 karakter olmalıdır</string>
+    <string name="warning_new_password_must_6_character_message" translatable="false">Yeni şifre en az 6 karakter olmalıdır</string>
+    <string name="warning_new_confirm_password_must_6_character_message" translatable="false">Yeni şifre onay en az 6 karakter olmalıdır</string>
+    <string name="warning_passwords_must_be_same_message" translatable="false">Şifreler aynı olmalıdır</string>
+    <string name="warning_camera_permission_required_message" translatable="false">Kamera izni gereklidir</string>
+    <string name="warning_gallery_permission_required_message" translatable="false">Galeri izni gereklidir</string>
+    <string name="warning_please_create_vehicle" translatable="false">Henüz bir araç oluşturulmamış.<b>Lütfen bir araç oluştur</b></string>
 
-    <string name="warning_receipt_id_not_empty_message">ID alınamadı</string>
-    <string name="warning_receipt_email_not_empty_message">Email alınamadı</string>
-    <string name="warning_receipt_station_name_not_empty_message">İstasyon seçiniz</string>
-    <string name="warning_receipt_fuel_type_empty_message">Yakıt türü seçiniz</string>
-    <string name="warning_receipt_liter_price_empty_message">Litre fiyatı giriniz</string>
-    <string name="warning_receipt_liter_empty_message">Litre giriniz</string>
-    <string name="warning_receipt_vehicle_license_plate_message">Aracınızın plakasını seçiniz</string>
-    <string name="warning_receipt_vehicle_last_km_message">Aracınızın son kilometresini giriniz</string>
-    <string name="warning_receipt_tax_empty_message">Vergi hesaplanamadı</string>
-    <string name="warning_receipt_total_empty_message">Toplam tutar hesaplanamadı</string>
-    <string name="warning_receipt_date_empty_message">Tarih alınamadı</string>
-    <string name="warning_receipt_time_empty_message">Saat alınamadı</string>
+    <string name="warning_receipt_id_not_empty_message" translatable="false">ID alınamadı</string>
+    <string name="warning_receipt_email_not_empty_message" translatable="false">Email alınamadı</string>
+    <string name="warning_receipt_station_name_not_empty_message" translatable="false">İstasyon seçiniz</string>
+    <string name="warning_receipt_fuel_type_empty_message" translatable="false">Yakıt türü seçiniz</string>
+    <string name="warning_receipt_liter_price_empty_message" translatable="false">Litre fiyatı giriniz</string>
+    <string name="warning_receipt_liter_empty_message" translatable="false">Litre giriniz</string>
+    <string name="warning_receipt_vehicle_license_plate_message" translatable="false">Aracınızın plakasını seçiniz</string>
+    <string name="warning_receipt_vehicle_last_km_message" translatable="false">Aracınızın son kilometresini giriniz</string>
+    <string name="warning_receipt_tax_empty_message" translatable="false">Vergi hesaplanamadı</string>
+    <string name="warning_receipt_total_empty_message" translatable="false">Toplam tutar hesaplanamadı</string>
+    <string name="warning_receipt_date_empty_message" translatable="false">Tarih alınamadı</string>
+    <string name="warning_receipt_time_empty_message" translatable="false">Saat alınamadı</string>
 
 
-    <string name="validation_message_empty_name">İsim giriniz</string>
-    <string name="validation_message_empty_surname">Soyad giriniz</string>
-    <string name="validation_message_empty_email">Email giriniz</string>
-    <string name="validation_message_empty_password">Şifre giriniz</string>
-    <string name="validation_message_valid_email">Geçerli bir email giriniz</string>
-    <string name="profile_my_vehicles_button_text">Araçlarım</string>
-    <string name="validation_message_empty_license_plate">Lütfen bir plaka giriniz</string>
-    <string name="validation_message_valid_license_plate">Lütfen geçerli bir plaka giriniz</string>
-    <string name="validation_message_empty_vehicle">Lütfen bir araç seçiniz"</string>
-    <string name="validation_message_empty_vehicle_last_km">Araç kilometresini giriniz"</string>
-    <string name="validation_message_empty_fuel_type">Lütfen bir yakıt türü seçiniz</string>
-    <string name="vehicle_select_vehicle_select_title">Araç \nSeçiniz</string>
-    <string name="vehicle_select_license_plate_title">Plaka giriniz</string>
-    <string name="vehicle_select_license_plate_info">Plakayı girerken boşluk koymayı unutmayın</string>
-    <string name="vehicle_select_license_plate_country">TR</string>
-    <string name="vehicle_select_create_button_text">Aracı oluştur</string>
+    <string name="validation_message_empty_name" translatable="false">İsim giriniz</string>
+    <string name="validation_message_empty_surname" translatable="false">Soyad giriniz</string>
+    <string name="validation_message_empty_email" translatable="false">Email giriniz</string>
+    <string name="validation_message_empty_password" translatable="false">Şifre giriniz</string>
+    <string name="validation_message_valid_email" translatable="false">Geçerli bir email giriniz</string>
+    <string name="profile_my_vehicles_button_text" translatable="false">Araçlarım</string>
+    <string name="validation_message_empty_license_plate" translatable="false">Lütfen bir plaka giriniz</string>
+    <string name="validation_message_valid_license_plate" translatable="false">Lütfen geçerli bir plaka giriniz</string>
+    <string name="validation_message_empty_vehicle" translatable="false">Lütfen bir araç seçiniz"</string>
+    <string name="validation_message_empty_vehicle_last_km" translatable="false">Araç kilometresini giriniz"</string>
+    <string name="validation_message_empty_fuel_type" translatable="false">Lütfen bir yakıt türü seçiniz</string>
+    <string name="vehicle_select_vehicle_select_title" translatable="false">Araç \nSeçiniz</string>
+    <string name="vehicle_select_license_plate_title" translatable="false">Plaka giriniz</string>
+    <string name="vehicle_select_license_plate_info" translatable="false">Plakayı girerken boşluk koymayı unutmayın</string>
+    <string name="vehicle_select_license_plate_country" translatable="false">TR</string>
+    <string name="vehicle_select_create_button_text" translatable="false">Aracı oluştur</string>
 
-    <string name="fuel_purchase_total_price_title">Toplam</string>
-    <string name="fuel_purchase_date_title">Tarih</string>
-    <string name="fuel_purchase_liter_taken_title">Alınan litre</string>
-    <string name="warning_empty_list">Henüz bir kayıt yapılmadı</string>
-    <string name="item_fuel_purchase_view_button_text">Görüntüle</string>
-    <string name="fuel_purchase_add_payment_card_title">Ödeme \nBilgileri</string>
-    <string name="fuel_purchase_add_fuel_card_title">Yakıt \nBilgileri</string>
-    <string name="fuel_purchase_add_vehicle_card_title">Araç \nBilgileri</string>
-    <string name="fuel_purchase_add_vehicle_km_title">Araç kilometre</string>
-    <string name="fuel_purchase_add_license_plate_title">Plaka</string>
+    <string name="fuel_purchase_total_price_title" translatable="false">Toplam</string>
+    <string name="fuel_purchase_date_title" translatable="false">Tarih</string>
+    <string name="fuel_purchase_liter_taken_title" translatable="false">Alınan litre</string>
+    <string name="warning_empty_list" translatable="false">Henüz bir kayıt yapılmadı</string>
+    <string name="item_fuel_purchase_view_button_text" translatable="false">Görüntüle</string>
+    <string name="fuel_purchase_add_payment_card_title" translatable="false">Ödeme \nBilgileri</string>
+    <string name="fuel_purchase_add_fuel_card_title" translatable="false">Yakıt \nBilgileri</string>
+    <string name="fuel_purchase_add_vehicle_card_title" translatable="false">Araç \nBilgileri</string>
+    <string name="fuel_purchase_add_vehicle_km_title" translatable="false">Araç kilometre</string>
+    <string name="fuel_purchase_add_license_plate_title" translatable="false">Plaka</string>
 
     <string-array name="companies">
         <item>Alpet</item>
@@ -169,43 +169,46 @@
         <item>Dizel</item>
     </string-array>
 
-    <string name="fuel_purchase_detail_station_name_title">İstasyon</string>
-    <string name="fuel_purchase_detail_fuel_type_title">Yakıt türü</string>
-    <string name="fuel_purchase_detail_liter_price_title">Litre fiyatı</string>
-    <string name="fuel_purchase_detail_liter_title">Alınan litre</string>
-    <string name="fuel_purchase_detail_license_plate_title">Plaka</string>
-    <string name="fuel_purchase_detail_kilometer_title">Kilometre</string>
-    <string name="fuel_purchase_detail_tax_title">KDV</string>
-    <string name="fuel_purchase_detail_total_title">Toplam</string>
-    <string name="fuel_purchase_detail_payment_card_title">Ödeme \nBilgileri</string>
+    <string name="fuel_purchase_detail_station_name_title" translatable="false">İstasyon</string>
+    <string name="fuel_purchase_detail_fuel_type_title" translatable="false">Yakıt türü</string>
+    <string name="fuel_purchase_detail_liter_price_title" translatable="false">Litre fiyatı</string>
+    <string name="fuel_purchase_detail_liter_title" translatable="false">Alınan litre</string>
+    <string name="fuel_purchase_detail_license_plate_title" translatable="false">Plaka</string>
+    <string name="fuel_purchase_detail_kilometer_title" translatable="false">Kilometre</string>
+    <string name="fuel_purchase_detail_tax_title" translatable="false">KDV</string>
+    <string name="fuel_purchase_detail_total_title" translatable="false">Toplam</string>
+    <string name="fuel_purchase_detail_payment_card_title" translatable="false">Ödeme \nBilgileri</string>
     <string name="fuel_purchase_detail_vehicle_card_title">Araç \nBilgileri</string>
     <string name="fuel_purchase_detail_fuel_card_title">Yakıt \nBilgileri</string>
     <string name="vehicle_select_vehicle_kilometer_title">Araç kilometre</string>
     <string name="home_last_fuel_purchase_title">Son yakıt alımlarım</string>
     <string name="home_bar_chart_liter_title">Litre</string>
     <string name="home_bar_chart_date_title">Tarih</string>
-    <string name="fuel_purchase_view_total_price_title">Toplam \nAlımlarım</string>
-    <string name="fuel_purchase_view_total_price">%s ₺</string>
+    <string name="fuel_purchase_view_total_price_title" translatable="false">Toplam \nAlımlarım</string>
+    <string name="fuel_purchase_view_total_price" translatable="false">%s ₺</string>
 
+    <string name="vehicle_view_card_info_text" translatable="false">Toplam araç sayısı <b>%d</b></string>
+    <string name="fuel_purchase_view_all_fuel_purchase_title" translatable="false">İşlemlerim</string>
+    <string name="vehicle_view_vehicle_title" translatable="false">Araç \nBilgileri</string>
+    <string name="vehicle_view_all_vehicle_title" translatable="false">Araçlarım</string>
 
-    <string name="vehicle_view_card_info_text">Toplam araç sayısı <b>%d</b></string>
-    <string name="fuel_purchase_view_all_fuel_purchase_title">İşlemlerim</string>
-    <string name="vehicle_view_vehicle_title">Araç \nBilgileri</string>
-    <string name="vehicle_view_all_vehicle_title">Araçlarım</string>
+    <string name="profile_toolbar_title" translatable="false">Profil</string>
+    <string name="edit_profile_toolbar_title" translatable="false">Profil düzenle</string>
+    <string name="forgot_password_toolbar_title" translatable="false">Şifremi unuttum</string>
+    <string name="update_password_toolbar_title" translatable="false">Şifre güncelle</string>
+    <string name="fuel_purchase_view_toolbar_title" translatable="false">Yakıt alımlarım</string>
+    <string name="fuel_purchase_detail_toolbar_title" translatable="false">Yakıt alım detayı</string>
+    <string name="fuel_purchase_add_toolbar_title" translatable="false">Yakıt alımı</string>
+    <string name="vehicle_view_toolbar_title" translatable="false">Araçlarım</string>
+    <string name="vehicle_detail_toolbar_title" translatable="false">Araç detayı</string>
+    <string name="vehicle_create_toolbar_title" translatable="false">Araç oluştur</string>
+    <string name="app_settings_toolbar_title" translatable="false">Ayarlar</string>
 
-
-
-    <string name="profile_toolbar_title">Profil</string>
-    <string name="edit_profile_toolbar_title">Profil düzenle</string>
-    <string name="forgot_password_toolbar_title">Şifremi unuttum</string>
-    <string name="update_password_toolbar_title">Şifre güncelle</string>
-    <string name="fuel_purchase_view_toolbar_title">Yakıt alımlarım</string>
-    <string name="fuel_purchase_detail_toolbar_title">Yakıt alım detayı</string>
-    <string name="fuel_purchase_add_toolbar_title">Yakıt alımı</string>
-    <string name="vehicle_view_toolbar_title">Araçlarım</string>
-    <string name="vehicle_detail_toolbar_title">Araç detayı</string>
-    <string name="vehicle_create_toolbar_title">Araç oluştur</string>
-    <string name="app_settings_toolbar_title">Ayarlar</string>
+    <string name="turkish_language_title" translatable="false">Türkçe</string>
+    <string name="english_language_title" translatable="false">İngilizce</string>
+    <string name="select_language_title" translatable="false">Dil seç</string>
+    <string name="app_settings_language_title">Dil</string>
+    <string name="app_settings_dark_mode_title">Koyu mod</string>
 
 
 </resources>

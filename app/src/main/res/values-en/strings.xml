@@ -1,4 +1,4 @@
-<resources >
+<resources>
     <string name="app_name">JourneyLog</string>
     <string name="todo">TODO</string>
     <string name="fuel_type_LPG">LPG</string>
@@ -207,4 +207,8 @@
 
     <string name="turkish_language_title">Turkish</string>
     <string name="english_language_title">English</string>
+    <string name="select_language_title">Select Language</string>
+    <string name="app_settings_language_title">Language</string>
+    <string name="app_settings_dark_mode_title">Dark mode</string>
+
 </resources>
