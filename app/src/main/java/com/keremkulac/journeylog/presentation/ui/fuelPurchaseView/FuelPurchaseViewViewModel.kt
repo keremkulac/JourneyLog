@@ -8,6 +8,7 @@ import com.github.mikephil.charting.data.PieEntry
 import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.domain.usecase.GetAllReceiptsUseCase
 import com.keremkulac.journeylog.util.Result
+import com.keremkulac.journeylog.util.TranslationHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.util.Locale
@@ -38,7 +39,7 @@ class FuelPurchaseViewViewModel @Inject constructor(
     fun calculateFuelTypePrice(list: List<Receipt>, fuelType: String): PieEntry {
         var total = 0.0
         for (item in list) {
-            if (item.fuelType == fuelType) {
+            if (TranslationHelper.translateManually(item.fuelType) == fuelType) {
                 total += item.total.replace(",", ".").toDouble()
             }
         }

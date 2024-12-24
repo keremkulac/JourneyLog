@@ -9,19 +9,31 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.domain.model.AverageFuelPrice
+import com.keremkulac.journeylog.util.TranslationHelper
 
 class AverageFuelPriceAdapter : RecyclerView.Adapter<AverageFuelPriceAdapter.ViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AverageFuelPriceAdapter.ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): AverageFuelPriceAdapter.ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_average_fuel_price, parent, false))
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_average_fuel_price, parent, false)
+        )
     }
 
     private val diffUtil = object : DiffUtil.ItemCallback<AverageFuelPrice>() {
-        override fun areItemsTheSame(oldItem: AverageFuelPrice, newItem: AverageFuelPrice): Boolean {
+        override fun areItemsTheSame(
+            oldItem: AverageFuelPrice,
+            newItem: AverageFuelPrice
+        ): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: AverageFuelPrice, newItem: AverageFuelPrice): Boolean {
+        override fun areContentsTheSame(
+            oldItem: AverageFuelPrice,
+            newItem: AverageFuelPrice
+        ): Boolean {
             return oldItem == newItem
         }
     }
@@ -45,7 +57,7 @@ class AverageFuelPriceAdapter : RecyclerView.Adapter<AverageFuelPriceAdapter.Vie
         fun bindItems(averageFuelPrice: AverageFuelPrice) {
             val fuelPriceTitle = itemView.findViewById<TextView>(R.id.fuelPriceTitle)
             val fuelPrice = itemView.findViewById<TextView>(R.id.fuelPrice)
-            fuelPriceTitle.text = averageFuelPrice.title
+            fuelPriceTitle.text = TranslationHelper.translateManually(averageFuelPrice.title)
             fuelPrice.text = averageFuelPrice.value
         }
     }

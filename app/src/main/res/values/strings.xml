@@ -209,6 +209,10 @@
     <string name="select_language_title" translatable="false">Dil seç</string>
     <string name="app_settings_language_title">Dil</string>
     <string name="app_settings_dark_mode_title">Koyu mod</string>
+    <string name="edit_profile_name_hint">Ad</string>
+    <string name="edit_profile_lastname_hint">Soyad</string>
+    <string name="update_password_title">Şifrenizi belirleyin</string>
+    <string name="edit_profile_email_hint">Email</string>
 
 
 </resources>

@@ -210,5 +210,10 @@
     <string name="select_language_title">Select Language</string>
     <string name="app_settings_language_title">Language</string>
     <string name="app_settings_dark_mode_title">Dark mode</string>
+    <string name="edit_profile_name_hint">Name</string>
+    <string name="edit_profile_lastname_hint">Lastname</string>
+    <string name="update_password_title">Set your password</string>
+    <string name="edit_profile_email_hint">Email</string>
+
 
 </resources>

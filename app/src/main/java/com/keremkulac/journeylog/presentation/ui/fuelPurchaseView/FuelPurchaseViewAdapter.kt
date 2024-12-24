@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.domain.model.Receipt
+import com.keremkulac.journeylog.util.TranslationHelper
 
 class FuelPurchaseViewAdapter : RecyclerView.Adapter<FuelPurchaseViewAdapter.ViewHolder>() {
 
@@ -62,7 +63,7 @@ class FuelPurchaseViewAdapter : RecyclerView.Adapter<FuelPurchaseViewAdapter.Vie
             val viewButton = itemView.findViewById<Button>(R.id.view)
             itemView.context.apply {
                 fuelTotalPrice.text = getString(R.string.total_price).format(receipt.total)
-                fuelType.text = receipt.fuelType
+                fuelType.text = TranslationHelper.translateManually(receipt.fuelType)
             }
             viewButton.setOnClickListener { clickListener?.invoke(receipt) }
         }

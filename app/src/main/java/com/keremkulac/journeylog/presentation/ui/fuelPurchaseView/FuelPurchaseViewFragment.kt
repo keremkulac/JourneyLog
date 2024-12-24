@@ -27,6 +27,7 @@ import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.util.FuelType
 import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
+import com.keremkulac.journeylog.util.TranslationHelper
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -104,7 +105,12 @@ class FuelPurchaseViewFragment :
     private fun createPieEntries(receiptList: List<Receipt>): ArrayList<PieEntry> {
         return ArrayList<PieEntry>().apply {
             FuelType.entries.forEach { fuelType ->
-                add(viewModel.calculateFuelTypePrice(receiptList, fuelType.value))
+                add(
+                    viewModel.calculateFuelTypePrice(
+                        receiptList,
+                        TranslationHelper.translateManually(fuelType.value)
+                    )
+                )
             }
         }
     }
@@ -210,6 +216,7 @@ class FuelPurchaseViewFragment :
         datePickerDialog.datePicker.maxDate = calendar.timeInMillis
         datePickerDialog.show()
     }
+
     fun View.hideKeyboard() {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
