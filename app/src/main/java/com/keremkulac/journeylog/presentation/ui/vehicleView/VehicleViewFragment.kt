@@ -19,13 +19,17 @@ import com.keremkulac.journeylog.domain.model.Vehicle
 import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
+import com.keremkulac.journeylog.util.TranslationHelper
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class VehicleViewFragment :
     BaseFragment<FragmentVehicleViewBinding>(FragmentVehicleViewBinding::inflate) {
 
+    @Inject
+    lateinit var translationHelper: TranslationHelper
     private lateinit var sharedViewModel: SharedViewModel
     private val viewModel by viewModels<VehicleViewViewModel>()
     private lateinit var adapter: VehicleViewAdapter
@@ -57,7 +61,7 @@ class VehicleViewFragment :
     }
 
     private fun setRecyclerView(vehicleList: List<Vehicle>) {
-        adapter = VehicleViewAdapter()
+        adapter = VehicleViewAdapter(translationHelper)
         binding.vehiclesRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         adapter.vehicleList = ArrayList(vehicleList)

@@ -27,7 +27,7 @@ class FuelPurchaseDetailFragment :
         val receipt = args.receipt
         receipt?.let {
             binding.stationName.text = receipt.stationName
-            binding.fuelType.text = translationHelper.translateManually(receipt.fuelType)
+            binding.fuelType.text = translationHelper.translate(receipt.fuelType, TranslationHelper.TranslationType.Fuel)
             requireContext().apply {
                 binding.literPrice.text = getString(R.string.fuel_liter_price).format(receipt.literPrice)
                 binding.liter.text = getString(R.string.liters_taken).format(receipt.liter)

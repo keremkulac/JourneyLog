@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.domain.model.Vehicle
+import com.keremkulac.journeylog.util.TranslationHelper
+import javax.inject.Inject
 
-class VehicleViewAdapter : RecyclerView.Adapter<VehicleViewAdapter.ViewHolder>() {
+class VehicleViewAdapter @Inject constructor(val translationHelper: TranslationHelper) : RecyclerView.Adapter<VehicleViewAdapter.ViewHolder>() {
 
     var clickListener: ((Vehicle) -> Unit)? = null
 
@@ -70,7 +72,7 @@ class VehicleViewAdapter : RecyclerView.Adapter<VehicleViewAdapter.ViewHolder>()
                 "drawable",
                 itemView.context.packageName
             )
-            vehicleTitle.text = vehicle.title
+            vehicleTitle.text = translationHelper.translate(vehicle.title!!,TranslationHelper.TranslationType.Vehicle)
             icon.setImageResource(resourceId)
             licensePlate.text = vehicle.licensePlate
         }

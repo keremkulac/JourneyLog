@@ -8,12 +8,16 @@ import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentVehicleDetailBinding
 import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.util.ResourceUtil
+import com.keremkulac.journeylog.util.TranslationHelper
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class VehicleDetailFragment :
     BaseFragment<FragmentVehicleDetailBinding>(FragmentVehicleDetailBinding::inflate) {
 
+    @Inject
+    lateinit var translationHelper: TranslationHelper
     private val args: VehicleDetailFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,7 +32,7 @@ class VehicleDetailFragment :
             val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.anim_vehicle_illustration)
             binding.vehicleIllustration.startAnimation(animation)
             binding.vehicleIllustration.setImageResource(ResourceUtil.getResourceId(resources,it.illustrationName!!,requireContext().packageName))
-            binding.vehicleTitle.text = it.title
+            binding.vehicleTitle.text = translationHelper.translate(it.title!!, TranslationHelper.TranslationType.Vehicle)
             binding.licensePlate.text = it.licensePlate
             binding.kilometerTitle.text = it.lastKm
             binding.vehicleIcon.setImageResource(ResourceUtil.getResourceId(resources,it.iconName!!,requireContext().packageName))

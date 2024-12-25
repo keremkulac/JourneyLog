@@ -12,18 +12,30 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
+        <View
+            android:id="@+id/imageViewCardView"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/profile_image_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/profilePicture"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="40dp"
+            android:padding="3dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewCardView"
             app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/circleImageView" />
+            app:layout_constraintStart_toStartOf="@+id/imageViewCardView"
+            app:layout_constraintTop_toTopOf="@+id/imageViewCardView"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:strokeColor="#F7F8FA"
+            app:strokeWidth="5dp"
+            tools:src="@drawable/ic_launcher_background" />
 
         <TextView
             android:id="@+id/userFullName"

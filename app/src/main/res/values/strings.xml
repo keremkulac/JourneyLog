@@ -133,6 +133,7 @@
     <string name="validation_message_empty_fuel_type" translatable="false">Lütfen bir yakıt türü seçiniz</string>
     <string name="vehicle_select_vehicle_select_title" translatable="false">Araç \nSeçiniz</string>
     <string name="vehicle_select_license_plate_title" translatable="false">Plaka giriniz</string>
+    <string name="vehicle_select_fuel_type_title" translatable="false">Yakıt türü</string>
     <string name="vehicle_select_license_plate_info" translatable="false">Plakayı girerken boşluk koymayı unutmayın</string>
     <string name="vehicle_select_license_plate_country" translatable="false">TR</string>
     <string name="vehicle_select_create_button_text" translatable="false">Aracı oluştur</string>

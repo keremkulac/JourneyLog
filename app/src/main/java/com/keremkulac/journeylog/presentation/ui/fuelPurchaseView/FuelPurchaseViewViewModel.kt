@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.github.mikephil.charting.data.PieEntry
 import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.domain.usecase.GetAllReceiptsUseCase
+import com.keremkulac.journeylog.util.FuelType
 import com.keremkulac.journeylog.util.Result
 import com.keremkulac.journeylog.util.TranslationHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,14 +37,18 @@ class FuelPurchaseViewViewModel @Inject constructor(
         return String.format(Locale.US, "%.2f", total).toDouble()
     }
 
-    fun calculateFuelTypePrice(list: List<Receipt>, fuelType: String,translationHelper: TranslationHelper): PieEntry {
-        var total = 0.0
-        for (item in list) {
-            if (translationHelper.translateManually(item.fuelType) == fuelType) {
-                total += item.total.replace(",", ".").toDouble()
+    fun calculateFuelTypePrice(receiptList: List<Receipt>, translationHelper: TranslationHelper): ArrayList<PieEntry> {
+        val pieEntries = ArrayList<PieEntry>()
+        FuelType.entries.forEach { fuelType ->
+            var total = 0.0
+            receiptList.forEach { receipt ->
+                if (translationHelper.translate(receipt.fuelType, TranslationHelper.TranslationType.Fuel) == fuelType.value) {
+                    total += receipt.total.replace(",", ".").toDouble()
+                }
             }
+            pieEntries.add(PieEntry(total.toFloat(), fuelType.value))
         }
-        return PieEntry(total.toFloat(), fuelType)
+        return pieEntries
     }
 
     fun filter(text: String,list: List<Receipt>) : ArrayList<Receipt>{

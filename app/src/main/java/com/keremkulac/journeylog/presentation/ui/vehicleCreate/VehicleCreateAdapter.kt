@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.domain.model.Vehicle
 import com.keremkulac.journeylog.util.ResourceUtil
+import com.keremkulac.journeylog.util.TranslationHelper
+import javax.inject.Inject
 
-class VehicleCreateAdapter : RecyclerView.Adapter<VehicleCreateAdapter.ViewHolder>() {
+class VehicleCreateAdapter @Inject constructor(val translationHelper: TranslationHelper) : RecyclerView.Adapter<VehicleCreateAdapter.ViewHolder>() {
 
     var clickListener: ((Vehicle) -> Unit)? = null
     private var selectedPosition = RecyclerView.NO_POSITION
@@ -72,8 +74,7 @@ class VehicleCreateAdapter : RecyclerView.Adapter<VehicleCreateAdapter.ViewHolde
             val icon: ImageView = itemView.findViewById(R.id.vehicleIcon)
             val title: TextView = itemView.findViewById(R.id.vehicleName)
             icon.setImageResource(ResourceUtil.getResourceId(itemView.resources,vehicle.iconName!!,itemView.context.packageName))
-            title.text = vehicle.title
-
+            title.text = translationHelper.translate(vehicle.title!!, TranslationHelper.TranslationType.Vehicle)
         }
 
     }

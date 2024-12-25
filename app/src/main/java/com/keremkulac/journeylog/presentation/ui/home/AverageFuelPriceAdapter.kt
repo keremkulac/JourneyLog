@@ -59,7 +59,7 @@ class AverageFuelPriceAdapter @Inject constructor(val translationHelper: Transla
         fun bindItems(averageFuelPrice: AverageFuelPrice) {
             val fuelPriceTitle = itemView.findViewById<TextView>(R.id.fuelPriceTitle)
             val fuelPrice = itemView.findViewById<TextView>(R.id.fuelPrice)
-            fuelPriceTitle.text = translationHelper.translateManually(averageFuelPrice.title)
+            fuelPriceTitle.text = translationHelper.translate(averageFuelPrice.title, TranslationHelper.TranslationType.Fuel)
             fuelPrice.text = averageFuelPrice.value
         }
     }

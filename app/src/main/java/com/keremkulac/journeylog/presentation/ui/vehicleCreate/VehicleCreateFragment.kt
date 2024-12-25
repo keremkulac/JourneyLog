@@ -18,10 +18,12 @@ import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.util.CustomDialog
 import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
+import com.keremkulac.journeylog.util.TranslationHelper
 import com.keremkulac.journeylog.util.VehicleItemsUtil
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.ArrayList
 import java.util.Locale
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class VehicleCreateFragment :
@@ -29,6 +31,8 @@ class VehicleCreateFragment :
 
     private lateinit var adapter: VehicleCreateAdapter
     private lateinit var sharedViewModel: SharedViewModel
+    @Inject
+    lateinit var translationHelper: TranslationHelper
     private var selectedVehicle: Vehicle? = null
     private var user: User? = null
     private var selectedFuelType : String? = null
@@ -49,7 +53,7 @@ class VehicleCreateFragment :
 
 
     private fun createRecyclerView() {
-        adapter = VehicleCreateAdapter()
+        adapter = VehicleCreateAdapter(translationHelper)
         binding.selectVehicleRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         adapter.vehicleList = ArrayList(VehicleItemsUtil.getVehicleItems())

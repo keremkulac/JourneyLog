@@ -22,7 +22,6 @@ import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentFuelPurchaseViewBinding
 import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.util.BaseFragment
-import com.keremkulac.journeylog.util.FuelType
 import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
 import com.keremkulac.journeylog.util.TranslationHelper
@@ -104,17 +103,7 @@ class FuelPurchaseViewFragment :
     }
 
     private fun createPieEntries(receiptList: List<Receipt>): ArrayList<PieEntry> {
-        return ArrayList<PieEntry>().apply {
-            FuelType.entries.forEach { fuelType ->
-                add(
-                    viewModel.calculateFuelTypePrice(
-                        receiptList,
-                        translationHelper.translateManually(fuelType.value),
-                        translationHelper
-                    )
-                )
-            }
-        }
+        return viewModel.calculateFuelTypePrice(receiptList, translationHelper)
     }
 
     private fun observeAllReceipts() {
@@ -218,7 +207,6 @@ class FuelPurchaseViewFragment :
         datePickerDialog.datePicker.maxDate = calendar.timeInMillis
         datePickerDialog.show()
     }
-
 
 
     private fun formatDate(day: Int, month: Int, year: Int): String {

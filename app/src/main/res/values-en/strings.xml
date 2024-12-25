@@ -133,6 +133,7 @@
     <string name="validation_message_empty_fuel_type">Select a fuel type</string>
     <string name="vehicle_select_vehicle_select_title">Select Vehicle</string>
     <string name="vehicle_select_license_plate_title">Enter License Plate</string>
+    <string name="vehicle_select_fuel_type_title" >Fuel type</string>
     <string name="vehicle_select_license_plate_info">Do not forget to add spaces when entering the license plate</string>
     <string name="vehicle_select_license_plate_country">TR</string>
     <string name="vehicle_select_create_button_text">Create Vehicle</string>

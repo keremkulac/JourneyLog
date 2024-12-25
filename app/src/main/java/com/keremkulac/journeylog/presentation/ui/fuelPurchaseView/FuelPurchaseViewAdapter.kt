@@ -65,7 +65,7 @@ class FuelPurchaseViewAdapter @Inject constructor(val translationHelper: Transla
             val cardView = itemView.findViewById<CardView>(R.id.cardView)
             itemView.context.apply {
                 fuelTotalPrice.text = getString(R.string.total_price).format(receipt.total)
-                fuelType.text = translationHelper.translateManually(receipt.fuelType)
+                fuelType.text = translationHelper.translate(receipt.fuelType, TranslationHelper.TranslationType.Fuel)
                 date.text = receipt.date
             }
             cardView.setOnClickListener { clickListener?.invoke(receipt) }
