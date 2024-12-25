@@ -3,17 +3,18 @@ package com.keremkulac.journeylog.presentation.ui.fuelPurchaseView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.util.TranslationHelper
+import javax.inject.Inject
 
-class FuelPurchaseViewAdapter : RecyclerView.Adapter<FuelPurchaseViewAdapter.ViewHolder>() {
-
+class FuelPurchaseViewAdapter @Inject constructor(val translationHelper: TranslationHelper) :
+    RecyclerView.Adapter<FuelPurchaseViewAdapter.ViewHolder>() {
     var clickListener: ((Receipt) -> Unit)? = null
 
     override fun onCreateViewHolder(
@@ -60,16 +61,18 @@ class FuelPurchaseViewAdapter : RecyclerView.Adapter<FuelPurchaseViewAdapter.Vie
         fun bindItems(receipt: Receipt) {
             val fuelTotalPrice = itemView.findViewById<TextView>(R.id.fuelTotalPrice)
             val fuelType = itemView.findViewById<TextView>(R.id.fuelType)
-            val viewButton = itemView.findViewById<Button>(R.id.view)
+            val date = itemView.findViewById<TextView>(R.id.date)
+            val cardView = itemView.findViewById<CardView>(R.id.cardView)
             itemView.context.apply {
                 fuelTotalPrice.text = getString(R.string.total_price).format(receipt.total)
-                fuelType.text = TranslationHelper.translateManually(receipt.fuelType)
+                fuelType.text = translationHelper.translateManually(receipt.fuelType)
+                date.text = receipt.date
             }
-            viewButton.setOnClickListener { clickListener?.invoke(receipt) }
+            cardView.setOnClickListener { clickListener?.invoke(receipt) }
         }
     }
 
-    fun filterList(filterList : ArrayList<Receipt>){
+    fun filterList(filterList: ArrayList<Receipt>) {
         receiptList = filterList
         notifyDataSetChanged()
     }

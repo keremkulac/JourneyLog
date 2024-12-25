@@ -7,12 +7,17 @@ import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentFuelPurchaseDetailBinding
 import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.util.TranslationHelper
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class FuelPurchaseDetailFragment :
     BaseFragment<FragmentFuelPurchaseDetailBinding>(FragmentFuelPurchaseDetailBinding::inflate) {
 
+    @Inject
+    lateinit var translationHelper: TranslationHelper
     private val args: FuelPurchaseDetailFragmentArgs by navArgs()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fillFields()
@@ -22,7 +27,7 @@ class FuelPurchaseDetailFragment :
         val receipt = args.receipt
         receipt?.let {
             binding.stationName.text = receipt.stationName
-            binding.fuelType.text = TranslationHelper.translateManually(receipt.fuelType)
+            binding.fuelType.text = translationHelper.translateManually(receipt.fuelType)
             requireContext().apply {
                 binding.literPrice.text = getString(R.string.fuel_liter_price).format(receipt.literPrice)
                 binding.liter.text = getString(R.string.liters_taken).format(receipt.liter)

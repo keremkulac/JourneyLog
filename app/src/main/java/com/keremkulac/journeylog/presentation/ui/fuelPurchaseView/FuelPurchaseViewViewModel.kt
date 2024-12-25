@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FuelPurchaseViewViewModel @Inject constructor(
-    private val getAllReceiptsUseCase: GetAllReceiptsUseCase
+    private val getAllReceiptsUseCase: GetAllReceiptsUseCase,
 ) : ViewModel() {
     private val _allReceipts = MutableLiveData<Result<Any>>()
     val allReceipts: LiveData<Result<Any>> get() = _allReceipts
@@ -36,10 +36,10 @@ class FuelPurchaseViewViewModel @Inject constructor(
         return String.format(Locale.US, "%.2f", total).toDouble()
     }
 
-    fun calculateFuelTypePrice(list: List<Receipt>, fuelType: String): PieEntry {
+    fun calculateFuelTypePrice(list: List<Receipt>, fuelType: String,translationHelper: TranslationHelper): PieEntry {
         var total = 0.0
         for (item in list) {
-            if (TranslationHelper.translateManually(item.fuelType) == fuelType) {
+            if (translationHelper.translateManually(item.fuelType) == fuelType) {
                 total += item.total.replace(",", ".").toDouble()
             }
         }

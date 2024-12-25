@@ -2,14 +2,12 @@ package com.keremkulac.journeylog.presentation.ui.fuelPurchaseView
 
 
 import android.app.DatePickerDialog
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
@@ -28,16 +26,19 @@ import com.keremkulac.journeylog.util.FuelType
 import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
 import com.keremkulac.journeylog.util.TranslationHelper
+import com.keremkulac.journeylog.util.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class FuelPurchaseViewFragment :
     BaseFragment<FragmentFuelPurchaseViewBinding>(FragmentFuelPurchaseViewBinding::inflate) {
-
+    @Inject
+    lateinit var translationHelper: TranslationHelper
     private val viewModel by viewModels<FuelPurchaseViewViewModel>()
     private lateinit var sharedViewModel: SharedViewModel
     private lateinit var searchView: SearchView
@@ -108,7 +109,8 @@ class FuelPurchaseViewFragment :
                 add(
                     viewModel.calculateFuelTypePrice(
                         receiptList,
-                        TranslationHelper.translateManually(fuelType.value)
+                        translationHelper.translateManually(fuelType.value),
+                        translationHelper
                     )
                 )
             }
@@ -132,7 +134,7 @@ class FuelPurchaseViewFragment :
     }
 
     private fun createRecyclerView(list: List<Receipt>) {
-        adapter = FuelPurchaseViewAdapter()
+        adapter = FuelPurchaseViewAdapter(translationHelper)
         binding.fuelPurchaseRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         adapter.receiptList = list as ArrayList<Receipt>
@@ -217,10 +219,7 @@ class FuelPurchaseViewFragment :
         datePickerDialog.show()
     }
 
-    fun View.hideKeyboard() {
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(windowToken, 0)
-    }
+
 
     private fun formatDate(day: Int, month: Int, year: Int): String {
         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())

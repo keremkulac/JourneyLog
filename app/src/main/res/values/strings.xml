@@ -181,7 +181,7 @@
     <string name="fuel_purchase_detail_vehicle_card_title">Araç \nBilgileri</string>
     <string name="fuel_purchase_detail_fuel_card_title">Yakıt \nBilgileri</string>
     <string name="vehicle_select_vehicle_kilometer_title">Araç kilometre</string>
-    <string name="home_last_fuel_purchase_title">Son yakıt alımlarım</string>
+    <string name="home_last_fuel_purchase_title">Son Yakıt \nAlımlarım</string>
     <string name="home_bar_chart_liter_title">Litre</string>
     <string name="home_bar_chart_date_title">Tarih</string>
     <string name="fuel_purchase_view_total_price_title" translatable="false">Toplam \nAlımlarım</string>

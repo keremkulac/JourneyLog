@@ -20,7 +20,9 @@ import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
+import com.keremkulac.journeylog.util.TranslationHelper
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
@@ -29,6 +31,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private lateinit var sharedViewModel: SharedViewModel
     private lateinit var barDataSet: BarDataSet
     private var toggle : Boolean = false
+    @Inject
+    lateinit var translationHelper: TranslationHelper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
@@ -49,7 +53,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     private fun setRecyclerView(averageFuelPriceList: ArrayList<AverageFuelPrice>) {
-        val adapter = AverageFuelPriceAdapter()
+        val adapter = AverageFuelPriceAdapter(translationHelper)
         val pagerHelper = PagerSnapHelper()
         adapter.averageFuelPriceList = averageFuelPriceList
         binding.averageFuelPriceRecyclerView.layoutManager =
