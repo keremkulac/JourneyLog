@@ -9,6 +9,7 @@ import com.keremkulac.journeylog.databinding.FragmentVehicleDetailBinding
 import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.util.ResourceUtil
 import com.keremkulac.journeylog.util.TranslationHelper
+import com.keremkulac.journeylog.util.decimalFormat
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -34,7 +35,7 @@ class VehicleDetailFragment :
             binding.vehicleIllustration.setImageResource(ResourceUtil.getResourceId(resources,it.illustrationName!!,requireContext().packageName))
             binding.vehicleTitle.text = translationHelper.translate(it.title!!, TranslationHelper.TranslationType.Vehicle)
             binding.licensePlate.text = it.licensePlate
-            binding.kilometerTitle.text = it.lastKm
+            binding.kilometerTitle.text = it.lastKm!!.decimalFormat()
             binding.vehicleIcon.setImageResource(ResourceUtil.getResourceId(resources,it.iconName!!,requireContext().packageName))
         }
     }

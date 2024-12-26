@@ -7,6 +7,8 @@ import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentFuelPurchaseDetailBinding
 import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.util.TranslationHelper
+import com.keremkulac.journeylog.util.decimalFormat
+import com.keremkulac.journeylog.util.toMoneyFormat
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -31,11 +33,11 @@ class FuelPurchaseDetailFragment :
             requireContext().apply {
                 binding.literPrice.text = getString(R.string.fuel_liter_price).format(receipt.literPrice)
                 binding.liter.text = getString(R.string.liters_taken).format(receipt.liter)
-                binding.receiptTotalPrice.text = getString(R.string.total_price).format(receipt.total)
-                binding.receiptTotalTax.text = getString(R.string.total_price).format(receipt.tax)
+                binding.receiptTotalPrice.text = getString(R.string.total_price).format(receipt.total.toDouble().toMoneyFormat())
+                binding.receiptTotalTax.text = getString(R.string.total_price).format(receipt.tax.toDouble().toMoneyFormat())
             }
             binding.vehicleLicensePlate.text = receipt.vehicleLicensePlate
-            binding.vehicleKm.text = receipt.vehicleLastKm
+            binding.vehicleKm.text = receipt.vehicleLastKm.decimalFormat()
             //   binding.date.text = receipt.date
 
         }

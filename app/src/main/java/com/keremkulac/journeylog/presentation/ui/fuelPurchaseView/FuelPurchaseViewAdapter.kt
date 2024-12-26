@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.util.TranslationHelper
+import com.keremkulac.journeylog.util.toMoneyFormat
 import javax.inject.Inject
 
 class FuelPurchaseViewAdapter @Inject constructor(val translationHelper: TranslationHelper) :
@@ -64,7 +65,7 @@ class FuelPurchaseViewAdapter @Inject constructor(val translationHelper: Transla
             val date = itemView.findViewById<TextView>(R.id.date)
             val cardView = itemView.findViewById<CardView>(R.id.cardView)
             itemView.context.apply {
-                fuelTotalPrice.text = getString(R.string.total_price).format(receipt.total)
+                fuelTotalPrice.text = getString(R.string.total_price).format(receipt.total.toDouble().toMoneyFormat())
                 fuelType.text = translationHelper.translate(receipt.fuelType, TranslationHelper.TranslationType.Fuel)
                 date.text = receipt.date
             }

@@ -43,9 +43,9 @@ class FuelPurchaseAddViewModel @Inject constructor(
     fun calculateTotal(liter: Double, literPrice: Double) {
         val total = liter * literPrice
         val formattedTotal = String.format("%.2f", total)
-        _totalPrice.value = formattedTotal
+        _totalPrice.value = formattedTotal.replace(",",".")
         val formattedTax = String.format("%.2f", calculateTax(total))
-        _totalTax.value = formattedTax
+        _totalTax.value = formattedTax.replace(",",".")
     }
 
     private fun calculateTax(total: Double): Double {

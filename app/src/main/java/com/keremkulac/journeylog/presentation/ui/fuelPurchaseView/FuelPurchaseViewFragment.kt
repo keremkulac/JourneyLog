@@ -26,6 +26,7 @@ import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
 import com.keremkulac.journeylog.util.TranslationHelper
 import com.keremkulac.journeylog.util.hideKeyboard
+import com.keremkulac.journeylog.util.toMoneyFormat
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -113,10 +114,7 @@ class FuelPurchaseViewFragment :
                     val list = data as List<Receipt>
                     createRecyclerView(list)
                     checkFuelPurchaseList(list)
-                    binding.totalPrice.text =
-                        getString(R.string.fuel_purchase_view_total_price).format(
-                            viewModel.calculateTotalPrice(list)
-                        )
+                    binding.totalPrice.text = getString(R.string.fuel_purchase_view_total_price).format(viewModel.calculateTotalPrice(list).toMoneyFormat())
                     setPieChart(list)
                 })
         }
