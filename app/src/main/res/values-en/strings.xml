@@ -133,7 +133,7 @@
     <string name="validation_message_empty_fuel_type">Select a fuel type</string>
     <string name="vehicle_select_vehicle_select_title">Select Vehicle</string>
     <string name="vehicle_select_license_plate_title">Enter License Plate</string>
-    <string name="vehicle_select_fuel_type_title" >Fuel type</string>
+    <string name="vehicle_select_fuel_type_title">Fuel type</string>
     <string name="vehicle_select_license_plate_info">Do not forget to add spaces when entering the license plate</string>
     <string name="vehicle_select_license_plate_country">TR</string>
     <string name="vehicle_select_create_button_text">Create Vehicle</string>
@@ -216,5 +216,7 @@
     <string name="update_password_title">Set your password</string>
     <string name="edit_profile_email_hint">Email</string>
 
+    <string name="fuel_consumption_per_100_kilometers_info">According to average <b>%s</b> prices, the vehicle burns <b>%s ₺</b> per 100 kilometers.</string>
+    <string name="fuel_consumption_per_kilometer_info">According to average <b>%s</b> prices, your car burns <b>%s ₺</b> per kilometer.</string>
 
 </resources>

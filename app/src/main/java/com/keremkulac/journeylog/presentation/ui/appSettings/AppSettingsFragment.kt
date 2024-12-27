@@ -32,7 +32,7 @@ class AppSettingsFragment :
         binding.language.setOnClickListener {
             val dialog = Dialog(requireContext())
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setContentView(R.layout.item_language_select)
+            dialog.setContentView(R.layout.dialog_language_select)
             dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
             val window = dialog.window
             val params = WindowManager.LayoutParams()

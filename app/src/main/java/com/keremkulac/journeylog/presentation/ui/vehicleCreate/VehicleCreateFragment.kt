@@ -23,6 +23,7 @@ import com.keremkulac.journeylog.util.VehicleItemsUtil
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.ArrayList
 import java.util.Locale
+import java.util.UUID
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -83,6 +84,7 @@ class VehicleCreateFragment :
             if (viewModel.validateLicensePlate(selectedVehicle, licensePlate, lastKm,selectedFuelType)) {
                 user?.let {
                     selectedVehicle?.let { vehicle ->
+                        vehicle.id = UUID.randomUUID().toString()
                         vehicle.userId = it.id
                         vehicle.licensePlate = licensePlate
                         vehicle.lastKm = lastKm

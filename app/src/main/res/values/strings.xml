@@ -215,5 +215,7 @@
     <string name="update_password_title">Şifrenizi belirleyin</string>
     <string name="edit_profile_email_hint">Email</string>
 
+    <string name="fuel_consumption_per_100_kilometers_info">Ortalama <b>%s</b> fiyatlarına göre aracınız 100 kilometrede <b>%s ₺</b> yakmaktadır.</string>
+    <string name="fuel_consumption_per_kilometer_info">Ortalama  <b>%s</b> fiyatlarına göre aracınız kilometrede <b>%s ₺</b>  yakmaktadır.</string>
 
 </resources>

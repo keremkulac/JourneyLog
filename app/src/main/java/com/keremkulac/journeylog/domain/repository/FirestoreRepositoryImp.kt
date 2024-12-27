@@ -86,6 +86,7 @@ class FirestoreRepositoryImp @Inject constructor(
                         list.add(receiptObject)
                     }
                 }
+                list.sortByDescending { it.date }
                 result.invoke(Result.Success(list))
 
             }.addOnFailureListener { exception ->
