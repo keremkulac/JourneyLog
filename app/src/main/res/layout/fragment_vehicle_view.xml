@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         app:cardCornerRadius="16dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -66,6 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:visibility="gone"
         android:text="@string/vehicle_view_all_vehicle_title"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -92,11 +94,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <ImageView
         android:id="@+id/emptyWarning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/warning_empty_list"
+        android:contentDescription="@string/todo"
+        android:src="@drawable/illustration_not_found"
         android:textSize="16sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -73,9 +73,13 @@ class VehicleViewFragment :
     private fun checkEmptyList(vehicleList: List<Vehicle>) {
         if (vehicleList.isEmpty()) {
             binding.vehiclesRecyclerView.visibility = View.GONE
+            binding.vehicleCardView.visibility = View.GONE
+            binding.allVehicleTitle.visibility = View.GONE
             binding.emptyWarning.visibility = View.VISIBLE
         } else {
             binding.vehiclesRecyclerView.visibility = View.VISIBLE
+            binding.vehicleCardView.visibility = View.VISIBLE
+            binding.allVehicleTitle.visibility = View.VISIBLE
             binding.emptyWarning.visibility = View.GONE
             binding.vehicleCardInfo.text =
                 getString(R.string.vehicle_view_card_info_text).format(vehicleList.size)

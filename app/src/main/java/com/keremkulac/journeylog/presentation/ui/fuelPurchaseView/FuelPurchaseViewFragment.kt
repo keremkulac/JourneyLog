@@ -144,9 +144,14 @@ class FuelPurchaseViewFragment :
         if (list.isEmpty()) {
             binding.fuelPurchaseRecyclerView.visibility = View.GONE
             binding.emptyWarning.visibility = View.VISIBLE
+            binding.appBarLayout.visibility = View.GONE
+            binding.scrollView.visibility = View.GONE
+
         } else {
             binding.fuelPurchaseRecyclerView.visibility = View.VISIBLE
             binding.emptyWarning.visibility = View.GONE
+            binding.appBarLayout.visibility = View.VISIBLE
+            binding.scrollView.visibility = View.VISIBLE
             adapter.filterList(list as ArrayList<Receipt>)
         }
     }
@@ -205,7 +210,6 @@ class FuelPurchaseViewFragment :
         datePickerDialog.datePicker.maxDate = calendar.timeInMillis
         datePickerDialog.show()
     }
-
 
     private fun formatDate(day: Int, month: Int, year: Int): String {
         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
