@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#F7F8FA"
+        android:padding="16dp"
         tools:context=".presentation.ui.vehicleCreate.VehicleCreateFragment">
 
         <androidx.cardview.widget.CardView
@@ -18,8 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -34,7 +33,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/imageview_background"
-                    android:backgroundTint="#E53935"
+                    android:backgroundTint="#1976D2"
                     android:contentDescription="@string/todo"
                     android:padding="10dp"
                     android:src="@drawable/ic_car"
@@ -42,24 +41,43 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/vehicleSelectTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Araç tipi seçiniz"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/vehicleIcon" />
+
+                <TextView
                     android:id="@+id/vehicleTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="@string/vehicle_select_vehicle_select_title"
+                    android:text="Araç \nBilgisi"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/vehicleIcon"
                     app:layout_constraintTop_toTopOf="@+id/vehicleIcon" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/selectVehicleRecyclerView"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/vehicleSelectLayout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="48dp"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/vehicleIcon" />
+                    app:layout_constraintTop_toBottomOf="@+id/vehicleSelectTitle">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/vehicleTypeSelect"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="none"
+                        tools:ignore="LabelFor" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/licensePlateTitle"
@@ -70,7 +88,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/selectVehicleRecyclerView" />
+                    app:layout_constraintTop_toBottomOf="@+id/vehicleSelectLayout" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/vehicleLicensePlateLayout"
@@ -96,34 +114,6 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/vehicleFuelTypeTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/vehicle_select_fuel_type_title"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/vehicleLicensePlateLayout" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/vehicleFuelTypeLayout"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                    android:layout_width="200dp"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/vehicleFuelTypeTitle">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/vehicleFuelType"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:inputType="none"
-                        tools:ignore="LabelFor" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <TextView
                     android:id="@+id/vehicleLastKmTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -132,7 +122,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/vehicleFuelTypeLayout" />
+                    app:layout_constraintTop_toBottomOf="@+id/vehicleLicensePlateLayout" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/vehicleLastKmLayout"
@@ -157,22 +147,125 @@
                         tools:ignore="LabelFor" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <Button
-                    android:id="@+id/confirmVehicle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:text="@string/vehicle_select_create_button_text"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:visibility="visible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/vehicleLastKmLayout" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/fuelCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectVehicleCardView">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/vehicleFuelIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/imageview_background"
+                    android:backgroundTint="#E53935"
+                    android:contentDescription="@string/todo"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_fuel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/vehicleFuelTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Yakıt \nBilgisi"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/vehicleFuelIcon"
+                    app:layout_constraintTop_toTopOf="@+id/vehicleFuelIcon" />
+
+
+                <TextView
+                    android:id="@+id/vehicleFuelTypeTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/vehicle_select_fuel_type_title"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/vehicleFuelIcon" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/vehicleFuelTypeLayout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="@+id/per100KilometerFuelTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/vehicleFuelTypeTitle">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/vehicleFuelType"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="none"
+                        tools:ignore="LabelFor" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/per100KilometerFuelTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Aracınızın 100'km de yakıt tüketimi"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/vehicleFuelTypeLayout" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/per100KilometerFuelLayout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="@+id/per100KilometerFuelTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/per100KilometerFuelTitle">
+
+                    <EditText
+                        android:id="@+id/per100KilometerFuel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        tools:ignore="LabelFor"
+                        tools:text="Örn 7.2" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/confirmVehicle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/vehicle_select_create_button_text"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fuelCardView" />
 
         <ProgressBar
             android:id="@+id/progressBar"

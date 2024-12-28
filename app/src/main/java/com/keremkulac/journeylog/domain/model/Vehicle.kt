@@ -11,6 +11,9 @@ data class Vehicle(
     val illustrationName: String? = "",
     var lastKm: String? = "",
     var vehicleFuelType: String? = "",
-    val title: String? = "",
+    var per100KilometersFuelLiter : String ?= "0",
+    var perKilometersFuelPrice : String ?= "0",
+    var per100KilometersFuelPrice : String ?= "0",
+    var title: String? = "",
     var licensePlate: String? = ""
 ) : Parcelable

@@ -9,9 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentVehicleCreateBinding
+import com.keremkulac.journeylog.domain.model.AverageFuelPrice
 import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.domain.model.Vehicle
 import com.keremkulac.journeylog.util.BaseFragment
@@ -20,6 +20,7 @@ import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
 import com.keremkulac.journeylog.util.TranslationHelper
 import com.keremkulac.journeylog.util.VehicleItemsUtil
+import com.keremkulac.journeylog.util.decimalFormat
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.ArrayList
 import java.util.Locale
@@ -30,41 +31,30 @@ import javax.inject.Inject
 class VehicleCreateFragment :
     BaseFragment<FragmentVehicleCreateBinding>(FragmentVehicleCreateBinding::inflate) {
 
-    private lateinit var adapter: VehicleCreateAdapter
     private lateinit var sharedViewModel: SharedViewModel
+
     @Inject
     lateinit var translationHelper: TranslationHelper
     private var selectedVehicle: Vehicle? = null
     private var user: User? = null
-    private var selectedFuelType : String? = null
+    private var selectedFuelType: String? = null
+    private var selectedVehicleType: String? = null
     private val viewModel by viewModels<VehicleCreateViewModel>()
     private val args by navArgs<VehicleCreateFragmentArgs>()
+    private lateinit var averageFuelPriceList: List<AverageFuelPrice>
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
+        createVehicleType()
+        createFuelType()
         observeUser()
-        createRecyclerView()
-        vehicleClick()
         observeValidation()
         createVehicle()
         observeSaveVehicleResult()
-        createFuelType()
         selectFuelType()
-    }
-
-
-    private fun createRecyclerView() {
-        adapter = VehicleCreateAdapter(translationHelper)
-        binding.selectVehicleRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        adapter.vehicleList = ArrayList(VehicleItemsUtil.getVehicleItems())
-        binding.selectVehicleRecyclerView.adapter = adapter
-    }
-
-    private fun vehicleClick() {
-        adapter.clickListener = { vehicle ->
-            selectedVehicle = vehicle
-        }
+        selectVehicleType()
+        observeAverageFuelPrices()
     }
 
     private fun createFuelType() {
@@ -77,22 +67,67 @@ class VehicleCreateFragment :
         binding.vehicleFuelType.setAdapter(adapter)
     }
 
+    private fun createVehicleType() {
+        val adapter =
+            ArrayAdapter(
+                requireContext(),
+                R.layout.item_dropdown,
+                resources.getStringArray(R.array.vehicleTypes)
+            )
+        binding.vehicleTypeSelect.setAdapter(adapter)
+    }
+
     private fun createVehicle() {
         binding.confirmVehicle.setOnClickListener {
-            val licensePlate = binding.vehicleLicensePlate.text.toString().uppercase(Locale.getDefault())
+            val licensePlate =
+                binding.vehicleLicensePlate.text.toString().uppercase(Locale.getDefault())
             val lastKm = binding.vehicleLastKm.text.toString()
-            if (viewModel.validateLicensePlate(selectedVehicle, licensePlate, lastKm,selectedFuelType)) {
+            val per100KilometerFuel = binding.per100KilometerFuel.text.toString()
+            if (viewModel.validateLicensePlate(
+                    selectedVehicleType,
+                    licensePlate,
+                    lastKm,
+                    selectedFuelType,
+                    per100KilometerFuel
+                )
+            ) {
                 user?.let {
+                    val fuelCost = calculateFuelCost(averageFuelPriceList, per100KilometerFuel)
+                    selectedVehicle = VehicleItemsUtil.getVehicleItems().find { it.title == selectedVehicleType }
                     selectedVehicle?.let { vehicle ->
                         vehicle.id = UUID.randomUUID().toString()
                         vehicle.userId = it.id
                         vehicle.licensePlate = licensePlate
                         vehicle.lastKm = lastKm
+                        vehicle.title = selectedVehicleType
                         vehicle.vehicleFuelType = selectedFuelType
+                        vehicle.per100KilometersFuelLiter = per100KilometerFuel
+                        vehicle.perKilometersFuelPrice = (fuelCost.toDouble() / 100).toString().decimalFormat()
+                        vehicle.per100KilometersFuelPrice = fuelCost
                         showDialog(vehicle)
                     }
                 }
             }
+        }
+    }
+
+    private fun calculateFuelCost(
+        averageFuelPriceList: List<AverageFuelPrice>,
+        per100KilometerFuel: String
+    ): String {
+        var per100KilometerInfo = 0.0
+        averageFuelPriceList.find { it.title == selectedFuelType }?.let { fuelPrice ->
+            per100KilometerInfo = per100KilometerFuel.toDouble() * fuelPrice.value.toDouble()
+        }
+        return per100KilometerInfo.toString().decimalFormat()
+    }
+
+    private fun observeAverageFuelPrices() {
+        viewModel.averageFuelPrices.observe(viewLifecycleOwner) { result ->
+            HandleResult.handleResult(binding.progressBar, result, onSuccess = { data ->
+                val averageFuelPriceList = data as List<AverageFuelPrice>
+                this.averageFuelPriceList = averageFuelPriceList
+            })
         }
     }
 
@@ -119,10 +154,17 @@ class VehicleCreateFragment :
         }
     }
 
-    private fun selectFuelType(){
+    private fun selectFuelType() {
         binding.vehicleFuelType.onItemClickListener =
             AdapterView.OnItemClickListener { parent, _, position, _ ->
                 selectedFuelType = parent.getItemAtPosition(position).toString()
+            }
+    }
+
+    private fun selectVehicleType() {
+        binding.vehicleTypeSelect.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, _, position, _ ->
+                selectedVehicleType = parent.getItemAtPosition(position).toString()
             }
     }
 

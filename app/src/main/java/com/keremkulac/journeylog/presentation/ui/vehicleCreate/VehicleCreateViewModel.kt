@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.keremkulac.journeylog.domain.model.Vehicle
+import com.keremkulac.journeylog.domain.usecase.GetAverageFuelPriceUseCase
 import com.keremkulac.journeylog.domain.usecase.SaveVehicleUseCase
 import com.keremkulac.journeylog.util.InputValidation
 import com.keremkulac.journeylog.util.Result
@@ -15,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class VehicleCreateViewModel @Inject constructor(
     private val inputValidation: InputValidation,
-    private val saveVehicleUseCase: SaveVehicleUseCase
+    private val saveVehicleUseCase: SaveVehicleUseCase,
+    private val getAverageFuelPriceUseCase: GetAverageFuelPriceUseCase
 ) : ViewModel() {
 
     private val _saveVehicleResult = MutableLiveData<Result<String>>()
@@ -24,8 +26,15 @@ class VehicleCreateViewModel @Inject constructor(
     private val _validationMessage = MutableLiveData<String>()
     val validationMessage: LiveData<String> get() = _validationMessage
 
-    fun validateLicensePlate(vehicle: Vehicle?,licensePlate: String?,lastKm: String?,selectedFuelType : String?): Boolean {
-        return inputValidation.validateLicensePlate(vehicle,licensePlate,lastKm,selectedFuelType) { message ->
+    private val _averageFuelPrices = MutableLiveData<Result<Any>>()
+    val averageFuelPrices: LiveData<Result<Any>> get() = _averageFuelPrices
+
+    init {
+        getAverageFuelPrice()
+    }
+
+    fun validateLicensePlate(selectedVehicleType: String?,licensePlate: String?,lastKm: String?,selectedFuelType : String?,per100KilometerFuel : String?): Boolean {
+        return inputValidation.validateLicensePlate(selectedVehicleType,licensePlate,lastKm,selectedFuelType,per100KilometerFuel) { message ->
             _validationMessage.value = message
         }
     }
@@ -34,6 +43,15 @@ class VehicleCreateViewModel @Inject constructor(
         viewModelScope.launch {
             saveVehicleUseCase.invoke(vehicle) { result ->
                 _saveVehicleResult.value = result
+            }
+        }
+    }
+
+    private fun getAverageFuelPrice() {
+        viewModelScope.launch {
+            _averageFuelPrices.value = Result.Loading
+            getAverageFuelPriceUseCase.invoke {
+                _averageFuelPrices.value = it
             }
         }
     }

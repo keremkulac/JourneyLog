@@ -128,9 +128,10 @@
     <string name="profile_my_vehicles_button_text" translatable="false">Araçlarım</string>
     <string name="validation_message_empty_license_plate" translatable="false">Lütfen bir plaka giriniz</string>
     <string name="validation_message_valid_license_plate" translatable="false">Lütfen geçerli bir plaka giriniz</string>
-    <string name="validation_message_empty_vehicle" translatable="false">Lütfen bir araç seçiniz"</string>
+    <string name="validation_message_empty_vehicle" translatable="false">Lütfen bir araç tipi seçiniz"</string>
     <string name="validation_message_empty_vehicle_last_km" translatable="false">Araç kilometresini giriniz"</string>
     <string name="validation_message_empty_fuel_type" translatable="false">Lütfen bir yakıt türü seçiniz</string>
+    <string name="validation_message_empty_per_100_kilometer_fuel" translatable="false">Lütfen yakıt tüketimini giriniz</string>
     <string name="vehicle_select_vehicle_select_title" translatable="false">Araç \nSeçiniz</string>
     <string name="vehicle_select_license_plate_title" translatable="false">Plaka giriniz</string>
     <string name="vehicle_select_fuel_type_title" translatable="false">Yakıt türü</string>
@@ -168,6 +169,14 @@
         <item>LPG</item>
         <item>Benzin</item>
         <item>Dizel</item>
+    </string-array>
+
+    <string-array name="vehicleTypes">
+        <item>Otomobil</item>
+        <item>Motorsiklet</item>
+        <item>SUV</item>
+        <item>Ticari</item>
+        <item>Kamyonet</item>
     </string-array>
 
     <string name="fuel_purchase_detail_station_name_title" translatable="false">İstasyon</string>

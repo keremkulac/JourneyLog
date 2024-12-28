@@ -232,15 +232,16 @@ class InputValidation @Inject constructor(private val context: Context) {
     }
 
     fun validateLicensePlate(
-        vehicle: Vehicle?,
+        selectedVehicleType: String?,
         licensePlate: String?,
         lastKm: String?,
         selectedFuelType: String?,
+        per100KilometerFuel: String?,
         validationMessage: (String) -> Unit
     ): Boolean {
         return when {
 
-            vehicle == null -> {
+            selectedVehicleType.isNullOrEmpty() -> {
                 validationMessage(context.getString(R.string.validation_message_empty_vehicle))
                 false
             }
@@ -255,13 +256,18 @@ class InputValidation @Inject constructor(private val context: Context) {
                 false
             }
 
+            lastKm.isNullOrEmpty() -> {
+                validationMessage(context.getString(R.string.validation_message_empty_vehicle_last_km))
+                false
+            }
+
             selectedFuelType.isNullOrEmpty() -> {
                 validationMessage(context.getString(R.string.validation_message_empty_fuel_type))
                 false
             }
 
-            lastKm.isNullOrEmpty() -> {
-                validationMessage(context.getString(R.string.validation_message_empty_vehicle_last_km))
+            per100KilometerFuel.isNullOrEmpty() -> {
+                validationMessage(context.getString(R.string.validation_message_empty_per_100_kilometer_fuel))
                 false
             }
 
