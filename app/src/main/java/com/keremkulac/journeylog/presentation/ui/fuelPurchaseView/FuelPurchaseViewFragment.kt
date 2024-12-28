@@ -48,7 +48,8 @@ class FuelPurchaseViewFragment :
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
         observeUser()
-        navigateAddFuelPurchase()
+        fabClick()
+        createReceiptClick()
         observeAllReceipts()
     }
 
@@ -59,10 +60,18 @@ class FuelPurchaseViewFragment :
     }
 
     private fun navigateAddFuelPurchase() {
+        findNavController().navigate(R.id.action_fuelPurchaseViewFragment_to_FuelPurchaseAddFragment)
+    }
+
+    private fun fabClick() {
         binding.fab.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_fuelPurchaseViewFragment_to_FuelPurchaseAddFragment
-            )
+            navigateAddFuelPurchase()
+        }
+    }
+
+    private fun createReceiptClick() {
+        binding.createReceipt.setOnClickListener {
+            navigateAddFuelPurchase()
         }
     }
 
@@ -114,7 +123,10 @@ class FuelPurchaseViewFragment :
                     val list = data as List<Receipt>
                     createRecyclerView(list)
                     checkFuelPurchaseList(list)
-                    binding.totalPrice.text = getString(R.string.fuel_purchase_view_total_price).format(viewModel.calculateTotalPrice(list).toMoneyFormat())
+                    binding.totalPrice.text =
+                        getString(R.string.fuel_purchase_view_total_price).format(
+                            viewModel.calculateTotalPrice(list).toMoneyFormat()
+                        )
                     setPieChart(list)
                 })
         }
@@ -141,18 +153,22 @@ class FuelPurchaseViewFragment :
     }
 
     private fun checkFuelPurchaseList(list: List<Receipt>) {
-        if (list.isEmpty()) {
-            binding.fuelPurchaseRecyclerView.visibility = View.GONE
-            binding.emptyWarning.visibility = View.VISIBLE
-            binding.appBarLayout.visibility = View.GONE
-            binding.scrollView.visibility = View.GONE
+        with(binding) {
+            if (list.isEmpty()) {
+                fuelPurchaseRecyclerView.visibility = View.GONE
+                emptyWarning.visibility = View.VISIBLE
+                createReceipt.visibility = View.VISIBLE
+                appBarLayout.visibility = View.GONE
+                fab.visibility = View.GONE
 
-        } else {
-            binding.fuelPurchaseRecyclerView.visibility = View.VISIBLE
-            binding.emptyWarning.visibility = View.GONE
-            binding.appBarLayout.visibility = View.VISIBLE
-            binding.scrollView.visibility = View.VISIBLE
-            adapter.filterList(list as ArrayList<Receipt>)
+            } else {
+                fuelPurchaseRecyclerView.visibility = View.VISIBLE
+                emptyWarning.visibility = View.GONE
+                createReceipt.visibility = View.GONE
+                appBarLayout.visibility = View.VISIBLE
+                fab.visibility = View.VISIBLE
+                adapter.filterList(list as ArrayList<Receipt>)
+            }
         }
     }
 

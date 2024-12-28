@@ -38,7 +38,8 @@ class VehicleViewFragment :
         sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
         observeUser()
         observeAllVehicles()
-        navigateVehicleCreate()
+        fabClick()
+        createVehicleClick()
     }
 
     private fun observeAllVehicles() {
@@ -71,19 +72,24 @@ class VehicleViewFragment :
     }
 
     private fun checkEmptyList(vehicleList: List<Vehicle>) {
-        if (vehicleList.isEmpty()) {
-            binding.vehiclesRecyclerView.visibility = View.GONE
-            binding.vehicleCardView.visibility = View.GONE
-            binding.allVehicleTitle.visibility = View.GONE
-            binding.emptyWarning.visibility = View.VISIBLE
-        } else {
-            binding.vehiclesRecyclerView.visibility = View.VISIBLE
-            binding.vehicleCardView.visibility = View.VISIBLE
-            binding.allVehicleTitle.visibility = View.VISIBLE
-            binding.emptyWarning.visibility = View.GONE
-            binding.vehicleCardInfo.text =
-                getString(R.string.vehicle_view_card_info_text).format(vehicleList.size)
-            adapter.filterList(vehicleList as ArrayList<Vehicle>)
+        with(binding) {
+            if (vehicleList.isEmpty()) {
+                vehiclesRecyclerView.visibility = View.GONE
+                fab.visibility = View.GONE
+                vehicleCardView.visibility = View.GONE
+                allVehicleTitle.visibility = View.GONE
+                emptyWarning.visibility = View.VISIBLE
+                createVehicle.visibility = View.VISIBLE
+            } else {
+                vehiclesRecyclerView.visibility = View.VISIBLE
+                fab.visibility = View.VISIBLE
+                vehicleCardView.visibility = View.VISIBLE
+                allVehicleTitle.visibility = View.VISIBLE
+                emptyWarning.visibility = View.GONE
+                createVehicle.visibility = View.GONE
+                vehicleCardInfo.text = getString(R.string.vehicle_view_card_info_text).format(vehicleList.size)
+                adapter.filterList(vehicleList as ArrayList<Vehicle>)
+            }
         }
     }
 
@@ -124,8 +130,18 @@ class VehicleViewFragment :
     }
 
     private fun navigateVehicleCreate() {
+        findNavController().navigate(R.id.action_vehicleViewFragment_to_vehicleCreateFragment)
+    }
+
+    private fun fabClick() {
         binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_vehicleViewFragment_to_vehicleCreateFragment)
+            navigateVehicleCreate()
+        }
+    }
+
+    private fun createVehicleClick() {
+        binding.createVehicle.setOnClickListener {
+            navigateVehicleCreate()
         }
     }
 
