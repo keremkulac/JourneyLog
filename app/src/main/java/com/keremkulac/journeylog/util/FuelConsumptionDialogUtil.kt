@@ -6,7 +6,6 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.ArrayAdapter
-import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.DialogFuelConsumptionBinding
 import com.keremkulac.journeylog.domain.model.AverageFuelPrice
 
@@ -34,6 +33,7 @@ class FuelConsumptionDialogUtil(
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT
             )
+            decorView.setPadding(32,32,32,32)
         }
     }
 
@@ -67,7 +67,6 @@ class FuelConsumptionDialogUtil(
 
     private fun calculateConsumption() {
         val literAmount = binding.kmLiter.text.toString().toDoubleOrNull() ?: return
-
         averageFuelPriceList.find { it.title == selectedFuelType }?.let { fuelPrice ->
             val per100KilometerInfo = literAmount * fuelPrice.value.toDouble()
             val perKilometerInfo = per100KilometerInfo / 100
@@ -77,12 +76,12 @@ class FuelConsumptionDialogUtil(
 
     private fun showResults(perKilometer: Double, per100Kilometer: Double) {
         with(binding) {
-            listOf(binding.perKilometerCardView, binding.per100KilometerCardView).forEach {
-                it.visibility = View.VISIBLE
-            }
-
-            perKilometerPrice.text = context.getString(R.string.total_price).format(perKilometer.toMoneyFormat())
-            per100KilometerPrice.text = context.getString(R.string.total_price).format(per100Kilometer.toMoneyFormat())
+            perKilometerCardView.visibility = View.VISIBLE
+            per100KilometerCardView.visibility = View.VISIBLE
+            perKilometerPriceSymbol.visibility = View.VISIBLE
+            per100KilometerPriceSymbol.visibility = View.VISIBLE
+            perKilometerPrice.text = perKilometer.toMoneyFormat()
+            per100KilometerPrice.text = per100Kilometer.toMoneyFormat()
         }
     }
 }

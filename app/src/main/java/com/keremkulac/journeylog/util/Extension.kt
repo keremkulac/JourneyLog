@@ -11,7 +11,7 @@ fun View.hideKeyboard() {
 }
 
 fun String.decimalFormat() : String{
-    return String.format(Locale.getDefault(), "%,.0f", this.toDouble())
+    return String.format(Locale.getDefault(), "%,.2f", this.toDouble()).replace(",", ".")
 }
 
 fun Double.toMoneyFormat(): String {
