@@ -41,6 +41,7 @@ class VehicleCreateViewModel @Inject constructor(
 
     fun saveVehicle(vehicle: Vehicle) {
         viewModelScope.launch {
+            _saveVehicleResult.value = Result.Loading
             saveVehicleUseCase.invoke(vehicle) { result ->
                 _saveVehicleResult.value = result
             }

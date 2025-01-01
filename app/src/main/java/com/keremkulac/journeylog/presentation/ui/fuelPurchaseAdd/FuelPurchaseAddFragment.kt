@@ -18,6 +18,7 @@ import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.util.CustomDialog
 import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
+import com.keremkulac.journeylog.util.SuccessfulDialogUtil
 import com.keremkulac.journeylog.util.TextWatcher
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -150,8 +151,11 @@ class FuelPurchaseAddFragment :
     private fun observeSaveResult() {
         viewModel.saveResult.observe(viewLifecycleOwner) { result ->
             HandleResult.handleResult(binding.progressBar, result,
-                onSuccess = { data ->
-                    Toast.makeText(requireContext(), data, Toast.LENGTH_SHORT).show()
+                onSuccess = {
+                    SuccessfulDialogUtil(
+                        requireContext(),
+                        getString(R.string.dialog_success_fuel_purchase_message)
+                    ).showDialog()
                     findNavController().navigate(R.id.action_fuelPurchaseAddFragment_to_fuelPurchaseViewFragment)
                 },
                 onFailure = { message ->
@@ -191,7 +195,6 @@ class FuelPurchaseAddFragment :
 
     private fun createDialog(receipt: Receipt) {
         requireContext().apply {
-
             CustomDialog.showConfirmationDialog(
                 this,
                 getString(R.string.dialog_add_fuel_purchase_title),

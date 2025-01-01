@@ -9,6 +9,7 @@ import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentUpdatePasswordBinding
 import com.keremkulac.journeylog.util.CustomDialog
 import com.keremkulac.journeylog.util.HandleResult
+import com.keremkulac.journeylog.util.SuccessfulDialogUtil
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,9 +39,12 @@ class UpdatePasswordFragment : BottomSheetDialogFragment(R.layout.fragment_updat
     private fun observePasswordResult() {
         viewModel.updatePasswordResult.observe(viewLifecycleOwner) { updateResult ->
             HandleResult.handleResult(binding.progressBar, updateResult,
-                onSuccess = { data ->
-                    Toast.makeText(requireContext(), data, Toast.LENGTH_SHORT).show()
+                onSuccess = {
                     dismiss()
+                    SuccessfulDialogUtil(
+                        requireContext(),
+                        getString(R.string.dialog_success_password_update_message)
+                    ).showDialog()
                 }, onFailure = { message ->
                     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 })

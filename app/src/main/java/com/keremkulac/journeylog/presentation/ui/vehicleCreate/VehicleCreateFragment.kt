@@ -1,6 +1,7 @@
 package com.keremkulac.journeylog.presentation.ui.vehicleCreate
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -18,6 +19,7 @@ import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.util.CustomDialog
 import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
+import com.keremkulac.journeylog.util.SuccessfulDialogUtil
 import com.keremkulac.journeylog.util.TranslationHelper
 import com.keremkulac.journeylog.util.VehicleItemsUtil
 import com.keremkulac.journeylog.util.decimalFormat
@@ -93,7 +95,8 @@ class VehicleCreateFragment :
             ) {
                 user?.let {
                     val fuelCost = calculateFuelCost(averageFuelPriceList, per100KilometerFuel)
-                    selectedVehicle = VehicleItemsUtil.getVehicleItems().find { it.title == selectedVehicleType }
+                    selectedVehicle =
+                        VehicleItemsUtil.getVehicleItems().find { it.title == selectedVehicleType }
                     selectedVehicle?.let { vehicle ->
                         vehicle.id = UUID.randomUUID().toString()
                         vehicle.userId = it.id
@@ -102,7 +105,8 @@ class VehicleCreateFragment :
                         vehicle.title = selectedVehicleType
                         vehicle.vehicleFuelType = selectedFuelType
                         vehicle.per100KilometersFuelLiter = per100KilometerFuel
-                        vehicle.perKilometersFuelPrice = (fuelCost.toDouble() / 100).toString().decimalFormat()
+                        vehicle.perKilometersFuelPrice =
+                            (fuelCost.toDouble() / 100).toString().decimalFormat()
                         vehicle.per100KilometersFuelPrice = fuelCost
                         showDialog(vehicle)
                     }
@@ -146,9 +150,18 @@ class VehicleCreateFragment :
     private fun observeSaveVehicleResult() {
         viewModel.saveVehicleResult.observe(viewLifecycleOwner) { result ->
             HandleResult.handleResult(binding.progressBar, result,
-                onSuccess = { data ->
-                    Toast.makeText(requireContext(), data, Toast.LENGTH_SHORT).show()
-                }, onFailure = { message ->
+                onSuccess = {
+                    SuccessfulDialogUtil(
+                        requireContext(),
+                        getString(R.string.dialog_success_vehicle_create_message)
+                    ).showDialog()
+                    if (args.fromAddPurchase) {
+                        findNavController().navigate(R.id.action_vehicleCreateFragment_to_fuelPurchaseAddFragment)
+                    } else {
+                        findNavController().navigate(R.id.action_vehicleCreateFragment_to_vehicleViewFragment)
+                    }
+                },
+                onFailure = { message ->
                     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 })
         }
@@ -175,17 +188,12 @@ class VehicleCreateFragment :
                 getString(R.string.dialog_save_vehicle_title),
                 getString(R.string.dialog_save_vehicle_message),
                 getString(R.string.dialog_save_vehicle_positive_button_text),
-                getString(R.string.dialog_save_vehicle_negative_button_text)
-            ) {
-                viewModel.saveVehicle(vehicle)
-                if (args.fromAddPurchase) {
-                    findNavController().navigate(R.id.action_vehicleCreateFragment_to_fuelPurchaseAddFragment)
-                } else {
-                    findNavController().navigate(R.id.action_vehicleCreateFragment_to_vehicleViewFragment)
+                getString(R.string.dialog_save_vehicle_negative_button_text),
+                onPositiveClick = {
+                    viewModel.saveVehicle(vehicle)
                 }
-            }
+            )
         }
     }
-
 
 }
