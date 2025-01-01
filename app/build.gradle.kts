@@ -194,6 +194,9 @@ dependencies {
     implementation(libs.mpandroidchart) {
         exclude(group = "com.intellij", module = "annotations")
     }
+    implementation(libs.lottie) {
+        exclude(group = "com.intellij", module = "annotations")
+    }
     kapt(libs.hilt.compiler)
     kapt(libs.androidx.room.compiler)
     testImplementation(libs.junit) {
