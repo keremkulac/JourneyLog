@@ -95,8 +95,7 @@ class VehicleCreateFragment :
             ) {
                 user?.let {
                     val fuelCost = calculateFuelCost(averageFuelPriceList, per100KilometerFuel)
-                    selectedVehicle =
-                        VehicleItemsUtil.getVehicleItems().find { it.title == selectedVehicleType }
+                    selectedVehicle = VehicleItemsUtil.getVehicleItems().find { translationHelper.translate(it.title!!,TranslationHelper.TranslationType.Vehicle) == selectedVehicleType }
                     selectedVehicle?.let { vehicle ->
                         vehicle.id = UUID.randomUUID().toString()
                         vehicle.userId = it.id

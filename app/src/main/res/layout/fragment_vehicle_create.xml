@@ -45,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Araç tipi seçiniz"
+                    android:text="@string/vehicle_select_vehicle_select_title"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +56,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Araç \nBilgisi"
+                    android:text="@string/vehicle_select_vehicle_section_title"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/vehicleIcon"
@@ -127,7 +127,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/vehicleLastKmLayout"
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="@+id/vehicleLastKmTitle"
@@ -182,7 +182,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Yakıt \nBilgisi"
+                    android:text="@string/vehicle_select_fuel_section_title"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/vehicleFuelIcon"
@@ -220,10 +220,10 @@
 
                 <TextView
                     android:id="@+id/per100KilometerFuelTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Aracınızın 100'km de yakıt tüketimi"
+                    android:text="@string/vehicle_select_vehicle_per_100_kilometer_title"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -234,7 +234,7 @@
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="@+id/per100KilometerFuelTitle"
                     app:layout_constraintStart_toStartOf="parent"
@@ -244,10 +244,10 @@
                         android:id="@+id/per100KilometerFuel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:hint="@string/vehicle_select_vehicle_per_100_kilometer_hint"
                         android:importantForAutofill="no"
                         android:inputType="text"
-                        tools:ignore="LabelFor"
-                        android:hint="Örn 7.2" />
+                        tools:ignore="LabelFor" />
 
                 </com.google.android.material.textfield.TextInputLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
