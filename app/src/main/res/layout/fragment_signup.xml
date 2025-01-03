@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     android:padding="16dp"
     tools:context=".presentation.ui.signup.SignupFragment">
 
@@ -106,6 +105,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        app:boxStrokeWidth="0.5dp"
         app:boxBackgroundColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -125,6 +125,8 @@
             android:importantForAutofill="no"
             android:inputType="textPassword"
             android:maxLines="1" />
+
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

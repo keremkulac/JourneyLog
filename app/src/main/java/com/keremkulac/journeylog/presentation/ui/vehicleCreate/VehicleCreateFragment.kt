@@ -1,7 +1,6 @@
 package com.keremkulac.journeylog.presentation.ui.vehicleCreate
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -24,7 +23,6 @@ import com.keremkulac.journeylog.util.TranslationHelper
 import com.keremkulac.journeylog.util.VehicleItemsUtil
 import com.keremkulac.journeylog.util.decimalFormat
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.ArrayList
 import java.util.Locale
 import java.util.UUID
 import javax.inject.Inject

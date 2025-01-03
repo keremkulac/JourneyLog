@@ -37,21 +37,39 @@ class FuelPurchaseViewViewModel @Inject constructor(
         return String.format(Locale.US, "%.2f", total).toDouble()
     }
 
-    fun calculateFuelTypePrice(receiptList: List<Receipt>, translationHelper: TranslationHelper): ArrayList<PieEntry> {
+    fun calculateFuelTypePrice(
+        receiptList: List<Receipt>,
+        translationHelper: TranslationHelper
+    ): ArrayList<PieEntry> {
         val pieEntries = ArrayList<PieEntry>()
         FuelType.entries.forEach { fuelType ->
             var total = 0.0
             receiptList.forEach { receipt ->
-                if (translationHelper.translate(receipt.fuelType, TranslationHelper.TranslationType.Fuel) == fuelType.value) {
+                if (translationHelper.translate(
+                        receipt.fuelType,
+                        TranslationHelper.TranslationType.Fuel
+                    ) == translationHelper.translate(
+                        fuelType.value,
+                        TranslationHelper.TranslationType.Fuel
+                    )
+                ) {
                     total += receipt.total.replace(",", ".").toDouble()
                 }
             }
-            pieEntries.add(PieEntry(total.toFloat(), fuelType.value))
+            pieEntries.add(
+                PieEntry(
+                    total.toFloat(),
+                    translationHelper.translate(
+                        fuelType.value,
+                        TranslationHelper.TranslationType.Fuel
+                    )
+                )
+            )
         }
         return pieEntries
     }
 
-    fun filter(text: String,list: List<Receipt>) : ArrayList<Receipt>{
+    fun filter(text: String, list: List<Receipt>): ArrayList<Receipt> {
         val filteredList: ArrayList<Receipt> = ArrayList()
         for (item in list) {
             if (item.date.lowercase().contains(text.lowercase())) {

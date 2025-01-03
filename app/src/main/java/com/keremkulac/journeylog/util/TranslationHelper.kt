@@ -7,7 +7,7 @@ import javax.inject.Inject
 class TranslationHelper @Inject constructor(private val context: Context) {
 
     sealed class TranslationType(val translations: Map<String, String>) {
-        object Fuel : TranslationType(
+        data object Fuel : TranslationType(
             mapOf(
                 "Benzin" to "Gasoline",
                 "LPG" to "LPG",
@@ -15,7 +15,7 @@ class TranslationHelper @Inject constructor(private val context: Context) {
             )
         )
 
-        object Vehicle : TranslationType(
+       data object Vehicle : TranslationType(
             mapOf(
                 "Otomobil" to "Automobile",
                 "Motorsiklet" to "Motorcycle",

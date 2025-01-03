@@ -67,6 +67,7 @@
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
+                    app:boxStrokeWidth="0.75dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/receiptStationTitle">
@@ -106,7 +107,8 @@
                         android:layout_height="wrap_content"
                         android:checkable="true"
                         android:text="@string/fuel_type_gasoline"
-                        app:checkedIconEnabled="true" />
+                        app:checkedIconEnabled="true"
+                        app:chipStrokeWidth="0.5dp" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/diesel"
@@ -114,7 +116,8 @@
                         android:layout_height="wrap_content"
                         android:checkable="true"
                         android:text="@string/fuel_type_diesel"
-                        app:checkedIconEnabled="true" />
+                        app:checkedIconEnabled="true"
+                        app:chipStrokeWidth="0.5dp" />
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/lpg"
@@ -122,7 +125,8 @@
                         android:layout_height="wrap_content"
                         android:checkable="true"
                         android:text="@string/fuel_type_LPG"
-                        app:checkedIconEnabled="true" />
+                        app:checkedIconEnabled="true"
+                        app:chipStrokeWidth="0.5dp" />
                 </com.google.android.material.chip.ChipGroup>
 
                 <TextView
@@ -143,6 +147,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
+                    app:boxStrokeWidth="0.75dp"
                     app:layout_constraintEnd_toStartOf="@+id/receiptPurchaseLiterLayout"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/receiptLiterPriceTitle">
@@ -177,6 +182,7 @@
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    app:boxStrokeWidth="0.75dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/receiptLiterPriceTitle"
@@ -265,6 +271,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:visibility="gone"
+                    app:boxStrokeWidth="0.75dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vehicleLicensePlateTitle">
@@ -295,6 +302,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
+                    app:boxStrokeWidth="0.75dp"
                     app:layout_constraintEnd_toEndOf="@+id/vehicleKmTitle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vehicleKmTitle">

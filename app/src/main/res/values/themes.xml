@@ -5,6 +5,8 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="colorPrimary">#3F51B5</item>
         <item name="colorPrimaryDark">#3F51B5</item>
+        <item name="android:windowBackground">@color/background</item>
+
     </style>
 
     <style name="Theme.JourneyLog" parent="Base.Theme.JourneyLog" />

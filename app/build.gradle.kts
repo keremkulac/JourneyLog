@@ -131,9 +131,6 @@ dependencies {
     implementation(libs.androidx.core) {
         exclude(group = "com.intellij", module = "annotations")
     }
-    implementation(libs.androidx.ktx.core) {
-        exclude(group = "com.intellij", module = "annotations")
-    }
     implementation(libs.play.services.maps) {
         exclude(group = "com.intellij", module = "annotations")
     }

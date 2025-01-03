@@ -2,7 +2,6 @@ package com.keremkulac.journeylog.util
 
 import android.content.Context
 import com.keremkulac.journeylog.R
-import com.keremkulac.journeylog.domain.model.Vehicle
 import javax.inject.Inject
 
 class InputValidation @Inject constructor(private val context: Context) {

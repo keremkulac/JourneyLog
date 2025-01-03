@@ -49,6 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            app:boxStrokeWidth="0.75dp"
             app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="@+id/literTitle"
             app:layout_constraintStart_toStartOf="parent"
@@ -97,6 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_margin="16dp"
+            app:boxStrokeWidth="0.75dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fuelIcon">
 

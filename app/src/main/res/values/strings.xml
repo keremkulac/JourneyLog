@@ -34,9 +34,6 @@
     <string name="forgot_password_email_hint">Email</string>
     <string name="forgot_password_send_button_text">Gönder</string>
     <string name="forgot_password_title_text">Şifrenizi mi unuttunuz?</string>
-    <string name="update_password_old_password_title">Eski şifrenizi giriniz</string>
-    <string name="update_password_new_password_title">Yeni şifrenizi giriniz</string>
-    <string name="update_password_new_password_confirm_title">Yeni şifrenizi onaylayın</string>
     <string name="update_password_old_password_hint">Eski şifre</string>
     <string name="update_password_new_password_hint">Yeni şifre</string>
     <string name="update_password_new_password_confirm_hint">Yeni şifre tekrar</string>
@@ -241,5 +238,10 @@
     <string name="dialog_success_vehicle_create_message">Araç başarıyla kaydedildi!</string>
     <string name="dialog_success_fuel_purchase_message">Yakıt alımı başarıyla kaydedildi!</string>
     <string name="dialog_success_password_update_message">Şifreniz başarıyla güncellendi!</string>
+    <string name="fuel_purchase_view_create_receipt">Yakıt alımı</string>
+    <string name="home_fuel_consumption_calculate_title">Yakıt Tüketimi \nHesapla</string>
+    <string name="home_trip_fuel_cost_calculate_title">Yolculuk Yakıt\nMaliyeti Hesapla</string>
+    <string name="vehicle_view_create_vehicle">Araç oluştur</string>
+    <string name="menu_search_title">Ara</string>
 
 </resources>

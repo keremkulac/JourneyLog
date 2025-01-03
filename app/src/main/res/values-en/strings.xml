@@ -34,9 +34,6 @@
     <string name="forgot_password_email_hint">Email</string>
     <string name="forgot_password_send_button_text">Send</string>
     <string name="forgot_password_title_text">Forgot Password?</string>
-    <string name="update_password_old_password_title">Enter your old password</string>
-    <string name="update_password_new_password_title">Enter your new password</string>
-    <string name="update_password_new_password_confirm_title">Confirm your new password</string>
     <string name="update_password_old_password_hint">Old Password</string>
     <string name="update_password_new_password_hint">New Password</string>
     <string name="update_password_new_password_confirm_hint">Confirm New Password</string>
@@ -136,7 +133,7 @@
     <string name="vehicle_select_vehicle_section_title" >Vehicle \nInformation</string>
     <string name="vehicle_select_license_plate_title">Enter License Plate</string>
     <string name="vehicle_select_fuel_type_title">Enter fuel type</string>
-    <string name="vehicle_select_fuel_section_title" >Fuuel \nInformation</string>
+    <string name="vehicle_select_fuel_section_title" >Fuel \nInformation</string>
     <string name="vehicle_select_vehicle_per_100_kilometer_hint">Example 7.2</string>
     <string name="vehicle_select_vehicle_per_100_kilometer_title">Enter your vehicle\'s fuel consumption \nper 100 kilometers</string>
     <string name="vehicle_select_license_plate_info">Do not forget to add spaces when entering the license plate</string>
@@ -242,5 +239,9 @@
     <string name="dialog_success_vehicle_create_message">The vehicle has been successfully registered!</string>
     <string name="dialog_success_fuel_purchase_message">Fuel purchase saved successfully!</string>
     <string name="dialog_success_password_update_message">Your password has been successfully updated!</string>
-
+    <string name="fuel_purchase_view_create_receipt">Fuel Purchase</string>
+    <string name="home_fuel_consumption_calculate_title">Calculate Fuel \nConsumption</string>
+    <string name="home_trip_fuel_cost_calculate_title">Calculate Trip \nFuel Cost</string>
+    <string name="vehicle_view_create_vehicle">Vehicle Create</string>
+    <string name="menu_search_title">Search</string>
 </resources>

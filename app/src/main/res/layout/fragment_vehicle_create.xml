@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F8FA"
     tools:context=".presentation.ui.vehicleCreate.VehicleCreateFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -68,6 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
+                    app:boxStrokeWidth="0.75dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vehicleSelectTitle">
 
@@ -96,6 +96,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    app:boxStrokeWidth="0.75dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/licensePlateTitle">
@@ -130,6 +131,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    app:boxStrokeWidth="0.75dp"
                     app:layout_constraintEnd_toEndOf="@+id/vehicleLastKmTitle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vehicleLastKmTitle">
@@ -206,6 +208,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="8dp"
+                    app:boxStrokeWidth="0.75dp"
                     app:layout_constraintEnd_toEndOf="@+id/per100KilometerFuelTitle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vehicleFuelTypeTitle">
@@ -235,6 +238,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    app:boxStrokeWidth="0.75dp"
                     app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="@+id/per100KilometerFuelTitle"
                     app:layout_constraintStart_toStartOf="parent"
