@@ -87,6 +87,10 @@
     <string name="dialog_save_vehicle_positive_button_text" >Kaydet</string>
     <string name="dialog_save_vehicle_negative_button_text" >İptal</string>
 
+    <string name="dialog_update_vehicle_title" >Araç güncelleme</string>
+    <string name="dialog_update_vehicle_message" >Bu aracı güncellemek istediğinizden emin misiniz?</string>
+    <string name="dialog_update_vehicle_positive_button_text" >Güncelle</string>
+    <string name="dialog_update_vehicle_negative_button_text" >İptal</string>
 
     <string name="warning_please_select_company" >Lütfen bir şirket seçin</string>
     <string name="warning_please_fill_all_fields" >Lütfen tüm alanları doldurun</string>
@@ -236,6 +240,7 @@
     <string name="dialog_fuel_consumption_per_100_kilometer_title">100 kilometrede</string>
 
     <string name="dialog_success_vehicle_create_message">Araç başarıyla kaydedildi!</string>
+    <string name="dialog_success_vehicle_update_message">Araç başarıyla güncellendi!</string>
     <string name="dialog_success_fuel_purchase_message">Yakıt alımı başarıyla kaydedildi!</string>
     <string name="dialog_success_password_update_message">Şifreniz başarıyla güncellendi!</string>
     <string name="fuel_purchase_view_create_receipt">Yakıt alımı</string>
@@ -243,5 +248,7 @@
     <string name="home_trip_fuel_cost_calculate_title">Yolculuk Yakıt\nMaliyeti Hesapla</string>
     <string name="vehicle_view_create_vehicle">Araç oluştur</string>
     <string name="menu_search_title">Ara</string>
+    <string name="vehicle_create_update_button_text">Güncelle</string>
+    <string name="vehicle_detail_update_button_text">Güncelle</string>
 
 </resources>

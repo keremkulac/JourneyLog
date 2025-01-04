@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.keremkulac.journeylog.domain.model.Vehicle
 import com.keremkulac.journeylog.domain.usecase.GetAverageFuelPriceUseCase
 import com.keremkulac.journeylog.domain.usecase.SaveVehicleUseCase
+import com.keremkulac.journeylog.domain.usecase.UpdateVehicleUseCase
 import com.keremkulac.journeylog.util.InputValidation
 import com.keremkulac.journeylog.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,11 +18,15 @@ import javax.inject.Inject
 class VehicleCreateViewModel @Inject constructor(
     private val inputValidation: InputValidation,
     private val saveVehicleUseCase: SaveVehicleUseCase,
+    private val updateVehicleUseCase: UpdateVehicleUseCase,
     private val getAverageFuelPriceUseCase: GetAverageFuelPriceUseCase
 ) : ViewModel() {
 
     private val _saveVehicleResult = MutableLiveData<Result<String>>()
     val saveVehicleResult: LiveData<Result<String>> get() = _saveVehicleResult
+
+    private val _updateVehicleResult = MutableLiveData<Result<String>>()
+    val updateVehicleResult: LiveData<Result<String>> get() = _updateVehicleResult
 
     private val _validationMessage = MutableLiveData<String>()
     val validationMessage: LiveData<String> get() = _validationMessage
@@ -33,8 +38,20 @@ class VehicleCreateViewModel @Inject constructor(
         getAverageFuelPrice()
     }
 
-    fun validateLicensePlate(selectedVehicleType: String?,licensePlate: String?,lastKm: String?,selectedFuelType : String?,per100KilometerFuel : String?): Boolean {
-        return inputValidation.validateLicensePlate(selectedVehicleType,licensePlate,lastKm,selectedFuelType,per100KilometerFuel) { message ->
+    fun validateVehicle(
+        selectedVehicleType: String?,
+        licensePlate: String?,
+        lastKm: String?,
+        selectedFuelType: String?,
+        per100KilometerFuel: String?
+    ): Boolean {
+        return inputValidation.validateLicensePlate(
+            selectedVehicleType,
+            licensePlate,
+            lastKm,
+            selectedFuelType,
+            per100KilometerFuel
+        ) { message ->
             _validationMessage.value = message
         }
     }
@@ -44,6 +61,15 @@ class VehicleCreateViewModel @Inject constructor(
             _saveVehicleResult.value = Result.Loading
             saveVehicleUseCase.invoke(vehicle) { result ->
                 _saveVehicleResult.value = result
+            }
+        }
+    }
+
+    fun updateVehicle(vehicle: Vehicle) {
+        viewModelScope.launch {
+            _updateVehicleResult.value = Result.Loading
+            updateVehicleUseCase.invoke(vehicle) { result ->
+                _updateVehicleResult.value = result
             }
         }
     }

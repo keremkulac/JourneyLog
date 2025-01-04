@@ -95,10 +95,23 @@ class FirestoreRepositoryImp @Inject constructor(
     }
 
     override suspend fun saveVehicle(vehicle: Vehicle, result: (Result<String>) -> Unit) {
-        firestore.collection("vehicles").add(vehicle).addOnSuccessListener {
-            result.invoke(Result.Success("Araç kaydı başarılı"))
-        }.addOnFailureListener { exception ->
-            result.invoke(Result.Failure(firebaseException.findExceptionMessage(exception)))
+        firestore.collection("vehicles").document(vehicle.id)
+            .set(vehicle)
+            .addOnSuccessListener {
+                result.invoke(Result.Success("Araç kaydı başarılı"))
+
+            }
+            .addOnFailureListener { exception ->
+                result.invoke(Result.Failure(firebaseException.findExceptionMessage(exception)))
+            }
+
+    }
+
+    override suspend fun updateVehicle(vehicle: Vehicle, result: (Result<String>) -> Unit) {
+        firestore.collection("vehicles").document(vehicle.id).set(vehicle).addOnSuccessListener {
+            result.invoke(Result.Success("Araç başarıyla güncellendi"))
+        }.addOnFailureListener {
+            result.invoke(Result.Failure("Araç güncellemesi başarısız"))
         }
     }
 

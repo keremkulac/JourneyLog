@@ -39,9 +39,11 @@ class VehicleCreateFragment :
     private var user: User? = null
     private var selectedFuelType: String? = null
     private var selectedVehicleType: String? = null
+    private var updatedVehicle: Vehicle? = null
     private val viewModel by viewModels<VehicleCreateViewModel>()
     private val args by navArgs<VehicleCreateFragmentArgs>()
     private lateinit var averageFuelPriceList: List<AverageFuelPrice>
+    private var isUpdate: Boolean = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,9 +54,31 @@ class VehicleCreateFragment :
         observeValidation()
         createVehicle()
         observeSaveVehicleResult()
+        observeUpdateVehicleResult()
         selectFuelType()
         selectVehicleType()
         observeAverageFuelPrices()
+        updateVehicle()
+    }
+
+    private fun updateVehicle() {
+        updatedVehicle = args.vehicle
+        isUpdate = args.fromVehicleDetail
+        if (isUpdate && updatedVehicle != null) {
+            binding.apply {
+                confirmVehicle.text = getString(R.string.vehicle_create_update_button_text)
+                vehicleLicensePlate.setText(updatedVehicle!!.licensePlate)
+                vehicleFuelType.setText(updatedVehicle!!.vehicleFuelType)
+                vehicleTypeSelect.setText(updatedVehicle!!.title)
+                vehicleLastKm.setText(updatedVehicle!!.lastKm)
+                per100KilometerFuel.setText(updatedVehicle!!.per100KilometersFuelLiter)
+            }
+            selectedFuelType = updatedVehicle!!.vehicleFuelType
+            selectedVehicleType = updatedVehicle!!.title
+            createVehicleType()
+            createFuelType()
+        }
+
     }
 
     private fun createFuelType() {
@@ -83,7 +107,7 @@ class VehicleCreateFragment :
                 binding.vehicleLicensePlate.text.toString().uppercase(Locale.getDefault())
             val lastKm = binding.vehicleLastKm.text.toString()
             val per100KilometerFuel = binding.per100KilometerFuel.text.toString()
-            if (viewModel.validateLicensePlate(
+            if (viewModel.validateVehicle(
                     selectedVehicleType,
                     licensePlate,
                     lastKm,
@@ -93,9 +117,18 @@ class VehicleCreateFragment :
             ) {
                 user?.let {
                     val fuelCost = calculateFuelCost(averageFuelPriceList, per100KilometerFuel)
-                    selectedVehicle = VehicleItemsUtil.getVehicleItems().find { translationHelper.translate(it.title!!,TranslationHelper.TranslationType.Vehicle) == selectedVehicleType }
+                    selectedVehicle = VehicleItemsUtil.getVehicleItems().find {
+                        translationHelper.translate(
+                            it.title!!,
+                            TranslationHelper.TranslationType.Vehicle
+                        ) == selectedVehicleType
+                    }
                     selectedVehicle?.let { vehicle ->
-                        vehicle.id = UUID.randomUUID().toString()
+                        if (isUpdate) {
+                            vehicle.id = updatedVehicle!!.id
+                        } else {
+                            vehicle.id = UUID.randomUUID().toString()
+                        }
                         vehicle.userId = it.id
                         vehicle.licensePlate = licensePlate
                         vehicle.lastKm = lastKm
@@ -164,6 +197,21 @@ class VehicleCreateFragment :
         }
     }
 
+    private fun observeUpdateVehicleResult() {
+        viewModel.updateVehicleResult.observe(viewLifecycleOwner) { result ->
+            HandleResult.handleResult(
+                binding.progressBar, result,
+                onSuccess = {
+                    SuccessfulDialogUtil(
+                        requireContext(), getString(R.string.dialog_success_vehicle_update_message)
+                    ).showDialog()
+                    findNavController().navigate(R.id.action_vehicleCreateFragment_to_vehicleViewFragment)
+                }, onFailure = { message ->
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                })
+        }
+    }
+
     private fun selectFuelType() {
         binding.vehicleFuelType.onItemClickListener =
             AdapterView.OnItemClickListener { parent, _, position, _ ->
@@ -180,16 +228,28 @@ class VehicleCreateFragment :
 
     private fun showDialog(vehicle: Vehicle) {
         requireContext().apply {
-            CustomDialog.showConfirmationDialog(
-                this,
-                getString(R.string.dialog_save_vehicle_title),
-                getString(R.string.dialog_save_vehicle_message),
-                getString(R.string.dialog_save_vehicle_positive_button_text),
-                getString(R.string.dialog_save_vehicle_negative_button_text),
-                onPositiveClick = {
-                    viewModel.saveVehicle(vehicle)
-                }
-            )
+            if (isUpdate) {
+                CustomDialog.showConfirmationDialog(this,
+                    getString(R.string.dialog_update_vehicle_title),
+                    getString(R.string.dialog_update_vehicle_message),
+                    getString(R.string.dialog_update_vehicle_positive_button_text),
+                    getString(R.string.dialog_update_vehicle_negative_button_text),
+                    onPositiveClick = {
+                        viewModel.updateVehicle(vehicle)
+                    })
+            } else {
+                CustomDialog.showConfirmationDialog(
+                    this,
+                    getString(R.string.dialog_save_vehicle_title),
+                    getString(R.string.dialog_save_vehicle_message),
+                    getString(R.string.dialog_save_vehicle_positive_button_text),
+                    getString(R.string.dialog_save_vehicle_negative_button_text),
+                    onPositiveClick = {
+                        viewModel.saveVehicle(vehicle)
+                    }
+                )
+            }
+
         }
     }
 
