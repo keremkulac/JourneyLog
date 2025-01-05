@@ -6,23 +6,22 @@ import android.animation.ValueAnimator
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.ImageView
+import com.keremkulac.journeylog.R
 
-class ExpandableLayoutManager {
-    private var expandedLayout: View? = null
+
+class ExpandableLayoutManager(private val toggleIcon: ImageView) {
+    private var isExpanded = false
 
     fun toggleLayout(layout: View) {
-        expandedLayout?.let {
-            if (it != layout && it.visibility == View.VISIBLE) {
-                animateLayoutCollapse(it)
-            }
-        }
-
         if (layout.visibility == View.VISIBLE) {
             animateLayoutCollapse(layout)
-            expandedLayout = null
+            isExpanded = false
+            toggleIcon.setImageDrawable(layout.context.getDrawable(R.drawable.ic_open))
         } else {
             animateLayoutExpand(layout)
-            expandedLayout = layout
+            isExpanded = true
+            toggleIcon.setImageDrawable(layout.context.getDrawable(R.drawable.ic_close))
         }
     }
 
@@ -45,7 +44,7 @@ class ExpandableLayoutManager {
             }
         })
 
-        animation.duration = 300
+        animation.duration = 0
         animation.interpolator = AccelerateDecelerateInterpolator()
         animation.start()
     }
