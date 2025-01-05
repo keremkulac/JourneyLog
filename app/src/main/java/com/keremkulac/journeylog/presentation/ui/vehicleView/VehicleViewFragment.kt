@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentVehicleViewBinding
@@ -19,6 +20,7 @@ import com.keremkulac.journeylog.domain.model.Vehicle
 import com.keremkulac.journeylog.util.BaseFragment
 import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
+import com.keremkulac.journeylog.util.SwipeToDeleteCallback
 import com.keremkulac.journeylog.util.TranslationHelper
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -69,6 +71,7 @@ class VehicleViewFragment :
         binding.vehiclesRecyclerView.adapter = adapter
         clickVehicle(adapter)
         optionsMenu(vehicleList)
+        swipeRecyclerViewItem(vehicleList)
     }
 
     private fun checkEmptyList(vehicleList: List<Vehicle>) {
@@ -87,7 +90,8 @@ class VehicleViewFragment :
                 allVehicleTitle.visibility = View.VISIBLE
                 emptyWarning.visibility = View.GONE
                 createVehicle.visibility = View.GONE
-                vehicleCardInfo.text = getString(R.string.vehicle_view_card_info_text).format(vehicleList.size)
+                vehicleCardInfo.text =
+                    getString(R.string.vehicle_view_card_info_text).format(vehicleList.size)
                 adapter.filterList(vehicleList as ArrayList<Vehicle>)
             }
         }
@@ -153,5 +157,14 @@ class VehicleViewFragment :
                 )
             )
         }
+    }
+
+    private fun swipeRecyclerViewItem(vehicleList: List<Vehicle>) {
+        val swipeCallback = SwipeToDeleteCallback(adapter, requireContext()) { position ->
+            viewModel.deleteVehicle(vehicleList[position].id)
+            observeUser()
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeCallback)
+        itemTouchHelper.attachToRecyclerView(binding.vehiclesRecyclerView)
     }
 }

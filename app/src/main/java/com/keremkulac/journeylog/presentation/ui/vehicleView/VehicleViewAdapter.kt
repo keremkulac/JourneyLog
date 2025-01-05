@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.domain.model.Vehicle
+import com.keremkulac.journeylog.util.SwipeToDeleteCallback
 import com.keremkulac.journeylog.util.TranslationHelper
 import javax.inject.Inject
 
@@ -81,5 +82,10 @@ class VehicleViewAdapter @Inject constructor(val translationHelper: TranslationH
     fun filterList(filterList : ArrayList<Vehicle>){
         vehicleList = filterList
         notifyDataSetChanged()
+    }
+
+    fun deleteItem(position: Int){
+        vehicleList.removeAt(position)
+        notifyItemRemoved(position)
     }
 }
