@@ -115,6 +115,18 @@ class FirestoreRepositoryImp @Inject constructor(
         }
     }
 
+    override suspend fun deleteVehicle(vehicleId: String, result: (Result<String>) -> Unit) {
+        firestore.collection("vehicles")
+            .document(vehicleId)
+            .delete()
+            .addOnSuccessListener {
+                result.invoke(Result.Success("Araç başarıyla silindi"))
+            }
+            .addOnFailureListener { e ->
+                result.invoke(Result.Failure("Araç silinemedi"))
+            }
+    }
+
     override suspend fun getAllVehicles(userId: String, result: (Result<Any>) -> Unit) {
         firestore.collection("vehicles").get().addOnSuccessListener { snapshot ->
             val vehicle = snapshot.toObjects(Vehicle::class.java)
