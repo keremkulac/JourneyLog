@@ -19,12 +19,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/userEmail"
-        style="@style/Widget.Material3.TextInputLayout.FilledBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:boxBackgroundColor="@color/white"
-        app:boxStrokeWidth="0.5dp"
+        style="@style/TextInputLayoutFilledBoxStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/registerIllustrations">
@@ -46,12 +41,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password"
-        style="@style/Widget.Material3.TextInputLayout.FilledBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:boxBackgroundColor="@color/white"
-        app:boxStrokeWidth="0.5dp"
+        style="@style/TextInputLayoutFilledBoxStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userEmail"
@@ -95,11 +85,9 @@
 
     <Button
         android:id="@+id/login"
-        android:layout_width="match_parent"
+        style="@style/ButtonStyle"
         android:layout_height="60dp"
-        android:layout_marginTop="8dp"
         android:text="@string/login_with_email_button_text"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rememberMe" />

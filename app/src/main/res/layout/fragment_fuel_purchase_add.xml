@@ -120,10 +120,9 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/receiptLiterPriceLayout"
-                    style="@style/TextInputLayoutStyle"
+                    style="@style/TextInputLayoutOutlinedBoxStyle"
                     android:layout_width="0dp"
                     android:layout_marginEnd="8dp"
-
                     app:layout_constraintEnd_toStartOf="@+id/receiptPurchaseLiterLayout"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/receiptLiterPriceTitle">
@@ -148,7 +147,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/receiptPurchaseLiterLayout"
-                    style="@style/TextInputLayoutStyle"
+                    style="@style/TextInputLayoutOutlinedBoxStyle"
                     android:layout_width="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -243,7 +242,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/vehicleKmLayout"
-                    style="@style/TextInputLayoutStyle"
+                    style="@style/TextInputLayoutOutlinedBoxStyle"
                     android:layout_width="0dp"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/vehicleKmTitle"

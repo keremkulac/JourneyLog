@@ -10,15 +10,7 @@
         android:name="com.keremkulac.journeylog.presentation.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/action_homeFragment_to_journeyFragment"
-            app:destination="@id/journeyFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_fuelPurchaseViewFragment"
-            app:destination="@id/fuelPurchaseViewFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/journeyFragment"

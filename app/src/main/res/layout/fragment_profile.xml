@@ -61,11 +61,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/profileCardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:padding="16dp"
-            app:cardCornerRadius="16dp"
+            style="@style/CardViewMain"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userEmail">
@@ -77,16 +73,8 @@
 
                 <TextView
                     android:id="@+id/profileEdit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:drawablePadding="8dp"
-                    android:fontFamily="sans-serif-light"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="16dp"
+                    style="@style/ProfileTextViewStyle"
                     android:text="@string/profile_edit_profile_button_text"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
                     app:drawableEndCompat="@drawable/ic_enter"
                     app:drawableStartCompat="@drawable/ic_profile"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -95,26 +83,16 @@
 
                 <com.google.android.material.divider.MaterialDivider
                     android:id="@+id/divider1"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.75dp"
+                    style="@style/DividerStyle"
                     android:layout_marginStart="32dp"
-                    android:layout_marginEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/profileEdit" />
 
                 <TextView
                     android:id="@+id/passwordSettings"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:drawablePadding="8dp"
-                    android:fontFamily="sans-serif-light"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="16dp"
+                    style="@style/ProfileTextViewStyle"
                     android:text="@string/profile_password_settings_button_text"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
                     app:drawableEndCompat="@drawable/ic_enter"
                     app:drawableStartCompat="@drawable/ic_profile_password"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -125,14 +103,9 @@
 
         </androidx.cardview.widget.CardView>
 
-
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="16dp"
+            style="@style/CardViewMain"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -145,16 +118,8 @@
 
                 <TextView
                     android:id="@+id/appSettings"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:drawablePadding="8dp"
-                    android:fontFamily="sans-serif-light"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="16dp"
+                    style="@style/ProfileTextViewStyle"
                     android:text="@string/profile_app_settings_button_text"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
                     app:drawableEndCompat="@drawable/ic_enter"
                     app:drawableStartCompat="@drawable/ic_settings"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -163,26 +128,16 @@
 
                 <com.google.android.material.divider.MaterialDivider
                     android:id="@+id/divider2"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.75dp"
+                    style="@style/DividerStyle"
                     android:layout_marginStart="32dp"
-                    android:layout_marginEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/appSettings" />
 
                 <TextView
                     android:id="@+id/vehicleSettings"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:drawablePadding="8dp"
-                    android:fontFamily="sans-serif-light"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="16dp"
+                    style="@style/ProfileTextViewStyle"
                     android:text="@string/profile_my_vehicles_button_text"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
                     app:drawableEndCompat="@drawable/ic_enter"
                     app:drawableStartCompat="@drawable/ic_car4"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -191,31 +146,21 @@
 
                 <com.google.android.material.divider.MaterialDivider
                     android:id="@+id/divider3"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    style="@style/DividerStyle"
                     android:layout_marginStart="32dp"
-                    android:layout_marginEnd="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vehicleSettings" />
 
                 <TextView
                     android:id="@+id/logout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="8dp"
-                    android:fontFamily="sans-serif-light"
-                    android:paddingTop="16dp"
-                    android:paddingBottom="16dp"
+                    style="@style/ProfileTextViewStyle"
                     android:text="@string/profile_logout_button_text"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
                     app:drawableEndCompat="@drawable/ic_enter"
                     app:drawableStartCompat="@drawable/ic_logout"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/divider3" />
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

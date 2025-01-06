@@ -2,29 +2,25 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CardViewMain"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
-    android:padding="16dp"
     app:cardCornerRadius="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp">
+        android:padding="16dp">
 
 
         <ImageView
             android:id="@+id/fuelBottleİcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            style="@style/CardViewMainIcon"
             android:background="@drawable/imageview_background"
             android:backgroundTint="#880E4F"
             android:contentDescription="@string/todo"
             android:padding="10dp"
-
             android:src="@drawable/ic_fuel_bottle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,10 +28,8 @@
 
         <TextView
             android:id="@+id/literTitle"
+            style="@style/CardViewMainTitle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="4dp"
             android:text="@string/dialog_fuel_consumption_liter_title"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -45,12 +39,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/kmLiterLayout"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:boxStrokeWidth="0.75dp"
-            app:hintEnabled="false"
+            style="@style/TextInputLayoutOutlinedBoxStyle"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="@+id/literTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fuelBottleİcon">
@@ -68,37 +58,29 @@
 
         <ImageView
             android:id="@+id/fuelIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            style="@style/CardViewMainIcon"
             android:layout_marginTop="16dp"
             android:background="@drawable/imageview_background"
             android:backgroundTint="#0D47A1"
             android:contentDescription="@string/todo"
-            android:padding="10dp"
             android:src="@drawable/ic_fuel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/kmLiterLayout" />
 
         <TextView
             android:id="@+id/fuelTypeTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            style="@style/CardViewMainTitle"
             android:text="@string/dialog_fuel_consumption_fuel_type"
             android:textSize="16sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/fuelIcon"
             app:layout_constraintStart_toEndOf="@+id/fuelIcon"
             app:layout_constraintTop_toTopOf="@+id/fuelIcon" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/fuelTypeLayout"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+            style="@style/TextInputLayoutExposedDropdownStyle"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_margin="16dp"
-            app:boxStrokeWidth="0.75dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fuelIcon">
 
@@ -112,9 +94,7 @@
 
         <Button
             android:id="@+id/calculateButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            style="@style/ButtonStyle"
             android:text="@string/dialog_fuel_consumption_calculate_button_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -123,13 +103,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/perKilometerCardView"
-            android:layout_width="wrap_content"
+            style="@style/CardViewMain"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
             android:visibility="gone"
             app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/per100KilometerCardView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/calculateButton">
 
@@ -189,13 +169,13 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/per100KilometerCardView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:visibility="gone"
             app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/perKilometerCardView"
             app:layout_constraintTop_toBottomOf="@+id/calculateButton">
 
             <androidx.constraintlayout.widget.ConstraintLayout

@@ -4,15 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".presentation.ui.vehicleView.VehicleViewFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/vehicleCardView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        style="@style/CardViewMain"
         android:visibility="gone"
-        app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,12 +22,10 @@
 
             <ImageView
                 android:id="@+id/vehicleIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/CardViewMainIcon"
                 android:background="@drawable/imageview_background"
                 android:backgroundTint="#1E88E5"
                 android:contentDescription="@string/todo"
-                android:padding="10dp"
                 android:src="@drawable/ic_car"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -65,7 +61,7 @@
         android:id="@+id/allVehicleTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
         android:text="@string/vehicle_view_all_vehicle_title"
         android:textSize="18sp"
         android:textStyle="bold"

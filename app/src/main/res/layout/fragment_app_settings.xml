@@ -8,9 +8,8 @@
     tools:context=".presentation.ui.appSettings.AppSettingsFragment">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="16dp"
+        style="@style/CardViewMain"
+        android:layout_marginTop="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,11 +21,9 @@
 
             <TextView
                 android:id="@+id/languageTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/CardViewSubTitle"
+                android:layout_marginTop="0dp"
                 android:text="@string/app_settings_language_title"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,28 +32,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                tools:text="Türkçe"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/languageTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/languageTitle"
+                tools:text="Türkçe" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
+                style="@style/DividerStyle"
+                android:layout_marginStart="0dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/language" />
 
             <TextView
                 android:id="@+id/nightModeTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
+                style="@style/CardViewSubTitle"
                 android:text="@string/app_settings_dark_mode_title"
-                android:textSize="16sp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider" />
 

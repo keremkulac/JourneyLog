@@ -73,7 +73,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/vehicleLicensePlateLayout"
-                    style="@style/TextInputLayoutStyle"
+                    style="@style/TextInputLayoutOutlinedBoxStyle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/licensePlateTitle">
@@ -93,18 +93,14 @@
 
                 <TextView
                     android:id="@+id/vehicleLastKmTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    style="@style/CardViewSubTitle"
                     android:text="@string/vehicle_select_vehicle_kilometer_title"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vehicleLicensePlateLayout" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/vehicleLastKmLayout"
-                    style="@style/TextInputLayoutStyle"
+                    style="@style/TextInputLayoutOutlinedBoxStyle"
                     app:layout_constraintEnd_toEndOf="@+id/vehicleLastKmTitle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vehicleLastKmTitle">
@@ -186,7 +182,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/per100KilometerFuelLayout"
-                    style="@style/TextInputLayoutStyle"
+                    style="@style/TextInputLayoutOutlinedBoxStyle"
                     app:layout_constraintEnd_toEndOf="@+id/per100KilometerFuelTitle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/per100KilometerFuelTitle">

@@ -18,12 +18,10 @@
 
         <ImageView
             android:id="@+id/fuelİcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/CardViewMainIcon"
             android:background="@drawable/imageview_background"
             android:backgroundTint="#E53935"
             android:contentDescription="@string/todo"
-            android:padding="10dp"
             android:src="@drawable/ic_fuel"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,11 +29,8 @@
 
         <TextView
             android:id="@+id/fuelType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            style="@style/CardViewMainTitle"
+            android:layout_marginTop="0dp"
             app:layout_constraintStart_toEndOf="@+id/fuelİcon"
             app:layout_constraintTop_toTopOf="@+id/fuelİcon"
             tools:text="Benzin" />
@@ -45,8 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:textStyle="bold"
             android:textSize="12sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/fuelİcon"
             app:layout_constraintStart_toStartOf="@+id/fuelType"
             app:layout_constraintTop_toBottomOf="@+id/fuelType"
@@ -56,9 +51,9 @@
             android:id="@+id/fuelTotalPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#B8B8B8"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="#B8B8B8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/fuelİcon"
             tools:text="2512,24 ₺" />
