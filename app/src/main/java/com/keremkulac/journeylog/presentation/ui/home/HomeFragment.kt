@@ -18,6 +18,7 @@ import com.keremkulac.journeylog.databinding.FragmentHomeBinding
 import com.keremkulac.journeylog.domain.model.AverageFuelPrice
 import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.domain.model.User
+import com.keremkulac.journeylog.util.ExpandableLayoutManager
 import com.keremkulac.journeylog.util.FuelConsumptionDialogUtil
 import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
@@ -31,8 +32,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private val viewModel by viewModels<HomeViewModel>()
     private lateinit var sharedViewModel: SharedViewModel
     private lateinit var barDataSet: BarDataSet
-    private var toggle: Boolean = false
     private lateinit var averageFuelPriceList: List<AverageFuelPrice>
+    private lateinit var expandableLayoutManager : ExpandableLayoutManager
 
     @Inject
     lateinit var translationHelper: TranslationHelper
@@ -47,6 +48,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         fuelConsumption()
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun observeAverageFuelPrices() {
         viewModel.averageFuelPrices.observe(viewLifecycleOwner) { result ->
             HandleResult.handleResult(binding.progressBar, result, onSuccess = { data ->
@@ -97,6 +99,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun observeAllReceipts() {
         viewModel.allReceipts.observe(viewLifecycleOwner) { result ->
             HandleResult.handleResult(binding.progressBar, result,
@@ -147,20 +150,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     private fun lastFuelPurchaseCardViewToggle() {
-        binding.lastFuelPurchaseCardViewToggle.setOnClickListener {
-            if (!toggle) {
-                binding.lastFuelPurchaseCardView.visibility = View.VISIBLE
-                binding.lastFuelPurchaseCardViewToggle.background =
-                    requireContext().getDrawable(R.drawable.toggle_style_active)
-                binding.openFuelPurchaseCardView.setImageDrawable(requireContext().getDrawable(R.drawable.ic_close))
-                toggle = true
-            } else {
-                binding.lastFuelPurchaseCardView.visibility = View.GONE
-                binding.lastFuelPurchaseCardViewToggle.background =
-                    requireContext().getDrawable(R.drawable.toogle_style_deactive)
-                binding.openFuelPurchaseCardView.setImageDrawable(requireContext().getDrawable(R.drawable.ic_open))
-                toggle = false
-            }
+        binding.apply {
+            expandableLayoutManager = ExpandableLayoutManager(this.openFuelPurchaseCardView)
+            lastFuelPurchaseCardView.setOnClickListener{expandableLayoutManager.toggleLayout(this.lastFuelPurchaseLayout)}
         }
     }
 

@@ -20,7 +20,10 @@ class FuelPurchaseDetailFragment :
     @Inject
     lateinit var translationHelper: TranslationHelper
     private val args: FuelPurchaseDetailFragmentArgs by navArgs()
-    private val expandableLayoutManager = ExpandableLayoutManager()
+    private lateinit var fuelLayoutManager: ExpandableLayoutManager
+    private lateinit var vehicleLayoutManager: ExpandableLayoutManager
+    private lateinit var paymentLayoutManager: ExpandableLayoutManager
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,9 +53,13 @@ class FuelPurchaseDetailFragment :
 
     private fun setupExpandableLayouts() {
         binding.apply {
-            fuelCard.setOnClickListener { expandableLayoutManager.toggleLayout(fuelCardLayout) }
-            vehicleCard.setOnClickListener { expandableLayoutManager.toggleLayout(vehicleCardLayout) }
-            paymentCard.setOnClickListener { expandableLayoutManager.toggleLayout(paymentCardLayout) }
+            fuelLayoutManager = ExpandableLayoutManager(fuelCardOpen)
+            vehicleLayoutManager = ExpandableLayoutManager(vehicleCardOpen)
+            paymentLayoutManager = ExpandableLayoutManager(paymentCardOpen)
+
+            fuelCard.setOnClickListener { fuelLayoutManager.toggleLayout(fuelCardLayout) }
+            vehicleCard.setOnClickListener { vehicleLayoutManager.toggleLayout(vehicleCardLayout) }
+            paymentCard.setOnClickListener { paymentLayoutManager.toggleLayout(paymentCardLayout) }
         }
     }
 

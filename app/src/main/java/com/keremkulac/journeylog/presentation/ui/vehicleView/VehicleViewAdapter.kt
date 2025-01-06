@@ -27,7 +27,6 @@ class VehicleViewAdapter @Inject constructor(val translationHelper: TranslationH
         )
     }
 
-
     private val diffUtil = object : DiffUtil.ItemCallback<Vehicle>() {
         override fun areItemsTheSame(
             oldItem: Vehicle,

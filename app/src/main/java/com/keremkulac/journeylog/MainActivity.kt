@@ -87,7 +87,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     private fun getToolbarSettings(): Map<Int, Pair<String, Boolean>> {
         return mapOf(
             R.id.profileFragment to Pair(getString(R.string.profile_toolbar_title), true),
@@ -103,7 +102,6 @@ class MainActivity : AppCompatActivity() {
             R.id.appSettingsFragment to Pair(getString(R.string.app_settings_toolbar_title), true)
         )
     }
-
 
     private fun toolBarSet(destinationId: Int) {
         val toolbarSettings = getToolbarSettings()

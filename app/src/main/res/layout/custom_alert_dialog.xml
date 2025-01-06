@@ -17,10 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Çıkış yap"
-            android:textStyle="bold" />
+            tools:text="Çıkış yap" />
 
         <TextView
             android:id="@+id/dialogMessage"
@@ -37,8 +37,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textColor="#3F51B5"
             android:layout_marginEnd="16dp"
+            android:textColor="#3F51B5"
             app:layout_constraintEnd_toStartOf="@+id/negativeButton"
             app:layout_constraintTop_toBottomOf="@id/dialogMessage"
             tools:text="Evet" />

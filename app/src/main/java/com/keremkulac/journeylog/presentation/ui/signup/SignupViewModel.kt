@@ -47,7 +47,6 @@ class SignupViewModel @Inject constructor(
         }
     }
 
-
     fun validateInputs(
         userName: String?,
         userLastname: String?,

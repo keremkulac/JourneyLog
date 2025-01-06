@@ -52,16 +52,16 @@
 
                         <TextView
                             android:id="@+id/totalPriceTitle"
-                            android:text="@string/fuel_purchase_view_total_price_title"
                             style="@style/CardViewMainTitle"
+                            android:text="@string/fuel_purchase_view_total_price_title"
                             app:layout_constraintStart_toEndOf="@+id/fuelİcon"
                             app:layout_constraintTop_toTopOf="@+id/fuelİcon" />
 
                         <TextView
                             android:id="@+id/totalPrice"
                             style="@style/CardViewMainTitle"
-                            android:layout_marginTop="16dp"
                             android:layout_marginStart="0dp"
+                            android:layout_marginTop="16dp"
                             android:textSize="24sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="@+id/fuelİcon"
@@ -91,8 +91,8 @@
 
             <TextView
                 android:id="@+id/allFuelPurchaseTitle"
-                android:text="@string/fuel_purchase_view_all_fuel_purchase_title"
-                style="@style/CardViewMainTitle"/>
+                style="@style/CardViewMainTitle"
+                android:text="@string/fuel_purchase_view_all_fuel_purchase_title" />
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>

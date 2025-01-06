@@ -54,7 +54,6 @@ class EditProfileFragment : BottomSheetDialogFragment(R.layout.fragment_edit_pro
         }
     }
 
-
     private fun fillFields() {
         sharedViewModel.sharedData.observe(viewLifecycleOwner) { user ->
             user?.let {

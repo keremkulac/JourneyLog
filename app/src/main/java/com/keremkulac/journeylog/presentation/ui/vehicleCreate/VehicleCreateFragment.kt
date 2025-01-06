@@ -156,6 +156,7 @@ class VehicleCreateFragment :
         return per100KilometerInfo.toString().decimalFormat()
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun observeAverageFuelPrices() {
         viewModel.averageFuelPrices.observe(viewLifecycleOwner) { result ->
             HandleResult.handleResult(binding.progressBar, result, onSuccess = { data ->

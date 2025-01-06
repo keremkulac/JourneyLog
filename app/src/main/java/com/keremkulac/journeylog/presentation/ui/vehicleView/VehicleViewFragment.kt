@@ -49,6 +49,7 @@ class VehicleViewFragment :
         observeSaveVehicleResult()
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun observeAllVehicles() {
         viewModel.getAllVehicles.observe(viewLifecycleOwner) { result ->
             HandleResult.handleResult(binding.progressBar, result,

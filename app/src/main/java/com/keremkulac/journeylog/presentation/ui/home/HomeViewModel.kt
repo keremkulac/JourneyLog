@@ -37,7 +37,6 @@ class HomeViewModel @Inject constructor(
     private val _allReceipts = MutableLiveData<Result<Any>>()
     val allReceipts: LiveData<Result<Any>> get() = _allReceipts
 
-
     init {
         getCurrentUser()
         getAverageFuelPrice()
@@ -51,7 +50,6 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
-
 
     private fun getCurrentUser() {
         viewModelScope.launch {
@@ -116,6 +114,5 @@ class HomeViewModel @Inject constructor(
             append(lastName.firstOrNull()?.uppercase() ?: "")
         }
     }
-
 
 }

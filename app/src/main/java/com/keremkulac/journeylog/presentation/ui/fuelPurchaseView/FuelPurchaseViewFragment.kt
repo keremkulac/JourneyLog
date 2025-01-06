@@ -116,6 +116,7 @@ class FuelPurchaseViewFragment :
         return viewModel.calculateFuelTypePrice(receiptList, translationHelper)
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun observeAllReceipts() {
         viewModel.allReceipts.observe(viewLifecycleOwner) { result ->
             HandleResult.handleResult(binding.progressBar, result,
@@ -123,10 +124,7 @@ class FuelPurchaseViewFragment :
                     val list = data as List<Receipt>
                     createRecyclerView(list)
                     checkFuelPurchaseList(list)
-                    binding.totalPrice.text =
-                        getString(R.string.fuel_purchase_view_total_price).format(
-                            viewModel.calculateTotalPrice(list).toMoneyFormat()
-                        )
+                    binding.totalPrice.text = getString(R.string.fuel_purchase_view_total_price).format(viewModel.calculateTotalPrice(list).toMoneyFormat())
                     setPieChart(list)
                 })
         }
