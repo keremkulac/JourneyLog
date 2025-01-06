@@ -15,9 +15,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/selectVehicleCardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="16dp"
+            style="@style/CardViewMain"
+            android:layout_marginTop="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -29,45 +28,31 @@
 
                 <ImageView
                     android:id="@+id/vehicleIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/CardViewMainIcon"
                     android:background="@drawable/imageview_background"
                     android:backgroundTint="#1976D2"
                     android:contentDescription="@string/todo"
-                    android:padding="10dp"
                     android:src="@drawable/ic_car"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/vehicleSelectTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    style="@style/CardViewSubTitle"
                     android:text="@string/vehicle_select_vehicle_select_title"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vehicleIcon" />
 
                 <TextView
                     android:id="@+id/vehicleTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    style="@style/CardViewMainTitle"
                     android:text="@string/vehicle_select_vehicle_section_title"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/vehicleIcon"
                     app:layout_constraintTop_toTopOf="@+id/vehicleIcon" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/vehicleSelectLayout"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    app:boxStrokeWidth="0.75dp"
+                    style="@style/TextInputLayoutExposedDropdownStyle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vehicleSelectTitle">
 
@@ -81,22 +66,14 @@
 
                 <TextView
                     android:id="@+id/licensePlateTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    style="@style/CardViewSubTitle"
                     android:text="@string/vehicle_select_license_plate_title"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vehicleSelectLayout" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/vehicleLicensePlateLayout"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:boxStrokeWidth="0.75dp"
+                    style="@style/TextInputLayoutStyle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/licensePlateTitle">
@@ -127,11 +104,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/vehicleLastKmLayout"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:boxStrokeWidth="0.75dp"
+                    style="@style/TextInputLayoutStyle"
                     app:layout_constraintEnd_toEndOf="@+id/vehicleLastKmTitle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vehicleLastKmTitle">
@@ -155,10 +128,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/fuelCardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:cardCornerRadius="16dp"
+            style="@style/CardViewMain"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/selectVehicleCardView">
 
@@ -169,46 +139,32 @@
 
                 <ImageView
                     android:id="@+id/vehicleFuelIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/CardViewMainIcon"
                     android:background="@drawable/imageview_background"
                     android:backgroundTint="#E53935"
                     android:contentDescription="@string/todo"
-                    android:padding="10dp"
                     android:src="@drawable/ic_fuel"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/vehicleFuelTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    style="@style/CardViewMainTitle"
                     android:text="@string/vehicle_select_fuel_section_title"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/vehicleFuelIcon"
                     app:layout_constraintTop_toTopOf="@+id/vehicleFuelIcon" />
 
 
                 <TextView
                     android:id="@+id/vehicleFuelTypeTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    style="@style/CardViewSubTitle"
                     android:text="@string/vehicle_select_fuel_type_title"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vehicleFuelIcon" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/vehicleFuelTypeLayout"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="8dp"
-                    app:boxStrokeWidth="0.75dp"
+                    style="@style/TextInputLayoutExposedDropdownStyle"
                     app:layout_constraintEnd_toEndOf="@+id/per100KilometerFuelTitle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vehicleFuelTypeTitle">
@@ -223,23 +179,14 @@
 
                 <TextView
                     android:id="@+id/per100KilometerFuelTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    style="@style/CardViewSubTitle"
                     android:text="@string/vehicle_select_vehicle_per_100_kilometer_title"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/vehicleFuelTypeLayout" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/per100KilometerFuelLayout"
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:boxStrokeWidth="0.75dp"
-                    app:hintEnabled="false"
+                    style="@style/TextInputLayoutStyle"
                     app:layout_constraintEnd_toEndOf="@+id/per100KilometerFuelTitle"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/per100KilometerFuelTitle">
@@ -261,13 +208,8 @@
 
         <Button
             android:id="@+id/confirmVehicle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            style="@style/ButtonStyle"
             android:text="@string/vehicle_select_create_button_text"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fuelCardView" />
