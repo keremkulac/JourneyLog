@@ -250,5 +250,6 @@
     <string name="menu_search_title">Ara</string>
     <string name="vehicle_create_update_button_text">Güncelle</string>
     <string name="vehicle_detail_update_button_text">Güncelle</string>
-
+    <string name="vehicle_delete_snackbar_title">Geri al</string>
+    <string name="vehicle_delete_snackbar_message">Silinen araç geri alındı!</string>
 </resources>

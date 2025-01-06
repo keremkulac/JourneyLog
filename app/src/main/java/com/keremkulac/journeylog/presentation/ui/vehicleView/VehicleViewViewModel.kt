@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.keremkulac.journeylog.domain.model.Vehicle
 import com.keremkulac.journeylog.domain.usecase.DeleteVehicleUseCase
 import com.keremkulac.journeylog.domain.usecase.GetAllVehiclesUseCase
+import com.keremkulac.journeylog.domain.usecase.SaveVehicleUseCase
 import com.keremkulac.journeylog.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class VehicleViewViewModel @Inject constructor(
     private val getAllVehiclesUseCase: GetAllVehiclesUseCase,
-    private val deleteVehicleUseCase: DeleteVehicleUseCase
+    private val deleteVehicleUseCase: DeleteVehicleUseCase,
+    private val saveVehicleUseCase: SaveVehicleUseCase
 ) : ViewModel() {
 
     private val _getAllVehicles = MutableLiveData<Result<Any>>()
@@ -23,6 +25,9 @@ class VehicleViewViewModel @Inject constructor(
 
     private val _deleteVehicleResult = MutableLiveData<Result<String>>()
     val deleteVehicleResult: LiveData<Result<String>> get() = _deleteVehicleResult
+
+    private val _saveVehicleResult = MutableLiveData<Result<String>>()
+    val saveVehicleResult: LiveData<Result<String>> get() = _saveVehicleResult
 
     fun getAllVehicles(userId: String) {
         viewModelScope.launch {
@@ -33,7 +38,7 @@ class VehicleViewViewModel @Inject constructor(
         }
     }
 
-    fun filter(text: String,list: List<Vehicle>) : ArrayList<Vehicle>{
+    fun filter(text: String, list: List<Vehicle>): ArrayList<Vehicle> {
         val filteredList: ArrayList<Vehicle> = ArrayList()
         for (item in list) {
             if (item.licensePlate!!.lowercase().contains(text.lowercase())) {
@@ -43,11 +48,20 @@ class VehicleViewViewModel @Inject constructor(
         return filteredList
     }
 
-    fun deleteVehicle(vehicleId : String){
+    fun deleteVehicle(vehicleId: String) {
         viewModelScope.launch {
             _deleteVehicleResult.value = Result.Loading
-            deleteVehicleUseCase.invoke(vehicleId){
+            deleteVehicleUseCase.invoke(vehicleId) {
                 _deleteVehicleResult.value = it
+            }
+        }
+    }
+
+    fun saveVehicle(vehicle: Vehicle) {
+        viewModelScope.launch {
+            _saveVehicleResult.value = Result.Loading
+            saveVehicleUseCase.invoke(vehicle) {
+                _saveVehicleResult.value = it
             }
         }
     }

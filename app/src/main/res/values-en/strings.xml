@@ -251,4 +251,6 @@
     <string name="menu_search_title">Search</string>
     <string name="vehicle_create_update_button_text">Update</string>
     <string name="vehicle_detail_update_button_text">Update</string>
+    <string name="vehicle_delete_snackbar_title">Undo</string>
+    <string name="vehicle_delete_snackbar_message">Deleted vehicle retrieved!</string>
 </resources>

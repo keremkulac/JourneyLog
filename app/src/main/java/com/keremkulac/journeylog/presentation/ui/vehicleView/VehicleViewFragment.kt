@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.FragmentVehicleViewBinding
 import com.keremkulac.journeylog.domain.model.Vehicle
@@ -35,6 +36,8 @@ class VehicleViewFragment :
     private lateinit var sharedViewModel: SharedViewModel
     private val viewModel by viewModels<VehicleViewViewModel>()
     private lateinit var adapter: VehicleViewAdapter
+    private var deletedVehicle: Vehicle? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
@@ -42,6 +45,8 @@ class VehicleViewFragment :
         observeAllVehicles()
         fabClick()
         createVehicleClick()
+        observeDeleteVehicleResult()
+        observeSaveVehicleResult()
     }
 
     private fun observeAllVehicles() {
@@ -54,6 +59,37 @@ class VehicleViewFragment :
                 }, onFailure = { message ->
                     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                 })
+        }
+    }
+
+    private fun observeDeleteVehicleResult() {
+        viewModel.deleteVehicleResult.observe(viewLifecycleOwner) { result ->
+            HandleResult.handleResult(binding.progressBar, result,
+                onSuccess = { data ->
+                    val snackbar = Snackbar.make(binding.root, data, Snackbar.LENGTH_LONG)
+                        .setAction(getString(R.string.vehicle_delete_snackbar_title)) {
+                            viewModel.saveVehicle(deletedVehicle!!)
+                            val secondSnackbar = Snackbar.make(
+                                binding.root, getString(R.string.vehicle_delete_snackbar_message),
+                                Snackbar.LENGTH_LONG
+                            )
+                            secondSnackbar.show()
+                        }
+                    snackbar.show()
+                }, onFailure = { message ->
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                })
+        }
+    }
+
+    private fun observeSaveVehicleResult() {
+        viewModel.saveVehicleResult.observe(viewLifecycleOwner) { result ->
+            HandleResult.handleResult(binding.progressBar, result, onSuccess = { data ->
+                observeUser()
+            }, onFailure = { message ->
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+
+            })
         }
     }
 
@@ -161,7 +197,8 @@ class VehicleViewFragment :
 
     private fun swipeRecyclerViewItem(vehicleList: List<Vehicle>) {
         val swipeCallback = SwipeToDeleteCallback(adapter, requireContext()) { position ->
-            viewModel.deleteVehicle(vehicleList[position].id)
+            deletedVehicle = vehicleList[position]
+            viewModel.deleteVehicle(deletedVehicle!!.id)
             observeUser()
         }
         val itemTouchHelper = ItemTouchHelper(swipeCallback)
