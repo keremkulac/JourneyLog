@@ -15,6 +15,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
@@ -79,7 +80,6 @@ class FuelPurchaseViewFragment :
         val pieEntries = createPieEntries(receiptList)
         val pieDataSet = createPieDataSet(pieEntries)
         val pieData = createPieData(pieDataSet)
-
         setupPieChart(pieData)
     }
 
@@ -93,8 +93,7 @@ class FuelPurchaseViewFragment :
         return PieDataSet(entries, "").apply {
             valueTextSize = 12f
             colors = getChartColors()
-            valueTextColor = Color.BLACK
-        }
+            valueTextColor = Color.BLACK }
     }
 
     private fun createPieData(dataSet: PieDataSet): PieData {
@@ -108,6 +107,7 @@ class FuelPurchaseViewFragment :
             description.isEnabled = false
             setDrawEntryLabels(false)
             data = pieData
+            legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
             invalidate()
         }
     }
