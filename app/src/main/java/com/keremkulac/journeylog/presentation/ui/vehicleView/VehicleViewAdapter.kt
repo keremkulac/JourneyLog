@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.domain.model.Vehicle
-import com.keremkulac.journeylog.util.SwipeToDeleteCallback
 import com.keremkulac.journeylog.util.TranslationHelper
 import javax.inject.Inject
 

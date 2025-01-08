@@ -7,6 +7,7 @@ import com.keremkulac.journeylog.domain.model.AverageFuelPrice
 import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.domain.model.User
 import com.keremkulac.journeylog.domain.model.Vehicle
+import com.keremkulac.journeylog.util.DateFormatUtil
 import com.keremkulac.journeylog.util.FirebaseException
 import com.keremkulac.journeylog.util.Result
 import javax.inject.Inject
@@ -86,9 +87,10 @@ class FirestoreRepositoryImp @Inject constructor(
                         list.add(receiptObject)
                     }
                 }
-                list.sortByDescending { it.date }
+                list.sortByDescending {
+                    DateFormatUtil.fullDateFormat().parse("${it.date} ${it.time}")
+                }
                 result.invoke(Result.Success(list))
-
             }.addOnFailureListener { exception ->
                 result.invoke(Result.Failure("Veri çekme başarısız"))
             }
