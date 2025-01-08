@@ -100,38 +100,39 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fuelTypeLayout" />
 
-
         <androidx.cardview.widget.CardView
             android:id="@+id/perKilometerCardView"
             style="@style/CardViewMain"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
             android:visibility="gone"
-            app:cardCornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/per100KilometerCardView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/calculateButton">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <View
                     android:id="@+id/view"
-                    android:layout_width="5dp"
-                    android:layout_height="25dp"
+                    android:layout_width="2.5dp"
+                    android:layout_height="0dp"
                     android:background="#303F9F"
-                    app:layout_constraintBottom_toBottomOf="@+id/perKilometerPrice"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/perKilometerPrice" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/perKilometerPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:textSize="24sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -153,14 +154,12 @@
                     android:id="@+id/perKilometerTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginBottom="16dp"
                     android:text="@string/dialog_fuel_consumption_per_kilometer_title"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/perKilometerPrice"
                     app:layout_constraintTop_toBottomOf="@+id/perKilometerPrice"
                     app:layout_constraintVertical_bias="1.0" />
@@ -169,34 +168,36 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/per100KilometerCardView"
+            style="@style/CardViewMain"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
             android:visibility="gone"
-            app:cardCornerRadius="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/perKilometerCardView"
             app:layout_constraintTop_toBottomOf="@+id/calculateButton">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <View
                     android:id="@+id/view2"
-                    android:layout_width="5dp"
-                    android:layout_height="25dp"
+                    android:layout_width="2.5dp"
+                    android:layout_height="0dp"
                     android:background="#303F9F"
-                    app:layout_constraintBottom_toBottomOf="@+id/per100KilometerPrice"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/per100KilometerPrice" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/per100KilometerPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:textSize="24sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -219,14 +220,12 @@
                     android:id="@+id/per100KilometerTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginBottom="16dp"
                     android:text="@string/dialog_fuel_consumption_per_100_kilometer_title"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/per100KilometerPrice"
                     app:layout_constraintTop_toBottomOf="@+id/per100KilometerPrice" />
             </androidx.constraintlayout.widget.ConstraintLayout>
