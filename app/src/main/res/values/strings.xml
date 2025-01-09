@@ -252,4 +252,15 @@
     <string name="vehicle_detail_update_button_text">Güncelle</string>
     <string name="vehicle_delete_snackbar_title">Geri al</string>
     <string name="vehicle_delete_snackbar_message">Silinen araç geri alındı!</string>
+    <string name="dialog_trip_fuel_cost_calculation_own_vehicle_main_title">Kendi aracım</string>
+    <string name="dialog_trip_fuel_cost_calculation_own_vehicle_sub_title">Kendi aracım için</string>
+    <string name="dialog_trip_fuel_cost_calculation_other_vehicle_main_title">Başka bir araç</string>
+    <string name="dialog_trip_fuel_cost_calculation_other_vehicle_sub_title">Başka bir araç için</string>
+    <string name="dialog_trip_fuel_cost_calculation_forward_button_text">İleri</string>
+    <string name="dialog_trip_fuel_cost_calculation_cancel_button_text">İptal</string>
+    <string name="dialog_trip_fuel_cost_calculation_select_license_plate_title">Plaka seçiniz</string>
+    <string name="dialog_trip_fuel_cost_calculation_distance_travel_title">Gidilecek mesafeyi giriniz</string>
+    <string name="dialog_trip_fuel_cost_calculation_calculate_button_text">Hesapla</string>
+    <string name="dialog_trip_fuel_cost_select_fuel_type_title">Yakıt türü seçiniz</string>
+    <string name="dialog_trip_fuel_cost_calculation_used_fuel_per_100_kilometer_title">Aracınız 100 km\'de kaç L yakıyor?</string>
 </resources>

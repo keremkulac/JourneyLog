@@ -87,10 +87,10 @@
     <string name="dialog_save_vehicle_positive_button_text">Save</string>
     <string name="dialog_save_vehicle_negative_button_text">Cancel</string>
 
-    <string name="dialog_update_vehicle_title" >Vehicle update</string>
-    <string name="dialog_update_vehicle_message" >Are you sure you want to update this vehicle?</string>
-    <string name="dialog_update_vehicle_positive_button_text" >Update</string>
-    <string name="dialog_update_vehicle_negative_button_text" >Cancel</string>
+    <string name="dialog_update_vehicle_title">Vehicle update</string>
+    <string name="dialog_update_vehicle_message">Are you sure you want to update this vehicle?</string>
+    <string name="dialog_update_vehicle_positive_button_text">Update</string>
+    <string name="dialog_update_vehicle_negative_button_text">Cancel</string>
 
     <string name="warning_please_select_company">Please select a company</string>
     <string name="warning_please_fill_all_fields">Please fill in all fields</string>
@@ -133,11 +133,11 @@
     <string name="validation_message_empty_vehicle_last_km">Enter vehicle mileage</string>
     <string name="validation_message_empty_fuel_type">Select a fuel type</string>
     <string name="validation_message_empty_per_100_kilometer_fuel">Please enter the amount of fuel per 100 kilometers</string>
-    <string name="vehicle_select_vehicle_select_title" >Select vehicle type</string>
-    <string name="vehicle_select_vehicle_section_title" >Vehicle \nInformation</string>
+    <string name="vehicle_select_vehicle_select_title">Select vehicle type</string>
+    <string name="vehicle_select_vehicle_section_title">Vehicle \nInformation</string>
     <string name="vehicle_select_license_plate_title">Enter License Plate</string>
     <string name="vehicle_select_fuel_type_title">Enter fuel type</string>
-    <string name="vehicle_select_fuel_section_title" >Fuel \nInformation</string>
+    <string name="vehicle_select_fuel_section_title">Fuel \nInformation</string>
     <string name="vehicle_select_vehicle_per_100_kilometer_hint">Example 7.2</string>
     <string name="vehicle_select_vehicle_per_100_kilometer_title">Enter your vehicle\'s fuel consumption \nper 100 kilometers</string>
     <string name="vehicle_select_license_plate_info">Do not forget to add spaces when entering the license plate</string>
@@ -253,4 +253,17 @@
     <string name="vehicle_detail_update_button_text">Update</string>
     <string name="vehicle_delete_snackbar_title">Undo</string>
     <string name="vehicle_delete_snackbar_message">Deleted vehicle retrieved!</string>
+
+
+    <string name="dialog_trip_fuel_cost_calculation_own_vehicle_main_title">My own vehicle</string>
+    <string name="dialog_trip_fuel_cost_calculation_own_vehicle_sub_title">For my own vehicle</string>
+    <string name="dialog_trip_fuel_cost_calculation_other_vehicle_main_title">Another vehicle</string>
+    <string name="dialog_trip_fuel_cost_calculation_other_vehicle_sub_title">For another vehicle</string>
+    <string name="dialog_trip_fuel_cost_calculation_forward_button_text">Forward</string>
+    <string name="dialog_trip_fuel_cost_calculation_cancel_button_text">Cancel</string>
+    <string name="dialog_trip_fuel_cost_calculation_select_license_plate_title">Choose license plate</string>
+    <string name="dialog_trip_fuel_cost_calculation_distance_travel_title">Enter the distance to be traveled</string>
+    <string name="dialog_trip_fuel_cost_calculation_calculate_button_text">Calculate</string>
+    <string name="dialog_trip_fuel_cost_select_fuel_type_title">Choose fuel type</string>
+    <string name="dialog_trip_fuel_cost_calculation_used_fuel_per_100_kilometer_title">Enter your vehicle\'s fuel consumption \nper 100 kilometers</string>
 </resources>

@@ -1,69 +1,333 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/CardViewMain"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
     app:cardCornerRadius="16dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:padding="16dp">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/forOwnVehicleCardView"
-            style="@style/CardViewMain"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainSelectionLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="16dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/forOtherVehicleCardView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:visibility="visible">
 
-            <TextView
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/forOwnVehicleCardView"
+                style="@style/CardViewMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:backgroundTint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeWidth="2dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="24dp">
+
+                    <ImageView
+                        android:id="@+id/forOwnVehicleIllustration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/illustrations_selection"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/forOwnVehicleMainTitle"
+                        style="@style/CardViewSubTitle"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="0dp"
+                        android:text="@string/dialog_trip_fuel_cost_calculation_own_vehicle_main_title"
+                        app:layout_constraintStart_toEndOf="@+id/forOwnVehicleIllustration"
+                        app:layout_constraintTop_toTopOf="@+id/forOwnVehicleIllustration" />
+
+                    <TextView
+                        android:id="@+id/forOwnVehicleSubTitle"
+                        style="@style/CardViewSubTitle"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/dialog_trip_fuel_cost_calculation_own_vehicle_sub_title"
+                        android:textSize="14sp"
+                        android:textStyle="normal"
+                        app:layout_constraintBottom_toBottomOf="@+id/forOwnVehicleIllustration"
+                        app:layout_constraintStart_toEndOf="@+id/forOwnVehicleIllustration"
+                        app:layout_constraintTop_toBottomOf="@+id/forOwnVehicleMainTitle" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/forOtherVehicleCardView"
+                style="@style/CardViewMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/forOwnVehicleCardView"
+                app:strokeWidth="2dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="24dp">
+
+                    <ImageView
+                        android:id="@+id/forOtherVehicleIllustration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/todo"
+                        android:src="@drawable/illustrations_selection2"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/forOtherVehicleMainTitle"
+                        style="@style/CardViewSubTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center"
+                        android:text="@string/dialog_trip_fuel_cost_calculation_other_vehicle_main_title"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/forOtherVehicleIllustration"
+                        app:layout_constraintTop_toTopOf="@+id/forOtherVehicleIllustration" />
+
+                    <TextView
+                        android:id="@+id/forOtherVehicleSubTitle"
+                        style="@style/CardViewSubTitle"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/dialog_trip_fuel_cost_calculation_other_vehicle_sub_title"
+                        android:textSize="14sp"
+                        android:textStyle="normal"
+                        app:layout_constraintBottom_toBottomOf="@+id/forOtherVehicleIllustration"
+                        app:layout_constraintStart_toEndOf="@+id/forOtherVehicleIllustration"
+                        app:layout_constraintTop_toBottomOf="@+id/forOtherVehicleMainTitle" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/forward"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="#5C6BC0"
-                android:gravity="center"
-                android:padding="32dp"
-                android:textColor="@color/white"
-                android:text="Kendi aracım için"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </androidx.cardview.widget.CardView>
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#1976D2"
+                android:text="@string/dialog_trip_fuel_cost_calculation_forward_button_text"
+                app:cornerRadius="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/forOtherVehicleCardView" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/forOtherVehicleCardView"
-            style="@style/CardViewMain"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/forOwnVehicleCardView"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="#7E57C2"
-                android:gravity="center"
-                android:padding="32dp"
-                android:textColor="@color/white"
-                android:text="Başka bir araç için"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </androidx.cardview.widget.CardView>
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="#331976D2"
+                android:text="@string/dialog_trip_fuel_cost_calculation_cancel_button_text"
+                app:cornerRadius="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/forward"
+                app:layout_constraintTop_toBottomOf="@+id/forOtherVehicleCardView" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ownVehicleSelectionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/licensePlateTitle"
+                style="@style/CardViewSubTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="@string/dialog_trip_fuel_cost_calculation_select_license_plate_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/licensePlateLayout"
+                style="@style/TextInputLayoutExposedDropdownStyle"
+                android:layout_width="match_parent"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/licensePlateTitle">
+
+                <AutoCompleteTextView
+                    android:id="@+id/licensePlate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none"
+                    tools:ignore="LabelFor" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/ownVehicleDistanceToTripTitle"
+                style="@style/CardViewSubTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dialog_trip_fuel_cost_calculation_distance_travel_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/licensePlateLayout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ownVehicleDistanceToTripLayout"
+                style="@style/TextInputLayoutOutlinedBoxStyle"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ownVehicleDistanceToTripTitle">
+
+                <EditText
+                    android:id="@+id/ownVehicleDistanceToTrip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    tools:ignore="LabelFor" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/calculateOwnTripCostFuelConsumption"
+                style="@style/ButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/dialog_trip_fuel_cost_calculation_calculate_button_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ownVehicleDistanceToTripLayout" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/otherVehicleSelectionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/otherVehicleDistanceToTripTitle"
+                style="@style/CardViewSubTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:text="@string/dialog_trip_fuel_cost_calculation_distance_travel_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/otherVehicleDistanceToTripLayout"
+                style="@style/TextInputLayoutOutlinedBoxStyle"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/otherVehicleDistanceToTripTitle">
+
+                <EditText
+                    android:id="@+id/otherVehicleDistanceToTrip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    tools:ignore="LabelFor" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/otherVehicleFuelTypeTitle"
+                style="@style/CardViewSubTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dialog_trip_fuel_cost_select_fuel_type_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/otherVehicleDistanceToTripLayout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/otherVehicleFuelTypeLayout"
+                style="@style/TextInputLayoutExposedDropdownStyle"
+                android:layout_width="match_parent"
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/otherVehicleFuelTypeTitle">
+
+                <AutoCompleteTextView
+                    android:id="@+id/otherVehicleFuelType"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none"
+                    tools:ignore="LabelFor" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/otherVehicleUsedFuelPer100KilometersTitle"
+                style="@style/CardViewSubTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dialog_trip_fuel_cost_calculation_used_fuel_per_100_kilometer_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/otherVehicleFuelTypeLayout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/otherVehicleUsedFuelPer100KilometersLayout"
+                style="@style/TextInputLayoutOutlinedBoxStyle"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/otherVehicleUsedFuelPer100KilometersTitle">
+
+                <EditText
+                    android:id="@+id/otherVehicleUsedFuelPer100Kilometers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    tools:ignore="LabelFor" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/calculateOtherTripCostFuelConsumption"
+                style="@style/ButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/dialog_trip_fuel_cost_calculation_calculate_button_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/otherVehicleUsedFuelPer100KilometersLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
 
 
 </androidx.cardview.widget.CardView>
