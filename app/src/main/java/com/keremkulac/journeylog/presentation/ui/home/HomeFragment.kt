@@ -18,11 +18,13 @@ import com.keremkulac.journeylog.databinding.FragmentHomeBinding
 import com.keremkulac.journeylog.domain.model.AverageFuelPrice
 import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.domain.model.User
+import com.keremkulac.journeylog.domain.model.Vehicle
 import com.keremkulac.journeylog.util.ExpandableLayoutManager
 import com.keremkulac.journeylog.util.FuelConsumptionDialogUtil
 import com.keremkulac.journeylog.util.HandleResult
 import com.keremkulac.journeylog.util.SharedViewModel
 import com.keremkulac.journeylog.util.TranslationHelper
+import com.keremkulac.journeylog.util.TripFuelCostCalculationDialogUtil
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -33,7 +35,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private lateinit var sharedViewModel: SharedViewModel
     private lateinit var barDataSet: BarDataSet
     private lateinit var averageFuelPriceList: List<AverageFuelPrice>
-    private lateinit var expandableLayoutManager : ExpandableLayoutManager
+    private lateinit var vehicleList: List<Vehicle>
+    private lateinit var expandableLayoutManager: ExpandableLayoutManager
 
     @Inject
     lateinit var translationHelper: TranslationHelper
@@ -44,8 +47,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         getCurrentUser()
         observeAverageFuelPrices()
         observeAllReceipts()
+        observeAllVehicles()
         lastFuelPurchaseCardViewToggle()
         fuelConsumption()
+        tripFuelCosCalculation()
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -95,6 +100,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 binding.userFullName.text = viewModel.formatFullName(user.name, user.surname)
                 sharedViewModel.updateData(user)
                 viewModel.getAllReceipts(user.email)
+                viewModel.getAllVehicles(user.id)
             })
         }
     }
@@ -106,6 +112,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 onSuccess = { data ->
                     val list = data as List<Receipt>
                     loadBarChartData(viewModel.getBarDataSet(list), viewModel.getReceiptDates(list))
+                })
+        }
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun observeAllVehicles() {
+        viewModel.allVehicles.observe(viewLifecycleOwner) { result ->
+            HandleResult.handleResult(binding.progressBar, result,
+                onSuccess = { data ->
+                    val list = data as List<Vehicle>
+                    vehicleList = list
                 })
         }
     }
@@ -152,7 +169,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private fun lastFuelPurchaseCardViewToggle() {
         binding.apply {
             expandableLayoutManager = ExpandableLayoutManager(this.openFuelPurchaseCardView)
-            lastFuelPurchaseCardView.setOnClickListener{expandableLayoutManager.toggleLayout(this.lastFuelPurchaseLayout)}
+            lastFuelPurchaseCardView.setOnClickListener { expandableLayoutManager.toggleLayout(this.lastFuelPurchaseLayout) }
         }
     }
 
@@ -164,5 +181,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             }
         )
     }
+
+    private fun tripFuelCosCalculation() {
+        binding.tripFuelCostCalculation.setOnClickListener {
+            TripFuelCostCalculationDialogUtil(requireContext(), averageFuelPriceList,vehicleList).showDialog()
+        }
+
+    }
+
 
 }

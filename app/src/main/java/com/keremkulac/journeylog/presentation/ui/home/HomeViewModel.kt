@@ -9,6 +9,7 @@ import com.github.mikephil.charting.data.BarEntry
 import com.google.firebase.auth.FirebaseUser
 import com.keremkulac.journeylog.domain.model.Receipt
 import com.keremkulac.journeylog.domain.usecase.GetAllReceiptsUseCase
+import com.keremkulac.journeylog.domain.usecase.GetAllVehiclesUseCase
 import com.keremkulac.journeylog.domain.usecase.GetAverageFuelPriceUseCase
 import com.keremkulac.journeylog.domain.usecase.GetCurrentUserUseCase
 import com.keremkulac.journeylog.domain.usecase.GetUserUseCase
@@ -22,7 +23,8 @@ class HomeViewModel @Inject constructor(
     private val getUserUseCase: GetUserUseCase,
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
     private val getAverageFuelPriceUseCase: GetAverageFuelPriceUseCase,
-    private val getAllReceiptsUseCase: GetAllReceiptsUseCase
+    private val getAllReceiptsUseCase: GetAllReceiptsUseCase,
+    private val getAllVehiclesUseCase: GetAllVehiclesUseCase
 ) :
     ViewModel() {
     private val _userResult = MutableLiveData<Result<Any>>()
@@ -36,6 +38,9 @@ class HomeViewModel @Inject constructor(
 
     private val _allReceipts = MutableLiveData<Result<Any>>()
     val allReceipts: LiveData<Result<Any>> get() = _allReceipts
+
+    private val _allVehicles = MutableLiveData<Result<Any>>()
+    val allVehicles: LiveData<Result<Any>> get() = _allVehicles
 
     init {
         getCurrentUser()
@@ -74,6 +79,15 @@ class HomeViewModel @Inject constructor(
             _allReceipts.value = Result.Loading
             getAllReceiptsUseCase.invoke(email) {
                 _allReceipts.value = it
+            }
+        }
+    }
+
+    fun getAllVehicles(id: String) {
+        viewModelScope.launch {
+            _allVehicles.value = Result.Loading
+            getAllVehiclesUseCase.invoke(id) {
+                _allVehicles.value = it
             }
         }
     }
