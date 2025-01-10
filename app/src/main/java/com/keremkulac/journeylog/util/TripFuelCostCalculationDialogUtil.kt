@@ -18,8 +18,8 @@ class TripFuelCostCalculationDialogUtil(
     private val vehicleList: List<Vehicle>
 ) {
     private lateinit var binding: DialogTripFuelCostCalculationBinding
-    private var selectedFuelType: String = ""
-    private var selectedLicensePlate: String = ""
+    private var selectedAverageFuel: AverageFuelPrice? = null
+    private var selectedVehicle: Vehicle? = null
     private val dialog: Dialog = createDialog()
     private var selection = -1
 
@@ -50,6 +50,8 @@ class TripFuelCostCalculationDialogUtil(
         ownVehicleSelection()
         cancelClick()
         forwardClick()
+        calculateOwnTripCostFuelConsumption()
+        calculateOtherTripCostFuelConsumption()
         dialog.show()
     }
 
@@ -62,7 +64,7 @@ class TripFuelCostCalculationDialogUtil(
             )
             setAdapter(adapter)
             setOnItemClickListener { _, _, position, _ ->
-                selectedFuelType = averageFuelPriceList[position].title
+                selectedAverageFuel = averageFuelPriceList[position]
             }
         }
     }
@@ -76,7 +78,7 @@ class TripFuelCostCalculationDialogUtil(
             )
             setAdapter(adapter)
             setOnItemClickListener { _, _, position, _ ->
-                selectedLicensePlate = averageFuelPriceList[position].title
+                selectedVehicle = vehicleList[position]
             }
         }
     }
@@ -123,6 +125,24 @@ class TripFuelCostCalculationDialogUtil(
         }
     }
 
+    private fun ownVehicleCalculation() {
+        with(binding) {
+            mainSelectionLayout.visibility = View.GONE
+            ownVehicleSelectionLayout.visibility = View.GONE
+            messageLayout.visibility = View.VISIBLE
+            calculationAnimation.playAnimation()
+        }
+    }
+
+    private fun otherVehicleCalculation() {
+        with(binding) {
+            mainSelectionLayout.visibility = View.GONE
+            otherVehicleSelectionLayout.visibility = View.GONE
+            messageLayout.visibility = View.VISIBLE
+            calculationAnimation.playAnimation()
+        }
+    }
+
     private fun cancelClick() {
         binding.cancel.setOnClickListener {
             dialog.dismiss()
@@ -139,6 +159,37 @@ class TripFuelCostCalculationDialogUtil(
         with(binding) {
             forOwnVehicleCardView.strokeColor = context.getColor(R.color.border)
             forOtherVehicleCardView.strokeColor = context.getColor(R.color.border)
+        }
+    }
+
+    private fun calculateOwnTripCostFuelConsumption() {
+        with(binding) {
+            calculateOwnTripCostFuelConsumption.setOnClickListener {
+                selectedVehicle?.let {
+                    val distance = ownVehicleDistanceToTrip.text.toString().toDouble()
+                    val totalPrice = ownVehicleDistanceToTrip.text.toString()
+                        .toDouble() * it.perKilometersFuelPrice!!.toDouble()
+                    ownVehicleCalculation()
+                    message.text = context.getString(R.string.dialog_trip_fuel_cost_message)
+                        .format(distance.toString(), totalPrice.toMoneyFormat())
+                }
+            }
+        }
+    }
+
+    private fun calculateOtherTripCostFuelConsumption() {
+        with(binding) {
+            calculateOtherTripCostFuelConsumption.setOnClickListener {
+                selectedAverageFuel?.let {
+                    val distance = otherVehicleDistanceToTrip.text.toString().toDouble()
+                    val totalPrice = otherVehicleDistanceToTrip.text.toString()
+                        .toDouble() * ((it.value.toDouble() * otherVehicleUsedFuelPer100Kilometers.text.toString()
+                        .toDouble()) / 100)
+                    otherVehicleCalculation()
+                    message.text = context.getString(R.string.dialog_trip_fuel_cost_message)
+                        .format(distance.toString(), totalPrice.toMoneyFormat())
+                }
+            }
         }
     }
 

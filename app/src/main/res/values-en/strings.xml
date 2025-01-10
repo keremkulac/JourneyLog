@@ -256,9 +256,9 @@
 
 
     <string name="dialog_trip_fuel_cost_calculation_own_vehicle_main_title">My own vehicle</string>
-    <string name="dialog_trip_fuel_cost_calculation_own_vehicle_sub_title">For my own vehicle</string>
+    <string name="dialog_trip_fuel_cost_calculation_own_vehicle_sub_title">Select available vehicle, use</string>
     <string name="dialog_trip_fuel_cost_calculation_other_vehicle_main_title">Another vehicle</string>
-    <string name="dialog_trip_fuel_cost_calculation_other_vehicle_sub_title">For another vehicle</string>
+    <string name="dialog_trip_fuel_cost_calculation_other_vehicle_sub_title">Enter new vehicle information</string>
     <string name="dialog_trip_fuel_cost_calculation_forward_button_text">Forward</string>
     <string name="dialog_trip_fuel_cost_calculation_cancel_button_text">Cancel</string>
     <string name="dialog_trip_fuel_cost_calculation_select_license_plate_title">Choose license plate</string>
@@ -266,4 +266,6 @@
     <string name="dialog_trip_fuel_cost_calculation_calculate_button_text">Calculate</string>
     <string name="dialog_trip_fuel_cost_select_fuel_type_title">Choose fuel type</string>
     <string name="dialog_trip_fuel_cost_calculation_used_fuel_per_100_kilometer_title">Enter your vehicle\'s fuel consumption \nper 100 kilometers</string>
+    <string name="dialog_trip_fuel_cost_message">Your vehicle will consume  %1s ₺ \nof fuel for %2s km. </string>
+
 </resources>
