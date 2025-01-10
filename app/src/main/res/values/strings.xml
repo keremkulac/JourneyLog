@@ -128,6 +128,7 @@
     <string name="validation_message_valid_email" >Geçerli bir email giriniz</string>
     <string name="profile_my_vehicles_button_text" >Araçlarım</string>
     <string name="validation_message_empty_license_plate" >Lütfen bir plaka giriniz</string>
+    <string name="validation_message_empty_distance" >Lütfen gidilecek mesafeyi giriniz</string>
     <string name="validation_message_valid_license_plate" >Lütfen geçerli bir plaka giriniz</string>
     <string name="validation_message_empty_vehicle" >Lütfen bir araç tipi seçiniz"</string>
     <string name="validation_message_empty_vehicle_last_km" >Araç kilometresini giriniz"</string>
@@ -265,5 +266,6 @@
     <string name="dialog_trip_fuel_cost_calculation_used_fuel_per_100_kilometer_title">Aracınız 100 km\'de kaç L yakıyor?</string>
 
     <string name="dialog_trip_fuel_cost_message">Aracınız %1s km\'de %2s ₺\nyakıt harcayacaktır.</string>
+
 
 </resources>

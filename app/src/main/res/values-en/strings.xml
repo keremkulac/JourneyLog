@@ -128,6 +128,7 @@
     <string name="validation_message_valid_email">Enter a valid email</string>
     <string name="profile_my_vehicles_button_text">My Vehicles</string>
     <string name="validation_message_empty_license_plate">Enter a license plate</string>
+    <string name="validation_message_empty_distance" >Please enter the distance to be traveled</string>
     <string name="validation_message_valid_license_plate">Enter a valid license plate</string>
     <string name="validation_message_empty_vehicle">Select a vehicle type</string>
     <string name="validation_message_empty_vehicle_last_km">Enter vehicle mileage</string>

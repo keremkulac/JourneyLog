@@ -7,6 +7,7 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.DialogTripFuelCostCalculationBinding
 import com.keremkulac.journeylog.domain.model.AverageFuelPrice
@@ -15,13 +16,16 @@ import com.keremkulac.journeylog.domain.model.Vehicle
 class TripFuelCostCalculationDialogUtil(
     private val context: Context,
     private val averageFuelPriceList: List<AverageFuelPrice>,
-    private val vehicleList: List<Vehicle>
+    private val vehicleList: List<Vehicle>,
+    private val inputValidation: InputValidation
 ) {
     private lateinit var binding: DialogTripFuelCostCalculationBinding
     private var selectedAverageFuel: AverageFuelPrice? = null
     private var selectedVehicle: Vehicle? = null
     private val dialog: Dialog = createDialog()
     private var selection = -1
+    private var validationMessage = ""
+
 
     private fun createDialog(): Dialog {
         return Dialog(context).apply {
@@ -165,13 +169,15 @@ class TripFuelCostCalculationDialogUtil(
     private fun calculateOwnTripCostFuelConsumption() {
         with(binding) {
             calculateOwnTripCostFuelConsumption.setOnClickListener {
-                selectedVehicle?.let {
-                    val distance = ownVehicleDistanceToTrip.text.toString().toDouble()
+                val distance = ownVehicleDistanceToTrip.text.toString()
+                if (!validateOwnTripCostFuelCalculation(selectedVehicle, distance)) {
+                    Toast.makeText(context, validationMessage, Toast.LENGTH_SHORT).show()
+                } else {
                     val totalPrice = ownVehicleDistanceToTrip.text.toString()
-                        .toDouble() * it.perKilometersFuelPrice!!.toDouble()
+                        .toDouble() * selectedVehicle!!.perKilometersFuelPrice!!.toDouble()
                     ownVehicleCalculation()
                     message.text = context.getString(R.string.dialog_trip_fuel_cost_message)
-                        .format(distance.toString(), totalPrice.toMoneyFormat())
+                        .format(distance, totalPrice.toMoneyFormat())
                 }
             }
         }
@@ -180,16 +186,45 @@ class TripFuelCostCalculationDialogUtil(
     private fun calculateOtherTripCostFuelConsumption() {
         with(binding) {
             calculateOtherTripCostFuelConsumption.setOnClickListener {
-                selectedAverageFuel?.let {
-                    val distance = otherVehicleDistanceToTrip.text.toString().toDouble()
-                    val totalPrice = otherVehicleDistanceToTrip.text.toString()
-                        .toDouble() * ((it.value.toDouble() * otherVehicleUsedFuelPer100Kilometers.text.toString()
+                val distance = otherVehicleDistanceToTrip.text.toString()
+                val otherVehicleUsedFuelPer100Kilometers = otherVehicleUsedFuelPer100Kilometers.text.toString()
+                if (!validateOtherTripCostFuelCalculation(selectedAverageFuel,distance,otherVehicleUsedFuelPer100Kilometers)){
+                    Toast.makeText(context, validationMessage, Toast.LENGTH_SHORT).show()
+                }else{
+                    val totalPrice = distance.toDouble() * ((selectedAverageFuel!!.value.toDouble() * otherVehicleUsedFuelPer100Kilometers
                         .toDouble()) / 100)
                     otherVehicleCalculation()
                     message.text = context.getString(R.string.dialog_trip_fuel_cost_message)
-                        .format(distance.toString(), totalPrice.toMoneyFormat())
+                        .format(distance, totalPrice.toMoneyFormat())
                 }
+
             }
+        }
+    }
+
+    private fun validateOwnTripCostFuelCalculation(
+        selectedVehicle: Vehicle?,
+        distanceToTrip: String?,
+    ): Boolean {
+        return inputValidation.validateOwnTripCostFuelCalculation(
+            selectedVehicle,
+            distanceToTrip
+        ) { message ->
+            validationMessage = message
+        }
+    }
+
+    private fun validateOtherTripCostFuelCalculation(
+        averageFuelPrice: AverageFuelPrice?,
+        distanceToTrip: String?,
+        vehicleUsedFuelPer100Kilometers: String?
+    ): Boolean {
+        return inputValidation.validateOtherTripCostFuelCalculation(
+            averageFuelPrice,
+            distanceToTrip,
+            vehicleUsedFuelPer100Kilometers
+        ) { message ->
+            validationMessage = message
         }
     }
 

@@ -2,6 +2,8 @@ package com.keremkulac.journeylog.util
 
 import android.content.Context
 import com.keremkulac.journeylog.R
+import com.keremkulac.journeylog.domain.model.AverageFuelPrice
+import com.keremkulac.journeylog.domain.model.Vehicle
 import javax.inject.Inject
 
 class InputValidation @Inject constructor(private val context: Context) {
@@ -275,5 +277,49 @@ class InputValidation @Inject constructor(private val context: Context) {
 
     }
 
+    fun validateOwnTripCostFuelCalculation(
+        selectedVehicle: Vehicle?,
+        distanceToTrip: String?,
+        validationMessage: (String) -> Unit
+    ): Boolean {
+        return when {
+            selectedVehicle == null -> {
+                validationMessage(context.getString(R.string.validation_message_empty_license_plate))
+                false
+            }
+
+            distanceToTrip.isNullOrEmpty() -> {
+                validationMessage(context.getString(R.string.validation_message_empty_distance))
+                false
+            }
+
+            else -> true
+        }
+    }
+
+    fun validateOtherTripCostFuelCalculation(
+        averageFuelPrice: AverageFuelPrice?, distanceToTrip: String?,
+        vehicleUsedFuelPer100Kilometers: String?,
+        validationMessage: (String) -> Unit
+    ): Boolean {
+        return when {
+            distanceToTrip.isNullOrEmpty() -> {
+                validationMessage(context.getString(R.string.validation_message_empty_distance))
+                false
+            }
+
+            averageFuelPrice == null -> {
+                validationMessage(context.getString(R.string.validation_message_empty_fuel_type))
+                false
+            }
+
+            vehicleUsedFuelPer100Kilometers.isNullOrEmpty() -> {
+                validationMessage(context.getString(R.string.validation_message_empty_per_100_kilometer_fuel))
+                false
+            }
+
+            else -> true
+        }
+    }
 
 }
