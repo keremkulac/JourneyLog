@@ -7,6 +7,7 @@ import com.keremkulac.journeylog.domain.model.Vehicle
 import javax.inject.Inject
 
 class InputValidation @Inject constructor(private val context: Context) {
+    private val regex = "^-?\\d*(\\.\\d+)?$".toRegex()
 
     fun validateEmailAndPassword(
         userEmail: String?,
@@ -172,8 +173,18 @@ class InputValidation @Inject constructor(private val context: Context) {
                 false
             }
 
+            !regex.matches(literPrice) -> {
+                validationMessage(context.getString(R.string.validation_message_enter_only_number))
+                false
+            }
+
             liter.isNullOrEmpty() -> {
                 validationMessage(context.getString(R.string.warning_receipt_liter_empty_message))
+                false
+            }
+
+            !regex.matches(liter) -> {
+                validationMessage(context.getString(R.string.validation_message_enter_only_number))
                 false
             }
 
@@ -184,6 +195,11 @@ class InputValidation @Inject constructor(private val context: Context) {
 
             vehicleLastKm.isNullOrEmpty() -> {
                 validationMessage(context.getString(R.string.warning_receipt_vehicle_last_km_message))
+                false
+            }
+
+            !regex.matches(vehicleLastKm) -> {
+                validationMessage(context.getString(R.string.validation_message_enter_only_number))
                 false
             }
 
@@ -262,6 +278,11 @@ class InputValidation @Inject constructor(private val context: Context) {
                 false
             }
 
+            !regex.matches(lastKm) -> {
+                validationMessage(context.getString(R.string.validation_message_enter_only_number))
+                false
+            }
+
             selectedFuelType.isNullOrEmpty() -> {
                 validationMessage(context.getString(R.string.validation_message_empty_fuel_type))
                 false
@@ -269,6 +290,11 @@ class InputValidation @Inject constructor(private val context: Context) {
 
             per100KilometerFuel.isNullOrEmpty() -> {
                 validationMessage(context.getString(R.string.validation_message_empty_per_100_kilometer_fuel))
+                false
+            }
+
+            !regex.matches(per100KilometerFuel) -> {
+                validationMessage(context.getString(R.string.validation_message_enter_only_number))
                 false
             }
 
@@ -293,6 +319,11 @@ class InputValidation @Inject constructor(private val context: Context) {
                 false
             }
 
+            !regex.matches(distanceToTrip) -> {
+                validationMessage(context.getString(R.string.validation_message_enter_only_number))
+                false
+            }
+
             else -> true
         }
     }
@@ -308,6 +339,11 @@ class InputValidation @Inject constructor(private val context: Context) {
                 false
             }
 
+            !regex.matches(distanceToTrip) -> {
+                validationMessage(context.getString(R.string.validation_message_enter_only_number))
+                false
+            }
+
             averageFuelPrice == null -> {
                 validationMessage(context.getString(R.string.validation_message_empty_fuel_type))
                 false
@@ -315,6 +351,11 @@ class InputValidation @Inject constructor(private val context: Context) {
 
             vehicleUsedFuelPer100Kilometers.isNullOrEmpty() -> {
                 validationMessage(context.getString(R.string.validation_message_empty_per_100_kilometer_fuel))
+                false
+            }
+
+            !regex.matches(vehicleUsedFuelPer100Kilometers) -> {
+                validationMessage(context.getString(R.string.validation_message_enter_only_number))
                 false
             }
 

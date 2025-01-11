@@ -134,6 +134,7 @@
     <string name="validation_message_empty_vehicle_last_km" >Araç kilometresini giriniz"</string>
     <string name="validation_message_empty_fuel_type" >Lütfen bir yakıt türü seçiniz</string>
     <string name="validation_message_empty_per_100_kilometer_fuel" >Lütfen yakıt tüketimini giriniz</string>
+    <string name="validation_message_enter_only_number" >Lütfen sadece sayı giriniz</string>
     <string name="vehicle_select_vehicle_select_title" >Araç tipi seçiniz</string>
     <string name="vehicle_select_vehicle_section_title" >Araç \nBilgisi</string>
     <string name="vehicle_select_license_plate_title" >Plaka giriniz</string>
