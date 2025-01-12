@@ -43,9 +43,9 @@ class FuelPurchaseAddViewModel @Inject constructor(
     fun calculateTotal(liter: Double, literPrice: Double) {
         val total = liter * literPrice
         val formattedTotal = String.format("%.2f", total)
-        _totalPrice.value = formattedTotal.replace(",",".")
+        _totalPrice.value = formattedTotal.replace(",", ".")
         val formattedTax = String.format("%.2f", calculateTax(total))
-        _totalTax.value = formattedTax.replace(",",".")
+        _totalTax.value = formattedTax.replace(",", ".")
     }
 
     private fun calculateTax(total: Double): Double {
@@ -81,37 +81,32 @@ class FuelPurchaseAddViewModel @Inject constructor(
         }
     }
 
-    fun validateInputs(
-        id: String?,
-        email: String?,
+    fun validateFuelInputReceipt(
         stationName: String?,
         fuelType: String?,
         literPrice: String?,
-        liter: String?,
-        vehicleLicensePlate: String?,
-        vehicleLastKm: String?,
-        tax: String?,
-        total: String?,
-        date: String?,
-        time: String?
+        liter: String?
     ): Boolean {
-        return inputValidation.validateReceipt(
-            id,
-            email,
+        return inputValidation.validateFuelInputReceipt(
             stationName,
             fuelType,
             literPrice,
-            liter,
-            vehicleLicensePlate,
-            vehicleLastKm,
-            tax,
-            total,
-            date,
-            time
+            liter
         ) { message ->
             _validationMessage.value = message
         }
     }
 
+    fun validateVehicleInputReceipt(
+        vehicleLicensePlate: String?,
+        vehicleLastKm: String?,
+    ): Boolean {
+        return inputValidation.validateVehicleInputReceipt(
+            vehicleLicensePlate,
+            vehicleLastKm
+        ) { message ->
+            _validationMessage.value = message
+        }
+    }
 
 }

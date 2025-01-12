@@ -1,5 +1,6 @@
 package com.keremkulac.journeylog.presentation.ui.fuelPurchaseAdd
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView.OnItemClickListener
@@ -51,7 +52,9 @@ class FuelPurchaseAddFragment :
         selectLicensePlate()
         observeValidation()
         createVehicle()
-
+        forwardVehicleInfo()
+        forwardPaymentInfo()
+        confirmClick()
     }
 
     private fun getSelectedFuelType() {
@@ -100,9 +103,7 @@ class FuelPurchaseAddFragment :
 
     private fun saveReceipt() {
         binding.receiptSave.setOnClickListener {
-            if (isValid()) {
-                createDialog(getReceipt())
-            }
+            createDialog(getReceipt())
         }
     }
 
@@ -226,20 +227,20 @@ class FuelPurchaseAddFragment :
         )
     }
 
-    private fun isValid(): Boolean {
-        val isValid = viewModel.validateInputs(
-            viewModel.createUUID(),
-            user?.email.toString().trim(),
+    private fun isValidFuelInputs(): Boolean {
+        val isValid = viewModel.validateFuelInputReceipt(
             selectedCompany.trim(),
             selectedType.trim(),
             binding.receiptLiterPrice.text.toString().trim(),
-            binding.receiptPurchaseLiter.text.toString().trim(),
+            binding.receiptPurchaseLiter.text.toString().trim()
+        )
+        return isValid
+    }
+
+    private fun isValidVehicleInputs(): Boolean {
+        val isValid = viewModel.validateVehicleInputReceipt(
             selectedLicensePlate.trim(),
-            binding.vehicleKm.text.toString().trim(),
-            binding.receiptTotalTax.text.toString().trim(),
-            binding.receiptTotalPrice.text.toString().trim(),
-            date = dateTime[0],
-            time = dateTime[1]
+            binding.vehicleKm.text.toString().trim()
         )
         return isValid
     }
@@ -254,4 +255,39 @@ class FuelPurchaseAddFragment :
         }
     }
 
+    private fun forwardVehicleInfo() {
+        with(binding) {
+            forwardVehicleInfo.setOnClickListener {
+                if (isValidFuelInputs()) {
+                    fuelCard.visibility = View.GONE
+                    vehicleCard.visibility = View.VISIBLE
+                    vehicleInfoIndicatorTitle.setTextColor(Color.parseColor("#3F51B5"))
+                    fuelIndicator.setBackgroundColor(Color.parseColor("#3F51B5"))
+                }
+            }
+        }
+    }
+
+    private fun forwardPaymentInfo() {
+        with(binding) {
+            forwardPaymentInfo.setOnClickListener {
+                if (isValidVehicleInputs()) {
+                    vehicleCard.visibility = View.GONE
+                    paymentCard.visibility = View.VISIBLE
+                    vehicleIndicator.setBackgroundColor(Color.parseColor("#3F51B5"))
+                    paymentInfoIndicatorTitle.setTextColor(Color.parseColor("#3F51B5"))
+                }
+            }
+        }
+    }
+
+    private fun confirmClick() {
+        with(binding) {
+            confirmReceipt.setOnClickListener {
+                confirmReceipt.visibility = View.GONE
+                receiptSave.visibility = View.VISIBLE
+                paymentIndicator.setBackgroundColor(Color.parseColor("#3F51B5"))
+            }
+        }
+    }
 }
