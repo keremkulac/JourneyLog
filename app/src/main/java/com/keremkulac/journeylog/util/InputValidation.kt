@@ -132,32 +132,14 @@ class InputValidation @Inject constructor(private val context: Context) {
 
     }
 
-    fun validateReceipt(
-        id: String?,
-        email: String?,
+    fun validateFuelInputReceipt(
         stationName: String?,
         fuelType: String?,
         literPrice: String?,
         liter: String?,
-        vehicleLicensePlate: String?,
-        vehicleLastKm: String?,
-        tax: String?,
-        total: String?,
-        date: String?,
-        time: String?,
         validationMessage: (String) -> Unit
     ): Boolean {
         return when {
-            id.isNullOrEmpty() -> {
-                validationMessage(context.getString(R.string.warning_receipt_id_not_empty_message))
-                false
-            }
-
-            email.isNullOrEmpty() -> {
-                validationMessage(context.getString(R.string.warning_receipt_email_not_empty_message))
-                false
-            }
-
             stationName.isNullOrEmpty() -> {
                 validationMessage(context.getString(R.string.warning_receipt_station_name_not_empty_message))
                 false
@@ -188,6 +170,16 @@ class InputValidation @Inject constructor(private val context: Context) {
                 false
             }
 
+            else -> true
+        }
+    }
+
+    fun validateVehicleInputReceipt(
+        vehicleLicensePlate: String?,
+        vehicleLastKm: String?,
+        validationMessage: (String) -> Unit
+    ): Boolean {
+        return when {
             vehicleLicensePlate.isNullOrEmpty() -> {
                 validationMessage(context.getString(R.string.warning_receipt_vehicle_license_plate_message))
                 false
@@ -203,30 +195,10 @@ class InputValidation @Inject constructor(private val context: Context) {
                 false
             }
 
-            tax.isNullOrEmpty() -> {
-                validationMessage(context.getString(R.string.warning_receipt_tax_empty_message))
-                false
-            }
-
-            total.isNullOrEmpty() -> {
-                validationMessage(context.getString(R.string.warning_receipt_total_empty_message))
-                false
-            }
-
-            date.isNullOrEmpty() -> {
-                validationMessage(context.getString(R.string.warning_receipt_date_empty_message))
-                false
-            }
-
-            time.isNullOrEmpty() -> {
-                validationMessage(context.getString(R.string.warning_receipt_time_empty_message))
-                false
-            }
-
             else -> true
         }
-
     }
+
 
     fun validateUpdateUser(
         userName: String?,
