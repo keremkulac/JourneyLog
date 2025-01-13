@@ -8,229 +8,169 @@
     android:layout_margin="16dp"
     app:cardCornerRadius="16dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-
-        <ImageView
-            android:id="@+id/fuelBottleİcon"
-            style="@style/CardViewMainIcon"
-            android:background="@drawable/imageview_background"
-            android:backgroundTint="#880E4F"
-            android:contentDescription="@string/todo"
-            android:padding="10dp"
-            android:src="@drawable/ic_fuel_bottle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:id="@+id/literTitle"
-            style="@style/CardViewMainTitle"
-            android:layout_width="wrap_content"
-            android:text="@string/dialog_fuel_consumption_liter_title"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/fuelBottleİcon"
-            app:layout_constraintStart_toEndOf="@+id/fuelBottleİcon"
-            app:layout_constraintTop_toTopOf="@+id/fuelBottleİcon" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/kmLiterLayout"
-            style="@style/TextInputLayoutOutlinedBoxStyle"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="@+id/literTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fuelBottleİcon">
-
-            <EditText
-                android:id="@+id/kmLiter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/dialog_fuel_consumption_liter_hint"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                tools:ignore="LabelFor" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <ImageView
-            android:id="@+id/fuelIcon"
-            style="@style/CardViewMainIcon"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/imageview_background"
-            android:backgroundTint="#0D47A1"
-            android:contentDescription="@string/todo"
-            android:src="@drawable/ic_fuel"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/kmLiterLayout" />
-
-        <TextView
-            android:id="@+id/fuelTypeTitle"
-            style="@style/CardViewMainTitle"
-            android:text="@string/dialog_fuel_consumption_fuel_type"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/fuelIcon"
-            app:layout_constraintStart_toEndOf="@+id/fuelIcon"
-            app:layout_constraintTop_toTopOf="@+id/fuelIcon" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/fuelTypeLayout"
-            style="@style/TextInputLayoutExposedDropdownStyle"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/calculateLayout"
             android:layout_width="match_parent"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fuelIcon">
-
-            <AutoCompleteTextView
-                android:id="@+id/fuelType"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="none"
-                tools:ignore="LabelFor" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/calculateButton"
-            style="@style/ButtonStyle"
-            android:text="@string/dialog_fuel_consumption_calculate_button_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fuelTypeLayout" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/perKilometerCardView"
-            style="@style/CardViewMain"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/per100KilometerCardView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/calculateButton">
+            android:padding="16dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ImageView
+                android:id="@+id/fuelBottleİcon"
+                style="@style/CardViewMainIcon"
+                android:background="@drawable/imageview_background"
+                android:backgroundTint="#880E4F"
+                android:contentDescription="@string/todo"
+                android:padding="10dp"
+                android:src="@drawable/ic_fuel_bottle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/literTitle"
+                style="@style/CardViewMainTitle"
+                android:layout_width="wrap_content"
+                android:text="@string/dialog_fuel_consumption_liter_title"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/fuelBottleİcon"
+                app:layout_constraintStart_toEndOf="@+id/fuelBottleİcon"
+                app:layout_constraintTop_toTopOf="@+id/fuelBottleİcon" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/kmLiterLayout"
+                style="@style/TextInputLayoutOutlinedBoxStyle"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/literTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fuelBottleİcon">
+
+                <EditText
+                    android:id="@+id/kmLiter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/dialog_fuel_consumption_liter_hint"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal"
+                    tools:ignore="LabelFor" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/fuelIcon"
+                style="@style/CardViewMainIcon"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/imageview_background"
+                android:backgroundTint="#0D47A1"
+                android:contentDescription="@string/todo"
+                android:src="@drawable/ic_fuel"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/kmLiterLayout" />
+
+            <TextView
+                android:id="@+id/fuelTypeTitle"
+                style="@style/CardViewMainTitle"
+                android:text="@string/dialog_fuel_consumption_fuel_type"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/fuelIcon"
+                app:layout_constraintStart_toEndOf="@+id/fuelIcon"
+                app:layout_constraintTop_toTopOf="@+id/fuelIcon" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fuelTypeLayout"
+                style="@style/TextInputLayoutExposedDropdownStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_marginTop="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fuelIcon">
 
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="2.5dp"
-                    android:layout_height="0dp"
-                    android:background="#303F9F"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                <AutoCompleteTextView
+                    android:id="@+id/fuelType"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none"
+                    tools:ignore="LabelFor" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <TextView
-                    android:id="@+id/perKilometerPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="3,25" />
+            <Button
+                android:id="@+id/calculateButton"
+                style="@style/ButtonStyle"
+                android:text="@string/dialog_fuel_consumption_calculate_button_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fuelTypeLayout" />
 
-                <TextView
-                    android:id="@+id/perKilometerPriceSymbol"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="@string/dialog_fuel_consumption_price_symbol"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@+id/perKilometerPrice"
-                    app:layout_constraintStart_toEndOf="@+id/perKilometerPrice" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/perKilometerTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="@string/dialog_fuel_consumption_per_kilometer_title"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/perKilometerPrice"
-                    app:layout_constraintTop_toBottomOf="@+id/perKilometerPrice"
-                    app:layout_constraintVertical_bias="1.0" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/per100KilometerCardView"
-            style="@style/CardViewMain"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/messageLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/perKilometerCardView"
-            app:layout_constraintTop_toBottomOf="@+id/calculateButton">
+            android:padding="16dp"
+            android:visibility="gone">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/calculationAnimation"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/raw_calculation" />
 
-                <View
-                    android:id="@+id/view2"
-                    android:layout_width="2.5dp"
-                    android:layout_height="0dp"
-                    android:background="#303F9F"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <View
+                android:id="@+id/view3"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:background="@drawable/rounded_textview_style"
+                android:backgroundTint="@color/main"
+                app:layout_constraintBottom_toBottomOf="@+id/perKilometerPriceMessage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/perKilometerPriceMessage" />
 
-                <TextView
-                    android:id="@+id/per100KilometerPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="325" />
+            <TextView
+                android:id="@+id/perKilometerPriceMessage"
+                style="@style/CardViewSubTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@+id/view3"
+                app:layout_constraintTop_toBottomOf="@+id/calculationAnimation"
+                tools:text="Aracınız kilometre başına 9,67 tl yakıt harcayacaktır" />
 
-                <TextView
-                    android:id="@+id/per100KilometerPriceSymbol"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:text="@string/dialog_fuel_consumption_price_symbol"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@+id/per100KilometerPrice"
-                    app:layout_constraintStart_toEndOf="@+id/per100KilometerPrice" />
+            <View
+                android:id="@+id/view4"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:background="@drawable/rounded_textview_style"
+                android:backgroundTint="@color/main"
+                app:layout_constraintBottom_toBottomOf="@+id/per100KilometerPriceMessage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/per100KilometerPriceMessage" />
+
+            <TextView
+                android:id="@+id/per100KilometerPriceMessage"
+                style="@style/CardViewSubTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/view4"
+                app:layout_constraintTop_toBottomOf="@+id/perKilometerPriceMessage"
+                tools:text="Aracınız 100 km'de 967 tl yakıt harcayacaktır" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                <TextView
-                    android:id="@+id/per100KilometerTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="@string/dialog_fuel_consumption_per_100_kilometer_title"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/per100KilometerPrice"
-                    app:layout_constraintTop_toBottomOf="@+id/per100KilometerPrice" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

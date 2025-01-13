@@ -6,16 +6,20 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import com.keremkulac.journeylog.R
 import com.keremkulac.journeylog.databinding.DialogFuelConsumptionBinding
 import com.keremkulac.journeylog.domain.model.AverageFuelPrice
 
 class FuelConsumptionDialogUtil(
     private val context: Context,
-    private val averageFuelPriceList: List<AverageFuelPrice>
+    private val averageFuelPriceList: List<AverageFuelPrice>,
+    private val inputValidation: InputValidation
 ) {
     private lateinit var binding: DialogFuelConsumptionBinding
     private var selectedFuelType: String = ""
     private val dialog: Dialog = createDialog()
+    private var validationMessage = ""
 
     private fun createDialog(): Dialog {
         return Dialog(context).apply {
@@ -33,16 +37,14 @@ class FuelConsumptionDialogUtil(
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT
             )
-            decorView.setPadding(32,32,32,32)
+            decorView.setPadding(32, 32, 32, 32)
         }
     }
 
     fun showDialog() {
-        with(binding) {
-            setupFuelTypeSpinner()
-            setupCalculateButton()
-            dialog.show()
-        }
+        setupFuelTypeSpinner()
+        setupCalculateButton()
+        dialog.show()
     }
 
     private fun setupFuelTypeSpinner() {
@@ -61,7 +63,11 @@ class FuelConsumptionDialogUtil(
 
     private fun setupCalculateButton() {
         binding.calculateButton.setOnClickListener {
-            calculateConsumption()
+            if (!validateFuelConsumption(binding.kmLiter.text.toString(), selectedFuelType)) {
+                Toast.makeText(context, validationMessage, Toast.LENGTH_SHORT).show()
+            } else {
+                calculateConsumption()
+            }
         }
     }
 
@@ -76,12 +82,23 @@ class FuelConsumptionDialogUtil(
 
     private fun showResults(perKilometer: Double, per100Kilometer: Double) {
         with(binding) {
-            perKilometerCardView.visibility = View.VISIBLE
-            per100KilometerCardView.visibility = View.VISIBLE
-            perKilometerPriceSymbol.visibility = View.VISIBLE
-            per100KilometerPriceSymbol.visibility = View.VISIBLE
-            perKilometerPrice.text = perKilometer.toMoneyFormat()
-            per100KilometerPrice.text = per100Kilometer.toMoneyFormat()
+            calculateLayout.visibility = View.GONE
+            messageLayout.visibility = View.VISIBLE
+            perKilometerPriceMessage.text = context.getString(R.string.fuel_consumption_per_kilometer_info).format(perKilometer.toMoneyFormat())
+            per100KilometerPriceMessage.text = context.getString(R.string.fuel_consumption_per_100_kilometers_info).format(per100Kilometer.toMoneyFormat())
         }
+    }
+
+    private fun validateFuelConsumption(
+        per100KilometerFuel: String?,
+        selectedFuelType: String?
+    ): Boolean {
+        return inputValidation.validateFuelConsumption(
+            per100KilometerFuel,
+            selectedFuelType
+        ) { message ->
+            validationMessage = message
+        }
+
     }
 }

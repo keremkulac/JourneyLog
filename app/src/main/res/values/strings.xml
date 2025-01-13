@@ -231,8 +231,10 @@
     <string name="update_password_title">Şifrenizi belirleyin</string>
     <string name="edit_profile_email_hint">Email</string>
 
-    <string name="fuel_consumption_per_100_kilometers_info">Ortalama <b>%s</b> fiyatlarına göre aracınız 100 kilometrede <b>%s ₺</b> yakmaktadır.</string>
-    <string name="fuel_consumption_per_kilometer_info">Ortalama  <b>%s</b> fiyatlarına göre aracınız kilometrede <b>%s ₺</b>  yakmaktadır.</string>
+
+
+    <string name="fuel_consumption_per_100_kilometers_info">Aracınız 100 kilometrede %s ₺ yakıt harcayacaktır</string>
+    <string name="fuel_consumption_per_kilometer_info">Aracınız kilometre başına %s ₺ yakıt harcayacaktır</string>
     <string name="dialog_fuel_consumption_liter_title">Aracınız 100 km\'de \nkaç L yakıyor?</string>
     <string name="dialog_fuel_consumption_liter_hint">Örn 7.2</string>
     <string name="dialog_fuel_consumption_fuel_type">Yakıt türü</string>
@@ -267,6 +269,7 @@
     <string name="dialog_trip_fuel_cost_calculation_used_fuel_per_100_kilometer_title">Aracınız 100 km\'de kaç L yakıyor?</string>
 
     <string name="dialog_trip_fuel_cost_message">Aracınız %1s km\'de %2s ₺\nyakıt harcayacaktır.</string>
+
 
 
 </resources>
