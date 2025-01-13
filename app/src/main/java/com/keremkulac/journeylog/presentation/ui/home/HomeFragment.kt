@@ -22,6 +22,7 @@ import com.keremkulac.journeylog.domain.model.Vehicle
 import com.keremkulac.journeylog.util.ExpandableLayoutManager
 import com.keremkulac.journeylog.util.FuelConsumptionDialogUtil
 import com.keremkulac.journeylog.util.HandleResult
+import com.keremkulac.journeylog.util.InputValidation
 import com.keremkulac.journeylog.util.SharedViewModel
 import com.keremkulac.journeylog.util.TranslationHelper
 import com.keremkulac.journeylog.util.TripFuelCostCalculationDialogUtil
@@ -37,6 +38,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     private lateinit var averageFuelPriceList: List<AverageFuelPrice>
     private lateinit var vehicleList: List<Vehicle>
     private lateinit var expandableLayoutManager: ExpandableLayoutManager
+
+    @Inject
+    lateinit var inputValidation: InputValidation
 
     @Inject
     lateinit var translationHelper: TranslationHelper
@@ -79,7 +83,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun fuelConsumption() {
         binding.fuelConsumptionCardView.setOnClickListener {
-            FuelConsumptionDialogUtil(requireContext(), averageFuelPriceList).showDialog()
+            FuelConsumptionDialogUtil(requireContext(), averageFuelPriceList,inputValidation).showDialog()
         }
     }
 
@@ -133,7 +137,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
 
         val barData = BarData(barDataSet).apply {
-            barWidth = 0.15f
+            barWidth = 0.35f
         }
 
         barDataSet.valueTextSize = 14f
@@ -155,7 +159,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 isEnabled = false
             }
             xAxis.apply {
-                textSize = 12f
+                textSize = 10.5f
                 granularity = 1f
                 setDrawGridLines(false)
                 axisLineWidth = 2f
@@ -184,10 +188,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun tripFuelCosCalculation() {
         binding.tripFuelCostCalculation.setOnClickListener {
-            TripFuelCostCalculationDialogUtil(requireContext(), averageFuelPriceList,vehicleList).showDialog()
+            TripFuelCostCalculationDialogUtil(
+                requireContext(),
+                averageFuelPriceList,
+                vehicleList,
+                inputValidation
+            ).showDialog()
         }
 
     }
-
-
 }

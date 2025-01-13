@@ -286,6 +286,7 @@ class FuelPurchaseAddFragment :
             confirmReceipt.setOnClickListener {
                 confirmReceipt.visibility = View.GONE
                 receiptSave.visibility = View.VISIBLE
+                successfulIcon.visibility = View.VISIBLE
                 paymentIndicator.setBackgroundColor(Color.parseColor("#3F51B5"))
             }
         }
