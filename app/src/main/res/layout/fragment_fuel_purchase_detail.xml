@@ -37,9 +37,11 @@
                 <TextView
                     android:id="@+id/fuelCardTitle"
                     style="@style/CardViewMainTitle"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/fuel_purchase_detail_fuel_card_title"
-                    app:layout_constraintStart_toEndOf="@+id/fuelİcon"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fuelİcon" />
 
                 <ImageView
                     android:id="@+id/fuelCardOpen"
@@ -47,14 +49,15 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/todo"
                     android:src="@drawable/ic_open"
-                    app:layout_constraintBottom_toBottomOf="@+id/fuelCardTitle"
+                    app:layout_constraintBottom_toBottomOf="@+id/fuelİcon"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/fuelCardTitle" />
+                    app:layout_constraintTop_toTopOf="@+id/fuelİcon" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/fuelCardLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -179,9 +182,11 @@
                 <TextView
                     android:id="@+id/vehicleCardTitle"
                     style="@style/CardViewMainTitle"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/fuel_purchase_detail_vehicle_card_title"
-                    app:layout_constraintStart_toEndOf="@+id/carIcon"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/carIcon" />
 
                 <ImageView
                     android:id="@+id/vehicleCardOpen"
@@ -189,14 +194,15 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/todo"
                     android:src="@drawable/ic_open"
-                    app:layout_constraintBottom_toBottomOf="@+id/vehicleCardTitle"
+                    app:layout_constraintBottom_toBottomOf="@+id/carIcon"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/vehicleCardTitle" />
+                    app:layout_constraintTop_toTopOf="@+id/carIcon" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/vehicleCardLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -276,22 +282,24 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/todo"
                     android:src="@drawable/ic_open"
-                    app:layout_constraintBottom_toBottomOf="@+id/paymentCardTitle"
+                    app:layout_constraintBottom_toBottomOf="@+id/paymentIcon"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/paymentCardTitle" />
-
+                    app:layout_constraintTop_toTopOf="@+id/paymentIcon" />
 
                 <TextView
                     android:id="@+id/paymentCardTitle"
                     style="@style/CardViewMainTitle"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/fuel_purchase_detail_payment_card_title"
-                    app:layout_constraintStart_toEndOf="@+id/paymentIcon"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/paymentIcon" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/paymentCardLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

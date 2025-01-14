@@ -12,6 +12,8 @@
         <item name="android:layout_marginTop">8dp</item>
         <item name="hintEnabled">false</item>
         <item name="boxStrokeWidth">0.75dp</item>
+        <item name="boxStrokeWidthFocused">0.75dp</item>
+        <item name="boxStrokeColor">#A0A0A0</item>
         <item name="boxCornerRadiusTopEnd">8dp</item>
         <item name="boxCornerRadiusTopStart">8dp</item>
         <item name="boxCornerRadiusBottomStart">8dp</item>
@@ -24,6 +26,8 @@
         <item name="android:layout_marginTop">8dp</item>
         <item name="hintEnabled">false</item>
         <item name="boxStrokeWidth">0.75dp</item>
+        <item name="boxStrokeWidthFocused">0.75dp</item>
+        <item name="boxStrokeColor">#A0A0A0</item>
         <item name="boxCornerRadiusTopEnd">8dp</item>
         <item name="boxCornerRadiusTopStart">8dp</item>
         <item name="boxCornerRadiusBottomStart">8dp</item>
@@ -43,6 +47,7 @@
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
     <style name="CardViewSubTitle">
@@ -51,6 +56,7 @@
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
 

@@ -194,8 +194,10 @@
                     android:text="@string/home_last_fuel_purchase_title"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/fuelİcon"
-                    app:layout_constraintTop_toTopOf="@+id/fuelİcon" />
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fuelİcon" />
 
                 <ImageView
                     android:id="@+id/openFuelPurchaseCardView"
@@ -203,9 +205,9 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/todo"
                     android:src="@drawable/ic_open"
-                    app:layout_constraintBottom_toBottomOf="@+id/lastFuelPurchaseTitle"
+                    app:layout_constraintBottom_toBottomOf="@+id/fuelİcon"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/lastFuelPurchaseTitle" />
+                    app:layout_constraintTop_toTopOf="@+id/fuelİcon" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/lastFuelPurchaseLayout"

@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:text="Yakıt bilgileri"
+            android:text="@string/fuel_purchase_add_fuel_indicator_title"
             android:textColor="#3F51B5"
             android:textStyle="bold" />
 
@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:text="Araç bilgileri"
+            android:text="@string/fuel_purchase_add_vehicle_indicator_title"
             android:textColor="#A0A0A0"
             android:textStyle="bold" />
 
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:text="Ödeme bilgileri"
+            android:text="@string/fuel_purchase_add_payment_indicator_title"
             android:textColor="#A0A0A0"
             android:textStyle="bold" />
     </LinearLayout>
@@ -87,12 +87,13 @@
     </LinearLayout>
 
     <ImageView
-        android:padding="2dp"
-        android:visibility="gone"
         android:id="@+id/successfulIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/todo"
+        android:padding="2dp"
         android:src="@drawable/ic_successful"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -113,7 +114,7 @@
                 android:id="@+id/fuelCardTitle"
                 style="@style/CardViewMainTitle"
                 android:layout_marginStart="0dp"
-                android:text="Yakıt bilgilerini giriniz"
+                android:text="@string/fuel_purchase_add_fuel_card_title"
                 android:textSize="22sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -121,8 +122,9 @@
             <TextView
                 android:id="@+id/receiptStationTitle"
                 style="@style/CardViewSubTitle"
+                android:fontFamily="sans-serif-light"
                 android:text="@string/add_fuel_purchase_station"
-                android:textColor="#B1B1B1"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fuelCardTitle" />
 
@@ -146,7 +148,6 @@
                 android:id="@+id/receiptPurchasedFuelTypeTitle"
                 style="@style/CardViewSubTitle"
                 android:text="@string/add_fuel_purchase_fuel_type"
-                android:textColor="#B1B1B1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/receiptStationLayout" />
 
@@ -191,7 +192,6 @@
                 style="@style/CardViewSubTitle"
                 android:layout_width="0dp"
                 android:text="@string/add_fuel_purchase_liter_price"
-                android:textColor="#B1B1B1"
                 app:layout_constraintEnd_toStartOf="@+id/receiptPurchaseLiterTitle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/receiptPurchasedFuelType" />
@@ -219,7 +219,6 @@
                 style="@style/CardViewSubTitle"
                 android:layout_width="0dp"
                 android:text="@string/add_fuel_purchase_liter"
-                android:textColor="#B1B1B1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/receiptLiterPriceTitle"
                 app:layout_constraintTop_toBottomOf="@+id/receiptPurchasedFuelType" />
@@ -245,7 +244,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/forwardVehicleInfo"
                 style="@style/ButtonStyle"
-                android:text="İlerle"
+                android:text="@string/fuel_purchase_add_forward_vehicle_button_text"
                 app:cornerRadius="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -271,7 +270,7 @@
                 android:id="@+id/vehicleCardTitle"
                 style="@style/CardViewMainTitle"
                 android:layout_marginStart="0dp"
-                android:text="Araç bilgilerini giriniz"
+                android:text="@string/fuel_purchase_add_vehicle_card_title"
                 android:textSize="22sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -340,7 +339,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/forwardPaymentInfo"
                 style="@style/ButtonStyle"
-                android:text="İlerle"
+                android:text="@string/fuel_purchase_add_forward_payment_button_text"
                 app:cornerRadius="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -366,7 +365,7 @@
                 android:id="@+id/paymentCardTitle"
                 style="@style/CardViewMainTitle"
                 android:layout_marginStart="0dp"
-                android:text="Ödeme bilgileri"
+                android:text="@string/fuel_purchase_add_payment_card_title"
                 android:textSize="22sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -408,7 +407,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/confirmReceipt"
                 style="@style/ButtonStyle"
-                android:text="Onayla"
+                android:text="@string/fuel_purchase_add_confirm_receipt_button_text"
                 app:cornerRadius="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -417,7 +416,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/receiptSave"
                 style="@style/ButtonStyle"
-                android:text="Kaydet"
+                android:text="@string/fuel_purchase_add_save_receipt_button_text"
                 android:visibility="gone"
                 app:cornerRadius="12dp"
                 app:layout_constraintEnd_toEndOf="parent"

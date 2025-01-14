@@ -59,10 +59,10 @@
 
                         <TextView
                             android:id="@+id/totalPrice"
-                            android:layout_marginStart="0dp"
                             style="@style/CardViewMainTitle"
+                            android:textSize="26sp"
+                            android:layout_marginStart="0dp"
                             android:layout_marginTop="16dp"
-                            android:textSize="20sp"
                             app:layout_constraintStart_toStartOf="@+id/fuelİcon"
                             app:layout_constraintTop_toBottomOf="@+id/fuelİcon"
                             tools:text="56724.51 ₺" />

@@ -151,11 +151,19 @@
     <string name="fuel_purchase_liter_taken_title">Liters Taken</string>
     <string name="warning_empty_list">No records yet</string>
     <string name="item_fuel_purchase_view_button_text">View</string>
-    <string name="fuel_purchase_add_payment_card_title">Payment Info</string>
-    <string name="fuel_purchase_add_fuel_card_title">Fuel Info</string>
-    <string name="fuel_purchase_add_vehicle_card_title">Vehicle Info</string>
+    <string name="fuel_purchase_add_payment_card_title">Enter Payment Information</string>
+    <string name="fuel_purchase_add_fuel_card_title">Enter Fuel Information</string>
+    <string name="fuel_purchase_add_vehicle_card_title">Enter Vehicle Information</string>
     <string name="fuel_purchase_add_vehicle_km_title">Vehicle Mileage</string>
     <string name="fuel_purchase_add_license_plate_title">License Plate</string>
+
+    <string name="fuel_purchase_add_fuel_indicator_title">Fuel information</string>
+    <string name="fuel_purchase_add_vehicle_indicator_title">Vehicle information</string>
+    <string name="fuel_purchase_add_payment_indicator_title">Payment information</string>
+    <string name="fuel_purchase_add_forward_vehicle_button_text">Forward</string>
+    <string name="fuel_purchase_add_forward_payment_button_text">Forward</string>
+    <string name="fuel_purchase_add_save_receipt_button_text">Save</string>
+    <string name="fuel_purchase_add_confirm_receipt_button_text">Confirm</string>
 
     <string-array name="companies">
         <item>Alpet</item>
@@ -194,9 +202,9 @@
     <string name="fuel_purchase_detail_kilometer_title">Kilometer</string>
     <string name="fuel_purchase_detail_tax_title">VAT</string>
     <string name="fuel_purchase_detail_total_title">Total</string>
-    <string name="fuel_purchase_detail_payment_card_title">Payment \nInformation</string>
-    <string name="fuel_purchase_detail_vehicle_card_title">Vehicle \nInformation</string>
-    <string name="fuel_purchase_detail_fuel_card_title">Fuel \nInformation</string>
+    <string name="fuel_purchase_detail_payment_card_title">Payment Information</string>
+    <string name="fuel_purchase_detail_vehicle_card_title">Vehicle Information</string>
+    <string name="fuel_purchase_detail_fuel_card_title">Fuel Information</string>
 
     <string name="vehicle_select_vehicle_kilometer_title">Enter the last mileage of the vehicle</string>
     <string name="home_last_fuel_purchase_title">My Recent Fuel Purchases</string>

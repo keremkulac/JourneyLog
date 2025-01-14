@@ -335,4 +335,30 @@ class InputValidation @Inject constructor(private val context: Context) {
         }
     }
 
+    fun validateFuelConsumption(
+        per100KilometerFuel: String?,
+        selectedFuelType: String?,
+        validationMessage: (String) -> Unit
+    ): Boolean {
+        return when {
+
+            per100KilometerFuel.isNullOrEmpty() -> {
+                validationMessage(context.getString(R.string.validation_message_empty_per_100_kilometer_fuel))
+                false
+            }
+
+            !regex.matches(per100KilometerFuel) -> {
+                validationMessage(context.getString(R.string.validation_message_enter_only_number))
+                false
+            }
+
+            selectedFuelType.isNullOrEmpty() -> {
+                validationMessage(context.getString(R.string.validation_message_empty_fuel_type))
+                false
+            }
+
+            else -> true
+        }
+    }
+
 }
