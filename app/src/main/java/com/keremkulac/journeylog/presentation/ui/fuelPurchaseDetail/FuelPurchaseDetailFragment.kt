@@ -23,12 +23,14 @@ class FuelPurchaseDetailFragment :
     private lateinit var fuelLayoutManager: ExpandableLayoutManager
     private lateinit var vehicleLayoutManager: ExpandableLayoutManager
     private lateinit var paymentLayoutManager: ExpandableLayoutManager
+    private lateinit var detailLayoutManager: ExpandableLayoutManager
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fillFields()
         setupExpandableLayouts()
+        showDetails()
     }
 
     private fun fillFields() {
@@ -36,30 +38,72 @@ class FuelPurchaseDetailFragment :
         receipt?.let {
             binding.apply {
                 stationName.text = receipt.stationName
-                fuelType.text = translationHelper.translate(receipt.fuelType, TranslationHelper.TranslationType.Fuel)
+                fuelType.text = translationHelper.translate(
+                    receipt.fuelType,
+                    TranslationHelper.TranslationType.Fuel
+                )
                 requireContext().apply {
-                    literPrice.text = getString(R.string.fuel_liter_price).format(receipt.literPrice)
+                    literPrice.text =
+                        getString(R.string.fuel_liter_price).format(receipt.literPrice)
                     liter.text = getString(R.string.liters_taken).format(receipt.liter)
-                    receiptTotalPrice.text = getString(R.string.total_price).format(receipt.total.toDouble().toMoneyFormat())
-                    receiptTotalTax.text = getString(R.string.total_price).format(receipt.tax.toDouble().toMoneyFormat())
+                    receiptTotalPrice.text = getString(R.string.total_price).format(
+                        receipt.total.toDouble().toMoneyFormat()
+                    )
+                    receiptTotalTax.text = getString(R.string.total_price).format(
+                        receipt.tax.toDouble().toMoneyFormat()
+                    )
                 }
                 vehicleLicensePlate.text = receipt.vehicleLicensePlate
                 vehicleKm.text = receipt.vehicleLastKm.decimalFormat()
-                //date.text = receipt.date
+                time.text = receipt.time
+                date.text = receipt.date
+                totalPrice.text =
+                    getString(R.string.total_price).format(receipt.total.toDouble().toMoneyFormat())
             }
-
         }
     }
 
     private fun setupExpandableLayouts() {
-        binding.apply {
-            fuelLayoutManager = ExpandableLayoutManager(fuelCardOpen)
-            vehicleLayoutManager = ExpandableLayoutManager(vehicleCardOpen)
-            paymentLayoutManager = ExpandableLayoutManager(paymentCardOpen)
+        with(binding) {
+            fuelLayoutManager = ExpandableLayoutManager()
+            vehicleLayoutManager = ExpandableLayoutManager()
+            paymentLayoutManager = ExpandableLayoutManager()
 
-            fuelCard.setOnClickListener { fuelLayoutManager.toggleLayout(fuelCardLayout) }
-            vehicleCard.setOnClickListener { vehicleLayoutManager.toggleLayout(vehicleCardLayout) }
-            paymentCard.setOnClickListener { paymentLayoutManager.toggleLayout(paymentCardLayout) }
+            fuelCard.setOnClickListener {
+                fuelLayoutManager.toggleLayout(
+                    fuelCardLayout,
+                    fuelCardOpen
+                )
+            }
+            vehicleCard.setOnClickListener {
+                vehicleLayoutManager.toggleLayout(
+                    vehicleCardLayout,
+                    vehicleCardOpen
+                )
+            }
+            paymentCard.setOnClickListener {
+                paymentLayoutManager.toggleLayout(
+                    paymentCardLayout,
+                    paymentCardOpen
+                )
+            }
+        }
+    }
+
+    private fun showDetails() {
+        with(binding) {
+            detailLayoutManager = ExpandableLayoutManager()
+            showDetails.setOnClickListener {
+                detailLayoutManager.toggleLayout(detailLayout, detailCardOpen)
+                detailLayoutManager.changeToggleText(
+                    toggleText,
+                    getString(R.string.fuel_purchase_detail_detail_toggle_open_text),
+                    getString(R.string.fuel_purchase_detail_detail_toggle_close_text)
+                )
+                fuelCard.visibility = View.VISIBLE
+                vehicleCard.visibility = View.VISIBLE
+                paymentCard.visibility = View.VISIBLE
+            }
         }
     }
 

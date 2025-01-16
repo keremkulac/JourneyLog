@@ -205,7 +205,8 @@
     <string name="fuel_purchase_detail_payment_card_title">Payment Information</string>
     <string name="fuel_purchase_detail_vehicle_card_title">Vehicle Information</string>
     <string name="fuel_purchase_detail_fuel_card_title">Fuel Information</string>
-
+    <string name="fuel_purchase_detail_detail_toggle_open_text">View details</string>
+    <string name="fuel_purchase_detail_detail_toggle_close_text">Hide details</string>
     <string name="vehicle_select_vehicle_kilometer_title">Enter the last mileage of the vehicle</string>
     <string name="home_last_fuel_purchase_title">My Recent Fuel Purchases</string>
     <string name="home_bar_chart_liter_title">Liter</string>

@@ -202,6 +202,8 @@
     <string name="fuel_purchase_detail_payment_card_title">Ödeme Bilgileri</string>
     <string name="fuel_purchase_detail_vehicle_card_title">Araç Bilgileri</string>
     <string name="fuel_purchase_detail_fuel_card_title">Yakıt Bilgileri</string>
+    <string name="fuel_purchase_detail_detail_toggle_open_text">Detayları görüntüle</string>
+    <string name="fuel_purchase_detail_detail_toggle_close_text">Detayları gizle</string>
     <string name="vehicle_select_vehicle_kilometer_title">Aracın son kilometresini giriniz</string>
     <string name="vehicle_select_vehicle_per_100_kilometer_hint">Örn 7.2</string>
     <string name="vehicle_select_vehicle_per_100_kilometer_title">Aracınızın 100\'km de yakıt tüketimini giriniz</string>
@@ -275,6 +277,7 @@
     <string name="dialog_trip_fuel_cost_calculation_used_fuel_per_100_kilometer_title">Aracınız 100 km\'de kaç L yakıyor?</string>
 
     <string name="dialog_trip_fuel_cost_message">Aracınız %1s km\'de %2s ₺\nyakıt harcayacaktır.</string>
+
 
 
 </resources>

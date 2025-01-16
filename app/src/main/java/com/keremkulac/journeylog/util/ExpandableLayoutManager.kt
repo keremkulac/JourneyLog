@@ -7,13 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
+import android.widget.TextView
 import com.keremkulac.journeylog.R
 
 
-class ExpandableLayoutManager(private val toggleIcon: ImageView) {
+class ExpandableLayoutManager {
     private var isExpanded = false
 
-    fun toggleLayout(layout: View) {
+    fun toggleLayout(layout: View, toggleIcon: ImageView) {
         if (layout.visibility == View.VISIBLE) {
             animateLayoutCollapse(layout)
             isExpanded = false
@@ -22,6 +23,14 @@ class ExpandableLayoutManager(private val toggleIcon: ImageView) {
             animateLayoutExpand(layout)
             isExpanded = true
             toggleIcon.setImageDrawable(layout.context.getDrawable(R.drawable.ic_close))
+        }
+    }
+
+    fun changeToggleText(textView: TextView, openText: String, closeText: String) {
+        if (isExpanded) {
+            textView.text = closeText
+        } else {
+            textView.text = openText
         }
     }
 

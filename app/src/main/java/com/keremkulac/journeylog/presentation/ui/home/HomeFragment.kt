@@ -83,7 +83,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun fuelConsumption() {
         binding.fuelConsumptionCardView.setOnClickListener {
-            FuelConsumptionDialogUtil(requireContext(), averageFuelPriceList,inputValidation).showDialog()
+            FuelConsumptionDialogUtil(
+                requireContext(),
+                averageFuelPriceList,
+                inputValidation
+            ).showDialog()
         }
     }
 
@@ -172,8 +176,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun lastFuelPurchaseCardViewToggle() {
         binding.apply {
-            expandableLayoutManager = ExpandableLayoutManager(this.openFuelPurchaseCardView)
-            lastFuelPurchaseCardView.setOnClickListener { expandableLayoutManager.toggleLayout(this.lastFuelPurchaseLayout) }
+            expandableLayoutManager = ExpandableLayoutManager()
+            lastFuelPurchaseCardView.setOnClickListener {
+                expandableLayoutManager.toggleLayout(
+                    this.lastFuelPurchaseLayout,
+                    this.openFuelPurchaseCardView
+                )
+            }
         }
     }
 
