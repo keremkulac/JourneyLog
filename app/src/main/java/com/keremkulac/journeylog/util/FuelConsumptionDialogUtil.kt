@@ -62,13 +62,17 @@ class FuelConsumptionDialogUtil(
     }
 
     private fun setupCalculateButton() {
-        binding.calculateButton.setOnClickListener {
-            if (!validateFuelConsumption(binding.kmLiter.text.toString(), selectedFuelType)) {
-                Toast.makeText(context, validationMessage, Toast.LENGTH_SHORT).show()
-            } else {
-                calculateConsumption()
+        with(binding) {
+            calculateButton.setOnClickListener {
+                if (!validateFuelConsumption(kmLiter.text.toString(), selectedFuelType)) {
+                    Toast.makeText(context, validationMessage, Toast.LENGTH_SHORT).show()
+                } else {
+                    calculateButton.hideKeyboard()
+                    calculateConsumption()
+                }
             }
         }
+
     }
 
     private fun calculateConsumption() {
@@ -84,8 +88,12 @@ class FuelConsumptionDialogUtil(
         with(binding) {
             calculateLayout.visibility = View.GONE
             messageLayout.visibility = View.VISIBLE
-            perKilometerPriceMessage.text = context.getString(R.string.fuel_consumption_per_kilometer_info).format(perKilometer.toMoneyFormat())
-            per100KilometerPriceMessage.text = context.getString(R.string.fuel_consumption_per_100_kilometers_info).format(per100Kilometer.toMoneyFormat())
+            perKilometerPriceMessage.text =
+                context.getString(R.string.fuel_consumption_per_kilometer_info)
+                    .format(perKilometer.toMoneyFormat())
+            per100KilometerPriceMessage.text =
+                context.getString(R.string.fuel_consumption_per_100_kilometers_info)
+                    .format(per100Kilometer.toMoneyFormat())
         }
     }
 

@@ -178,9 +178,9 @@
                 style="@style/TextInputLayoutExposedDropdownStyle"
                 android:layout_width="match_parent"
                 android:layout_marginTop="16dp"
-                app:startIconDrawable="@drawable/ic_license_plate"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/licensePlateTitle">
+                app:layout_constraintTop_toBottomOf="@+id/licensePlateTitle"
+                app:startIconDrawable="@drawable/ic_license_plate">
 
                 <AutoCompleteTextView
                     android:id="@+id/licensePlate"
@@ -204,10 +204,10 @@
                 android:id="@+id/ownVehicleDistanceToTripLayout"
                 style="@style/TextInputLayoutOutlinedBoxStyle"
                 android:layout_marginTop="16dp"
-                app:startIconDrawable="@drawable/ic_distance"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ownVehicleDistanceToTripTitle">
+                app:layout_constraintTop_toBottomOf="@+id/ownVehicleDistanceToTripTitle"
+                app:startIconDrawable="@drawable/ic_distance">
 
                 <EditText
                     android:id="@+id/ownVehicleDistanceToTrip"
@@ -250,10 +250,10 @@
                 android:id="@+id/otherVehicleDistanceToTripLayout"
                 style="@style/TextInputLayoutOutlinedBoxStyle"
                 android:layout_marginTop="16dp"
-                app:startIconDrawable="@drawable/ic_distance"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/otherVehicleDistanceToTripTitle">
+                app:layout_constraintTop_toBottomOf="@+id/otherVehicleDistanceToTripTitle"
+                app:startIconDrawable="@drawable/ic_distance">
 
                 <EditText
                     android:id="@+id/otherVehicleDistanceToTrip"
@@ -279,9 +279,9 @@
                 style="@style/TextInputLayoutExposedDropdownStyle"
                 android:layout_width="match_parent"
                 android:layout_marginTop="16dp"
-                app:startIconDrawable="@drawable/ic_fuel"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/otherVehicleFuelTypeTitle">
+                app:layout_constraintTop_toBottomOf="@+id/otherVehicleFuelTypeTitle"
+                app:startIconDrawable="@drawable/ic_fuel">
 
                 <AutoCompleteTextView
                     android:id="@+id/otherVehicleFuelType"
@@ -305,10 +305,10 @@
                 android:id="@+id/otherVehicleUsedFuelPer100KilometersLayout"
                 style="@style/TextInputLayoutOutlinedBoxStyle"
                 android:layout_marginTop="16dp"
-                app:startIconDrawable="@drawable/ic_fuel_bottle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/otherVehicleUsedFuelPer100KilometersTitle">
+                app:layout_constraintTop_toBottomOf="@+id/otherVehicleUsedFuelPer100KilometersTitle"
+                app:startIconDrawable="@drawable/ic_fuel_bottle">
 
                 <EditText
                     android:id="@+id/otherVehicleUsedFuelPer100Kilometers"
@@ -336,7 +336,7 @@
             android:id="@+id/messageLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/calculationAnimation"
@@ -355,6 +355,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

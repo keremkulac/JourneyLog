@@ -173,6 +173,7 @@ class TripFuelCostCalculationDialogUtil(
                 if (!validateOwnTripCostFuelCalculation(selectedVehicle, distance)) {
                     Toast.makeText(context, validationMessage, Toast.LENGTH_SHORT).show()
                 } else {
+                    calculateOwnTripCostFuelConsumption.hideKeyboard()
                     val totalPrice = ownVehicleDistanceToTrip.text.toString()
                         .toDouble() * selectedVehicle!!.perKilometersFuelPrice!!.toDouble()
                     ownVehicleCalculation()
